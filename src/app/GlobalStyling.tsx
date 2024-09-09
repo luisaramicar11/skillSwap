@@ -36,8 +36,7 @@ html {
 }
 
 body {
-    //background: transparent;
-    //color: ${GlobalTheme.colors.textTertiary};
+    background-color: ${({ theme }) => theme.colors.bgPrimary};
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -45,23 +44,24 @@ body {
     width: 100% !important;
 }
 
-/* h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
+    background-color: ${({ theme }) => theme.colors.bgPrimary};
     color: ${GlobalTheme.colors.textTertiary};
     font-weight: bolder;
 }
 
 p {
-    color: ${GlobalTheme.colors.textTertiary};
+    color: ${({ theme }) => theme.colors.bgPrimary};
     line-height: 1.5;
     font-weight: lighter;
     margin: 0;
 } */
 
 .gradient-bg-primary {
-    background: ${GlobalTheme.colors.gradientPrimary};
+    background-color: ${({ theme }) => theme.colors.gradientPrimary};
 }
 
 .gradient-bg-secondary {
-    background: ${GlobalTheme.colors.gradientSecondary};
+    background-color: ${({ theme }) => theme.colors.gradientSecondary};
 }
 `;
