@@ -19,7 +19,7 @@ interface InputProps {
 const InputSignUp = styled.input`
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.textPrimary}; ;
+  color: ${({ theme }) => theme.colors.textPrimary};
   border-radius: 10px;
   font-size: 16px;
   width: 450px;
