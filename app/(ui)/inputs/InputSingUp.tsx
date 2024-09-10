@@ -16,17 +16,15 @@ interface InputProps {
   required?: boolean; 
 }
 
-const InputAuth = styled.input`
+const InputSignUp = styled.input`
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color:${({ theme }) => theme.colors.bgPrimary}; ;
+  color: ${({ theme }) => theme.colors.textPrimary}; ;
   border-radius: 10px;
   font-size: 16px;
   width: 450px;
   height: 60px;
   box-sizing: border-box;
-  color: red;
-
 
 `;
 
@@ -44,7 +42,7 @@ const Input: React.FC<InputProps> = ({
   required = false,
 }) => {
   return (
-    <InputAuth type={type}
+    <InputSignUp type={type}
     placeholder={label}
     value={value}
     onChange={onChange}
@@ -53,14 +51,9 @@ const Input: React.FC<InputProps> = ({
     aria-label={ariaLabel}
     name={name}
     required={required} >
-    </InputAuth>
+    </InputSignUp>
   );
 };
 
 export default Input;
-
-
-
-
-
 
