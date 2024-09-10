@@ -7,6 +7,7 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     return (
         <ThemeProvider theme={GlobalTheme}>
             <GlobalStyle />
+            {children}
         </ThemeProvider>
     );
 };
