@@ -1,16 +1,16 @@
 export interface IUserRegister {
     name: string;           
     lastName: string;       
-    birthdate: string;     
+    age: string;     
     image: string | null;   
-    phoneNumber: string;    
+    phoneNumber: string | null;    
     email: string;          
     password: string;       
     jobTitle: string;       
     description: string;    
-    linkedIn: string;       
-    behance?: string;       
-    github?: string;     
+    linkedIn: string | null;      
+    behance?: string | null;       
+    github?: string | null;     
     createdAt: string;      
   }
   

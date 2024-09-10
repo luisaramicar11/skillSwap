@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
-import ClientLayout from "./ClientLayout"
+import ClientLayout from "./ClientLayout";
+import { Providers } from './Providers';
 
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
 
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
+        <Providers>
         <ClientLayout>
         {children}
         </ClientLayout>
+        </Providers>    
         </body>
     </html>
   );

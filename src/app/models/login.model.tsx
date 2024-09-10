@@ -1,5 +1,4 @@
 export interface IUserLoginRequest {
-    id: number;
     email: string;
     password: string;
   }
@@ -16,3 +15,5 @@ export interface IUserLoginResponse {
     loading: boolean;
     error: string | null;
   }
+
+ 
