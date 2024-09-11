@@ -1,10 +1,11 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
+import { Urbanist } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
 
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
-
 
 // Setting our Global Theme
 export const GlobalTheme: IGlobalTheme = {
@@ -93,5 +94,8 @@ p {
 
 .gradient-bg-secondary {
     background-color: ${({ theme }) => theme.colors.gradientSecondary};
+}
+input, textarea, button {
+    font-family: ${urbanist.style.fontFamily};
 }
 `;
