@@ -76,7 +76,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    background-color: ${({ theme }) => theme.colors.bgPrimary};
     color: ${GlobalTheme.colors.textTertiary};
     font-weight: bolder;
 }
@@ -99,3 +98,5 @@ input, textarea, button {
     font-family: ${urbanist.style.fontFamily};
 }
 `;
+
+

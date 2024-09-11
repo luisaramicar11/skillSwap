@@ -6,7 +6,7 @@ import { loginUser } from '../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch } from '../../app/redux/store';
 import styled from 'styled-components';
-import InputSingUp from '../ui/inputs/InputSingUp';
+import InputSingUp from '../ui/inputs/InputSignUp';
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
 import Label from '../ui/label/Label';
 

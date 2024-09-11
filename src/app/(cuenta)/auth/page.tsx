@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { color, motion } from 'framer-motion';
 import styled from 'styled-components';
 import LoginPage from '../../../components/login/Login';
-import RegisterPage from '../../../components/Register';
-import { FormWrapper } from '@/src/components/login/LoginStyling'; 
+import RegisterPage from '../../../components/register/Register';
+import { FormWrapper } from '../../../components/login/LoginStyling'; 
 
 // Contenedor principal
 const Container = styled.div`
@@ -50,9 +50,6 @@ const OverlayPanel = styled.div`
   border-radius: none;
   border-bottom-right-radius:15px ;
   border-top-right-radius:15px ;
-  
-  
-  
 `;
 
 // Botones para alternar entre vistas
