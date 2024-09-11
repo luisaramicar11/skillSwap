@@ -26,8 +26,6 @@ const InputAuth = styled.input`
   height: 60px;
   box-sizing: border-box;
   color: red;
-
-
 `;
 
 

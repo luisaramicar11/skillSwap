@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 // Creación de la interface del elemento input
 interface InputProps {
-  label: string,
   type: string;
   placeholder: string;
   value?: string | number;
@@ -25,12 +24,9 @@ const InputSignUp = styled.input`
   width: 450px;
   height: 60px;
   box-sizing: border-box;
-
 `;
 
-
 const Input: React.FC<InputProps> = ({
-  label,
   type,
   placeholder,
   value,
@@ -43,7 +39,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <InputSignUp type={type}
-    placeholder={label}
+    placeholder={placeholder}
     value={value}
     onChange={onChange}
     className={className}

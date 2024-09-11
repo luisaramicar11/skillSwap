@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import LoginPage from '../../../components/Login';
-import RegisterPage from '../../../components/Register';
+import LoginPage from '../../../components/login/Login';
+import RegisterPage from '../../../components/register/Register';
 
 // Contenedor principal
 const Container = styled.div`
@@ -25,7 +25,6 @@ const MotionDiv = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
   padding: 20px;
 `;
 
@@ -38,7 +37,7 @@ const OverlayContainer = styled.div`
   height: 100%;
   background: linear-gradient(to right, #ff4b2b, #ff416c);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   z-index: 100;
 `;

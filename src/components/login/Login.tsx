@@ -2,9 +2,9 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../app/redux/slices/authSlice';
+import { loginUser } from '../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
-import { AppDispatch } from '../app/redux/store';
+import { AppDispatch } from '../../app/redux/store';
 
 export default function LoginPage() {
   const router = useRouter();
