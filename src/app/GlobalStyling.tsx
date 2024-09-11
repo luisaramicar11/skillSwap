@@ -1,11 +1,14 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
+import { Urbanist } from "next/font/google";
+
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
 
 // Setting our Global Theme
 export const GlobalTheme = {
     colors: {
         bgPrimary: '#FFFFFF',               
-        textPrimary: '#000000',             
+        textPrimary: '#222222',             
         bgSecondary: '#222222', 
         bgTerciary: '#F5F5F5',            
         TextSecondary: '#555555', 
@@ -63,5 +66,8 @@ p {
 
 .gradient-bg-secondary {
     background-color: ${({ theme }) => theme.colors.gradientSecondary};
+}
+input, textarea, button {
+    font-family: ${urbanist.style.fontFamily};
 }
 `;
