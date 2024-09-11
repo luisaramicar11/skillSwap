@@ -1,17 +1,45 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
 import { Urbanist } from "next/font/google";
-
+import { IGlobalTheme } from "../models/globalTheme.model";
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
 
+// Define los labels que deberían establecer el tema en oscuro
+export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
+
 // Setting our Global Theme
-export const GlobalTheme = {
+export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgPrimary: '#FFFFFF',               
-        textPrimary: '#000000',             
+        textPrimary: '#222222',             
         bgSecondary: '#222222', 
-        bgTerciary: '#F5F5F5',            
-        TextSecondary: '#555555', 
+        bgTertiary: '#F5F5F5',            
+        textSecondary: '#555555', 
+        textBlack: '#00000020',             
+        textTertiary: '#00000050',
+        textPurple: '#965AC6',
+        textOrange: '#DD5B0A',
+        textBlueLight: '#2D68FF',
+        textBlueDark: '#093A98',
+        textYellow: '#F0AC27',
+        textGreen: '#34DD0A',
+        textRed: '#891E1E60',
+        textGreenDark: '#1E892F60',
+        textBlue:'1E6F8960',
+        textBrown: '#A3761E60',     
+        gradientPrimary: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)', 
+        gradientSecondary: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)', 
+    }
+};
+
+export const GlobalDarkTheme: IGlobalTheme = {
+    colors: {
+        bgPrimary: '#222222',               
+        textPrimary: '#FFFFFF',             
+        bgSecondary: '#FFFFFF', 
+
+        bgTertiary: '#F5F5F5',            
+        textSecondary: '#555555', 
         textBlack: '#00000020',             
         textTertiary: '#00000050',
         textPurple: '#965AC6',
@@ -66,11 +94,9 @@ p {
 .gradient-bg-secondary {
     background-color: ${({ theme }) => theme.colors.gradientSecondary};
 }
-
 input, textarea, button {
     font-family: ${urbanist.style.fontFamily};
 }
-
 `;
 
 

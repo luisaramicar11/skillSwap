@@ -8,50 +8,58 @@ interface InputProps {
   placeholder: string;
   value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
   disabled?: boolean; 
-  ariaLabel: string; 
   name: string;
   required?: boolean; 
 }
 
-const InputSignUp = styled.input`
-  padding: 10px;
+const StyledInputSignUp = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.textPrimary}; ;
+  color: ${({ theme }) => theme.colors.bgPrimary};
   border-radius: 10px;
   font-size: 16px;
-  width: 450px;
-  height: 60px;
   box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: transparent;
+  
+  // Estiliza el placeholder en blanco
+  ::placeholder {
+    color: #ffffff;
+    opacity: 0.7; // Ajusta la opacidad si es necesario
+  }
+
+  // Cambia el color cuando el input esté en foco (seleccionado)
+  &:focus {
+    outline: none; // Elimina el borde de enfoque por defecto
+    border-color: ${({ theme }) => theme.colors.gradientPrimary}; // Cambia el borde a blanco
+    color: ${({ theme }) => theme.colors.gradientPrimary} ; // Cambia el color del texto a blanco
+  }
 `;
 
-const Input: React.FC<InputProps> = ({
+const InputSingUp: React.FC<InputProps> = ({
   type,
   placeholder,
   value,
   onChange,
-  className,
   disabled,
-  ariaLabel,
   name,
   required = false,
 }) => {
   return (
-    <InputSignUp type={type}
+    <StyledInputSignUp type={type}
     placeholder={placeholder}
     value={value}
     onChange={onChange}
-    className={className}
     disabled={disabled}
-    aria-label={ariaLabel}
     name={name}
     required={required} >
-    </InputSignUp>
+    </StyledInputSignUp>
   );
 };
 
-export default Input;
+export default InputSingUp;
 
 
 
