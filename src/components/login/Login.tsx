@@ -5,6 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch } from '../../app/redux/store';
+import styled from 'styled-components';
+import InputSingUp from '../ui/inputs/InputSignUp';
+import ButtonSingUp from '../ui/buttons/ButtonSingUp';
+import Label from '../ui/label/Label';
+
+//Syled
+import {FormWrapper} from './LoginStyling'
+import {Container} from './LoginStyling'
+import {Title} from './LoginStyling'
+import {DivButton} from './LoginStyling'
 
 export default function LoginPage() {
   const router = useRouter();
@@ -51,30 +61,41 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h1>Ingresar</h1>
+    <Container>
+      <FormWrapper>
+      <Title>Iniciar Sesion</Title>
       <form onSubmit={handleSubmit}>
-        <input
+        <Label
+          text= "Email"
+          htmlFor=''
+          />
+        <InputSingUp
           type="email"
           name="email"
           placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
+          value={form.email}  
           required
-        />
-        <input
+          />
+        <Label
+          text= "Contraseña"
+          htmlFor='hola'
+          />  
+        <InputSingUp
           type="password"
           name="password"
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
           required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Cargando...' : 'Login'}
-        </button>
+          />
+          <DivButton>
+            <ButtonSingUp type="submit" disabled={loading}>
+              {loading ? 'Cargando...' : 'Login'}
+            </ButtonSingUp>
+          </DivButton>
       </form>
+          </FormWrapper>
 
-    </div>
+    </Container>
   );
 }

@@ -90,7 +90,6 @@ export default function RegisterPage() {
             value={form.email}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
           <InputSignUp
             type="password"
@@ -99,7 +98,6 @@ export default function RegisterPage() {
             value={form.password}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
             </div> 
           </>
@@ -120,7 +118,6 @@ export default function RegisterPage() {
             value={form.name}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
              </DivUserInput>
              <DivUserInput>
@@ -132,7 +129,6 @@ export default function RegisterPage() {
             value={form.lastName}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
              </DivUserInput>
           <DivUserInput>
@@ -144,7 +140,6 @@ export default function RegisterPage() {
             value={form.age}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
           </DivUserInput>
           <DivUserInput>
@@ -155,7 +150,6 @@ export default function RegisterPage() {
             placeholder="Escribe la url de tu imagen"
             value={form.image}
             onChange={handleChange}
-            ariaLabel=''
           />
           </DivUserInput>    
             </DivUserData>
@@ -206,7 +200,6 @@ export default function RegisterPage() {
             value={form.jobTitle}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
               </DivUserInput>
               <DivUserInput>
@@ -218,7 +211,6 @@ export default function RegisterPage() {
             value={form.description}
             onChange={handleChange}
             required
-            ariaLabel=''
           />
               </DivUserInput>
           
@@ -238,7 +230,7 @@ export default function RegisterPage() {
             placeholder="Escribe tu linkedIn"
             value={form.linkedIn}
             onChange={handleChange}
-            ariaLabel=''
+            
           />
               </DivUserInput>
               <DivUserInput>
@@ -249,7 +241,6 @@ export default function RegisterPage() {
             placeholder="Escribe tu behance"
             value={form.behance}
             onChange={handleChange}
-            ariaLabel=''
           />
               </DivUserInput>
               <DivUserInput>
@@ -260,7 +251,6 @@ export default function RegisterPage() {
             placeholder="Escribe tu github"
             value={form.github}
             onChange={handleChange}
-            ariaLabel=''
             />
               </DivUserInput>
           
