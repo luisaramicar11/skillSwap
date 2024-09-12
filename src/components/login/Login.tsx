@@ -67,7 +67,7 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit}>
         <Label
           text= "Email"
-          htmlFor=''
+          htmlFor='email'
           />
         <InputSingUp
           type="email"
@@ -78,7 +78,7 @@ export default function LoginPage() {
           />
         <Label
           text= "Contraseña"
-          htmlFor='hola'
+          htmlFor='password'
           />  
         <InputSingUp
           type="password"

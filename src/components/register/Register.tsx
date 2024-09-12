@@ -10,6 +10,13 @@ import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from "./Regist
 import Label  from "../ui/labels/Label";
 import Select from "../ui/selects/SelectRegister";
 import TextArea from "../ui/textAreas/TextAreaRegister";
+import ButtonSingUp from '../ui/buttons/ButtonSingUp';
+
+//Syled
+import {FormWrapper} from '../login/LoginStyling';
+import {Container} from '../login/LoginStyling';
+import {Title} from '../login/LoginStyling';
+import {DivButton} from '../login/LoginStyling';
 
 export default function RegisterPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -83,6 +90,10 @@ export default function RegisterPage() {
         return (
           <>
             <div>
+            <Label
+          text= "Email"
+          htmlFor=''
+          />
           <InputSignUp
             type="email"
             name="email"
@@ -90,6 +101,10 @@ export default function RegisterPage() {
             value={form.email}
             onChange={handleChange}
             required
+          />
+          <Label
+          text= "Contraseña"
+          htmlFor='password'
           />
           <InputSignUp
             type="password"
@@ -264,29 +279,32 @@ export default function RegisterPage() {
   };
 
   return (
-    <div>
-      <h1>Registro</h1>
+    <Container>
+      <FormWrapper>
+      <Title>Registro</Title>
       <form onSubmit={handleSubmit}>
         {renderStep()}  
-        <div>
+        <DivButton>
           {currentStep > 0 && (
-            <button type="button" onClick={() => setCurrentStep(currentStep - 1)}>
+            <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep - 1)}>
               Atrás
-            </button>
+            </ButtonSingUp>
           )}
 
           {currentStep < 4 ? (
-            <button type="button" onClick={() => setCurrentStep(currentStep + 1)}>
+            <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
               Siguiente
-            </button>
+            </ButtonSingUp>
           ) : (
-            <button type="submit" disabled={loading}>
+            <ButtonSingUp type="submit" disabled={loading}>
               {loading ? 'Registrando...' : 'Registrar'}
-            </button>
+            </ButtonSingUp>
           )}
-        </div>
+        </DivButton>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
+    </FormWrapper>
+    </Container>
+    
   );
 }
