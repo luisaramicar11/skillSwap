@@ -110,11 +110,13 @@ const SwitchButton = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 10%;
-
-  &:hover {
-    background-color: rgba(4, 175, 10, 0.2);
-  }
 `;
+
+const P = styled.p`
+ color:${({ theme }) => theme.colors.textTertiary};
+ font-weight: bold;
+ font-size: 1rem;
+ `;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
