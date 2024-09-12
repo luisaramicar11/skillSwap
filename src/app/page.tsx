@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import Carousel from "../components/ui/carousel/Carousel";
 
 
 // Estilos para el contenedor principal
@@ -151,6 +152,7 @@ const Box = styled.div`
   width: 80%;
 `;
 
+
 // Componente principal de la página de inicio
 const Home = () => {
   return (
@@ -167,6 +169,7 @@ const Home = () => {
           <h2 className="right-text">Para los amantes del entorno digital</h2>
         </Text2>
       </MainText>
+      <Carousel></Carousel>
       <Footer>
         <div>
           <a href="#">HOME</a>
@@ -186,6 +189,8 @@ const Home = () => {
           </div>
         </Box>
       </Footer>
+
+      
     </HomeContainer>
   );
 };
