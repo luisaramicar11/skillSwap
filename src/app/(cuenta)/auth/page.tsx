@@ -63,11 +63,20 @@ const SwitchButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color:${({ theme }) => theme.colors.textTertiary};
+ font-weight: bold;
+ font-size: 1.5rem;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
 `;
+
+const P = styled.p`
+ color:${({ theme }) => theme.colors.textTertiary};
+ font-weight: bold;
+ font-size: 1rem;
+ `;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -118,7 +127,7 @@ export default function AuthPage() {
             ) : (
               <>
                 <h1>Hello, Friend!</h1>
-                <p>Enter your details and start your journey with us</p>
+                <P>Enter your details and start your journey with us</P>
                 <SwitchButton onClick={() => setIsSignUp(true)}>Sign Up</SwitchButton>
               </>
             )}
