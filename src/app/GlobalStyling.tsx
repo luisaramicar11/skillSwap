@@ -27,8 +27,8 @@ export const GlobalTheme: IGlobalTheme = {
         textGreenDark: '#1E892F60',
         textBlue:'1E6F8960',
         textBrown: '#A3761E60',     
-        gradientPrimary: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)', 
-        gradientSecondary: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)', 
+        gradientText: 'linear-gradient(90deg, #fefb41 11%,  #d38301 56%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fefb41b3 100% )', 
     }
 };
 
@@ -52,10 +52,11 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textGreenDark: '#1E892F60',
         textBlue:'1E6F8960',
         textBrown: '#A3761E60',     
-        gradientPrimary: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)', 
-        gradientSecondary: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)', 
+        gradientText: 'linear-gradient(90deg, #fefb41 11%,  #d38301 56%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fefb41b3 100% )', 
     }
 };
+
 
 // Global styling for essential HTML elements
 export const GlobalStyle = createGlobalStyle`
@@ -67,7 +68,6 @@ html {
 }
 
 body {
-    background-color: ${({ theme }) => theme.colors.bgPrimary};
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -76,7 +76,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: ${GlobalTheme.colors.textTertiary};
     font-weight: bolder;
 }
 
