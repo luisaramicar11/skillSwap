@@ -34,7 +34,7 @@ export const GlobalTheme: IGlobalTheme = {
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
-        bgPrimary: '#222222',               
+        bgPrimary: '#121212',               
         textPrimary: '#FFFFFF',             
         bgSecondary: '#FFFFFF', 
 
@@ -52,8 +52,8 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textGreenDark: '#1E892F60',
         textBlue:'1E6F8960',
         textBrown: '#A3761E60',     
-        gradientText: 'linear-gradient(90deg, #fefb41 11%,  #d38301 56%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fefb41b3 100% )', 
+        gradientText: 'linear-gradient(90deg, #fefb41 0%,  #d38301 60%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fefb41b3 90% )', 
     }
 };
 

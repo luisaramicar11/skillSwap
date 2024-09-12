@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import styled from 'styled-components';
-import InputSingUp from '../ui/inputs/InputSingUp';
+import InputSingUp from '../ui/inputs/InputSignUp';
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
 
 const Container = styled.div`
