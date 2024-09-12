@@ -1,46 +1,32 @@
 "use client";
 import styled from "styled-components";
 
+
 // Estilos para el contenedor principal
 const HomeContainer = styled.div`
   background-color: #121212;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+
 `;
 
 // Estilos para la barra de navegación
-const NavBar = styled.nav`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px 40px;
 
-  a {
-    color: #fff;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 16px;
-
-    &:hover {
-      color: #f39c12;
-    }
-  }
-`;
 
 // Estilos para el logo y el botón
 const Logo = styled.h1`
   background: ${({ theme }) => theme.colors.gradientText};
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: bold;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el degradado */       
+  -webkit-text-fill-color: transparent;   
   span {
     color: #e74c3c;
     font-weight: normal;
   }
+
 `;
 
 const Button = styled.button`
@@ -48,11 +34,11 @@ const Button = styled.button`
   color: #fff;
   border: none;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 25px;
   cursor: pointer;
   border-radius: 4px;
-  margin-top: 5px;
   transition: background 0.3s;
+  margin-bottom: 50px;
 
   &:hover {
     background: linear-gradient(90deg, #e74c3c 0%, #f39c12 100%);
@@ -64,8 +50,9 @@ const MainText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
   background: transparent;
+  
 `;
 
 // Estilos para cada cuadro de texto
@@ -74,7 +61,7 @@ const Text = styled.div`
   text-align: center;
   padding: 50px;
   background: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.bgPrimary};
   font-size: 24px;
   width: 50%;
   border: 1px solid #e74c3c;
@@ -93,7 +80,7 @@ const Text2 = styled.div`
   text-align: center;
   padding: 50px;
   background: transparent;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.bgPrimary};
   font-size: 24px;
   border: 1px solid #f39c12;
   background-origin: border-box;
@@ -118,7 +105,7 @@ const Footer = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 150px;
 
   
 
@@ -168,12 +155,6 @@ const Box = styled.div`
 const Home = () => {
   return (
     <HomeContainer>
-      <NavBar>
-        <a href="#">HOME</a>
-        <a href="#">MATCH</a>
-        <a href="#">DISCOVER</a>
-        <a href="#">USER</a>
-      </NavBar>
       <Logo>
         SKILL<span>swap</span>
       </Logo>
