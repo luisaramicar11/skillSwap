@@ -1,7 +1,7 @@
 "use client";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { AuthState, IUserLoginRequest, IUserLoginResponse } from "../../models/login.model";
-import { IUserRegister } from "../../models/register.model"
+import { AuthState, IUserLoginRequest, IUserLoginResponse } from "../../../models/login.model";
+import { IUserRegister } from "../../../models/register.model"
 
 // Estado inicial
 const initialState: AuthState = {

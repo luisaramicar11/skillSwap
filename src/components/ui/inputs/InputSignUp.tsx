@@ -38,7 +38,6 @@ const StyledInputSignUp = styled.input`
   }
 `;
 
-
 const InputSingUp: React.FC<InputProps> = ({
   type,
   placeholder,
