@@ -14,8 +14,8 @@ interface InputProps {
 }
 
 const StyledInputSignUp = styled.input`
-  border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.bgPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.textWhite};
+  color: ${({ theme }) => theme.colors.textWhite};
   border-radius: 10px;
   font-size: 16px;
   box-sizing: border-box;
@@ -26,16 +26,10 @@ const StyledInputSignUp = styled.input`
   
   // Estiliza el placeholder en blanco
   ::placeholder {
-    color: #ffffff;
-    opacity: 0.7; // Ajusta la opacidad si es necesario
+    color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
   }
 
-  // Cambia el color cuando el input esté en foco (seleccionado)
-  &:focus {
-    outline: none; // Elimina el borde de enfoque por defecto
-    border-color: ${({ theme }) => theme.colors.gradientPrimary}; // Cambia el borde a blanco
-    color: ${({ theme }) => theme.colors.gradientPrimary} ; // Cambia el color del texto a blanco
-  }
+  
 `;
 
 const InputSingUp: React.FC<InputProps> = ({

@@ -11,9 +11,10 @@ interface LabelProps {
 
 const LabelAuth = styled.label`
   font-size: 16px;
-  color: ${({ theme }) => theme.colors.bgPrimary};
+  color: ${({ theme }) => theme.colors.textWhite};
   margin-bottom: 8px;
   display: block;
+  margin-top: 30px;
 `;
 
 const Label: React.FC<LabelProps> = ({ text, htmlFor, className }) => {

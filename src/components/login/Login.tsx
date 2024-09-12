@@ -8,7 +8,7 @@ import { AppDispatch } from '../../app/redux/store';
 import styled from 'styled-components';
 import InputSingUp from '../ui/inputs/InputSignUp';
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
-import Label from '../ui/label/Label';
+import Label from '../ui/labels/LabelAuth';
 
 //Syled
 import {FormWrapper} from './LoginStyling'
@@ -83,14 +83,14 @@ export default function LoginPage() {
         <InputSingUp
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           value={form.password}
           onChange={handleChange}
           required
           />
           <DivButton>
             <ButtonSingUp type="submit" disabled={loading}>
-              {loading ? 'Cargando...' : 'Login'}
+              {loading ? 'Cargando...' : 'ENTRAR'}
             </ButtonSingUp>
           </DivButton>
       </form>

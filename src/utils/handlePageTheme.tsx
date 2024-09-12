@@ -2,7 +2,7 @@ import { IGlobalTheme } from "../models/globalTheme.model";
 import { GlobalDarkTheme, GlobalTheme } from '../app/GlobalStyling';
 
 // Define the labels that should set the dark theme
-export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
+export const darkThemeLabels = ['REGISTRO', 'ADMIN'];
 
 // Function to update the theme based on the current page
 export function handlePageChange(label: string) {
