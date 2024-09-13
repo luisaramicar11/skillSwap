@@ -1,7 +1,6 @@
 "use client";
 import styled from "styled-components";
 import Carousel from "../components/ui/carousel/Carousel";
-
 import { Baskervville } from "next/font/google";
 
 const baskervville = Baskervville({

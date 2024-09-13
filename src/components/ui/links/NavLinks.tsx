@@ -17,7 +17,7 @@ const NavLinkComponent = styled(Link)`
   }
 `;
 
-const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick }) => {
+const StyledNavLink: React.FC<ILinkProps> = ({ href, label, icon, onClick }) => {
     return (
         <NavLinkComponent
             href={href}

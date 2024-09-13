@@ -3,7 +3,7 @@ import { Urbanist } from "next/font/google";
 import ClientLayout from "./ClientLayout";
 import { Providers } from './Providers';
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={urbanist.className}>
         <Providers>
-        <ClientLayout>
-        {children}
-        </ClientLayout>
-        </Providers>    
-        </body>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </Providers>
+      </body>
     </html>
   );
 }
