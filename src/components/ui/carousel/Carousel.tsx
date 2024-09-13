@@ -7,13 +7,17 @@ interface CardProps {
 
 // Contenedor principal
 const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #121212;
+  background-color:${({ theme }) => theme.colors.textSecondary};
   flex-direction: column;
   padding: 20px;
-  margin-bottom: 0; // Elimina cualquier margen inferior innecesario
+  margin-bottom: 0; 
+  padding-top:100px;
+  padding-bottom: 100px;
+  width: 100vw;;// Elimina cualquier margen inferior innecesario
 
   // Elimina min-height: 100vh para evitar el exceso de espacio
   height: auto; // Ajusta el tamaño según el contenido

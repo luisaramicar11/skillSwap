@@ -6,8 +6,8 @@ import { handlePageChange } from "@/src/utils/handlePageTheme";
 
 // Styled components
 const NavbarContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
-  border-bottom: 0.5px solid ${({ theme }) => theme.colors.bgSecondary};
+  background-color: ${({ theme }) => theme.colors.bgNavbar};
+  color: ${({ theme }) => theme.colors.textWhite};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@ const NavList = styled.ul`
 
 const NavItem = styled.li`
   display: inline-block;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
 `;
 
@@ -32,17 +32,17 @@ export const Navbar: React.FC = () => {
     return (
         <NavbarContainer>
             <NavList>
-                <NavItem onClick={() => handlePageChange('HOME')}>
-                    <StyledNavLink href="/" label="HOME" />
+                <NavItem onClick={() => handlePageChange('INICIO')}>
+                    <StyledNavLink href="/" label="INICIO" />
                 </NavItem>
                 <NavItem onClick={() => handlePageChange('MATCH')}>
                     <StyledNavLink href="/match" label="MATCH" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('DISCOVER')}>
-                    <StyledNavLink href="/discover" label="DISCOVER" />
+                <NavItem onClick={() => handlePageChange('DESCUBRE')}>
+                    <StyledNavLink href="/discover" label="DESCUBRE" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('USER')}>
-                    <StyledNavLink href="/user" label="USER" />
+                <NavItem onClick={() => handlePageChange('USUARIO')}>
+                    <StyledNavLink href="/user" label="USUARIO" />
                 </NavItem>
             </NavList>
         </NavbarContainer>

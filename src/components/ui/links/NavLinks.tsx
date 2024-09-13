@@ -8,7 +8,8 @@ import { handlePageChange } from "@/src/utils/handlePageTheme";
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
   padding: 15px;
-  color: ${({ theme }) => theme.colors.textPrimary};
+  margin: 0;
+  color: ${({ theme }) => theme.colors.textWhite};
   font-weight: bold;
 
   &:hover {

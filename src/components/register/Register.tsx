@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { AppDispatch, RootState } from '../../app/redux/store';
 import InputSignUp from "../ui/inputs/InputSignUp"
 import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
-import Label  from "../ui/labels/Label";
+import Label  from "../ui/labels/LabelAuth";
 import Select from "../ui/selects/SelectRegister";
 import TextArea from "../ui/textAreas/TextAreaRegister";
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
@@ -90,6 +90,7 @@ export default function RegisterPage() {
         return (
           <>
             <div>
+            <Title>Registro</Title>
             <Label
           text= "Email"
           htmlFor=''
@@ -97,7 +98,7 @@ export default function RegisterPage() {
           <InputSignUp
             type="email"
             name="email"
-            placeholder="Escribe tu nombre"
+            placeholder="Escribe tu nombre..."
             value={form.email}
             onChange={handleChange}
             required
@@ -109,7 +110,7 @@ export default function RegisterPage() {
           <InputSignUp
             type="password"
             name="password"
-            placeholder="Escribe tu contraseña"
+            placeholder="Escribe tu contraseña..."
             value={form.password}
             onChange={handleChange}
             required
@@ -122,7 +123,7 @@ export default function RegisterPage() {
         return (
             <DivUserData>
               <DivUserTitle>
-              <TitleUserData>Tus datos</TitleUserData> 
+              <Title>Tus datos</Title> 
               </DivUserTitle>        
              <DivUserInput>
              <Label htmlFor="name" text="Nombre*" />    
@@ -145,7 +146,15 @@ export default function RegisterPage() {
             onChange={handleChange}
             required
           />
-             </DivUserInput>
+             </DivUserInput>   
+            </DivUserData>
+        );
+        case 2:
+        return (
+            <DivUserData>
+              <DivUserTitle>
+              <Title>Tus datos</Title> 
+              </DivUserTitle>        
           <DivUserInput>
           <Label htmlFor="age" text="Edad" /> 
           <InputSignUp
@@ -169,7 +178,7 @@ export default function RegisterPage() {
           </DivUserInput>    
             </DivUserData>
         );
-        case 2:
+        case 3:
         return (
           <DivUserData>
             <DivUserTitle>
@@ -200,7 +209,7 @@ export default function RegisterPage() {
             </DivUserInput>   
           </DivUserData>
         );
-      case 3:
+      case 4:
         return (
           <DivUserData>
             <DivUserTitle>
@@ -231,7 +240,7 @@ export default function RegisterPage() {
           
           </DivUserData>
         );
-      case 4:
+      case 5:
         return (
             <DivUserData>
               <DivUserTitle>
@@ -263,7 +272,7 @@ export default function RegisterPage() {
               <InputSignUp
             type="text"
             name="github"
-            placeholder="Escribe tu github"
+            placeholder="Escribe tu GitHub"
             value={form.github}
             onChange={handleChange}
             />
@@ -281,23 +290,23 @@ export default function RegisterPage() {
   return (
     <Container>
       <FormWrapper>
-      <Title>Registro</Title>
+
       <form onSubmit={handleSubmit}>
         {renderStep()}  
         <DivButton>
           {currentStep > 0 && (
             <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep - 1)}>
-              Atrás
+              ATRÁS
             </ButtonSingUp>
           )}
 
-          {currentStep < 4 ? (
+          {currentStep < 5 ? (
             <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
-              Siguiente
+              SIGUIENTE
             </ButtonSingUp>
           ) : (
             <ButtonSingUp type="submit" disabled={loading}>
-              {loading ? 'Registrando...' : 'Registrar'}
+              {loading ? 'Registrando...' : 'ENVIAR'}
             </ButtonSingUp>
           )}
         </DivButton>

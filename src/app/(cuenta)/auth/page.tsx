@@ -5,11 +5,12 @@ import styled from "styled-components";
 import LoginPage from "../../../components/login/Login";
 import RegisterPage from "../../../components/register/Register";
 import { FormWrapper } from "../../../components/login/LoginStyling";
+import StyledNavLink from "@/src/components/ui/links/NavLinks";
 
 const TextWrapper = styled.div`
   position: absolute;
-  right: 18%;
-  top: 2%;
+  right: 31%;
+  bottom:61%;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -17,7 +18,7 @@ const TextWrapper = styled.div`
 `;
 
 const SwapText = styled(motion.h1)`
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -26,12 +27,12 @@ const SwapText = styled(motion.h1)`
   margin: 0;
   line-height: 1.2;
   text-transform: uppercase;
-
   -webkit-text-fill-color: transparent;
+  
 `;
 
 const SkillSwapText = styled(motion.h1)`
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -41,6 +42,7 @@ const SkillSwapText = styled(motion.h1)`
   line-height: 1.2;
   text-transform: uppercase;
   -webkit-text-fill-color: transparent;
+
 `;
 
 // Contenedor principal
@@ -49,13 +51,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100;
+  
 `;
 
 const MotionDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
 `;
 
 // Contenedor de la capa superpuesta
@@ -63,31 +66,42 @@ const OverlayContainer = styled.div`
   position: absolute;
   left: 50%;
   width: 50%;
-  height: 100%;
-  background: ${({ theme }) => theme.colors.textimary};
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
 `;
 
 // Panel dentro de la capa superpuesta
 const OverlayPanel = styled.div`
-  background: ${({ theme }) => theme.colors.bgPrimary};
-  border: 1px solid ${({ theme }) => theme.colors.textPrimary};
-  padding: 40px;
-  border-left: none;
-  width: 500px;
-  /* height: 443px; */
-  text-align: center;
-  justify-content: center;
+  border: none;
+  width: 60%;  
+  justify-content: start;
   align-items: center;
-  height: 400px;
-  border-radius: none;
-  border-bottom-right-radius: 15px;
-  border-top-right-radius: 15px;
 `;
+const Div = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.colors.textYellow};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textYellow};
+  border-right: 1px solid ${({ theme }) => theme.colors.textYellow};
+  background: ${({ theme }) => theme.colors.bgPrimary};
+  border-radius: none;
+  border-bottom-right-radius:15px ;
+  border-top-right-radius:15px ;
+  padding: 50px;
+  width: 100%;
+  height: 500px;
+  text-align: start;
+  justify-content: center;
+  align-items: center;  
+  margin: 0;`
+
 const H1 = styled.h1`
-  margin-top: 40%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  height: 100%;
+  padding-bottom: 20px;
 
   h1{
     font-size: 2rem;
@@ -100,16 +114,32 @@ const H1 = styled.h1`
  `
 // Botones para alternar entre vistas
 const SwitchButton = styled.button`
-  padding: 12px 45px;
+  padding: 0 !important;
   border-radius: 20px;
-  border: 1px solid white;
-  background-color: transparent;
-  color: #f10909;
+  width: 150px;
+  border: 1px solid ${({ theme }) => theme.colors.textOrange};
+  background-color: transparent; 
   font-size: 12px;
   font-weight: bold;
-  cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & a {
+    width: 100% !important;
+    height: 100% !important;
+    color: ${({ theme }) => theme.colors.textOrange};
+  }
+
+  &:hover {
+    background:${({ theme }) => theme.colors.gradientPrimary};
+    border: none;
+
+    & a:hover {
+      color: ${({ theme }) => theme.colors.textPrimary};
+    }
+  }
 `;
 
 const P = styled.p`
@@ -180,32 +210,28 @@ export default function AuthPage() {
           </SkillSwapText>
         </TextWrapper>
         <OverlayPanel>
-          {isSignUp ? (
-            <>
+          <Div>
+            {isSignUp ? (
+              <>
               <H1>
-                <h1>Welcome Back!</h1>
-                <p>
-                  To keep connected with us, please login with your personal info
-                </p>
-              </H1>
-              <SwitchButton
-                style={{ background: "red" }}
-                onClick={() => setIsSignUp(false)}
-              >
-                Sign In
-              </SwitchButton>
-            </>
-          ) : (
-            <>
-              <H1>
-                <h1>Hello, Friend!</h1>
-                <p>Enter your details and start your journey with us</p>
-                <SwitchButton onClick={() => setIsSignUp(true)}>
-                  Sign Up
+                <SwitchButton
+                  onClick={() => setIsSignUp(false)}
+                >
+                  <StyledNavLink href="/auth" label="INICIAR SESIÓN"></StyledNavLink>
                 </SwitchButton>
               </H1>
-            </>
-          )}
+              </>
+            ) : (
+              <>
+                <H1>
+                  <SwitchButton onClick={() => setIsSignUp(true)}>
+                    <StyledNavLink href="/auth" label="REGISTRO"></StyledNavLink>
+                  </SwitchButton>
+                </H1>
+              </>
+            )}
+          </Div>
+
         </OverlayPanel>
       </OverlayContainer>
     </Container>

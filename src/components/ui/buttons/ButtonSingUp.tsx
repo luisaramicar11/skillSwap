@@ -10,16 +10,14 @@ type ButtonProps = {
 };
 
 const StyledButtonSingUp = styled.button`
-  padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.gradientPrimary};
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 15px;
+  color: ${({ theme }) => theme.colors.textOrange};
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
   width: 120px;
-  height: 50px;
-  background-color: ${({ theme }) => theme.colors.buttonBackground}; // Ajusta el color de fondo si es necesario
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  background-color: ${({ theme }) => theme.colors.textWhite};
+  border: none; // Ajusta el color de fondo si es necesario
 `;
 
 const ButtonSingUp: React.FC<ButtonProps> = ({ type = 'button', disabled = false, onClick, children }) => {
