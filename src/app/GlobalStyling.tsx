@@ -63,20 +63,25 @@ export const GlobalDarkTheme: IGlobalTheme = {
 
 // Global styling for essential HTML elements
 export const GlobalStyle = createGlobalStyle`
-*{
-    box-sizing: border-box;
-}
 
 html {
+
     background-color: ${({ theme }) => theme.colors.bgPrimary};
     width: 100vw !important;
     overflow-x: hidden;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
 }
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
     width: 100% !important;
     overflow-x: hidden;
     margin: 0;
