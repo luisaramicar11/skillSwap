@@ -2,7 +2,17 @@
 import styled from "styled-components";
 import React from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks"
+import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { Baskervville } from "next/font/google";
+import InfoIcon from "@/public/svg/InfoIcon";
+import SettingsIcon from "@/public/svg/SettingsIcon";
+
+const baskervville = Baskervville({
+    weight: '400',
+    subsets: ['latin'],
+    style: 'normal'
+});
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -10,8 +20,35 @@ const NavbarContainer = styled.div`
   color: ${({ theme }) => theme.colors.textWhite};
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 50px;
   gap: 50px;
+`;
+
+const SidebarLink = styled.p`
+    font-family: ${baskervville.style.fontFamily};
+    font-style: italic;
+    font-size: 14px;
+    width: max-content;
+
+    & span {
+        text-decoration: underline;
+    }
+
+    &:hover {
+        font-weight: bold;
+    }
+`;
+
+const SidebarLinkContainer = styled.div`
+  width: 100px;
+  cursor: pointer;
+`;
+
+const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const NavList = styled.ul`
@@ -31,6 +68,9 @@ const NavItem = styled.li`
 export const Navbar: React.FC = () => {
     return (
         <NavbarContainer>
+            <SidebarLinkContainer>
+                <SidebarLink>+ <span>¿Quieres ver tu información?</span></SidebarLink>
+            </SidebarLinkContainer>
             <NavList>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
                     <StyledNavLink href="/" label="INICIO" />
@@ -41,10 +81,15 @@ export const Navbar: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('DESCUBRE')}>
                     <StyledNavLink href="/discover" label="DESCUBRE" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('USUARIO')}>
-                    <StyledNavLink href="/user" label="USUARIO" />
-                </NavItem>
             </NavList>
+            <IconsContainer>
+                <StyledIconNavLink href="/user" label="USUARIO" icon={<SettingsIcon />} />
+                <StyledIconNavLink
+                    href="/legal"
+                    label="LEGAL"
+                    icon={<InfoIcon />}
+                />
+            </IconsContainer>
         </NavbarContainer>
     );
 };
