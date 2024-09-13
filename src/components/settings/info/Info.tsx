@@ -1,319 +1,191 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../app/redux/slices/authSlice';
-import { toast } from 'react-toastify';
-import { AppDispatch, RootState } from '../../app/redux/store';
-import InputSignUp from "../ui/inputs/InputSignUp"
-import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from '../auth/register/RegisterStyling';
-import Label from '../ui/labels/LabelAuth';
-import Select from '../ui/selects/SelectRegister';
-import TextArea from '../ui/textAreas/TextAreaRegister';
-import ButtonSingUp from '../ui/buttons/ButtonSingUp';
+"use client";
+import styled from "styled-components";
+import WidgetContainer from '../../WidgetContainer/WidgetContainer';
+import Image from "next/image";
 
-//Syled
-import { FormWrapper } from '../auth/login/LoginStyling';
-import { Container } from '../auth/login/LoginStyling';
-import { Title } from '../auth/login/LoginStyling';
-import { DivButton } from '../auth/login/LoginStyling';
 
-export default function RegisterPage() {
-  const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter();
-  const { loading, error } = useSelector((state: RootState) => state.auth);
+//Container for the whole page.tsx
+const PageContainer = styled.section`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
 
-  const [form, setForm] = useState({
-    name: "",
-    lastName: "",
-    age: "",
-    image: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    jobTitle: "",
-    description: "",
-    linkedIn: "",
-    behance: "",
-    github: "",
-    createdAt: ""
-  });
-
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const [skills, setSkills] = useState<string>("");
-  const [currentStep, setCurrentStep] = useState(0); // Controla la vista actual del carrusel
-
-  // Manejar cambios en los inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  // Manejar el select
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
-  // Manejar el textarea
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSkills(event.target.value);
-  };
-
-  // Manejar el envío del formulario
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Validación básica de campos
-    if (!form.email || !form.name || !form.password || !form.lastName || !form.age || !form.description || !form.jobTitle) {
-      toast.error('Por favor, completa todos los campos.');
-      return;
+  & h1 {
+      translate: 0 30px;
+      font-size: 100px;
     }
 
-    try {
-      await dispatch(registerUser(form)).unwrap();
-      toast.success('Registro exitoso!');
-    } catch (err: any) {
-      if (err?.message) {
-        toast.error(`Registro fallido: ${err.message}`);
-      } else {
-        toast.error('Registro fallido. Inténtalo de nuevo.');
-      }
+  & h2 {
+      width: 100%;
+      font-size: 40px;
     }
-  };
 
-  // Renderizar el input actual basado en la vista
-  const renderStep = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <>
-            <div>
-              <Title>Registro</Title>
-              <Label
-                text="Email"
-                htmlFor=''
-              />
-              <InputSignUp
-                type="email"
-                name="email"
-                placeholder="Escribe tu nombre..."
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
-              <Label
-                text="Contraseña"
-                htmlFor='password'
-              />
-              <InputSignUp
-                type="password"
-                name="password"
-                placeholder="Escribe tu contraseña..."
-                value={form.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          </>
-
-        );
-      case 1:
-        return (
-          <DivUserData>
-            <DivUserTitle>
-              <Title>Tus datos</Title>
-            </DivUserTitle>
-            <DivUserInput>
-              <Label htmlFor="name" text="Nombre*" />
-              <InputSignUp
-                type="text"
-                name="name"
-                placeholder="Escribe tu nombre"
-                value={form.name}
-                onChange={handleChange}
-                required
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="lastname" text="Apellidos*" />
-              <InputSignUp
-                type="text"
-                name="lastName"
-                placeholder="Escribe tus apellidos"
-                value={form.lastName}
-                onChange={handleChange}
-                required
-              />
-            </DivUserInput>
-          </DivUserData>
-        );
-      case 2:
-        return (
-          <DivUserData>
-            <DivUserTitle>
-              <Title>Tus datos</Title>
-            </DivUserTitle>
-            <DivUserInput>
-              <Label htmlFor="age" text="Edad" />
-              <InputSignUp
-                type="text"
-                name="age"
-                placeholder="Escribe tu edad"
-                value={form.age}
-                onChange={handleChange}
-                required
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="image" text="Imagen" />
-              <InputSignUp
-                type="text"
-                name="image"
-                placeholder="Escribe la url de tu imagen"
-                value={form.image}
-                onChange={handleChange}
-              />
-            </DivUserInput>
-          </DivUserData>
-        );
-      case 3:
-        return (
-          <DivUserData>
-            <DivUserTitle>
-              <TitleUserData>Tus habilidades</TitleUserData>
-            </DivUserTitle>
-            <DivUserInput>
-              <Label htmlFor="area" text="Selecciona una categoría" />
-              <Select
-                value={selectedOption}
-                onChange={handleSelectChange}
-                ariaLabel="Select area"
-                name="area"
-                required
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="skills" text="Habilidades" />
-              <TextArea
-                value={skills}
-                onChange={handleTextAreaChange}
-                ariaLabel="Escribe tus habilidades"
-                name="skills"
-                placeholder="Escribe aquí tus habilidades (máx. 200 caracteres)..."
-                required
-                maxLength={200} // Especificamos el límite de caracteres
-              />
-              <p>{skills.length} / 200 caracteres</p> {/* Mostrar contador de caracteres */}
-            </DivUserInput>
-          </DivUserData>
-        );
-      case 4:
-        return (
-          <DivUserData>
-            <DivUserTitle>
-              <TitleUserData>Sobre tu experiencia</TitleUserData>
-            </DivUserTitle>
-            <DivUserInput>
-              <Label htmlFor="jobTitle" text="Trabajo/título" />
-              <InputSignUp
-                type="text"
-                name="jobTitle"
-                placeholder="Nombre de tu trabajo"
-                value={form.jobTitle}
-                onChange={handleChange}
-                required
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="description" text="Descripción" />
-              <InputSignUp
-                type="text"
-                name="description"
-                placeholder="Describe tu experiencia "
-                value={form.description}
-                onChange={handleChange}
-                required
-              />
-            </DivUserInput>
-
-          </DivUserData>
-        );
-      case 5:
-        return (
-          <DivUserData>
-            <DivUserTitle>
-              <TitleUserData>Contacto</TitleUserData>
-            </DivUserTitle>
-            <DivUserInput>
-              <Label htmlFor="linkedIn" text="LinkedIn" />
-              <InputSignUp
-                type="text"
-                name="linkedIn"
-                placeholder="Escribe tu linkedIn"
-                value={form.linkedIn}
-                onChange={handleChange}
-
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="behance" text="Behance" />
-              <InputSignUp
-                type="text"
-                name="behance"
-                placeholder="Escribe tu behance"
-                value={form.behance}
-                onChange={handleChange}
-              />
-            </DivUserInput>
-            <DivUserInput>
-              <Label htmlFor="github" text="Github" />
-              <InputSignUp
-                type="text"
-                name="github"
-                placeholder="Escribe tu GitHub"
-                value={form.github}
-                onChange={handleChange}
-              />
-            </DivUserInput>
-
-          </DivUserData>
-
-
-        );
-      default:
-        return null;
+  & h3 {
+      padding: 10px 30px;
+      width: 100% !important;
+      font-size: 25px;
+      border-bottom: 1px solid  ${({ theme }) => theme.colors.bgSecondary};
     }
-  };
 
+  & h4 {
+    width: 100%;
+      font-size: 25px;
+    }
+
+  & p{
+    width: 100%;
+    font-size: 16px;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+//Container for page.tsx content
+const PageContentContainer = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
+
+//Containers for banner
+const Banner = styled.article`
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  height:200px;
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgBanner};
+`;
+
+const BannerBody = styled.div`
+    width: 1000px !important;
+    display: flex;
+    justify-content: space-between;
+`
+
+const BannerImageDiv = styled.div`
+  background-image: url("https://imagenes.eltiempo.com/files/image_414_541/uploads/2024/06/18/66720e3f4feb4.png");
+  background-size: cover;
+  width: 200px !important;
+  height: 200px !important;
+  translate: 0 30px;
+  border: solid 0.5px ${({ theme }) => theme.colors.textBlack};
+`;
+
+//Container for INFO content
+const InfoPageContainer = styled.div`
+  padding-top: 200px;
+  width: 100%;
+  max-width: 1000px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const PageContent = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  gap: 20px;
+`;
+
+const PageBody = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+//Containers for Widgets and Aside
+const WidgetContent = styled.div`
+  padding: 20px 30px;
+  width: max-content;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const WidgetBody = styled.div`
+  padding: 20px 30px;
+  width: 100%;
+  min-width: 220px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const PageAside = styled.aside`
+  width: max-content;
+  padding: 0;
+  margin: 0;
+  margin-top: 50px;
+
+  & div{
+    width: 200px !important;
+  }
+`;
+
+// Componente principal de la página de inicio
+const UserInfo = () => {
   return (
-    <Container>
-      <FormWrapper>
+    <PageContainer>
+      <Banner>
+        <BannerBody>
+          <h1>Info</h1>
+          <BannerImageDiv />
+        </BannerBody>
+      </Banner>
+      <PageContentContainer>
+        <InfoPageContainer>
+          <PageContent>
+            <PageBody>
+              <WidgetContainer>
+                <WidgetBody>
+                  <h2>Martín Elías</h2>
+                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                </WidgetBody>
+              </WidgetContainer>
+              <WidgetContainer>
+                <WidgetBody>
+                  <h4>Descripción</h4>
+                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                </WidgetBody>
+              </WidgetContainer>
+              <WidgetContainer>
+                <h3>Enlaces</h3>
+                <WidgetContent>
+                  <WidgetContainer>
+                    <WidgetBody>
+                      <h4>LinkedIn</h4>
+                      <p>https://yourdomain.com</p>
+                    </WidgetBody>
+                  </WidgetContainer>
+                </WidgetContent>
+              </WidgetContainer>
+            </PageBody>
+            <PageAside>
+              <WidgetContainer>
+                <h3>User Data</h3>
+                <WidgetBody>
+                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                </WidgetBody>
+              </WidgetContainer>
+            </PageAside>
+          </PageContent>
+        </InfoPageContainer>
+      </PageContentContainer>
 
-        <form onSubmit={handleSubmit}>
-          {renderStep()}
-          <DivButton>
-            {currentStep > 0 && (
-              <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep - 1)}>
-                ATRÁS
-              </ButtonSingUp>
-            )}
-
-            {currentStep < 5 ? (
-              <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
-                SIGUIENTE
-              </ButtonSingUp>
-            ) : (
-              <ButtonSingUp type="submit" disabled={loading}>
-                {loading ? 'Registrando...' : 'ENVIAR'}
-              </ButtonSingUp>
-            )}
-          </DivButton>
-        </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </FormWrapper>
-    </Container>
-
+    </PageContainer>
   );
-}
+};
+
+export default UserInfo;
