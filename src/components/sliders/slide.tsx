@@ -16,8 +16,8 @@ interface SliderCardProps {
 const CardContainer = styled.div`
   width: 50%;
   height: 95%;
-  border-radius: 2rem;
-  margin: 2rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
   position: relative;
   color: white;
   text-align: center;
@@ -50,7 +50,7 @@ const CardContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   object-fit: cover;
 
   @media (max-width: 768px) {
@@ -59,11 +59,10 @@ const Image = styled.img`
 `;
 
 const Title = styled.h3`
-  font-size: 4rem;
-  margin-bottom: 10px;
+  font-size: 2rem;
   position: absolute;
-  bottom: 5rem;
-  left: 5rem;
+  bottom: 2rem;
+  left: 1rem;
   z-index: 99;
 
   @media (max-width: 768px) {
@@ -80,10 +79,11 @@ const Title = styled.h3`
 `;
 
 const Subtitle = styled.p`
-  font-size: 2rem;
+  font-size: 1rem;
+  font-weight: 300;
   position: absolute;
-  bottom: 1rem;
-  left: 5rem;
+  bottom: 2rem;
+  left: 1rem;
   z-index: 99;
   color: #ccc;
 
@@ -107,27 +107,28 @@ const PassButton = styled.button`
   background: none;
   border: none;
   color: white;
-  font-size: 4rem;
+  font-size: 2rem;
   z-index: 99;
+  font-weight: 100;
   cursor: pointer;
 
   @media (max-width: 768px) {
-    font-size: 3rem; /* Disminuye el tamaño en pantallas pequeñas */
+    font-size: 1.5rem; /* Disminuye el tamaño en pantallas pequeñas */
   }
 
   @media (max-width: 480px) {
-    font-size: 2rem; /* Disminuye aún más para móviles */
+    font-size: 1rem; /* Disminuye aún más para móviles */
   }
 `;
 
 const StarButton = styled.button`
   position: absolute;
-  bottom: 20px;
+  bottom: 4rem;
   right: 20px;
   background: none;
   border: none;
   color: white;
-  font-size: 5rem;
+  font-size: 2rem;
   z-index: 99;
   cursor: pointer;
 

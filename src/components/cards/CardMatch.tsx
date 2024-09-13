@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
-  width: 20%;
+  width: 25%;
   height: 95%;
-  margin: 2rem;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  border-radius: 2rem;
-  overflow-x: hidden;
+  border-radius: 0.5rem;
+  overflow: hidden;
 
   @media (max-width: 1024px) {
     width: 80%; /* Ocupa el 80% en pantallas pequeñas */
@@ -19,21 +18,20 @@ const CardContainer = styled.div`
   }
 `;
 
-
 // Estilo para el título
 const Title = styled.h3`
-  padding: 0.5rem;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: orange;
-  margin-bottom: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  padding: 0;
+  margin:0.5rem;
+  padding-left: 1rem;
 `;
 
 // Sección de conexiones
 const Connections = styled.div`
   padding: 1rem;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.6rem;
   color:${({ theme }) => theme.colors.textSecondary};
 
   div {
@@ -44,8 +42,8 @@ const Connections = styled.div`
 // Sección de rating
 const RatingSection = styled.div`
   padding: 1rem;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.6rem;
   color:${({ theme }) => theme.colors.textSecondary};
 
   div {
@@ -59,35 +57,38 @@ const RatingStars = styled.div`
 `;
 
 const Description = styled.div`
-padding: 1rem;
-  margin: 15px 0;
-  border-top: 1px solid #ddd;
-  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; // Reducido el espacio entre elementos
+  justify-content: start;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 `;
 
 const SkillsSection = styled.div`
-color:${({ theme }) => theme.colors.textSecondary};
-font-weight: bold;
-padding: 1rem;
-  margin-top: 10px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-weight: bold;
 `;
 
 const SkillTag = styled.span`
   display: inline-block;
+  width: 80%;
+  text-align: center;
   margin: 5px 5px 0 0;
   padding: 5px 10px;
   border-radius: 20px;
-  color: #6c63ff;
-  border: 1px solid #6c63ff;
-  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textPurple};
+  border: 1px solid ${({ theme }) => theme.colors.textPurple};
+  font-size: 0.7rem; // Reducido el tamaño de la fuente
 `;
 
 const SubTitle = styled.h4`
-font-size: 1.8rem;
-  color:${({ theme }) => theme.colors.textSecondary};
+  font-size: 1.1rem; // Reducido el tamaño de la fuente
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: bold;
-  margin-bottom: 10px;
-  font-style: italic;
+  padding-left: 1rem;
+  margin-bottom: 0.3rem; // Añadido un pequeño margen inferior
 `;
 
 const DivRating = styled.div`
@@ -97,16 +98,20 @@ const DivRating = styled.div`
 `;
 
 const P = styled.p`
-color:${({ theme }) => theme.colors.textSecondary};
-padding: 1rem;
-font-size: 1rem;
-font-weight: 300;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.9rem; // Reducido el tamaño de la fuente
+  font-weight: 300;
+  font-style: italic;
+  padding: 0;
+  padding-left: 1rem;
+  margin: 0;
 `;
 
 const Skills = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap:1rem;
+  padding-left: 1rem; // Añadido padding izquierdo para alinear con el texto
 `;
 
 const Star = styled.span`
@@ -115,6 +120,33 @@ const Star = styled.span`
   margin: 0 2px;
 `;
 
+const DivTitle = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0;
+  gap:0;
+  justify-content: flex-start;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};`
+
+const DivConnections = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap:0;
+
+`;  
+
+const DivDescription = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; // Reducido el espacio entre secciones
+`;
+
+const Hr = styled.hr`
+  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  margin-left: 3rem;
+  margin-right:3rem;
+`;
 interface CardProps {
     description: string;
     rating: number;
@@ -127,7 +159,10 @@ const MatchCard: React.FC<CardProps> = ({
   }) => {
   return (
     <CardContainer>
+      <DivTitle>
       <Title>Match</Title>
+      </DivTitle>
+      <DivConnections>
       <Connections>
         <div>Connections</div>
         <div>🔗 30</div>
@@ -146,7 +181,10 @@ const MatchCard: React.FC<CardProps> = ({
         </RatingStars>
         </DivRating>       
       </RatingSection>
-
+      <Hr />
+      </DivConnections>
+      
+      <DivDescription>
       <Description>
         <SubTitle>Description</SubTitle>
         <P>{description}</P>
@@ -161,6 +199,8 @@ const MatchCard: React.FC<CardProps> = ({
           ))}
         </Skills>
       </SkillsSection>
+      </DivDescription>
+      
     </CardContainer>
   );
 };
