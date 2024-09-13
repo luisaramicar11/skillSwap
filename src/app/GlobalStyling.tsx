@@ -37,7 +37,6 @@ export const GlobalDarkTheme: IGlobalTheme = {
         bgPrimary: '#222222',               
         textPrimary: '#FFFFFF',             
         bgSecondary: '#FFFFFF', 
-
         bgTertiary: '#F5F5F5',            
         textSecondary: '#555555', 
         textBlack: '#00000020',             
@@ -62,9 +61,14 @@ export const GlobalDarkTheme: IGlobalTheme = {
 export const GlobalStyle = createGlobalStyle`
 
 html {
-    width: 100% !important;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+*,
+*::before,
+*::after{
+    box-sizing: inherit;
 }
 
 body {
@@ -72,6 +76,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     min-height: 100vh;
+    overflow-x: hidden;
     width: 100% !important;
 }
 
