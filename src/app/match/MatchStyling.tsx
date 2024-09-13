@@ -4,22 +4,28 @@ export const DivMatch = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   height: 100vh;
-  padding: 1rem;
-  margin: 0.5rem;
-  flex-wrap: wrap; /* Hace que los elementos se apilen en pantallas pequeñas */
+  width: 100%;
+  flex-wrap: wrap;
   overflow: hidden;
-  margin: 2rem;
+  margin: 0;
+  padding: 0;
+  gap: 1rem; // Añadimos un pequeño espacio entre los componentes
 
-  @media (max-width: 1024px) {
-    flex-direction: column; /* Apila los elementos en una columna en pantallas menores a 1024px */
-    height: auto; /* Ajusta la altura automáticamente en pantallas pequeñas */
+  @media (min-width: 760px) {
+    flex-direction: row;
+    justify-content: space-between; // Distribuye el espacio uniformemente
+    gap: 0.5rem; // Reduce el espacio entre componentes en pantallas más grandes
   }
 
   @media (min-width: 1024px) {
-    flex-direction: row; /* Mantén los elementos uno al lado del otro a partir de 1024px */
-    flex-wrap: nowrap;
-    height: 100vh; /* Mantén la altura total de la pantalla */
+    justify-content: space-between; // Mantiene la distribución uniforme
+    padding: 0 2rem; // Añade un poco de padding en los lados para evitar que los componentes toquen los bordes
+  }
+
+  > * {
+    flex: 1; // Hace que cada componente hijo ocupe el mismo espacio
+    max-width: 33%; // Limita el ancho máximo de cada componente
+    min-width: 250px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
   }
 `;
