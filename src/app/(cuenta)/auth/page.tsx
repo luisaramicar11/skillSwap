@@ -2,14 +2,15 @@
 import { useState } from "react";
 import { color, motion } from "framer-motion";
 import styled from "styled-components";
-import LoginPage from "../../../components/login/Login";
+import LoginPage from "@/src/components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
-import { FormWrapper } from "../../../components/login/LoginStyling";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
+import { FormWrapper } from '../../../components/auth/login/LoginStyling';
 
 const TextWrapper = styled.div`
+  width: max-content;
   position: absolute;
-  right: 31%;
+  right: 15vw;
   bottom:61%;
   display: flex;
   flex-direction: column;
@@ -17,22 +18,8 @@ const TextWrapper = styled.div`
   z-index: 100;
 `;
 
-const SwapText = styled(motion.h1)`
-  font-size: 5rem;
-  font-weight: bold;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent; /* Gradiente o color similar al de la imagen */
-  margin: 0;
-  line-height: 1.2;
-  text-transform: uppercase;
-  -webkit-text-fill-color: transparent;
-  
-`;
-
 const SkillSwapText = styled(motion.h1)`
-  font-size: 5rem;
+  font-size: 4.2vw;
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -187,20 +174,20 @@ export default function AuthPage() {
       {/* Overlay Panel */}
       <OverlayContainer>
         <TextWrapper>
-          <SwapText
+          <SkillSwapText
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             SWAP
-          </SwapText>
-          <SwapText
+          </SkillSwapText>
+          <SkillSwapText
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             ← SWAP
-          </SwapText>
+          </SkillSwapText>
           <SkillSwapText
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
