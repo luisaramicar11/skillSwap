@@ -125,7 +125,7 @@ const Carousel: React.FC = () => {
   return (
     <Container>
       <Title>MATCH THE <em>ideal skill for you</em></Title>
-      <Subtitle>"Sometimes you don't even know you need, until you see it"</Subtitle>
+      <Subtitle>Sometimes you dont even know you need, until you see it</Subtitle>
       <CardsContainer>
         <Card angle={-10} />
         <Card angle={-5} />
