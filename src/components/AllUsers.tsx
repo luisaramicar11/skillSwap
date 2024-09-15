@@ -13,10 +13,34 @@ interface CardProps {
 
 // Datos de ejemplo
 const users = [
-  { title: "John Doe", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s", rating: 4, skills: ['JavaScript', 'React', 'Node.js'] },
-  { title: "Jane Smith", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s", rating: 5, skills: ['HTML', 'CSS', 'React'] },
-  { title: "Carlos Ruiz", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s", rating: 3, skills: ['Angular', 'TypeScript', 'Node.js'] },
-  { title: "Ana López", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s", rating: 4, skills: ['Python', 'Django', 'Flask'] },
+  {
+    title: "John Doe",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
+    rating: 4,
+    skills: ["JavaScript", "React", "Node.js"],
+  },
+  {
+    title: "Jane Smith",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
+    rating: 5,
+    skills: ["HTML", "CSS", "React"],
+  },
+  {
+    title: "Carlos Ruiz",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
+    rating: 3,
+    skills: ["Angular", "TypeScript", "Node.js"],
+  },
+  {
+    title: "Ana López",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
+    rating: 4,
+    skills: ["Python", "Django", "Flask"],
+  },
   // Agrega más usuarios...
 ];
 
@@ -26,9 +50,7 @@ const CardListContainer = styled.div`
   justify-items: center;
   width: 70%;
   margin: 0 auto;
-  align-items: center;
-  gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 `;
 
 // Estilos para los botones de paginación
@@ -53,9 +75,14 @@ const PaginationButton = styled.button`
   }
 `;
 
+const DivContainer = styled.div`
+  width: 100%;
+  margin-top: 3rem;
+`;
+
 const CardsWithPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 3; // Número de tarjetas por página
+  const cardsPerPage = 10; // Número de tarjetas por página
 
   // Calcular las tarjetas que se deben mostrar en la página actual
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -66,7 +93,7 @@ const CardsWithPagination = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <>
+    <DivContainer>
       <CardListContainer>
         {currentCards.map((user, index) => (
           <Card
@@ -93,10 +120,8 @@ const CardsWithPagination = () => {
           Siguiente
         </PaginationButton>
       </PaginationContainer>
-    </>
+    </DivContainer>
   );
 };
 
 export default CardsWithPagination;
-
-

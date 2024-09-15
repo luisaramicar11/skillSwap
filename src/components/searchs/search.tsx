@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 interface BuscadorProps {
   label: string;
@@ -8,11 +8,27 @@ interface BuscadorProps {
 
 const Container = styled.div`
   display: flex;
-  gap:2rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 90%;
   margin: 4rem auto;
+
+  @media (max-width: 480px) {
+    width: 50%;
+    margin: 2rem auto;
+  }
+
+  @media (max-width: 768px) {
+    width: 50%;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    margin: 2rem auto;
+  }
 `;
 
 const Label = styled.label`
@@ -29,7 +45,7 @@ const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 20px;
-  
+
   &:focus {
     border-color: #0070f3;
     outline: none;
@@ -42,20 +58,15 @@ const Buscador: React.FC<BuscadorProps> = ({ label, onSearch }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchTerm(value);
-    onSearch(value); 
+    onSearch(value);
   };
 
   return (
     <Container>
       <Label>{label}</Label>
-      <Input
-        type="text"
-        value={searchTerm}
-        onChange={handleChange}
-      />
+      <Input type="text" value={searchTerm} onChange={handleChange} />
     </Container>
   );
 };
 
 export default Buscador;
-

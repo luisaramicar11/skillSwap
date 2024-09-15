@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
@@ -23,7 +23,7 @@ const Title = styled.h3`
   font-size: 1.3rem;
   color: orange;
   padding: 0;
-  margin:0.5rem;
+  margin: 0.5rem;
   padding-left: 1rem;
 `;
 
@@ -32,10 +32,10 @@ const Connections = styled.div`
   padding: 1rem;
   margin-bottom: 0.5rem;
   font-size: 0.6rem;
-  color:${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textSecondary};
 
   div {
-    font-size:1rem
+    font-size: 1rem;
   }
 `;
 
@@ -44,10 +44,10 @@ const RatingSection = styled.div`
   padding: 1rem;
   margin-bottom: 0.5rem;
   font-size: 0.6rem;
-  color:${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textSecondary};
 
   div {
-    font-size:1rem
+    font-size: 1rem;
   }
 `;
 
@@ -93,8 +93,8 @@ const SubTitle = styled.h4`
 
 const DivRating = styled.div`
   display: flex;
- align-items: center;
- gap: 2rem;
+  align-items: center;
+  gap: 2rem;
 `;
 
 const P = styled.p`
@@ -110,7 +110,7 @@ const P = styled.p`
 const Skills = styled.div`
   display: flex;
   flex-direction: column;
-  gap:1rem;
+  gap: 1rem;
   padding-left: 1rem; // Añadido padding izquierdo para alinear con el texto
 `;
 
@@ -124,17 +124,17 @@ const DivTitle = styled.div`
   display: flex;
   align-items: center;
   padding: 0;
-  gap:0;
+  gap: 0;
   justify-content: flex-start;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+`;
 
 const DivConnections = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap:0;
-
-`;  
+  gap: 0;
+`;
 
 const DivDescription = styled.div`
   display: flex;
@@ -145,62 +145,58 @@ const DivDescription = styled.div`
 const Hr = styled.hr`
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
   margin-left: 3rem;
-  margin-right:3rem;
+  margin-right: 3rem;
 `;
 interface CardProps {
-    description: string;
-    rating: number;
-    skills: string[]; // Añadido para las habilidades
-  }
-const MatchCard: React.FC<CardProps> = ({
-    description,
-    skills,
-    rating
-  }) => {
+  description: string;
+  rating: number;
+  skills: string[]; // Añadido para las habilidades
+}
+const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
   return (
     <CardContainer>
       <DivTitle>
-      <Title>Match</Title>
+        <Title>Match</Title>
       </DivTitle>
       <DivConnections>
-      <Connections>
-        <div>Connections</div>
-        <div>🔗 30</div>
-      </Connections>
+        <Connections>
+          <div>Connections</div>
+          <div>🔗 30</div>
+        </Connections>
 
-      <RatingSection>
-        <div>Rating</div>
-        <DivRating>
-        <div>{rating}</div>
-        <RatingStars>
-          {[...Array(5)].map((_, index) => (
-            <Star key={index}>
-              {index < rating ? '★' : '☆'} {/* Muestra estrellas llenas o vacías */}
-            </Star>
-          ))}
-        </RatingStars>
-        </DivRating>       
-      </RatingSection>
-      <Hr />
+        <RatingSection>
+          <div>Rating</div>
+          <DivRating>
+            <div>{rating}</div>
+            <RatingStars>
+              {[...Array(5)].map((_, index) => (
+                <Star key={index}>
+                  {index < rating ? "★" : "☆"}{" "}
+                  {/* Muestra estrellas llenas o vacías */}
+                </Star>
+              ))}
+            </RatingStars>
+          </DivRating>
+        </RatingSection>
+        <Hr />
       </DivConnections>
-      
-      <DivDescription>
-      <Description>
-        <SubTitle>Description</SubTitle>
-        <P>{description}</P>
-      </Description>
 
-      <SkillsSection>
-        <SubTitle>Skills</SubTitle>
-        <P>Here you will see my skills!</P>
-        <Skills>
+      <DivDescription>
+        <Description>
+          <SubTitle>Description</SubTitle>
+          <P>{description}</P>
+        </Description>
+
+        <SkillsSection>
+          <SubTitle>Skills</SubTitle>
+          <P>Here you will see my skills!</P>
+          <Skills>
             {skills.map((skill, index) => (
-            <SkillTag key={index}>{skill}</SkillTag>
-          ))}
-        </Skills>
-      </SkillsSection>
+              <SkillTag key={index}>{skill}</SkillTag>
+            ))}
+          </Skills>
+        </SkillsSection>
       </DivDescription>
-      
     </CardContainer>
   );
 };

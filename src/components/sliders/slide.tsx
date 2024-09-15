@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 //import Modal from './Modal';
 
 interface Person {
@@ -24,7 +24,7 @@ const CardContainer = styled.div`
   overflow: hidden;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -168,4 +168,3 @@ const SliderCard: React.FC<SliderCardProps> = ({ person, onPass }) => {
 };
 
 export default SliderCard;
-
