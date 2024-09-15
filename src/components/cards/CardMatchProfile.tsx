@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FaCheck, FaTimes, FaClock } from 'react-icons/fa';
+import React from "react";
+import styled from "styled-components";
+import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 
 const ProfileCardContainer = styled.div`
   width: 25%;
@@ -11,7 +11,7 @@ const ProfileCardContainer = styled.div`
   padding: 1rem;
   padding-top: 3rem;
   overflow: hidden;
-  border-right: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  //border-right: 1px solid ${({ theme }) => theme.colors.textTertiary};
 
   @media (max-width: 1024px) {
     width: 80%; /* Ocupa más espacio en pantallas medianas */
@@ -25,7 +25,7 @@ const ProfileCardContainer = styled.div`
 
 const ProfileHeader = styled.div`
   display: flex;
-  gap:0.5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
@@ -54,7 +54,7 @@ const ProfileStatus = styled.div`
   align-items: center;
 
   &::after {
-    content: '';
+    content: "";
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -72,7 +72,7 @@ const Skills = styled.div`
 const RatingSection = styled.div`
   display: flex;
   justify-content: space-around;
-  gap:1rem;
+  gap: 1rem;
   text-align: center;
   margin-bottom: 10px;
 
@@ -86,7 +86,7 @@ const RatingSection = styled.div`
   span {
     font-size: 1.2rem;
     font-weight: bold;
-    margin:0;
+    margin: 0;
     color: ${({ theme }) => theme.colors.textOrange};
   }
 `;
@@ -94,7 +94,7 @@ const RatingSection = styled.div`
 const Stars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
   font-size: 1.5rem;
-  margin:0;
+  margin: 0;
 `;
 
 const StatusSection = styled.div`
@@ -133,15 +133,14 @@ const StatusSection = styled.div`
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 
-  .inbox{
+  .inbox {
     color: ${({ theme }) => theme.colors.textYellow};
   }
 `;
 
 const DivRate = styled.div`
   display: flex;
-  flex-direction:column;
-
+  flex-direction: column;
 `;
 
 const H2StatusSection = styled.h2`
@@ -172,7 +171,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   return (
     <ProfileCardContainer>
       <ProfileHeader>
-        <Avatar src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg" alt="profile picture" />
+        <Avatar
+          src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
+          alt="profile picture"
+        />
         <div>
           <ProfileName>{name}</ProfileName>
           <Skills>
@@ -197,28 +199,36 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <H2StatusSection>Rejected</H2StatusSection>
           <div className="status-content">
             <FaTimes className="icon" />
-            <span>{rejected.length}: {rejected.join(', ')}</span>
+            <span>
+              {rejected.length}: {rejected.join(", ")}
+            </span>
           </div>
         </div>
         <div className="status-item accepted">
           <H2StatusSection>Accepted</H2StatusSection>
           <div className="status-content">
             <FaCheck className="icon" />
-            <span>{accepted.length}: {accepted.join(', ')}</span>
+            <span>
+              {accepted.length}: {accepted.join(", ")}
+            </span>
           </div>
         </div>
         <div className="status-item pending">
           <H2StatusSection>Pending</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
-            <span>{pending.length}: {pending.join(', ')}</span>
+            <span>
+              {pending.length}: {pending.join(", ")}
+            </span>
           </div>
         </div>
         <div className="status-item inbox">
           <H2StatusSection>Inbox</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
-            <span>{pending.length}: {pending.join(', ')}</span>
+            <span>
+              {pending.length}: {pending.join(", ")}
+            </span>
           </div>
         </div>
       </StatusSection>
@@ -227,4 +237,3 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 };
 
 export default ProfileCard;
-

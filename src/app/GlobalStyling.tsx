@@ -21,7 +21,6 @@ export const GlobalTheme: IGlobalTheme = {
         textWhite: '#ffffff',            
         textTertiary: '#00000050',
         textPurple: '#965AC6',
-
         textOrange: '#DD5B0A',
         textBlueLight: '#2D68FF',
         textBlueDark: '#093A98',
