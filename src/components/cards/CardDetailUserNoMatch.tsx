@@ -1,4 +1,7 @@
+"use client"
+import { useState } from "react";
 import styled from "styled-components";
+import ModalRequest from "../modals/ModalMatch"
 
 const ProfileContainer = styled.div`
   width: 70%;
@@ -240,6 +243,10 @@ const Arrow = styled.span`
 `;
 
 const UserProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <ProfileContainer>
@@ -284,10 +291,11 @@ const UserProfile = () => {
           <SkillButton>SpringBoot - Beginner</SkillButton>
         </Skills>
         <DivUserDescription>
-          <SendButton>
-            <ButtonText>SEND REQUEST</ButtonText>
-            <Arrow>→</Arrow>
-          </SendButton>
+        <SendButton>
+          <ButtonText>SEND REQUEST</ButtonText>
+          <Arrow onClick={openModal}>→</Arrow>
+        </SendButton>
+        <ModalRequest isOpen={isModalOpen} onClose={closeModal}/>
           <UserDescription>
             <H3>Description</H3>
             <P>Back-end Software Developer | Junior</P>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ReportForm from "../forms/FormReport"
 
 interface ModalProps {
   isOpen: boolean;
@@ -80,7 +81,7 @@ const LeftSection = styled.div`
   flex-direction: column;
   background-color: #fff;
   gap: 15px;
-  padding: 3rem;
+  padding: 1rem;
   width: 60%;
 `;
 
@@ -90,24 +91,6 @@ const RightSection = styled.div`
   flex-direction: column;
   background-color: #fff;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
-`;
-
-const TipItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-`;
-
-const Icon = styled.img`
-  padding-right: 0.5rem;
-  width: 60px;
-  height: 60px;
-`;
-
-const TipText = styled.p`
-  font-size: 1rem;
-  color: #000;
-  font-weight: 300;
 `;
 
 const AlertText = styled.p`
@@ -167,18 +150,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         <ModalContent>
           {/* Left section with the tips */}
           <LeftSection>
-            <TipItem>
-              <Icon src="/folder.svg" alt="Verify profile" />
-              <TipText>Verificar tu perfil aumenta la confianza entre usuarios y garantiza un ambiente seguro para el intercambio de habilidades.</TipText>
-            </TipItem>
-            <TipItem>
-              <Icon src="/folder.svg" alt="No sensitive data" />
-              <TipText>No compartas datos sensibles. Mantén tus interacciones en entornos virtuales controlados de forma segura y consciente.</TipText>
-            </TipItem>
-            <TipItem>
-              <Icon src="/folder.svg" alt="Report misconduct" />
-              <TipText>Respeta a los demás y reporta cualquier comportamiento sospechoso o inadecuado para mantener la seguridad de todos.</TipText>
-            </TipItem>
+            <ReportForm/>
           </LeftSection>
 
           {/* Right section with warnings */}
