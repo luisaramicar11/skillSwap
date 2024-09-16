@@ -1,9 +1,11 @@
 // NavLink.tsx
+"use client";
 import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
 import styled from "styled-components";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/utils/handlePageTheme";4
+
 
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
@@ -18,6 +20,7 @@ const NavLinkComponent = styled(Link)`
 `;
 
 const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick }) => {
+   
     return (
         <NavLinkComponent
             href={href}

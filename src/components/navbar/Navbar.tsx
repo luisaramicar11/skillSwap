@@ -30,6 +30,8 @@ const NavItem = styled.li`
 // Navbar component
 export const Navbar: React.FC = () => {
     return (
+
+        
         <NavbarContainer>
             <NavList>
                 <NavItem onClick={() => handlePageChange('INICIO')}>

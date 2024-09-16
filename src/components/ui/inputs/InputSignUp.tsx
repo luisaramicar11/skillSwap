@@ -20,12 +20,13 @@ const StyledInputSignUp = styled.input`
   font-size: 16px;
   box-sizing: border-box;
   width: 100%;
+  height:40px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background: transparent;
   
-  // Estiliza el placeholder en blanco
-  ::placeholder {
+
+  &::placeholder {
     color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
   }
 

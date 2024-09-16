@@ -81,9 +81,9 @@ const OverlayPanel = styled.div`
   align-items: center;
 `;
 const Div = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.colors.textYellow};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textYellow};
-  border-right: 1px solid ${({ theme }) => theme.colors.textYellow};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-right: 1px solid ${({ theme }) => theme.colors.borderAuth};
   background: ${({ theme }) => theme.colors.bgPrimary};
   border-radius: none;
   border-bottom-right-radius:15px ;

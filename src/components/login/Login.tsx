@@ -14,7 +14,7 @@ import Label from '../ui/labels/LabelAuth';
 import {FormWrapper} from './LoginStyling'
 import {Container} from './LoginStyling'
 import {Title} from './LoginStyling'
-import {DivButton} from './LoginStyling'
+import {DivButtonLogin} from './LoginStyling'
 
 export default function LoginPage() {
   const router = useRouter();
@@ -74,6 +74,7 @@ export default function LoginPage() {
           name="email"
           placeholder="Email"
           value={form.email}  
+          onChange={handleChange}
           required
           />
         <Label
@@ -88,11 +89,11 @@ export default function LoginPage() {
           onChange={handleChange}
           required
           />
-          <DivButton>
+          <DivButtonLogin>
             <ButtonSingUp type="submit" disabled={loading}>
               {loading ? 'Cargando...' : 'ENTRAR'}
             </ButtonSingUp>
-          </DivButton>
+          </DivButtonLogin>
       </form>
           </FormWrapper>
 

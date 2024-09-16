@@ -35,7 +35,23 @@ export const DivUserTitle = styled.div`
 `;
 
 export const TitleUserData = styled.h1`
-  color: ${({ theme }) => theme.colors.bgPrimary}; 
+  color: ${({ theme }) => theme.colors.textSecondary}; 
   font-size: 2rem;
 `;
+
+
+export const Form = styled.form`
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ gap: 0.5rem;
+`
+export const DivButtonSingUp = styled.div`
+  position: absolute;
+  top: 22rem;
+  display: flex;
+  gap: 20px;
+  border: none;
+`;
+
 

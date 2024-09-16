@@ -18,14 +18,18 @@ interface TextAreaProps {
 // Estilos para el textarea usando styled-components
 const TextAreaStyled = styled.textarea`
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: ${({ theme }) => theme.colors.textWhite};
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   border-radius: 10px;
   font-size: 16px;
-  width: 450px;
-  height: 150px; 
+  width: 350px;
+  height: 100px; 
   box-sizing: border-box;
-  resize: vertical; 
+  resize: none;
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
+  } 
 `;
 
 // Componente TextArea

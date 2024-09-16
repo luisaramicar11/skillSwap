@@ -10,9 +10,9 @@ export const Container = styled.div`
 
 export const FormWrapper = styled.div`
   background: ${({ theme }) => theme.colors.gradientPrimary};
-  border-top: 1px solid ${({ theme }) => theme.colors.textYellow};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textYellow};
-  border-left: 1px solid ${({ theme }) => theme.colors.textYellow};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-left: 1px solid ${({ theme }) => theme.colors.borderAuth};
   border-radius: none;
   border-bottom-left-radius:15px ;
   border-top-left-radius:15px ;
@@ -33,8 +33,9 @@ export const Title = styled.h2`
 
 `;
 
-export const DivButton = styled.div`
-  margin-top: 50px;
+export const DivButtonLogin = styled.div`
+  position: absolute;
+  bottom: 7rem;
   display: flex;
   gap: 20px;
   border: none;

@@ -16,10 +16,22 @@ interface SelectProps {
 // Estilos para el elemento select usando styled-components
 const SelectStyled = styled.select`
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   border-radius: 10px;
   font-size: 16px;
+  width: 350px;
+  height: 50px;
+  box-sizing: border-box;
+`;
+const Option = styled.option`
+  padding: 1000px;
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  background: ${({ theme }) => theme.colors.gradientPrimary};
+  border-radius: 10px;
+  font-size: 15px;
   width: 450px;
   height: 60px;
   box-sizing: border-box;
@@ -45,10 +57,10 @@ const Select: React.FC<SelectProps> = ({
       name={name}
       required={required}
     >
-      <option value="" disabled>
+      <Option value="" disabled>
         -- Selecciona una opción --
-      </option>
-      <option value="desarrollo">Desarrollo</option>
+      </Option>
+      <Option value="desarrollo">Desarrollo</Option>
       <option value="marketing">Marketing y Branding</option>
     </SelectStyled>
   );
