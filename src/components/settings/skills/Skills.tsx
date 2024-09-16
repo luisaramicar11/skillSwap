@@ -15,6 +15,9 @@ const PageContainer = styled.section`
       height: min-content;
       translate: 0 30px;
       font-size: 100px;
+      width: 30vw;
+      min-width: 300px !important;
+      border-bottom: solid 5px black;
     }
 
   & h2 {
@@ -59,7 +62,6 @@ const Banner = styled.article`
   height:200px;
   display: flex;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.bgBanner};
 `;
 
 const BannerBody = styled.div`
@@ -68,21 +70,12 @@ const BannerBody = styled.div`
     justify-content: space-between;
 `
 
-const BannerImageDiv = styled.div`
-  background-image: url("https://imagenes.eltiempo.com/files/image_414_541/uploads/2024/06/18/66720e3f4feb4.png");
-  background-size: cover;
-  width: 200px;
-  height: 200px;
-  translate: 0 30px;
-  border-radius: 10px;
-  border: solid 0.5px ${({ theme }) => theme.colors.textBlack};
-`;
-
 //Container for INFO content
-const InfoPageContainer = styled.div`
+const SkillsPageContainer = styled.div`
   padding-top: 200px;
   width: 100%;
   max-width: 1000px;
+  height: 100%;
   display: flex;
   align-items: start;
   flex-direction: column;
@@ -90,6 +83,7 @@ const InfoPageContainer = styled.div`
 
 const PageContent = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -102,86 +96,48 @@ const PageBody = styled.div`
   gap: 20px;
 `;
 
-//Containers for Widgets and Aside
-const WidgetContent = styled.div`
-  padding: 20px 30px;
-  width: max-content;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const WidgetBody = styled.div`
-  padding: 20px 30px;
-  width: 100%;
-  min-width: 220px;
-  display: flex;
-  flex-direction: column;
-`;
+//Containers for Aside Background Image
 
 const PageAside = styled.aside`
-  width: max-content;
+  width: 200px;
   padding: 0;
   margin: 0;
   margin-top: 50px;
+`;
 
-  & div{
-    width: 200px !important;
-  }
+const BgImageDiv = styled.div`
+  top:0 ;
+  position: absolute;
+  background-image: url("https://png.pngtree.com/png-vector/20220929/ourmid/pngtree-3d-dna-illustration-design-in-red-and-blue-colors-png-image_6223384.png");
+  background-size: contain;
+  filter: grayscale();
+  opacity: 0.1;
+  width: 200px;
+  height: 100%;
 `;
 
 // Componente principal de la página de inicio
-const UserInfo = () => {
+const UserSkills = () => {
   return (
     <PageContainer>
       <Banner>
         <BannerBody>
-          <h1>Info</h1>
-          <BannerImageDiv />
+          <h1>Skills</h1>
         </BannerBody>
       </Banner>
       <PageContentContainer>
-        <InfoPageContainer>
+        <SkillsPageContainer>
           <PageContent>
             <PageBody>
-              <WidgetContainer>
-                <WidgetBody>
-                  <h2>Martín Elías</h2>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
-                </WidgetBody>
-              </WidgetContainer>
-              <WidgetContainer>
-                <WidgetBody>
-                  <h4>Descripción</h4>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
-                </WidgetBody>
-              </WidgetContainer>
-              <WidgetContainer>
-                <h3>Enlaces</h3>
-                <WidgetContent>
-                  <WidgetContainer>
-                    <WidgetBody>
-                      <h4>LinkedIn</h4>
-                      <p>https://yourdomain.com</p>
-                    </WidgetBody>
-                  </WidgetContainer>
-                </WidgetContent>
-              </WidgetContainer>
             </PageBody>
             <PageAside>
-              <WidgetContainer>
-                <h3>User Data</h3>
-                <WidgetBody>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
-                </WidgetBody>
-              </WidgetContainer>
+              <BgImageDiv />
             </PageAside>
           </PageContent>
-        </InfoPageContainer>
+        </SkillsPageContainer>
       </PageContentContainer>
-
     </PageContainer>
   );
 };
 
-export default UserInfo;
+export default UserSkills;

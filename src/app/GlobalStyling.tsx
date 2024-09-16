@@ -2,6 +2,7 @@
 import { createGlobalStyle } from "styled-components";
 import { Urbanist } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
+
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 // Define los labels que deberían establecer el tema en oscuro
@@ -67,8 +68,6 @@ export const GlobalDarkTheme: IGlobalTheme = {
 export const GlobalStyle = createGlobalStyle`
 
 /* styles/globals.css */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css');
-
 html {
 
     background-color: ${({ theme }) => theme.colors.bgPrimary};

@@ -1,5 +1,6 @@
 'use client'
 import UserInfo from "@/src/components/settings/info/Info";
+import UserSkills from "@/src/components/settings/skills/Skills";
 import styled from "styled-components";
 import React from "react";
 
@@ -14,6 +15,7 @@ const UserSettings = () => {
     return (
         <SettingsContainer>
             <UserInfo />
+            <UserSkills />
         </SettingsContainer>
     )
 }
