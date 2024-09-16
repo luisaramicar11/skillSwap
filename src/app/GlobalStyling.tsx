@@ -2,7 +2,8 @@
 import { createGlobalStyle } from "styled-components";
 import { Urbanist } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
+
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
@@ -11,6 +12,7 @@ export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
         bgPink: '#FFF4F4',
         bgPrimary: '#FFFFFF',               
         textPrimary: '#ffffff',
@@ -42,6 +44,7 @@ export const GlobalTheme: IGlobalTheme = {
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'rgba(255, 255, 255, 0.025)',
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
         bgPrimary: '#222222',   
         bgPink: '#FFF4F4',            
         textPrimary: '#222222',             
@@ -73,6 +76,7 @@ export const GlobalDarkTheme: IGlobalTheme = {
 // Global styling for essential HTML elements
 export const GlobalStyle = createGlobalStyle`
 
+/* styles/globals.css */
 html {
 
     background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -99,6 +103,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bolder;
+    margin: 0;
+    padding: 0;
 }
 
 p {
@@ -106,6 +112,7 @@ p {
     line-height: 1.5;
     font-weight: lighter;
     margin: 0;
+    padding: 0;
 } */
 
 .gradient-bg-primary {
