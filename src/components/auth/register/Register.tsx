@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch, RootState } from '../../../app/redux/store';
-import InputSignUp from "../../ui/inputs/InputSignUp"
-import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
+import InputAuth from "../../../components/ui/inputs/InputAuth"
+import { DivUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
 import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
@@ -16,7 +16,9 @@ import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 import { FormWrapper } from '../login/LoginStyling';
 import { Container } from '../login/LoginStyling';
 import { Title } from '../login/LoginStyling';
-import { DivButton } from '../login/LoginStyling';
+import { DivButtonLogin } from '../login/LoginStyling';
+import { DivButtonSingUp } from './RegisterStyling';
+import { Form } from './RegisterStyling';
 
 export default function RegisterPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -91,33 +93,30 @@ export default function RegisterPage() {
           <>
             <div>
               <Title>Registro</Title>
-              <Label
-                text="Email"
-                htmlFor=''
-              />
-              <InputSignUp
+              <Label text="Email" htmlFor='email' />
+              <InputAuth
                 type="email"
+                id="email" // Atributo agregado
                 name="email"
-                placeholder="Escribe tu nombre..."
+                placeholder="Escribe tu email..."
                 value={form.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
               />
-              <Label
-                text="Contraseña"
-                htmlFor='password'
-              />
-              <InputSignUp
+              <Label text="Contraseña" htmlFor='password' />
+              <InputAuth
                 type="password"
+                id="password" // Atributo agregado
                 name="password"
                 placeholder="Escribe tu contraseña..."
                 value={form.password}
                 onChange={handleChange}
                 required
+                autoComplete="new-password"
               />
             </div>
           </>
-
         );
       case 1:
         return (
@@ -127,24 +126,28 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="name" text="Nombre*" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="name" // Atributo agregado
                 name="name"
                 placeholder="Escribe tu nombre"
                 value={form.name}
                 onChange={handleChange}
                 required
+                autoComplete="given-name"
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="lastname" text="Apellidos*" />
-              <InputSignUp
+              <Label htmlFor="lastName" text="Apellidos*" />
+              <InputAuth
                 type="text"
+                id="lastName" // Atributo agregado
                 name="lastName"
                 placeholder="Escribe tus apellidos"
                 value={form.lastName}
                 onChange={handleChange}
                 required
+                autoComplete="family-name"
               />
             </DivUserInput>
           </DivUserData>
@@ -157,23 +160,27 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="age" text="Edad" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="age" // Atributo agregado
                 name="age"
                 placeholder="Escribe tu edad"
                 value={form.age}
                 onChange={handleChange}
                 required
+                autoComplete="age" // Aunque no es estándar, puede ser útil para personalizar
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="image" text="Imagen" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="image" // Atributo agregado
                 name="image"
-                placeholder="Escribe la url de tu imagen"
+                placeholder="Escribe la URL de tu imagen"
                 value={form.image}
                 onChange={handleChange}
+                autoComplete="url"
               />
             </DivUserInput>
           </DivUserData>
@@ -182,28 +189,32 @@ export default function RegisterPage() {
         return (
           <DivUserData>
             <DivUserTitle>
-              <TitleUserData>Tus habilidades</TitleUserData>
+              <Title>Tus habilidades</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="area" text="Selecciona una categoría" />
               <Select
+                id="area" // Atributo agregado
                 value={selectedOption}
                 onChange={handleSelectChange}
                 ariaLabel="Select area"
                 name="area"
                 required
+                autoComplete="category" // Aunque no es estándar, puede ser útil para personalizar
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="skills" text="Habilidades" />
               <TextArea
+                id="skills" // Atributo agregado
                 value={skills}
                 onChange={handleTextAreaChange}
                 ariaLabel="Escribe tus habilidades"
                 name="skills"
                 placeholder="Escribe aquí tus habilidades (máx. 200 caracteres)..."
                 required
-                maxLength={200} // Especificamos el límite de caracteres
+                maxLength={200}
+                autoComplete="skills" // Aunque no es estándar, puede ser útil para personalizar
               />
               <p>{skills.length} / 200 caracteres</p> {/* Mostrar contador de caracteres */}
             </DivUserInput>
@@ -213,93 +224,97 @@ export default function RegisterPage() {
         return (
           <DivUserData>
             <DivUserTitle>
-              <TitleUserData>Sobre tu experiencia</TitleUserData>
+              <Title>Sobre tu experiencia</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="jobTitle" text="Trabajo/título" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="jobTitle" // Atributo agregado
                 name="jobTitle"
                 placeholder="Nombre de tu trabajo"
                 value={form.jobTitle}
                 onChange={handleChange}
                 required
+                autoComplete="organization-title"
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="description" text="Descripción" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="description" // Atributo agregado
                 name="description"
-                placeholder="Describe tu experiencia "
+                placeholder="Describe tu experiencia"
                 value={form.description}
                 onChange={handleChange}
                 required
+                autoComplete="description" // Aunque no es estándar, puede ser útil para personalizar
               />
             </DivUserInput>
-
           </DivUserData>
         );
       case 5:
         return (
           <DivUserData>
             <DivUserTitle>
-              <TitleUserData>Contacto</TitleUserData>
+              <Title>Contacto</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="linkedIn" text="LinkedIn" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="linkedIn" // Atributo agregado
                 name="linkedIn"
-                placeholder="Escribe tu linkedIn"
+                placeholder="Escribe tu LinkedIn"
                 value={form.linkedIn}
                 onChange={handleChange}
-
+                autoComplete="url"
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="behance" text="Behance" />
-              <InputSignUp
+              <InputAuth
                 type="text"
+                id="behance" // Atributo agregado
                 name="behance"
-                placeholder="Escribe tu behance"
+                placeholder="Escribe tu Behance"
                 value={form.behance}
                 onChange={handleChange}
+                autoComplete="url"
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="github" text="Github" />
-              <InputSignUp
+              <Label htmlFor="github" text="GitHub" />
+              <InputAuth
                 type="text"
+                id="github" // Atributo agregado
                 name="github"
                 placeholder="Escribe tu GitHub"
                 value={form.github}
                 onChange={handleChange}
+                autoComplete="url"
               />
             </DivUserInput>
-
           </DivUserData>
-
-
         );
       default:
         return null;
     }
   };
-
+  
   return (
     <Container>
       <FormWrapper>
-
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           {renderStep()}
-          <DivButton>
+          <DivButtonLogin />
+          <DivButtonSingUp>
             {currentStep > 0 && (
               <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep - 1)}>
                 ATRÁS
               </ButtonSingUp>
             )}
-
             {currentStep < 5 ? (
               <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
                 SIGUIENTE
@@ -309,11 +324,10 @@ export default function RegisterPage() {
                 {loading ? 'Registrando...' : 'ENVIAR'}
               </ButtonSingUp>
             )}
-          </DivButton>
-        </form>
+          </DivButtonSingUp>
+        </Form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </FormWrapper>
     </Container>
-
   );
 }

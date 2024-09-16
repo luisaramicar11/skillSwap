@@ -13,7 +13,7 @@ const Container = styled.div`
   align-items: center;
   background-color:${({ theme }) => theme.colors.textSecondary};
   flex-direction: column;
-  padding: 20px;
+  padding-top: 200px;
   margin-bottom: 0; 
   padding-top:100px;
   padding-bottom: 100px;
@@ -62,6 +62,7 @@ const CardsContainer = styled.div`
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+  padding: 100px;
 
   @media (max-width: 768px) {
     justify-content: space-around;

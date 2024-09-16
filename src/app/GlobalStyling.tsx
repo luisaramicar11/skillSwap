@@ -25,6 +25,8 @@ export const GlobalTheme: IGlobalTheme = {
         textTertiary: '#00000050',
         textPurple: '#965AC6',
         textOrange: '#DD5B0A',
+        textOrange2: '#ea2424',
+        textOrangeO: '#ea242450',
         textBlueLight: '#2D68FF',
         textBlueDark: '#093A98',
         textYellow: '#F0AC27',
@@ -33,9 +35,10 @@ export const GlobalTheme: IGlobalTheme = {
         textGreenDark: '#1E892F60',
         textBlue:'#1E6F8960',
         textBrown: '#A3761E60', 
-        textPink: '#EFC7C5',    
-        gradientText: 'linear-gradient(90deg, #fec841 11%,  #d38301 56%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fec841b3 100% )',
+        textPink: '#EFC7C5', 
+        borderAuth: '#F0AC27',   
+        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
@@ -56,7 +59,9 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textWhite: '#ffffff',      
         textTertiary: '#00000050',
         textPurple: '#965AC6',
-        textOrange: '#DD5B0A',
+        textOrange: '#da731e',
+        textOrange2: '#ea2424',
+        textOrangeO: '#ea242450',
         textBlueLight: '#2D68FF',
         textBlueDark: '#093A98',
         textYellow: '#F0AC27',
@@ -64,9 +69,10 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textRed: '#891E1E60',
         textGreenDark: '#1E892F60',
         textBlue:'1E6F8960',
-        textBrown: '#A3761E60',     
-        gradientText: 'linear-gradient(90deg, #fefb41 0%,  #d38301 60%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #d38301 47%,#fefb41 90% )', 
+        textBrown: '#A3761E60',  
+        borderAuth: '#ffffff',     
+        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
@@ -89,6 +95,7 @@ html {
 *,
 *::before,
 *::after{
+    font-family: ${urbanist.style.fontFamily};
     box-sizing: inherit;
 }
 
@@ -103,8 +110,6 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bolder;
-    margin: 0;
-    padding: 0;
 }
 
 p {
@@ -112,7 +117,6 @@ p {
     line-height: 1.5;
     font-weight: lighter;
     margin: 0;
-    padding: 0;
 } */
 
 .gradient-bg-primary {
@@ -122,7 +126,7 @@ p {
 .gradient-bg-secondary {
     background-color: ${({ theme }) => theme.colors.gradientSecondary};
 }
-input, textarea, button {
+input, select, textarea, button {
     font-family: ${urbanist.style.fontFamily};
 }
 `;

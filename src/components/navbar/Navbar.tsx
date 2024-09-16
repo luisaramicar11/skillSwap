@@ -67,6 +67,8 @@ const NavItem = styled.li`
 // Navbar component
 export const Navbar: React.FC = () => {
     return (
+
+        
         <NavbarContainer>
             <SidebarLinkContainer>
                 <SidebarLink>+ <span>¿Quieres ver tu información?</span></SidebarLink>

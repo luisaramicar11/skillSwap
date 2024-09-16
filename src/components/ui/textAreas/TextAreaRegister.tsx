@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 // Creación de la interfaz para el componente TextArea
 interface TextAreaProps {
+  id:string;
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
@@ -13,23 +14,29 @@ interface TextAreaProps {
   placeholder?: string;
   required?: boolean;
   maxLength?: number; 
+  autoComplete?: string
 }
 
 // Estilos para el textarea usando styled-components
 const TextAreaStyled = styled.textarea`
   padding: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.bgPrimary};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: ${({ theme }) => theme.colors.textWhite};
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   border-radius: 10px;
   font-size: 16px;
-  width: 450px;
-  height: 150px; 
+  width: 100%;
+  height: 100px; 
   box-sizing: border-box;
-  resize: vertical; 
+  resize: none;
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
+  } 
 `;
 
 // Componente TextArea
 const TextArea: React.FC<TextAreaProps> = ({
+  id,
   value,
   onChange,
   className,
@@ -39,9 +46,11 @@ const TextArea: React.FC<TextAreaProps> = ({
   placeholder,
   required = false,
   maxLength = 200, 
+  autoComplete
 }) => {
   return (
     <TextAreaStyled
+      id={id}
       value={value}
       onChange={onChange}
       className={className}
@@ -51,6 +60,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       placeholder={placeholder}
       required={required}
       maxLength={maxLength} 
+      autoComplete={autoComplete}
     />
   );
 };
