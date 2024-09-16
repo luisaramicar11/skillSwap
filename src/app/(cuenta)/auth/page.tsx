@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "styled-components";
-import LoginPage from "@/src/components/auth/login/Login";
+import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import { FormWrapper } from '../../../components/auth/login/LoginStyling';

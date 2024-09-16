@@ -1,9 +1,8 @@
-// NavLink.tsx
 import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
-import styled from "styled-components";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import styled from 'styled-components';
+import { handlePageChange } from '@/src/utils/handlePageTheme';
 
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
@@ -13,22 +12,25 @@ const NavLinkComponent = styled(Link)`
   font-weight: bold;
 
   &:hover {
-      font-weight: 900;
+    font-weight: 900;
   }
 `;
 
-const StyledNavLink: React.FC<ILinkProps> = ({ href, label, icon, onClick }) => {
-    return (
-        <NavLinkComponent
-            href={href}
-            onClick={() => {
-                handlePageChange(label);
-                if (onClick) onClick(label); // Call the provided onClick function if any
-            }}
-        >
-            {label}
-        </NavLinkComponent>
-    );
+const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children }) => {
+  return (
+    <NavLinkComponent
+      href={href}
+      onClick={() => {
+        if (label) {
+          handlePageChange(label);
+          if (onClick) onClick(label); // Llamar a onClick si se pasa
+        }
+      }}
+    >
+      {children || label} {/* Si `children` existe, lo renderiza, de lo contrario usa `label` */}
+    </NavLinkComponent>
+  );
 };
 
 export default StyledNavLink;
+

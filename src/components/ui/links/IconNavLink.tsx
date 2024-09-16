@@ -32,8 +32,8 @@ const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ h
         <IconNavLinkComponent
             href={href}
             onClick={() => {
-                handlePageChange(label);
-                if (onClick) onClick(label);
+                handlePageChange(label ?? 'default-label');
+                if (onClick) onClick(label ?? 'default-label');
             }}
         >
             {icon}
