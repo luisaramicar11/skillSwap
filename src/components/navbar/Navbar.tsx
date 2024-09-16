@@ -83,7 +83,7 @@ export const Navbar: React.FC = () => {
                 </NavItem>
             </NavList>
             <IconsContainer>
-                <StyledIconNavLink href="/user" label="USUARIO" icon={<SettingsIcon />} />
+                <StyledIconNavLink href="/settings" label="CONFIGURA" icon={<SettingsIcon />} />
                 <StyledIconNavLink
                     href="/legal"
                     label="LEGAL"

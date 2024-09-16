@@ -10,8 +10,9 @@ export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 // Setting our Global Theme
 export const GlobalTheme: IGlobalTheme = {
     colors: {
-        bgNavbar:'#222222',
-        bgPrimary: '#FFFFFF',               
+        bgNavbar: '#222222',
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgPrimary: '#FFFFFF',
         textPrimary: '#ffffff',
         textDark: '#555555',             
         bgSecondary: '#222222', 
@@ -38,6 +39,7 @@ export const GlobalTheme: IGlobalTheme = {
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar: 'rgba(255, 255, 255, 0.025)',
+        bgBanner: 'rgba(255, 255, 255, 0.1)',
         bgPrimary: '#222222',
         textPrimary: '#222222',
         bgSecondary: '#FFFFFF',
@@ -94,6 +96,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bolder;
+    margin: 0;
+    padding: 0;
 }
 
 p {
@@ -101,6 +105,7 @@ p {
     line-height: 1.5;
     font-weight: lighter;
     margin: 0;
+    padding: 0;
 } */
 
 .gradient-bg-primary {

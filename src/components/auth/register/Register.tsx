@@ -2,21 +2,21 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../app/redux/slices/authSlice';
+import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
-import { AppDispatch, RootState } from '../../app/redux/store';
-import InputSignUp from "../ui/inputs/InputSignUp"
-import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from '../auth/register/RegisterStyling';
-import Label from '../ui/labels/LabelAuth';
-import Select from '../ui/selects/SelectRegister';
-import TextArea from '../ui/textAreas/TextAreaRegister';
-import ButtonSingUp from '../ui/buttons/ButtonSingUp';
+import { AppDispatch, RootState } from '../../../app/redux/store';
+import InputSignUp from "../../ui/inputs/InputSignUp"
+import { DivUserData, TitleUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
+import Label from "../../ui/labels/LabelAuth";
+import Select from "../../ui/selects/SelectRegister";
+import TextArea from "../../ui/textAreas/TextAreaRegister";
+import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 
 //Syled
-import { FormWrapper } from '../auth/login/LoginStyling';
-import { Container } from '../auth/login/LoginStyling';
-import { Title } from '../auth/login/LoginStyling';
-import { DivButton } from '../auth/login/LoginStyling';
+import { FormWrapper } from '../login/LoginStyling';
+import { Container } from '../login/LoginStyling';
+import { Title } from '../login/LoginStyling';
+import { DivButton } from '../login/LoginStyling';
 
 export default function RegisterPage() {
   const dispatch = useDispatch<AppDispatch>();
