@@ -10,6 +10,7 @@ interface CardProps {
 
 // Estilos para el Card
 const CardContainer = styled.div`
+  margin-top: 2rem;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
@@ -17,8 +18,8 @@ const CardContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  width: 15rem; /* Tamaño fijo para una imagen circular */
-  height: 15rem; /* Debe ser igual al ancho para mantener la forma circular */
+  width: 10rem; /* Tamaño fijo para una imagen circular */
+  height: 10rem; /* Debe ser igual al ancho para mantener la forma circular */
   object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
   border-radius: 50%; /* Redondea la imagen en forma de círculo */
   display: block; /* Asegura que la imagen se comporte como un bloque */
@@ -34,14 +35,13 @@ const CardContent = styled.div`
 const CardTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  margin: 10px 0;
+  color: #000;
+  margin: 0 auto;
 `;
 
 const StarsContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
 `;
 
 const Star = styled.span`
@@ -59,7 +59,8 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, rating }) => {
         <StarsContainer>
           {[...Array(5)].map((_, index) => (
             <Star key={index}>
-              {index < rating ? '★' : '☆'} {/* Muestra estrellas llenas o vacías */}
+              {index < rating ? "★" : "☆"}{" "}
+              {/* Muestra estrellas llenas o vacías */}
             </Star>
           ))}
         </StarsContainer>

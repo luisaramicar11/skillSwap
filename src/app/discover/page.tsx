@@ -1,24 +1,26 @@
-"use client"
+"use client";
 import Carousel from "../../components/carousels/CarouseDiscover";
-import AllUsers from "../../components/AllUsers"
-import Search from "../../components/searchs/search"
+import AllUsers from "../../components/AllUsers";
+import Search from "../../components/searchs/search";
+import { H2, DivContainer, DivRecentUsers } from "./DiscoverStyling";
 
 const handleSearch = () => {
-    console.log("")
-}
+  console.log("");
+};
 const Discover = () => {
-    return(
-        <div>
-            <Search label="Buscar"  onSearch={handleSearch} />
-            <h1>usuarios más recientes</h1>
-            <Carousel />
-            <h2>todos los usuarios</h2>
-            <div>
-            <AllUsers/>
-            </div>
-            
-        </div>
-    )
-}
+  return (
+    <DivContainer>
+      <Search label="Buscar" onSearch={handleSearch} />
+      <div>
+        <H2>usuarios más recientes</H2>
+        <Carousel />
+      </div>
+      <div>
+        <H2>todos los usuarios</H2>
+        <AllUsers />
+      </div>
+    </DivContainer>
+  );
+};
 
 export default Discover;

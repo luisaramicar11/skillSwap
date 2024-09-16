@@ -2,7 +2,8 @@
 import { createGlobalStyle } from "styled-components";
 import { Urbanist } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]});
+
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
@@ -11,8 +12,11 @@ export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgPink: '#FFF4F4',
         bgPrimary: '#FFFFFF',               
-        textPrimary: '#ffffff',             
+        textPrimary: '#ffffff',
+        textDark: '#555555',             
         bgSecondary: '#222222', 
         bgTertiary: '#F5F5F5',            
         textSecondary: '#222222', 
@@ -27,25 +31,31 @@ export const GlobalTheme: IGlobalTheme = {
         textBlueDark: '#093A98',
         textYellow: '#F0AC27',
         textGreen: '#34DD0A',
-        textRed: '#891E1E60',
+        textRed: '#891E1E',
         textGreenDark: '#1E892F60',
         textBlue:'#1E6F8960',
         textBrown: '#A3761E60', 
-        borderAuth: '#F0AC27',    
-        gradientText: 'linear-gradient(90deg, #fec841 11%,  #d38301 56%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fec841b3 100% )', 
+        textPink: '#EFC7C5', 
+        borderAuth: '#F0AC27',   
+        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
+        backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
+        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'rgba(255, 255, 255, 0.025)',
-        bgPrimary: '#222222',               
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgPrimary: '#222222',   
+        bgPink: '#FFF4F4',            
         textPrimary: '#222222',             
         bgSecondary: '#FFFFFF', 
         bgTertiary: '#F5F5F5',            
         textSecondary: '#ffffff', 
         textBlack: '#00000020',
+        textPink: '#EFC7C5',
         textWhite: '#ffffff',      
         textTertiary: '#00000050',
         textPurple: '#965AC6',
@@ -58,11 +68,13 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textGreen: '#34DD0A',
         textRed: '#891E1E60',
         textGreenDark: '#1E892F60',
-        textBlue:'#1E6F8960',
-        textBrown: '#A3761E60',   
-        borderAuth: '#ffffff',   
+        textBlue:'1E6F8960',
+        textBrown: '#A3761E60',  
+        borderAuth: '#ffffff',     
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
+        backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
+        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 
@@ -70,6 +82,7 @@ export const GlobalDarkTheme: IGlobalTheme = {
 // Global styling for essential HTML elements
 export const GlobalStyle = createGlobalStyle`
 
+/* styles/globals.css */
 html {
 
     background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -82,6 +95,7 @@ html {
 *,
 *::before,
 *::after{
+    font-family: ${urbanist.style.fontFamily};
     box-sizing: inherit;
 }
 

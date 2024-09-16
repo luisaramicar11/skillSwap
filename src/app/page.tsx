@@ -2,10 +2,7 @@
 import styled from "styled-components";
 import Carousel from "../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
-
 import { Baskervville } from "next/font/google";
-
-
 
 const baskervville = Baskervville({
   weight: '400',
@@ -407,13 +404,13 @@ const RightTextLine1 = styled.div`
   font-weight: 0;
 `;
 const RightTextLine2 = styled.div`
-  border-right: 2px solid #4f4f4f;
+  border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: 7rem;
   font-weight: 600;
 `;
 const RightTextLine3 = styled.div`
-  border-right: 2px solid ${({ theme }) => theme.colors.bgSecondary};;
+  border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: 7rem;
   font-weight: 800;

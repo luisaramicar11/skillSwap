@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { color, motion } from "framer-motion";
 import styled from "styled-components";
-import LoginPage from "../../../components/login/Login";
-import RegisterPage from "../../../components/register/Register";
-import { FormWrapper } from "../../../components/login/LoginStyling";
+import LoginPage from "../../../components/auth/login/Login";
+import RegisterPage from "../../../components/auth/register/Register";
+import { FormWrapper } from "../../../components/auth/login/LoginStyling";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 
 const TextWrapper = styled.div`

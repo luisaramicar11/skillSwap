@@ -2,13 +2,13 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../app/redux/slices/authSlice';
+import { loginUser } from '@/src/app/redux/slices/authSlice'; 
 import { toast } from 'react-toastify';
-import { AppDispatch } from '../../app/redux/store';
+import { AppDispatch } from '@/src/app/redux/store';
 import styled from 'styled-components';
-import InputSingUp from '../ui/inputs/InputAuth';
-import ButtonSingUp from '../ui/buttons/ButtonSingUp';
-import Label from '../ui/labels/LabelAuth';
+import InputSingUp from '../../../components/ui/inputs/InputAuth';
+import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
+import Label from '../../ui/labels/LabelAuth';
 
 //Syled
 import { FormWrapper } from './LoginStyling'
@@ -62,7 +62,7 @@ export default function LoginPage() {
 
   return (
     <Container>
-  <FormWrapper>
+      <FormWrapper>
     <Title>Iniciar Sesión</Title>
     <form onSubmit={handleSubmit}>
       <Label text="Email" htmlFor="email-login" />
@@ -96,5 +96,5 @@ export default function LoginPage() {
   </FormWrapper>
 </Container>
 
-  )
+  );
 }

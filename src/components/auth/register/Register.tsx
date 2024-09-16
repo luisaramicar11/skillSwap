@@ -2,15 +2,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../app/redux/slices/authSlice';
+import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
-import { AppDispatch, RootState } from '../../app/redux/store';
-import InputSignUp from "../ui/inputs/InputAuth"
+import { AppDispatch, RootState } from '../../../app/redux/store';
+import InputAuth from "../../../components/ui/inputs/InputAuth"
 import { DivUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
-import Label from "../ui/labels/LabelAuth";
-import Select from "../ui/selects/SelectRegister";
-import TextArea from "../ui/textAreas/TextAreaRegister";
-import ButtonSingUp from '../ui/buttons/ButtonSingUp';
+import Label from "../../ui/labels/LabelAuth";
+import Select from "../../ui/selects/SelectRegister";
+import TextArea from "../../ui/textAreas/TextAreaRegister";
+import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 
 //Syled
 import { FormWrapper } from '../login/LoginStyling';
@@ -94,7 +94,7 @@ export default function RegisterPage() {
             <div>
               <Title>Registro</Title>
               <Label text="Email" htmlFor='email' />
-              <InputSignUp
+              <InputAuth
                 type="email"
                 id="email" // Atributo agregado
                 name="email"
@@ -105,7 +105,7 @@ export default function RegisterPage() {
                 autoComplete="email"
               />
               <Label text="Contraseña" htmlFor='password' />
-              <InputSignUp
+              <InputAuth
                 type="password"
                 id="password" // Atributo agregado
                 name="password"
@@ -126,7 +126,7 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="name" text="Nombre*" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="name" // Atributo agregado
                 name="name"
@@ -139,7 +139,7 @@ export default function RegisterPage() {
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="lastName" text="Apellidos*" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="lastName" // Atributo agregado
                 name="lastName"
@@ -160,7 +160,7 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="age" text="Edad" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="age" // Atributo agregado
                 name="age"
@@ -173,7 +173,7 @@ export default function RegisterPage() {
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="image" text="Imagen" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="image" // Atributo agregado
                 name="image"
@@ -228,7 +228,7 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="jobTitle" text="Trabajo/título" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="jobTitle" // Atributo agregado
                 name="jobTitle"
@@ -241,7 +241,7 @@ export default function RegisterPage() {
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="description" text="Descripción" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="description" // Atributo agregado
                 name="description"
@@ -262,7 +262,7 @@ export default function RegisterPage() {
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="linkedIn" text="LinkedIn" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="linkedIn" // Atributo agregado
                 name="linkedIn"
@@ -274,7 +274,7 @@ export default function RegisterPage() {
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="behance" text="Behance" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="behance" // Atributo agregado
                 name="behance"
@@ -286,7 +286,7 @@ export default function RegisterPage() {
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="github" text="GitHub" />
-              <InputSignUp
+              <InputAuth
                 type="text"
                 id="github" // Atributo agregado
                 name="github"
