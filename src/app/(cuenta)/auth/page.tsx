@@ -29,7 +29,6 @@ const SkillSwapText = styled(motion.h1)`
   line-height: 1.2;
   text-transform: uppercase;
   -webkit-text-fill-color: transparent;
-
 `;
 
 // Contenedor principal
@@ -38,8 +37,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100;
-  
+  width: 100; 
 `;
 
 const MotionDiv = styled(motion.div)`
@@ -57,7 +55,6 @@ const OverlayContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
 `;
 
 // Panel dentro de la capa superpuesta
