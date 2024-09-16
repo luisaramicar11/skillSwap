@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ConnectionRequestForm from "../forms/FormRequest"
 
 interface ModalProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ const ModalOverlay = styled.div`
 
 const ModalContainer = styled.div`
   background-color: white;
-  width: 70%;
+  width: 50%;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -33,7 +34,7 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   font-size: 18px;
-  background-color: #000;
+  background-color: ${({ theme }) => theme.colors.textSecondary};
   color: #fff;
   padding: 0.5rem;
   padding-left: 2rem;
@@ -49,26 +50,6 @@ const ModalCloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  height: 80%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  resize: none;
-`;
-
-const SendButton = styled.button`
-  background: none;
-  width: 50%;
-  border: none;
-  padding: 0.3rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  cursor: pointer;
-  font-size: 0.7rem;
-  font-weight: 800;
 `;
 
 const UserInfo = styled.div`
@@ -203,8 +184,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         <DivRoute>C:\ User\ RequestConnection</DivRoute>
         <Div>
           <DivRequest>
-            <TextArea placeholder="Type here the content for your connection request..." />
-            <SendButton>ENVIAR</SendButton>
+          <ConnectionRequestForm/>
           </DivRequest>
           <UserInfo>
             <DivConnections>

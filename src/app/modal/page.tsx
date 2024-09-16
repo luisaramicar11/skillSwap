@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   return (
     <div>
       <h1>Modal Example</h1>
+      
       <button onClick={openModal}>Open Modal</button>
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </div>

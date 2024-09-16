@@ -1,4 +1,7 @@
+"use client"
+import { useState } from "react";
 import styled from "styled-components";
+import ModalRequest from "../modals/ModalMatch"
 
 const ProfileContainer = styled.div`
   width: 70%;
@@ -182,35 +185,6 @@ const RequestContainer = styled.div`
   width: 70%;
 `;
 
-const InfoBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 20px;
-`;
-
-const Placeholder = styled.div`
-  text-align: center;
-`;
-
-const SmallText = styled.p`
-  font-size: 16px;
-  color: #b3b3b3;
-  margin: 0;
-`;
-
-const LargeText = styled.p`
-  font-size: 18px;
-  color: #b3b3b3;
-  font-weight: bold;
-  margin: 0;
-`;
-
 const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -316,6 +290,10 @@ const Arrow = styled.span`
 `;
 
 const UserProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <>
       <ProfileContainer>
@@ -389,8 +367,9 @@ const UserProfile = () => {
         </RequestContainer>
         <SendButton>
           <ButtonText>SEND REQUEST</ButtonText>
-          <Arrow>→</Arrow>
+          <Arrow onClick={openModal}>→</Arrow>
         </SendButton>
+        <ModalRequest isOpen={isModalOpen} onClose={closeModal}/>
       </ProfileContainer>
     </>
   );
