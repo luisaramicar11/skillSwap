@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center!important;
 `;
 
-
 export const DivUserData = styled.div`
   border-right: none; 
   width:100%;
