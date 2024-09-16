@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
+import LinkProfileCard  from "./CardProfile"
 
 const ProfileCardContainer = styled.div`
   width: 25%;
@@ -170,30 +171,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }) => {
   return (
     <ProfileCardContainer>
-      <ProfileHeader>
-        <Avatar
-          src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
-          alt="profile picture"
-        />
-        <div>
-          <ProfileName>{name}</ProfileName>
-          <Skills>
-            {skills.map((skill, index) => (
-              <li key={index}>{skill}</li>
-            ))}
-          </Skills>
-          {/* ponerle un href con link*/}
-        </div>
-      </ProfileHeader>
-
-      <RatingSection>
-        <h1>{rating}</h1>
-        <DivRate>
-          <span>Your Rate</span>
-          <Stars>★★★★☆</Stars>
-        </DivRate>
-      </RatingSection>
-
+    <LinkProfileCard name={name} skills={skills} rating={rating}/>
       <StatusSection>
         <div className="status-item rejected">
           <H2StatusSection>Rejected</H2StatusSection>

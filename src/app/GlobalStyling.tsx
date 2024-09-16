@@ -11,6 +11,7 @@ export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
+        bgPink: '#FFF4F4',
         bgPrimary: '#FFFFFF',               
         textPrimary: '#ffffff',
         textDark: '#555555',             
@@ -28,22 +29,27 @@ export const GlobalTheme: IGlobalTheme = {
         textGreen: '#34DD0A',
         textRed: '#891E1E',
         textGreenDark: '#1E892F60',
-        textBlue:'1E6F8960',
-        textBrown: '#A3761E60',     
+        textBlue:'#1E6F8960',
+        textBrown: '#A3761E60', 
+        textPink: '#EFC7C5',    
         gradientText: 'linear-gradient(90deg, #fec841 11%,  #d38301 56%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fec841b3 100% )', 
+        gradientPrimary: ' linear-gradient(90deg, #ea2424b3 3%, #d38301b3 47%,#fec841b3 100% )',
+        backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
+        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'rgba(255, 255, 255, 0.025)',
-        bgPrimary: '#222222',               
+        bgPrimary: '#222222',   
+        bgPink: '#FFF4F4',            
         textPrimary: '#222222',             
         bgSecondary: '#FFFFFF', 
         bgTertiary: '#F5F5F5',            
         textSecondary: '#ffffff', 
         textBlack: '#00000020',
+        textPink: '#EFC7C5',
         textWhite: '#ffffff',      
         textTertiary: '#00000050',
         textPurple: '#965AC6',
@@ -58,6 +64,8 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textBrown: '#A3761E60',     
         gradientText: 'linear-gradient(90deg, #fefb41 0%,  #d38301 60%, #ea2424 100% )', 
         gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #d38301 47%,#fefb41 90% )', 
+        backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
+        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 

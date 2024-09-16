@@ -1,6 +1,9 @@
+import React, { ReactNode } from 'react';
+
 export interface ILinkProps {
     href: string;
-    label: string;
+    label?: string;  // Mantén esto opcional en caso de usar solo children
     target?: string;
     onClick?: (label: string) => string;
+    children?: ReactNode;  // Nuevo, para aceptar children
 }
