@@ -6,15 +6,15 @@ import { loginUser } from '../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch } from '../../app/redux/store';
 import styled from 'styled-components';
-import InputSingUp from '../ui/inputs/InputSignUp';
+import InputSingUp from '../ui/inputs/InputAuth';
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
 import Label from '../ui/labels/LabelAuth';
 
 //Syled
-import {FormWrapper} from './LoginStyling'
-import {Container} from './LoginStyling'
-import {Title} from './LoginStyling'
-import {DivButtonLogin} from './LoginStyling'
+import { FormWrapper } from './LoginStyling'
+import { Container } from './LoginStyling'
+import { Title } from './LoginStyling'
+import { DivButtonLogin } from './LoginStyling'
 
 export default function LoginPage() {
   const router = useRouter();
@@ -62,41 +62,39 @@ export default function LoginPage() {
 
   return (
     <Container>
-      <FormWrapper>
-      <Title>Iniciar Sesion</Title>
-      <form onSubmit={handleSubmit}>
-        <Label
-          text= "Email"
-          htmlFor='email'
-          />
-        <InputSingUp
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}  
-          onChange={handleChange}
-          required
-          />
-        <Label
-          text= "Contraseña"
-          htmlFor='password'
-          />  
-        <InputSingUp
-          type="password"
-          name="password"
-          placeholder="Contraseña"
-          value={form.password}
-          onChange={handleChange}
-          required
-          />
-          <DivButtonLogin>
-            <ButtonSingUp type="submit" disabled={loading}>
-              {loading ? 'Cargando...' : 'ENTRAR'}
-            </ButtonSingUp>
-          </DivButtonLogin>
-      </form>
-          </FormWrapper>
+  <FormWrapper>
+    <Title>Iniciar Sesión</Title>
+    <form onSubmit={handleSubmit}>
+      <Label text="Email" htmlFor="email-login" />
+      <InputSingUp
+        type="email"
+        id="email-login"
+        name="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+        required
+        autoComplete="email"
+      />
+      <Label text="Contraseña" htmlFor="password-login" />
+      <InputSingUp
+        type="password"
+        id="password-login"
+        name="password"
+        placeholder="Contraseña"
+        value={form.password}
+        onChange={handleChange}
+        required
+        autoComplete="current-password"
+      />
+      <DivButtonLogin>
+        <ButtonSingUp type="submit" disabled={loading}>
+          {loading ? 'Cargando...' : 'ENTRAR'}
+        </ButtonSingUp>
+      </DivButtonLogin>
+    </form>
+  </FormWrapper>
+</Container>
 
-    </Container>
-  );
+  )
 }

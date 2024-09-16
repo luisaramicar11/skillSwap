@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: flex-end !important;
   margin: 0;
+  border: none;
 `;
 
 export const FormWrapper = styled.div`
@@ -13,7 +14,6 @@ export const FormWrapper = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
   border-left: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-radius: none;
   border-bottom-left-radius:15px ;
   border-top-left-radius:15px ;
   padding: 50px;
@@ -23,6 +23,7 @@ export const FormWrapper = styled.div`
   justify-content: center;
   align-items: center;  
   margin: 0;
+  position: relative;
 `;
 
 export const Title = styled.h2`
@@ -30,12 +31,14 @@ export const Title = styled.h2`
   font-size: 2rem;
   background: transparent;
   font-weight: 400;
+  padding-bottom: 20px;
+  margin: 0;
 
 `;
 
 export const DivButtonLogin = styled.div`
   position: absolute;
-  bottom: 7rem;
+  bottom: 3.2rem;
   display: flex;
   gap: 20px;
   border: none;

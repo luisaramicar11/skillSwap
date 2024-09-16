@@ -112,7 +112,7 @@ p {
 .gradient-bg-secondary {
     background-color: ${({ theme }) => theme.colors.gradientSecondary};
 }
-input, textarea, button {
+input, select, textarea, button {
     font-family: ${urbanist.style.fontFamily};
 }
 `;

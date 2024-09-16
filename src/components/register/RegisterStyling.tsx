@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center!important;
 `;
 
-
 export const DivUserData = styled.div`
   border-right: none; 
   width:100%;
@@ -33,12 +32,6 @@ export const DivUserTitle = styled.div`
   margin: 0px;
   padding: 0px;
 `;
-
-export const TitleUserData = styled.h1`
-  color: ${({ theme }) => theme.colors.textSecondary}; 
-  font-size: 2rem;
-`;
-
 
 export const Form = styled.form`
  position: relative;

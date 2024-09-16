@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 // Creación de la interfaz para el componente Select
 interface SelectProps {
+  id:string
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   className?: string;
@@ -11,6 +12,7 @@ interface SelectProps {
   ariaLabel: string;
   name: string;
   required?: boolean;
+  autoComplete?: string
 }
 
 // Estilos para el elemento select usando styled-components
@@ -21,7 +23,7 @@ const SelectStyled = styled.select`
   background: ${({ theme }) => theme.colors.gradientPrimary};
   border-radius: 10px;
   font-size: 16px;
-  width: 350px;
+  width: 100%;
   height: 50px;
   box-sizing: border-box;
 `;
@@ -39,6 +41,7 @@ const Option = styled.option`
 
 // Componente Select
 const Select: React.FC<SelectProps> = ({
+  id,
   value,
   onChange,
   className,
@@ -46,9 +49,11 @@ const Select: React.FC<SelectProps> = ({
   ariaLabel,
   name,
   required = false,
+  autoComplete
 }) => {
   return (
     <SelectStyled
+      id={id}
       value={value}
       onChange={onChange}
       className={className}
@@ -56,6 +61,7 @@ const Select: React.FC<SelectProps> = ({
       aria-label={ariaLabel}
       name={name}
       required={required}
+      autoComplete={autoComplete}
     >
       <Option value="" disabled>
         -- Selecciona una opción --

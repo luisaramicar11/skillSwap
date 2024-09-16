@@ -51,7 +51,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100;
+  width: 100%;
   
 `;
 
@@ -121,7 +121,7 @@ const SwitchButton = styled.button`
   background-color: transparent; 
   font-size: 12px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.6s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,17 +157,17 @@ export default function AuthPage() {
       <motion.div
         initial={false}
         animate={isSignUp ? { x: "-50%" } : { x: "0%" }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 1 }}
         style={{
-          width: "200%", // Aseguramos que los formularios ocupen el 100% cada uno
-          display: "flex",
+          width: "200%", 
+          display: "flex"
         }}
       >
         {/* Formulario de Iniciar Sesión */}
         <MotionDiv
           initial={false}
-          animate={isSignUp ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          animate={isSignUp ? { x:"200%" } : {x: "0%" }}
+          transition={{ duration: 1 }}
           style={{ width: "50%" }}
         >
           <LoginPage />
@@ -176,8 +176,8 @@ export default function AuthPage() {
         {/* Formulario de Registrarse */}
         <motion.div
           initial={false}
-          animate={isSignUp ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          animate={isSignUp ? { x: "0%" } : { x: "200%" }}
+          transition={{ duration: 1 }}
           style={{ width: "50%" }}
         >
           <RegisterPage />
