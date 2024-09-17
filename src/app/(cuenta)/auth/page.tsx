@@ -1,38 +1,24 @@
 "use client";
 import { useState } from "react";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
-import { FormWrapper } from "../../../components/auth/login/LoginStyling";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 
 const TextWrapper = styled.div`
+  width: max-content;
   position: absolute;
-  right: 31%;
-  bottom:61%;
+  right: 15vw;
+  bottom: 55%;
   display: flex;
   flex-direction: column;
   text-align: start;
   z-index: 100;
 `;
 
-const SwapText = styled(motion.h1)`
-  font-size: 5rem;
-  font-weight: bold;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent; /* Gradiente o color similar al de la imagen */
-  margin: 0;
-  line-height: 1.2;
-  text-transform: uppercase;
-  -webkit-text-fill-color: transparent;
-  
-`;
-
 const SkillSwapText = styled(motion.h1)`
-  font-size: 5rem;
+  font-size: clamp(2.8rem,4.2vw,6rem);
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -42,7 +28,6 @@ const SkillSwapText = styled(motion.h1)`
   line-height: 1.2;
   text-transform: uppercase;
   -webkit-text-fill-color: transparent;
-
 `;
 
 // Contenedor principal
@@ -51,8 +36,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  min-height: 500px;
   width: 100%;
-  
 `;
 
 const MotionDiv = styled(motion.div)`
@@ -70,7 +55,6 @@ const OverlayContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
 `;
 
 // Panel dentro de la capa superpuesta
@@ -81,16 +65,16 @@ const OverlayPanel = styled.div`
   align-items: center;
 `;
 const Div = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-right: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
+  border-right: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
   background: ${({ theme }) => theme.colors.bgPrimary};
   border-radius: none;
   border-bottom-right-radius:15px ;
   border-top-right-radius:15px ;
   padding: 50px;
   width: 100%;
-  height: 500px;
+  height: 450px;
   text-align: start;
   justify-content: center;
   align-items: center;  
@@ -101,7 +85,7 @@ const H1 = styled.h1`
   justify-content: end;
   align-items: end;
   height: 100%;
-  padding-bottom: 20px;
+  margin: 0;
 
   h1{
     font-size: 2rem;
@@ -121,7 +105,6 @@ const SwitchButton = styled.button`
   background-color: transparent; 
   font-size: 12px;
   font-weight: bold;
-  transition: background-color 0.6s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,6 +112,7 @@ const SwitchButton = styled.button`
   & a {
     width: 100% !important;
     height: 100% !important;
+    transition: 0.6s ease-in-out;
     color: ${({ theme }) => theme.colors.textOrange};
   }
 
@@ -137,16 +121,17 @@ const SwitchButton = styled.button`
     border: none;
 
     & a:hover {
+      transition: 0.6s ease-in-out;
       color: ${({ theme }) => theme.colors.textPrimary};
     }
   }
 `;
 
 const P = styled.p`
- color:${({ theme }) => theme.colors.textTertiary};
- font-weight: bold;
- font-size: 1rem;
- `;
+  color:${({ theme }) => theme.colors.textTertiary};
+  font-weight: bold;
+  font-size: 1rem;
+`;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -187,20 +172,20 @@ export default function AuthPage() {
       {/* Overlay Panel */}
       <OverlayContainer>
         <TextWrapper>
-          <SwapText
+          <SkillSwapText
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             SWAP
-          </SwapText>
-          <SwapText
+          </SkillSwapText>
+          <SkillSwapText
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             ← SWAP
-          </SwapText>
+          </SkillSwapText>
           <SkillSwapText
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -212,7 +197,6 @@ export default function AuthPage() {
         <OverlayPanel>
           <Div>
             {isSignUp ? (
-              <>
               <H1>
                 <SwitchButton
                   onClick={() => setIsSignUp(false)}
@@ -220,18 +204,14 @@ export default function AuthPage() {
                   <StyledNavLink href="/auth" label="INICIAR SESIÓN"></StyledNavLink>
                 </SwitchButton>
               </H1>
-              </>
             ) : (
-              <>
                 <H1>
                   <SwitchButton onClick={() => setIsSignUp(true)}>
                     <StyledNavLink href="/auth" label="REGISTRO"></StyledNavLink>
                   </SwitchButton>
                 </H1>
-              </>
             )}
           </Div>
-
         </OverlayPanel>
       </OverlayContainer>
     </Container>

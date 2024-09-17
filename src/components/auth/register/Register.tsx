@@ -90,13 +90,12 @@ export default function RegisterPage() {
     switch (currentStep) {
       case 0:
         return (
-          <>
             <div>
               <Title>Registro</Title>
               <Label text="Email" htmlFor='email' />
               <InputAuth
                 type="email"
-                id="email" // Atributo agregado
+                id="email" 
                 name="email"
                 placeholder="Escribe tu email..."
                 value={form.email}
@@ -107,7 +106,7 @@ export default function RegisterPage() {
               <Label text="Contraseña" htmlFor='password' />
               <InputAuth
                 type="password"
-                id="password" // Atributo agregado
+                id="password" 
                 name="password"
                 placeholder="Escribe tu contraseña..."
                 value={form.password}
@@ -116,7 +115,6 @@ export default function RegisterPage() {
                 autoComplete="new-password"
               />
             </div>
-          </>
         );
       case 1:
         return (
@@ -128,9 +126,9 @@ export default function RegisterPage() {
               <Label htmlFor="name" text="Nombre*" />
               <InputAuth
                 type="text"
-                id="name" // Atributo agregado
+                id="name" 
                 name="name"
-                placeholder="Escribe tu nombre"
+                placeholder="Escribe tu nombre..."
                 value={form.name}
                 onChange={handleChange}
                 required
@@ -141,9 +139,9 @@ export default function RegisterPage() {
               <Label htmlFor="lastName" text="Apellidos*" />
               <InputAuth
                 type="text"
-                id="lastName" // Atributo agregado
+                id="lastName" 
                 name="lastName"
-                placeholder="Escribe tus apellidos"
+                placeholder="Escribe tus apellidos..."
                 value={form.lastName}
                 onChange={handleChange}
                 required
@@ -162,22 +160,22 @@ export default function RegisterPage() {
               <Label htmlFor="age" text="Edad" />
               <InputAuth
                 type="text"
-                id="age" // Atributo agregado
+                id="age" 
                 name="age"
-                placeholder="Escribe tu edad"
+                placeholder="Escribe tu edad..."
                 value={form.age}
                 onChange={handleChange}
                 required
-                autoComplete="age" // Aunque no es estándar, puede ser útil para personalizar
+                autoComplete="age" 
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="image" text="Imagen" />
+              <Label htmlFor="image" text="Foto de Perfil" />
               <InputAuth
                 type="text"
-                id="image" // Atributo agregado
+                id="image" 
                 name="image"
-                placeholder="Escribe la URL de tu imagen"
+                placeholder="Escribe la URL de tu Imagen..."
                 value={form.image}
                 onChange={handleChange}
                 autoComplete="url"
@@ -194,29 +192,29 @@ export default function RegisterPage() {
             <DivUserInput>
               <Label htmlFor="area" text="Selecciona una categoría" />
               <Select
-                id="area" // Atributo agregado
+                id="area" 
                 value={selectedOption}
                 onChange={handleSelectChange}
                 ariaLabel="Select area"
                 name="area"
                 required
-                autoComplete="category" // Aunque no es estándar, puede ser útil para personalizar
+                autoComplete="category"
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="skills" text="Habilidades" />
               <TextArea
-                id="skills" // Atributo agregado
+                id="skills"
                 value={skills}
                 onChange={handleTextAreaChange}
                 ariaLabel="Escribe tus habilidades"
                 name="skills"
-                placeholder="Escribe aquí tus habilidades (máx. 200 caracteres)..."
+                placeholder="Escribe aquí tus habilidades separadas por coma (máx. 200 caracteres) ..."
                 required
                 maxLength={200}
-                autoComplete="skills" // Aunque no es estándar, puede ser útil para personalizar
+                autoComplete="skills"
               />
-              <p>{skills.length} / 200 caracteres</p> {/* Mostrar contador de caracteres */}
+              <sub>{skills.length} / 200 caracteres</sub> {/* Mostrar contador de caracteres */}
             </DivUserInput>
           </DivUserData>
         );
@@ -230,9 +228,9 @@ export default function RegisterPage() {
               <Label htmlFor="jobTitle" text="Trabajo/título" />
               <InputAuth
                 type="text"
-                id="jobTitle" // Atributo agregado
+                id="jobTitle"
                 name="jobTitle"
-                placeholder="Nombre de tu trabajo"
+                placeholder="Título de tu trabajo..."
                 value={form.jobTitle}
                 onChange={handleChange}
                 required
@@ -243,13 +241,13 @@ export default function RegisterPage() {
               <Label htmlFor="description" text="Descripción" />
               <InputAuth
                 type="text"
-                id="description" // Atributo agregado
+                id="description" 
                 name="description"
-                placeholder="Describe tu experiencia"
+                placeholder="Describe tu experiencia..."
                 value={form.description}
                 onChange={handleChange}
                 required
-                autoComplete="description" // Aunque no es estándar, puede ser útil para personalizar
+                autoComplete="description" 
               />
             </DivUserInput>
           </DivUserData>
@@ -261,24 +259,44 @@ export default function RegisterPage() {
               <Title>Contacto</Title>
             </DivUserTitle>
             <DivUserInput>
+              <Label htmlFor="phoneNumber" text="Número de Teléfono" />
+              <InputAuth
+                type="text"
+                id="phoneNumber" 
+                name="phoneNumber"
+                placeholder="Escribe tu número de teléfono..."
+                value={form.behance}
+                onChange={handleChange}
+                autoComplete="phone-number"
+              />
+            </DivUserInput>
+            <DivUserInput>
               <Label htmlFor="linkedIn" text="LinkedIn" />
               <InputAuth
                 type="text"
-                id="linkedIn" // Atributo agregado
+                id="linkedIn" 
                 name="linkedIn"
-                placeholder="Escribe tu LinkedIn"
+                placeholder="URL de tu Perfil de LinkedIn..."
                 value={form.linkedIn}
                 onChange={handleChange}
                 autoComplete="url"
               />
             </DivUserInput>
+          </DivUserData>
+        );
+        case 6:
+        return (
+          <DivUserData>
+            <DivUserTitle>
+              <Title>Contacto</Title>
+            </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="behance" text="Behance" />
               <InputAuth
                 type="text"
-                id="behance" // Atributo agregado
+                id="behance" 
                 name="behance"
-                placeholder="Escribe tu Behance"
+                placeholder="URL de tu Perfil de Behance..."
                 value={form.behance}
                 onChange={handleChange}
                 autoComplete="url"
@@ -288,9 +306,9 @@ export default function RegisterPage() {
               <Label htmlFor="github" text="GitHub" />
               <InputAuth
                 type="text"
-                id="github" // Atributo agregado
+                id="github" 
                 name="github"
-                placeholder="Escribe tu GitHub"
+                placeholder="URL de tu Perfil de GitHub..."
                 value={form.github}
                 onChange={handleChange}
                 autoComplete="url"
@@ -315,7 +333,7 @@ export default function RegisterPage() {
                 ATRÁS
               </ButtonSingUp>
             )}
-            {currentStep < 5 ? (
+            {currentStep < 6 ? (
               <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
                 SIGUIENTE
               </ButtonSingUp>
