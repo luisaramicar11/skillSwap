@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import ClientLayout from "./ClientLayout";
 import { Providers } from './Providers';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -23,6 +25,7 @@ export default function RootLayout({
             {children}
           </ClientLayout>
         </Providers>
+        <ToastContainer />
       </body>
     </html>
   );
