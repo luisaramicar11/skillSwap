@@ -128,49 +128,6 @@ const Text2 = styled.div`
   }
 `;
 
-// Estilos para el footer
-const Footer = styled.footer`
-  width: 100%;
-  background-color: #121212;
-  color: #fff;
-  padding: 20px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 150px;
-
-  a {
-    color: #fff;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 14px;
-
-    &:hover {
-      color: #f39c12;
-    }
-  }
-
-  .social-icons {
-    display: flex;
-    gap: 10px;
-
-    span {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #fff;
-      border-radius: 50%;
-    }
-  }
-`;
-
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-  border-top: 1px solid #f39c12;
-  padding-top: 60px;
-  width: 80%;
-`;
 
 //3page
 
@@ -421,7 +378,7 @@ const RightTextLine3 = styled.div`
 // Componente principal de la página de inicio
 const Home = () => {
   const router = useRouter();
-  const handleClick=() =>  {
+  const handleClick = () => {
     router.push('/auth')
   }
   return (
@@ -463,8 +420,8 @@ const Home = () => {
             <Title>ALL ACCORDING TO YOUR NEEDS AND INTERESTS</Title>
           </BoxTitle>
           <ProfileBox2>
-          <Name>Jorge Torres</Name>
-          <Message1>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message1>
+            <Name>Jorge Torres</Name>
+            <Message1>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message1>
             <ButtonGroup>
               <TagButton>Coding</TagButton>
               <TagButton>HTML</TagButton>
@@ -508,7 +465,6 @@ const Home = () => {
           <RightTextLine3>MEDIA</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
-
     </HomeContainer>
   );
 };
