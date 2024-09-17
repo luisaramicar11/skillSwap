@@ -1,9 +1,15 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
-import { Urbanist } from "next/font/google";
+import { Urbanist, Baskervville } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
 
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+
+const baskervville = Baskervville({
+    weight: '400',
+    subsets: ['latin'],
+    style: 'normal'
+});
 
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
@@ -92,6 +98,7 @@ html {
     margin: 0;
     padding: 0;
 }
+
 *,
 *::before,
 *::after{
@@ -128,6 +135,11 @@ p {
 }
 input, select, textarea, button {
     font-family: ${urbanist.style.fontFamily};
+}
+
+span{
+    font-family: ${baskervville.style.fontFamily};
+    font-style: italic;
 }
 `;
 

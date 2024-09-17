@@ -17,11 +17,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-
 `;
-
-// Estilos para la barra de navegación
-
 
 // Estilos para el logo y el botón
 const Logo = styled.h1`
@@ -31,7 +27,6 @@ const Logo = styled.h1`
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent; 
-
 `;
 
 const Button = styled.button`
@@ -60,11 +55,10 @@ const MainText = styled.div`
   justify-content: space-around;
   margin-top: 2.5vw;
   background: transparent;
-  padding-bottom: 100px;
   align-items: end;
   padding: 50px;
+  padding-bottom: 5vw;
   width: 100% !important;
-  
 `;
 
 // Estilos para cada cuadro de texto
@@ -120,11 +114,6 @@ const Text2 = styled.div`
   & h2 {
     font-size: 4vw;
     color:${({ theme }) => theme.colors.textSecondary};
-  }
-
-  & span{
-    font-family: ${baskervville.style.fontFamily};
-    font-style: italic;
   }
 `;
 
@@ -182,7 +171,7 @@ const Container = styled.div`
   justify-content: flex-end;
   width: 100%;
   background-color:${({ theme }) => theme.colors.bgPrimary};;
-  padding: 100px 50px 0px 100px;
+  padding: 10vw 100px;
 `;
 
 const Section1 = styled.div`
@@ -191,24 +180,19 @@ const Section1 = styled.div`
   justify-content: flex-start;
   flex-direction: row;
   width: 100%;
-  padding: 20px;
   border-radius: 10px;
-  
-  
 `;
 const Section2 = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
-  padding: 20px;
   border-radius: 10px;
   font-weight: 100;
   color: ${({ theme }) => theme.colors.textOrange2};
 
   @media (max-width: 1070px) {
     flex-direction: column;
-    padding: 10px;
   }
 `;
 const Section3 = styled.div`
@@ -216,7 +200,6 @@ const Section3 = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  padding: 20px 70px;
   border-radius: 10px;  
   
 `;
@@ -239,13 +222,17 @@ const BoxTitle = styled.div`
 const Title = styled.h1`
   background: ${({ theme }) => theme.colors.gradientText};
   font-size: 2.5rem;
-  font-weight: lighter;
+  font-weight: normal;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  @media (max-width: 1070px) {
+  @media (max-width: 1424px) {
     font-size: 2rem;
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 1.5rem;
   }
 
   @media (max-width: 768px) {
@@ -256,18 +243,19 @@ const Title = styled.h1`
 const ProfileBox = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #ddd;
-  padding: 10px 100px 10px 50px;
+  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  padding: 30px 100px 30px 50px;
   border-radius: 8px;
   text-align: start;
   align-items: start;
   justify-content: flex-start;
+  width:50%;
 `;
 const ProfileBox2 = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.textOrange2};
-  padding: 10px 100px 10px 50px;
+  padding: 30px 100px 30px 50px;
   border-radius: 8px;
   text-align: start;
   align-items: start;
@@ -276,10 +264,8 @@ const ProfileBox2 = styled.div`
 
   @media (max-width: 1070px) {
     width: 100%;
-    padding: 10px;
   }
 `;
-
 
 const Name = styled.h2`
   font-size: 1.5rem;
@@ -290,9 +276,9 @@ const Name = styled.h2`
   }
 `;
 
-const Message1 = styled.p`
+const Message2 = styled.p`
   font-size: 1.1rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: ${({ theme }) => theme.colors.bgSecondary};
 
   @media (max-width: 768px) {
@@ -302,31 +288,37 @@ const Message1 = styled.p`
 
 const Message = styled.p`
   font-size: 1.1rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color:${({ theme }) => theme.colors.bgSecondary};;
-
-
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
 
   @media (max-width: 768px) {
-    flex-direction: column;
     gap: 5px;
   }
 `;
 
 const TagButton = styled.button`
+  background-color: transparent;
   padding: 10px 15px;
-  border: none;
+  border: 1px dashed ${({ theme }) => theme.colors.bgBanner};
   border-radius: 5px;
   font-size: 0.9rem;
+  transition: 1.5s;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
     padding: 8px 12px;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.bgBanner};
+    border: none;
+    transition: 1.5s;
   }
 `;
 
@@ -334,33 +326,28 @@ const TagButton = styled.button`
 
 const ContainerDiscover = styled.div`
   display: flex;
-  height: 100vh;
   width: 100vw;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 50px;
   font-family: Arial, sans-serif;
-  padding-top: 200px;
+  padding: 10vw 50px;
 `;
-
 
 const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-left: 2px solid${({ theme }) => theme.colors.textYellow};;
+  justify-content: space-between;
+  width: 100%;
+  border-left: 5px solid${({ theme }) => theme.colors.textYellow};;
   padding-left: 50px;
 `;
 
 const RightSection = styled.div`
   text-align: right;
   justify-content: center;
-  padding: 20px;
-  margin-top: 100px;
 `;
 
 const SwapText = styled.h1`
-  font-size: 12rem;
+  font-size: clamp(2rem, 10vw, 12rem);
   background: ${({ theme }) => theme.colors.gradientText};
   font-weight: bold;
   -webkit-background-clip: text;
@@ -371,52 +358,39 @@ const SwapText = styled.h1`
 `;
 
 const SubText = styled.p`
-  font-size: 2rem;
-  color: ${({ theme }) => theme.colors.textOrange};
+  font-size: clamp(10px, 2vw, 2rem);
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.textYellow};
   margin: 10px 0 30px;
 `;
 
-const ButtonDiscover = styled.button`
-  background: none;
-  border: 2px solid #e45b00;
-  color: #e45b00;
-  padding: 10px 30px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #e45b00;
-    color: #fff;
-  }
-`;
-
 const DiscoverButton = styled(Button)`
-  align-self: flex-start;
-  align-items: end;
-  margin-top: 200px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 20%;
 `;
 
 const RightTextLine1 = styled.div`
   padding-right: 50px;
-  font-size: 7rem;
-  font-weight: 0;
+  font-size: clamp(2rem, 8vw, 8rem);
+  font-weight: 100;
 `;
+
 const RightTextLine2 = styled.div`
   border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
-  font-size: 7rem;
-  font-weight: 600;
+  font-size: clamp(2rem, 8vw, 8rem);
+  font-weight: 400;
 `;
+
 const RightTextLine3 = styled.div`
   border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
-  font-size: 7rem;
-  font-weight: 800;
+  font-size: clamp(2rem, 8vw, 8rem);
+  font-weight: 700;
 `;
-
-
 
 // Componente principal de la página de inicio
 const Home = () => {
@@ -429,7 +403,7 @@ const Home = () => {
       <Logo>
         SkillSwap
       </Logo>
-      <Button onClick={handleClick}>Inicar Sesion</Button>
+      <Button onClick={handleClick}>INICIAR SESIÓN</Button>
       <MainText>
         <Text>
           <h2>LOOKING FOR <br></br>SKILL</h2>
@@ -438,77 +412,65 @@ const Home = () => {
           <h2 className="right-text">EXCHANGE YOUR <br></br> <span>expertise</span>  AND <br></br><span>knowledges</span> </h2>
         </Text2>
       </MainText>
-
       <Carousel>
       </Carousel>
-
-
       <Container>
-
         {/* Profile Section 1 */}
         <Section1>
           <ProfileBox>
             <Name>Diane Ressler</Name>
             <Message>¡Hola Jorge! ¿Podrías enseñarme un poco sobre CSS?</Message>
             <ButtonGroup>
-              <TagButton>Digital Art</TagButton>
+              <TagButton>Arte Digital</TagButton>
               <TagButton>Adobe</TagButton>
               <TagButton>Design</TagButton>
             </ButtonGroup>
           </ProfileBox>
         </Section1>
-
         <Section2>
           <BoxTitle>
             <Title>ALL ACCORDING TO YOUR NEEDS AND INTERESTS</Title>
           </BoxTitle>
           <ProfileBox2>
           <Name>Jorge Torres</Name>
-          <Message1>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message1>
+          <Message2>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message2>
             <ButtonGroup>
               <TagButton>Coding</TagButton>
               <TagButton>HTML</TagButton>
-              <TagButton>CSS</TagButton>
               <TagButton>JavaScript</TagButton>
             </ButtonGroup>
           </ProfileBox2>
-
         </Section2>
-
         <Section3>
           <ProfileBox>
             <Name>Sara Castillo</Name>
             <Message>Hey, soy creadora de contenido. Me gustaría aprender Coding contigo.</Message>
             <ButtonGroup>
-              <TagButton>Entertainment</TagButton>
-              <TagButton>Audiovisual</TagButton>
+              <TagButton>Entretenimiento</TagButton>
               <TagButton>Manejo Redes</TagButton>
-              <TagButton>Edición</TagButton>
             </ButtonGroup>
           </ProfileBox>
         </Section3>
       </Container>
-
-
       <ContainerDiscover>
         {/* Left Section */}
         <LeftSection>
-          <SwapText>Swap?</SwapText>
-          <SubText>Yeah, why not.</SubText>
+          <div>
+            <SwapText>Swap?</SwapText>
+            <SubText>HÁGALE PUES</SubText>
+          </div>
           <DiscoverButton>DISCOVER</DiscoverButton>
         </LeftSection>
-
         {/* Right Section */}
         <RightSection>
-          <RightTextLine1>FOR</RightTextLine1>
-          <RightTextLine1>THOSE</RightTextLine1>
-          <RightTextLine2>WHO</RightTextLine2>
-          <RightTextLine2>LOVE</RightTextLine2>
+          <RightTextLine1>PARA</RightTextLine1>
+          <RightTextLine1>LAS</RightTextLine1>
+          <RightTextLine2>FIERAS</RightTextLine2>
+          <RightTextLine2>DEL</RightTextLine2>
+          <RightTextLine3>MEDIO</RightTextLine3>
           <RightTextLine3>DIGITAL</RightTextLine3>
-          <RightTextLine3>MEDIA</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
-
     </HomeContainer>
   );
 };
