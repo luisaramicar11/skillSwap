@@ -4,71 +4,66 @@ import React from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks"
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
-import { Baskervville } from "next/font/google";
 import InfoIcon from "@/public/svg/InfoIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 
-const baskervville = Baskervville({
-    weight: '400',
-    subsets: ['latin'],
-    style: 'normal'
-});
-
 // Styled components
 const NavbarContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgNavbar};
-  color: ${({ theme }) => theme.colors.textWhite};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-  gap: 50px;
+    background-color: ${({ theme }) => theme.colors.bgNavbar};
+    color: ${({ theme }) => theme.colors.textWhite};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    gap: 50px;
 `;
 
 const SidebarLink = styled.p`
-    font-family: ${baskervville.style.fontFamily};
+    font-weight:300;
     font-style: italic;
+    display: flex;
     font-size: 14px;
     width: max-content;
+    transition: 0.4s ease-in-out;
+    gap: 10px;
 
     & span {
         text-decoration: underline;
     }
 
-    &:hover {
-        font-weight: bold;
+    &:hover, :focus, :active {
+        transition: 0.4s ease-in-out;
+        font-weight: 700;
     }
 `;
 
 const SidebarLinkContainer = styled.div`
-  width: 100px;
-  cursor: pointer;
+    width: 100px;
+    cursor: pointer;
 `;
 
 const IconsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const NavList = styled.ul`
-  list-style: none;
-  text-align: center;
-  display: flex;
-  gap: 50px;
+    list-style: none;
+    text-align: center;
+    display: flex;
+    gap: 50px;
 `;
 
 const NavItem = styled.li`
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 `;
 
 // Navbar component
 export const Navbar: React.FC = () => {
     return (
-
-        
         <NavbarContainer>
             <SidebarLinkContainer>
                 <SidebarLink>+ <span>¿Quieres ver tu información?</span></SidebarLink>
@@ -77,11 +72,11 @@ export const Navbar: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('INICIO')}>
                     <StyledNavLink href="/" label="INICIO" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('MATCH')}>
-                    <StyledNavLink href="/match" label="MATCH" />
-                </NavItem>
                 <NavItem onClick={() => handlePageChange('DESCUBRE')}>
                     <StyledNavLink href="/discover" label="DESCUBRE" />
+                </NavItem>
+                <NavItem onClick={() => handlePageChange('MATCH')}>
+                    <StyledNavLink href="/match" label="MATCH" />
                 </NavItem>
             </NavList>
             <IconsContainer>

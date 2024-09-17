@@ -1,9 +1,15 @@
 'use client';
 import { createGlobalStyle } from "styled-components";
-import { Urbanist } from "next/font/google";
+import { Urbanist, Baskervville } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
 
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+
+const baskervville = Baskervville({
+    weight: '400',
+    subsets: ['latin'],
+    style: 'normal'
+});
 
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
@@ -36,9 +42,10 @@ export const GlobalTheme: IGlobalTheme = {
         textBlue:'#1E6F8960',
         textBrown: '#A3761E60', 
         textPink: '#EFC7C5', 
-        borderAuth: '#F0AC27',   
+        borderAuthLeft: '#2222220', 
+        borderAuthRight: '#F0AC27',  
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
+        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
@@ -70,9 +77,10 @@ export const GlobalDarkTheme: IGlobalTheme = {
         textGreenDark: '#1E892F60',
         textBlue:'1E6F8960',
         textBrown: '#A3761E60',  
-        borderAuth: '#ffffff',     
+        borderAuthLeft: '#FFFFFF', 
+        borderAuthRight: '#FFFFFF',     
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientPrimary: ' linear-gradient(90deg, #ea2424 3%, #da731e 47%,#F0AC27 90% )', 
+        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
@@ -92,6 +100,7 @@ html {
     margin: 0;
     padding: 0;
 }
+
 *,
 *::before,
 *::after{
@@ -128,6 +137,12 @@ p {
 }
 input, select, textarea, button {
     font-family: ${urbanist.style.fontFamily};
+}
+
+span{
+    font-family: ${baskervville.style.fontFamily};
+    font-style: italic;
+    font-weight: normal;
 }
 `;
 

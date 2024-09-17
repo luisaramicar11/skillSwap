@@ -22,7 +22,10 @@ export const DivUserData = styled.div`
 `;
 
 export const DivUserInput = styled.div`
-  
+  & sub{
+    opacity: 0.7;
+    color: ${({ theme }) => theme.colors.textWhite};
+  }
 `;
 
 export const DivUserTitle = styled.div`
@@ -34,14 +37,13 @@ export const DivUserTitle = styled.div`
 `;
 
 export const Form = styled.form`
- position: relative;
- display: flex;
- flex-direction: column;
- gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `
 export const DivButtonSingUp = styled.div`
   position: absolute;
-  top: 22rem;
+  bottom: 50px;
   display: flex;
   gap: 20px;
   border: none;

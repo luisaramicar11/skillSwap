@@ -7,51 +7,52 @@ interface CardProps {
 
 // Contenedor principal
 const Container = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color:${({ theme }) => theme.colors.textSecondary};
   flex-direction: column;
-  padding-top: 200px;
-  margin-bottom: 0; 
-  padding-top:100px;
-  padding-bottom: 100px;
-  width: 100vw;;// Elimina cualquier margen inferior innecesario
-
-  // Elimina min-height: 100vh para evitar el exceso de espacio
-  height: auto; // Ajusta el tamaño según el contenido
+  padding: 150px 0;
+  margin: 0; 
+  width: 100vw;
+  height: auto;
 `;
 
 // Título principal
 const Title = styled.h1`
-  color: white;
-  font-size: 36px;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: 40px;
   font-weight: bold;
   text-align: center;
 
+  & span{
+    font-weight:normal;
+  }
+
   @media (max-width: 768px) {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   @media (max-width: 480px) {
-    font-size: 22px;
+    font-size: 25px;
   }
 `;
 
 // Subtítulo
-const Subtitle = styled.p`
-  color: #b3b3b3;
-  font-size: 16px;
+const Subtitle = styled.span`
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: 14px;
+  opacity: 0.5;
+  font-style: normal;
   text-align: center;
   margin-bottom: 40px;
 
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    font-size: 10px;
     margin-bottom: 30px;
   }
 `;
@@ -125,8 +126,8 @@ const Card = styled.div<CardProps>`
 const Carousel: React.FC = () => {
   return (
     <Container>
-      <Title>MATCH THE <em>ideal skill for you</em></Title>
-      <Subtitle>Sometimes you dont even know you need, until you see it</Subtitle>
+      <Title>MATCH<span> con tu skill ideal</span></Title>
+      <Subtitle>“A VECES NI SABEMOS QUE LO<br></br>NECESITAMOS, HASTA QUE LO VEMOS.”</Subtitle>
       <CardsContainer>
         <Card angle={-10} />
         <Card angle={-5} />

@@ -23,7 +23,7 @@ const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children })
       onClick={() => {
         if (label) {
           handlePageChange(label);
-          if (onClick) onClick(label); // Llamar a onClick si se pasa
+          if (onClick) onClick(label);
         }
       }}
     >
