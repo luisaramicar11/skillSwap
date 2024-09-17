@@ -409,7 +409,7 @@ const Home = () => {
           </BoxTitle>
           <ProfileBox2>
             <Name>Jorge Torres</Name>
-            <Message1>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message1>
+            <Message2>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message2>
             <ButtonGroup>
               <TagButton>Coding</TagButton>
               <TagButton>HTML</TagButton>

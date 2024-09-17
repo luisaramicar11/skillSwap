@@ -12,7 +12,7 @@ const FooterStyled = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top:300px;
+  margin-top: 30px;
 
   a {
     color:${({ theme }) => theme.colors.textPrimary};
