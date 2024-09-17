@@ -12,14 +12,15 @@ export const Container = styled.div`
 
 export const FormWrapper = styled.div`
   background: ${({ theme }) => theme.colors.gradientPrimary};
-  border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-left: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderAuthLeft};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuthLeft};
+  border-left: 1px solid ${({ theme }) => theme.colors.borderAuthLeft};
   border-bottom-left-radius:15px ;
+  transition: 1s ease-in-out;
   border-top-left-radius:15px ;
   padding: 50px;
   width: 60%;
-  height: 500px;
+  height: 450px;
   text-align: start;
   justify-content: center;
   align-items: center;  

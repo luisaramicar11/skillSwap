@@ -26,10 +26,11 @@ const TextAreaStyled = styled.textarea`
   border-radius: 10px;
   font-size: 16px;
   width: 100%;
-  height: 100px; 
+  height: 90px; 
   box-sizing: border-box;
   resize: none;
   &::placeholder {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
   } 
 `;

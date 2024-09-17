@@ -24,7 +24,7 @@ const SelectStyled = styled.select`
   border-radius: 10px;
   font-size: 16px;
   width: 100%;
-  height: 50px;
+  height: 40px;
   box-sizing: border-box;
 `;
 const Option = styled.option`
@@ -67,7 +67,7 @@ const Select: React.FC<SelectProps> = ({
         -- Selecciona una opción --
       </Option>
       <Option value="desarrollo">Desarrollo</Option>
-      <option value="marketing">Marketing y Branding</option>
+      <Option value="marketing">Marketing y Branding</Option>
     </SelectStyled>
   );
 };

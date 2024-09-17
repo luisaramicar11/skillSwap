@@ -27,12 +27,10 @@ const StyledInputSignUp = styled.input`
   margin-bottom: 10px;
   background: transparent;
   
-
   &::placeholder {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
   }
-
-  
 `;
 
 const InputSingUp: React.FC<InputProps> = ({

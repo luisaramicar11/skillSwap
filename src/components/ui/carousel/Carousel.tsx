@@ -12,7 +12,7 @@ const Container = styled.div`
   align-items: center;
   background-color:${({ theme }) => theme.colors.textSecondary};
   flex-direction: column;
-  padding: 200px 0;
+  padding: 150px 0;
   margin: 0; 
   width: 100vw;
   height: auto;
@@ -20,7 +20,7 @@ const Container = styled.div`
 
 // Título principal
 const Title = styled.h1`
-  color: white;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -40,8 +40,10 @@ const Title = styled.h1`
 
 // Subtítulo
 const Subtitle = styled.span`
-  color: #b3b3b3;
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 14px;
+  opacity: 0.5;
+  font-style: normal;
   text-align: center;
   margin-bottom: 40px;
 
@@ -124,8 +126,8 @@ const Card = styled.div<CardProps>`
 const Carousel: React.FC = () => {
   return (
     <Container>
-      <Title>MATCH THE <span>ideal skill for you</span></Title>
-      <Subtitle>“SOMETIMES YOU DON&apos;T EVEN KNOW YOU<br></br>NEED, UNTIL YOU SEE IT”</Subtitle>
+      <Title>MATCH<span> con tu skill ideal</span></Title>
+      <Subtitle>“A VECES NI SABEMOS QUE LO<br></br>NECESITAMOS, HASTA QUE LO VEMOS.”</Subtitle>
       <CardsContainer>
         <Card angle={-10} />
         <Card angle={-5} />

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import styled from 'styled-components';
-import InputSingUp from '../ui/inputs/InputAuth';
+import InputAuth from '../ui/inputs/InputAuth';
 import ButtonSingUp from '../ui/buttons/ButtonSingUp';
 
 const Container = styled.div`
@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
         <form>
           <div>
             <Label htmlFor="email">Email</Label>
-            <InputSingUp
+            <InputAuth
               id="id"
               type="email"
               placeholder="Enter your email"
@@ -53,7 +53,7 @@ const LoginForm: React.FC = () => {
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <InputSingUp
+            <InputAuth
               id="id"
               type="password"
               placeholder="Ingresa tu contraseña"

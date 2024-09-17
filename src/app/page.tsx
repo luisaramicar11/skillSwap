@@ -10,7 +10,7 @@ const baskervville = Baskervville({
   style: 'normal'
 });
 
-// Estilos para el contenedor principal
+// ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
@@ -33,19 +33,19 @@ const Button = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.colors.textOrange};
   border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px 85px;
+  padding: 15px 70px;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 10px;
-  transition: 0.5s;
+  transition: 0.5s ease-in-out;
   margin-bottom: 50px;
 
   &:hover {
     background: ${({ theme }) => theme.colors.gradientPrimary};
-    color: #fff;
+    color: ${({ theme }) => theme.colors.textPrimary};
     border: none;
-    transition: 0.5s;
+    transition: 0.5s ease-in-out;
   }
 `;
 
@@ -53,7 +53,7 @@ const Button = styled.button`
 const MainText = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 2.5vw;
+  margin-top: 10vw;
   background: transparent;
   align-items: end;
   padding: 50px;
@@ -161,17 +161,19 @@ const Box = styled.div`
   width: 80%;
 `;
 
-//3page
+//--------------------- el carrusel será la section 2 ---------------------
+
+//--------------------- estilos para section 3 ---------------------
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Arial, sans-serif;
   justify-content: flex-end;
   width: 100%;
   background-color:${({ theme }) => theme.colors.bgPrimary};;
   padding: 10vw 100px;
+  gap: 50px;
 `;
 
 const Section1 = styled.div`
@@ -182,6 +184,7 @@ const Section1 = styled.div`
   width: 100%;
   border-radius: 10px;
 `;
+
 const Section2 = styled.div`
   display: flex;
   align-items: center;
@@ -219,6 +222,7 @@ const BoxTitle = styled.div`
     justify-content: center;
   }
 `;
+
 const Title = styled.h1`
   background: ${({ theme }) => theme.colors.gradientText};
   font-size: 2.5rem;
@@ -249,8 +253,15 @@ const ProfileBox = styled.div`
   text-align: start;
   align-items: start;
   justify-content: flex-start;
+  transition: 1s;
   width:50%;
+
+  &:hover{
+    transition: 1s;
+    transform: scale(1.05);
+  }
 `;
+
 const ProfileBox2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -260,7 +271,13 @@ const ProfileBox2 = styled.div`
   text-align: start;
   align-items: start;
   justify-content: flex-start;
+  transition: 1s;
   width: 50%;
+
+  &:hover{
+    transition: 1s;
+    transform: scale(1.05);
+  }
 
   @media (max-width: 1070px) {
     width: 100%;
@@ -270,6 +287,7 @@ const ProfileBox2 = styled.div`
 const Name = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 10px;
+  font-weight: normal;
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -308,7 +326,7 @@ const TagButton = styled.button`
   border: 1px dashed ${({ theme }) => theme.colors.bgBanner};
   border-radius: 5px;
   font-size: 0.9rem;
-  transition: 1.5s;
+  transition: 1s;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
@@ -316,19 +334,19 @@ const TagButton = styled.button`
   }
 
   &:hover {
+    transform: scale(1.1);
     background-color: ${({ theme }) => theme.colors.bgBanner};
     border: none;
-    transition: 1.5s;
+    transition: 1s;
   }
 `;
 
-//page 4
+//--------------------- estilos para section 4 ---------------------
 
 const ContainerDiscover = styled.div`
   display: flex;
   width: 100vw;
   justify-content: space-between;
-  font-family: Arial, sans-serif;
   padding: 10vw 50px;
 `;
 
@@ -389,10 +407,11 @@ const RightTextLine3 = styled.div`
   border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
-  font-weight: 700;
+  font-weight: 800;
 `;
 
-// Componente principal de la página de inicio
+//--------------------- Componente principal de la página de inicio ---------------------
+
 const Home = () => {
   const router = useRouter();
   const handleClick=() =>  {
@@ -409,7 +428,7 @@ const Home = () => {
           <h2>LOOKING FOR <br></br>SKILL</h2>
         </Text>
         <Text2>
-          <h2 className="right-text">EXCHANGE YOUR <br></br> <span>expertise</span>  AND <br></br><span>knowledges</span> </h2>
+          <h2 className="right-text">INTERCAMBIA <br></br> <span>experiencias</span>  & <br></br><span>destrezas</span> </h2>
         </Text2>
       </MainText>
       <Carousel>
@@ -421,15 +440,15 @@ const Home = () => {
             <Name>Diane Ressler</Name>
             <Message>¡Hola Jorge! ¿Podrías enseñarme un poco sobre CSS?</Message>
             <ButtonGroup>
-              <TagButton>Arte Digital</TagButton>
-              <TagButton>Adobe</TagButton>
               <TagButton>Design</TagButton>
+              <TagButton>Adobe</TagButton>
+              <TagButton>Branding</TagButton>
             </ButtonGroup>
           </ProfileBox>
         </Section1>
         <Section2>
           <BoxTitle>
-            <Title>ALL ACCORDING TO YOUR NEEDS AND INTERESTS</Title>
+            <Title>TODO SEGÚN TUS NECESIDADES E INTERESES</Title>
           </BoxTitle>
           <ProfileBox2>
           <Name>Jorge Torres</Name>
@@ -456,19 +475,19 @@ const Home = () => {
         {/* Left Section */}
         <LeftSection>
           <div>
-            <SwapText>Swap?</SwapText>
-            <SubText>HÁGALE PUES</SubText>
+            <SwapText>Swap.</SwapText>
+            <SubText><span>simple. dinámico. libre.</span></SubText>
           </div>
-          <DiscoverButton>DISCOVER</DiscoverButton>
+          <DiscoverButton>DESCUBRE</DiscoverButton>
         </LeftSection>
         {/* Right Section */}
         <RightSection>
           <RightTextLine1>PARA</RightTextLine1>
-          <RightTextLine1>LAS</RightTextLine1>
-          <RightTextLine2>FIERAS</RightTextLine2>
-          <RightTextLine2>DEL</RightTextLine2>
-          <RightTextLine3>MEDIO</RightTextLine3>
+          <RightTextLine1>LOS</RightTextLine1>
+          <RightTextLine2>QUE</RightTextLine2>
+          <RightTextLine2>VIVEN</RightTextLine2>
           <RightTextLine3>DIGITAL</RightTextLine3>
+          <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
     </HomeContainer>

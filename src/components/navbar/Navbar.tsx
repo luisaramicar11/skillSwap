@@ -19,51 +19,51 @@ const NavbarContainer = styled.div`
 `;
 
 const SidebarLink = styled.p`
+    font-weight:300;
     font-style: italic;
+    display: flex;
     font-size: 14px;
     width: max-content;
-    opacity: 0.5;
-    transition: 0.6s ease-in-out;
+    transition: 0.4s ease-in-out;
+    gap: 10px;
 
     & span {
         text-decoration: underline;
     }
 
     &:hover, :focus, :active {
-        transition: 0.6s ease-in-out;
-        opacity:1;
+        transition: 0.4s ease-in-out;
+        font-weight: 700;
     }
 `;
 
 const SidebarLinkContainer = styled.div`
-  width: 100px;
-  cursor: pointer;
+    width: 100px;
+    cursor: pointer;
 `;
 
 const IconsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const NavList = styled.ul`
-  list-style: none;
-  text-align: center;
-  display: flex;
-  gap: 50px;
+    list-style: none;
+    text-align: center;
+    display: flex;
+    gap: 50px;
 `;
 
 const NavItem = styled.li`
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 `;
 
 // Navbar component
 export const Navbar: React.FC = () => {
     return (
-
-
         <NavbarContainer>
             <SidebarLinkContainer>
                 <SidebarLink>+ <span>¿Quieres ver tu información?</span></SidebarLink>
