@@ -16,8 +16,8 @@ interface SliderCardProps {
 const CardContainer = styled.div`
   width: 50%;
   height: 95%;
+  margin: 1rem 0;
   border-radius: 0.5rem;
-  margin: 1rem;
   position: relative;
   color: white;
   text-align: center;
@@ -37,13 +37,15 @@ const CardContainer = styled.div`
   @media (max-width: 1024px) {
     width: 80%; /* Aumenta el ancho en pantallas más pequeñas */
     height: auto;
-    margin: 1rem;
+    margin-top: 2.5rem;
+    margin-left: 1rem;
   }
 
   @media (max-width: 768px) {
     width: 100%; /* Para pantallas más pequeñas aún, usa todo el ancho */
     height: auto;
-    margin: 1rem;
+    margin-left: 1rem;
+    margin-top: 2.5rem;
   }
 `;
 
@@ -61,20 +63,20 @@ const Image = styled.img`
 const Title = styled.h3`
   font-size: 2rem;
   position: absolute;
-  bottom: 2rem;
-  left: 1rem;
+  bottom: 2.5rem;
+  left: 1.5rem;
   z-index: 99;
 
   @media (max-width: 768px) {
     font-size: 2.5rem; /* Reduce el tamaño de la fuente en pantallas más pequeñas */
-    bottom: 2rem;
-    left: 2rem;
+    bottom: 2.5rem;
+    left: 2.5rem;
   }
 
   @media (max-width: 480px) {
     font-size: 2rem; /* Aún más pequeño en móviles */
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
   }
 `;
 
@@ -82,28 +84,28 @@ const Subtitle = styled.p`
   font-size: 1rem;
   font-weight: 300;
   position: absolute;
-  bottom: 2rem;
-  left: 1rem;
+  bottom: 2.5rem;
+  left: 1.5rem;
   z-index: 99;
   color: #ccc;
 
   @media (max-width: 768px) {
     font-size: 1.5rem; /* Ajusta la fuente para pantallas más pequeñas */
-    bottom: 1rem;
-    left: 2rem;
+    bottom: 1.5rem;
+    left: 2.5rem;
   }
 
   @media (max-width: 480px) {
     font-size: 1.2rem; /* Aún más pequeño en pantallas muy pequeñas */
-    bottom: 0.5rem;
-    left: 1rem;
+    bottom: 1rem;
+    left: 1.5rem;
   }
 `;
 
 const PassButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1rem;
+  right: 1.5rem;
   background: none;
   border: none;
   color: white;
@@ -123,8 +125,8 @@ const PassButton = styled.button`
 
 const StarButton = styled.button`
   position: absolute;
-  bottom: 4rem;
-  right: 20px;
+  bottom: 4.5rem;
+  right: 1.5rem;
   background: none;
   border: none;
   color: white;

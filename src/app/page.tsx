@@ -16,7 +16,8 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
+  height: 100%;
 `;
 
 // Estilos para el logo y el botón
@@ -66,7 +67,7 @@ const MainText = styled.div`
   align-items: end;
   padding: 50px;
   padding-bottom: 5vw;
-  width: 100% !important;
+  width: 100%;
 
   @media (max-width: 768px) {
     flex-direction: column;

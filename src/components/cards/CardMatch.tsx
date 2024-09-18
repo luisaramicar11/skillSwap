@@ -1,30 +1,63 @@
 import styled from "styled-components";
+import SkillTag from "../ui/skillTag/skillTag";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
-  width: 25%;
-  height: 95%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: max-content;
+  padding-bottom: 1rem;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
   border-radius: 0.5rem;
   overflow: hidden;
+  margin: 1rem 1rem 2rem 1rem;
 
   @media (max-width: 1024px) {
     width: 80%; /* Ocupa el 80% en pantallas pequeñas */
     height: auto;
+    margin-top: 2.5rem;
   }
 
   @media (min-width: 1024px) {
     width: 20%; /* Mantén el tamaño fijo en pantallas grandes */
   }
+
+  @media (max-width: 797px) {
+    margin: 0rem;
+    margin-bottom: 2rem;
+    width: 20%; /* Mantén el tamaño fijo en pantallas grandes */
+  }
+`;
+
+const DivCardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > * {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 200px; /* Mantén el tamaño fijo en pantallas grandes */
+  }
+
+  @media (min-width: 1440px) {
+    width: 300px; /* Mantén el tamaño fijo en pantallas grandes */
+  }
 `;
 
 // Estilo para el título
 const Title = styled.h3`
+  display: flex;
+  text-align: start;
   font-size: 1.3rem;
   color: orange;
   padding: 0;
   margin: 0.5rem;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 `;
 
 // Sección de conexiones
@@ -42,6 +75,8 @@ const Connections = styled.div`
 // Sección de rating
 const RatingSection = styled.div`
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.5rem;
   font-size: 0.6rem;
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -59,7 +94,6 @@ const RatingStars = styled.div`
 const Description = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; // Reducido el espacio entre elementos
   justify-content: start;
   padding: 0;
   margin-top: 0;
@@ -69,18 +103,6 @@ const Description = styled.div`
 const SkillsSection = styled.div`
   color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: bold;
-`;
-
-const SkillTag = styled.span`
-  display: inline-block;
-  width: 80%;
-  text-align: center;
-  margin: 5px 5px 0 0;
-  padding: 5px 10px;
-  border-radius: 20px;
-  color: ${({ theme }) => theme.colors.textPurple};
-  border: 1px solid ${({ theme }) => theme.colors.textPurple};
-  font-size: 0.7rem; // Reducido el tamaño de la fuente
 `;
 
 const SubTitle = styled.h4`
@@ -94,7 +116,7 @@ const SubTitle = styled.h4`
 const DivRating = styled.div`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
 `;
 
 const P = styled.p`
@@ -107,26 +129,31 @@ const P = styled.p`
   margin: 0;
 `;
 
-const Skills = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-left: 1rem; // Añadido padding izquierdo para alinear con el texto
-`;
-
 const Star = styled.span`
   color: gold;
   font-size: 20px;
-  margin: 0 2px;
 `;
 
 const DivTitle = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0;
   gap: 0;
-  justify-content: flex-start;
+  justify-content: center;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+
+  @media (min-width: 1440px) {
+    & div{
+      width: 300px !important; /* Mantén el tamaño fijo en pantallas grandes */
+    }
+  }
+
+  @media (min-width: 320px) {
+    & div{
+      width: 200px; /* Mantén el tamaño fijo en pantallas grandes */
+    }
+  }
 `;
 
 const DivConnections = styled.div`
@@ -139,13 +166,12 @@ const DivConnections = styled.div`
 const DivDescription = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; // Reducido el espacio entre secciones
+  gap: 0;
 `;
 
 const Hr = styled.hr`
+  width: 80%;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  margin-left: 3rem;
-  margin-right: 3rem;
 `;
 interface CardProps {
   description: string;
@@ -156,47 +182,48 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
   return (
     <CardContainer>
       <DivTitle>
-        <Title>Match</Title>
+        <div>
+          <Title>Match</Title>
+        </div>
       </DivTitle>
-      <DivConnections>
-        <Connections>
-          <div>Connections</div>
-          <div>🔗 30</div>
-        </Connections>
 
-        <RatingSection>
-          <div>Rating</div>
-          <DivRating>
-            <div>{rating}</div>
-            <RatingStars>
-              {[...Array(5)].map((_, index) => (
-                <Star key={index}>
-                  {index < rating ? "★" : "☆"}{" "}
-                  {/* Muestra estrellas llenas o vacías */}
-                </Star>
-              ))}
-            </RatingStars>
-          </DivRating>
-        </RatingSection>
-        <Hr />
-      </DivConnections>
+      <DivCardContent>
+        <DivConnections>
+          <Connections>
+            <div>Connections</div>
+            <div>🔗 30</div>
+          </Connections>
 
-      <DivDescription>
-        <Description>
-          <SubTitle>Description</SubTitle>
-          <P>{description}</P>
-        </Description>
+          <RatingSection>
+            <div>Rating</div>
+            <DivRating>
+              <div>{rating}</div>
+              <RatingStars>
+                {[...Array(5)].map((_, index) => (
+                  <Star key={index}>
+                    {index < rating ? "★" : "☆"}{" "}
+                    {/* Muestra estrellas llenas o vacías */}
+                  </Star>
+                ))}
+              </RatingStars>
+            </DivRating>
+          </RatingSection>
+          <Hr />
+        </DivConnections>
 
-        <SkillsSection>
-          <SubTitle>Skills</SubTitle>
-          <P>Here you will see my skills!</P>
-          <Skills>
-            {skills.map((skill, index) => (
-              <SkillTag key={index}>{skill}</SkillTag>
-            ))}
-          </Skills>
-        </SkillsSection>
-      </DivDescription>
+        <DivDescription>
+          <Description>
+            <SubTitle>Description</SubTitle>
+            <P>{description}</P>
+          </Description>
+
+          <SkillsSection>
+            <SubTitle>Skills</SubTitle>
+            <P>Here you will see my skills!</P>
+            <SkillTag skillsArray={skills} />
+          </SkillsSection>
+        </DivDescription>
+      </DivCardContent>
     </CardContainer>
   );
 };

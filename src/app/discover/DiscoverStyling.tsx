@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const H2 = styled.span`
+export const H2 = styled.h2`
   display: inline;
   font-size: 3rem;
   padding-left: 1rem;
