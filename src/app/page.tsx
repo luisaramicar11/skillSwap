@@ -28,6 +28,10 @@ const Logo = styled.h1`
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent; 
+
+  @media (max-width: 768px) {
+    font-size: 10vw;
+  }
 `;
 
 const Button = styled.button`
@@ -48,8 +52,12 @@ const Button = styled.button`
     border: none;
     transition: 0.5s ease-in-out;
   }
-`;
 
+  @media (max-width: 768px) {
+    padding: 10px 50px;
+    font-size: 14px;
+  }
+`;
 // Estilos para el texto principal
 const MainText = styled.div`
   display: flex;
@@ -59,12 +67,17 @@ const MainText = styled.div`
   align-items: end;
   padding: 50px;
   padding-bottom: 5vw;
-  width: 100% ;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+  }
 `;
 
 // Estilos para cada cuadro de texto
 const Text = styled.div`
-  display: flex;
+ display: flex;
   flex: 1;
   text-align: start;
   padding: 45px;
@@ -91,9 +104,20 @@ const Text = styled.div`
   & h2 {
     font-size: 4vw;
   }
+;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    width: 100%;
+    border: none;
+    & h2 {
+      font-size: 6vw;
+    }
+  }
 `;
+
 const Text2 = styled.div`
-  flex: 1;
+ flex: 1;
   text-align: center;
   padding: 50px;
   background: transparent;
@@ -116,74 +140,44 @@ const Text2 = styled.div`
     font-size: 4vw;
     color:${({ theme }) => theme.colors.textSecondary};
   }
-`;
-
-// Estilos para el footer
-const Footer = styled.footer`
-  width: 100%;
-  background-color: #121212;
-  color: #fff;
-  padding: 20px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 150px;
-
-  a {
-    color: #fff;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 14px;
-
-    &:hover {
-      color: #f39c12;
-    }
-  }
-
-  .social-icons {
-    display: flex;
-    gap: 10px;
-
-    span {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #fff;
-      border-radius: 50%;
+;
+  @media (max-width: 768px) {
+    padding: 20px;
+    width: 100%;
+    border: none;
+    & h2 {
+      font-size: 6vw;
     }
   }
 `;
 
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-  border-top: 1px solid #f39c12;
-  padding-top: 60px;
-  width: 80%;
-`;
-
-//--------------------- el carrusel será la section 2 ---------------------
-
-//--------------------- estilos para section 3 ---------------------
-
+//--------------------- estilos para section 2 ---------------------
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  background-color:${({ theme }) => theme.colors.bgPrimary};;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
   padding: 10vw 100px;
   gap: 50px;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 const Section1 = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  flex-direction: row;
   width: 100%;
   border-radius: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const Section2 = styled.div`
@@ -199,14 +193,20 @@ const Section2 = styled.div`
     flex-direction: column;
   }
 `;
+
 const Section3 = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  border-radius: 10px;  
-  
+  border-radius: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
+
 
 const BoxTitle = styled.div`
   display: flex;
@@ -349,6 +349,11 @@ const ContainerDiscover = styled.div`
   width: 100vw;
   justify-content: space-between;
   padding: 10vw 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+  }
 `;
 
 const LeftSection = styled.div`
@@ -356,13 +361,23 @@ const LeftSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  border-left: 5px solid${({ theme }) => theme.colors.textYellow};;
+  border-left: 5px solid ${({ theme }) => theme.colors.textYellow};
   padding-left: 50px;
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+    border-left: 5px solid ${({ theme }) => theme.colors.textYellow};
+  }
 `;
 
 const RightSection = styled.div`
   text-align: right;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    text-align: end;
+    /* display: none; */
+  }
 `;
 
 const SwapText = styled.h1`
@@ -389,6 +404,11 @@ const DiscoverButton = styled(Button)`
   align-items: center;
   margin-bottom: 10px;
   width: 20%;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+    /* display: none; */
+  }
 `;
 
 const RightTextLine1 = styled.div`
@@ -415,7 +435,7 @@ const RightTextLine3 = styled.div`
 
 const Home = () => {
   const router = useRouter();
-  const handleClick=() =>  {
+  const handleClick = () => {
     router.push('/auth')
   }
   return (
@@ -452,8 +472,8 @@ const Home = () => {
             <Title>TODO SEGÚN TUS NECESIDADES E INTERESES</Title>
           </BoxTitle>
           <ProfileBox2>
-          <Name>Jorge Torres</Name>
-          <Message2>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message2>
+            <Name>Jorge Torres</Name>
+            <Message2>¡Claro! Y luego podrías ayudarme a mejorar en Diseño y Redes.</Message2>
             <ButtonGroup>
               <TagButton>Coding</TagButton>
               <TagButton>HTML</TagButton>

@@ -3,6 +3,8 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyling";
 import { Navbar } from "../components/navbar/Navbar";
+import { Footer } from "../components/footer/Footer"
+
 import { useTheme } from "../hooks/useTheme";
 import ProfileCard from "../components/cards/CardMatchProfile";
 
@@ -17,9 +19,9 @@ const SideBar = styled.div`
 `
 
 const Foot = styled.div`
-z-index: 1000;
+    z-index: 1000;
     bottom: 0;
-position: fixed;
+    position: fixed;
     width: 100%;
     height:50px;
     display: flex;
@@ -50,6 +52,7 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                 </SideBar>
                 {children}
             </Pages>
+            <Footer />
             <Foot>
                 <h1>SkillSwap</h1>
             </Foot>

@@ -5,26 +5,37 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100vh;
-  justify-content: center!important;
+  padding: 0 20px; /* Añadido para asegurar margen en móviles */
+  @media (max-width: 768px) {
+    height: auto; /* Ajustar la altura para pantallas pequeñas */
+    padding: 20px;
+    border-radius: 0;
+ 
+  }
 `;
 
 export const DivUserData = styled.div`
-  border-right: none; 
-  width:100%;
+  width: 100%;
   height: inherit;
   text-align: start;
   justify-content: center;
   align-items: center;
-  border-radius: none;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 `;
 
 export const DivUserInput = styled.div`
-  & sub{
+  sub {
     opacity: 0.7;
     color: ${({ theme }) => theme.colors.textWhite};
+  }
+  @media (max-width: 768px) {
+    sub {
+      display: none; /* Oculta los subtextos en pantallas pequeñas */
+    }
   }
 `;
 
@@ -34,19 +45,31 @@ export const DivUserTitle = styled.div`
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  @media (max-width: 768px) {
+    font-size: 1rem; /* Reduce el tamaño del texto en móviles */
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-`
+  @media (max-width: 768px) {
+    gap: 0.3rem; /* Reducir el espacio entre elementos en móviles */
+  }
+`;
+
 export const DivButtonSingUp = styled.div`
   position: absolute;
   bottom: 50px;
   display: flex;
   gap: 20px;
-  border: none;
+  @media (max-width: 768px) {
+    position: static; /* Hace que el botón no sea fijo en móviles */
+    display: flex;
+    justify-content: center; /* Centrar el botón */
+    gap: 10px; /* Reducir el espacio entre botones en móviles */
+    margin-top: 20px;
+  }
 `;
-
 

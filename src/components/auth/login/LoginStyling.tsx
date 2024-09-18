@@ -8,6 +8,14 @@ export const Container = styled.div`
   justify-content: flex-end !important;
   margin: 0;
   border: none;
+
+  @media (max-width: 1070px) {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    align-items: center; /* Alinea el contenido al inicio */
+    justify-content: center; 
+    
+     /* Alinea el contenido al inicio */
+  }
 `;
 
 export const FormWrapper = styled.div`
@@ -26,6 +34,15 @@ export const FormWrapper = styled.div`
   align-items: center;  
   margin: 0;
   position: relative;
+  
+  
+
+  @media (max-width: 1070px) { 
+    border-radius: none;
+    width: 100%;
+    border-radius: 15px; 
+    border: 0;
+  }
 `;
 
 export const Title = styled.h2`
@@ -44,4 +61,8 @@ export const DivButtonLogin = styled.div`
   display: flex;
   gap: 20px;
   border: none;
+
+  @media (max-width: 1070px) { 
+    width: inherit;
+  }
 `;
