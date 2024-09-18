@@ -4,15 +4,14 @@ import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import LinkProfileCard  from "./CardProfile"
 
 const ProfileCardContainer = styled.div`
-  width: 25%;
-  height: 95%;
+  width: 300px !important;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
-  padding-top: 3rem;
+  padding: 1.5rem 1rem;
   overflow: hidden;
-  //border-right: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  border-right: 0.5px solid ${({ theme }) => theme.colors.textTertiary};
 
   @media (max-width: 1024px) {
     width: 80%; /* Ocupa más espacio en pantallas medianas */
@@ -84,7 +83,7 @@ const RatingSection = styled.div`
     font-weight: bold;
   }
 
-  span {
+  p {
     font-size: 1.2rem;
     font-weight: bold;
     margin: 0;
@@ -105,7 +104,6 @@ const StatusSection = styled.div`
   font-size: 0.7rem;
   margin-bottom: 10px;
   gap: 1.5rem;
-  border-left: 4px solid ${({ theme }) => theme.colors.textDark};
   padding-left: 2rem;
 
   .status-item {
@@ -123,19 +121,43 @@ const StatusSection = styled.div`
   }
 
   .rejected {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textRed};
+
+    & p{
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.textRed};
+    }
   }
 
   .accepted {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textBlueDark};
+
+    & p{
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.textBlueDark};
+    }
   }
 
   .pending {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textSecondary};
+
+    & p{
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.textSecondary};
+    }
   }
 
   .inbox {
+    opacity: 0.7;
     color: ${({ theme }) => theme.colors.textYellow};
+
+    & p{
+      font-weight: 500;
+      color: ${({ theme }) => theme.colors.textYellow};
+    }
   }
 `;
 
@@ -149,6 +171,7 @@ const H2StatusSection = styled.h2`
   font-weight: 500;
   margin: 0;
   margin-bottom: 0.1rem;
+  font-size: 1rem;
 `;
 
 interface ProfileCardProps {
@@ -177,36 +200,36 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <H2StatusSection>Rejected</H2StatusSection>
           <div className="status-content">
             <FaTimes className="icon" />
-            <span>
+            <p>
               {rejected.length}: {rejected.join(", ")}
-            </span>
+            </p>
           </div>
         </div>
         <div className="status-item accepted">
           <H2StatusSection>Accepted</H2StatusSection>
           <div className="status-content">
             <FaCheck className="icon" />
-            <span>
+            <p>
               {accepted.length}: {accepted.join(", ")}
-            </span>
+            </p>
           </div>
         </div>
         <div className="status-item pending">
           <H2StatusSection>Pending</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
-            <span>
+            <p>
               {pending.length}: {pending.join(", ")}
-            </span>
+            </p>
           </div>
         </div>
         <div className="status-item inbox">
           <H2StatusSection>Inbox</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
-            <span>
+            <p>
               {pending.length}: {pending.join(", ")}
-            </span>
+            </p>
           </div>
         </div>
       </StatusSection>

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import ProfileCard from "../../components/cards/CardMatchProfile";
 import SliderCard from "../../components/sliders/slide";
 import MatchCard from "../../components/cards/CardMatch";
 import { DivMatch } from "./MatchStyling";
@@ -36,20 +35,11 @@ const Match = () => {
   };
   return (
     <DivMatch>
-      <ProfileCard
-        name="Martín Elías"
-        skills={["JavaScript", "HTML", "Adobe"]}
-        rating={4.1}
-        rejected={["Juliana Mina"]}
-        accepted={["Andrea Mira"]}
-        pending={["Claudio Ponce"]}
-        inbox={0}
-      />
       <SliderCard person={people[currentIndex]} onPass={handlePass} />
       <MatchCard
-        description="Martín Elías"
+        description="Back-end Software Developer | Junior"
         skills={["JavaScript", "HTML", "Adobe"]}
-        rating={4.1}
+        rating={5}
       />
     </DivMatch>
   );

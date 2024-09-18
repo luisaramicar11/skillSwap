@@ -8,7 +8,7 @@ const ProfileHeader = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -27,6 +27,7 @@ const ProfileName = styled.div`
 `;
 
 const Skills = styled.div`
+  opacity: 0.5;
   font-size: 0.8rem;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
@@ -36,17 +37,19 @@ const RatingSection = styled.div`
   justify-content: space-around;
   gap: 1rem;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 20px 0;
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
     font-weight: bold;
   }
 
-  span {
-    font-size: 1.2rem;
+  p {
+    opacity: 0.5;
+    text-align: start;
+    font-size: 1rem;
     font-weight: bold;
     margin: 0;
     color: ${({ theme }) => theme.colors.textOrange};
@@ -55,7 +58,7 @@ const RatingSection = styled.div`
 
 const Stars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 0;
 `;
 
@@ -72,7 +75,7 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
   return (
-    <LinkProfile href="/user" label="USUARIO">
+    <LinkProfile href="/settings" label="CONFIGURACION">
         <ProfileHeader>
           <Avatar
             src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
@@ -92,7 +95,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
         <RatingSection>
           <h1>{rating}</h1>
           <DivRate>
-            <span>Your Rate</span>
+            <p>Your Rate</p>
             <Stars>★★★★☆</Stars>
           </DivRate>
         </RatingSection>
