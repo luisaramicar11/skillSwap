@@ -193,12 +193,12 @@ const SwitchButton = styled.button`
     border: none;
 
     & a:hover {
-      color: ${({ theme }) => theme.colors.textPrimary};
+      color: ${({ theme }) => theme.colors.textSecondary};
     }
   }
 
   @media (max-width: 1070px) {
-    width: 100px; /* Ajusta el tamaño del botón en pantallas pequeñas */
+    width: inherit; /* Ajusta el tamaño del botón en pantallas pequeñas */
     font-size: 10px;
      
   }

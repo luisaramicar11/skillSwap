@@ -40,8 +40,8 @@ export const FormWrapper = styled.div`
   @media (max-width: 1070px) { 
     border-radius: none;
     width: 100%;
-    border-bottom-left-radius:none; 
-    border-radius: 0;
+    border-radius: 15px; 
+    border: 0;
   }
 `;
 
@@ -61,4 +61,8 @@ export const DivButtonLogin = styled.div`
   display: flex;
   gap: 20px;
   border: none;
+
+  @media (max-width: 1070px) { 
+    width: inherit;
+  }
 `;
