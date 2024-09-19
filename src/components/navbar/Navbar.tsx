@@ -8,6 +8,8 @@ import InfoIcon from "@/public/svg/GitHubIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 import SideBarProfile from "../sidebars/SidebarFloatingProfile"
+import LogoutButton from "../Logout"
+import { FaSignOutAlt } from 'react-icons/fa';
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -160,6 +162,7 @@ export const Navbar: React.FC = () => {
             <IconsContainer>
                 <StyledIconNavLink href="/settings" label="CONFIGURA" icon={<SettingsIcon />} />
                 <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
+                <LogoutButton icon={<FaSignOutAlt />} />
             </IconsContainer>
         </NavbarContainer>
     );
