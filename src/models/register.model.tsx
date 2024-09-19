@@ -1,16 +1,24 @@
 export interface IUserRegister {
+    email: string;  
+    password: string;  
     name: string;           
-    lastName: string;       
-    age: string;     
-    image: string | null;   
+    lastName: string;
+    birthdate: Date | null; 
+    description: string;  
+    jobTitle: string;   
+    urlLinkedin: string | null;  
+    urlGithub: string | null;  
+    urlBehance?: string | null; 
+    urlImage: string | null;   
     phoneNumber: string | null;    
-    email: string;          
-    password: string;       
-    jobTitle: string;       
-    description: string;    
-    linkedIn: string | null;      
-    behance?: string | null;       
-    github?: string | null;     
-    createdAt: string;      
+    category: string ;  
+    abilities: string ;         
   }
+
+export interface IUserRegisterResponse {
+    message: string;
+    details: {
+      "text": string;
+    }
+}
   

@@ -5,8 +5,8 @@ import styled from "styled-components";
 // Creación de la interfaz para el componente Select
 interface SelectProps {
   id:string
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   className?: string;
   disabled?: boolean;
   ariaLabel: string;
@@ -67,7 +67,7 @@ const Select: React.FC<SelectProps> = ({
         -- Selecciona una opción --
       </Option>
       <Option value="desarrollo">Desarrollo</Option>
-      <Option value="marketing">Marketing y Branding</Option>
+      <Option value="marketing">Marketing</Option>
     </SelectStyled>
   );
 };

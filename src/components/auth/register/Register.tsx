@@ -26,49 +26,83 @@ export default function RegisterPage() {
   const { loading, error } = useSelector((state: RootState) => state.auth);
 
   const [form, setForm] = useState({
-    name: "",
-    lastName: "",
-    age: "",
-    image: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    jobTitle: "",
-    description: "",
-    linkedIn: "",
-    behance: "",
-    github: "",
-    createdAt: ""
+    email: "", 
+    password: "",  
+    name: "",            
+    lastName: "", 
+    birthdate: null, 
+    description: "",  
+    jobTitle: "",    
+    urlLinkedin: "",  
+    urlGithub: "",  
+    urlBehance: "",  
+    urlImage: "",   
+    phoneNumber: "",    
+    category: "",  
+    abilities: "", 
   });
 
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [skills, setSkills] = useState<string>("");
   const [currentStep, setCurrentStep] = useState(0); // Controla la vista actual del carrusel
 
-  // Manejar cambios en los inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ 
+
+  // Manejar el select
+const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const { name, value } = event.target;
+  setSelectedOption(value);
+  setForm({
+    ...form,
+    [name]: value,
+  });
+};
+
+// Manejar el textarea
+const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const { name, value } = event.target;
+  setSkills(value);
+  setForm({
+    ...form,
+    [name]: value,
+  });
+};
+
+   // Manejar cambios en los inputs
+   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
 
-  // Manejar el select
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
-
-  // Manejar el textarea
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setSkills(event.target.value);
-  };
-
   // Manejar el envío del formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (currentStep < 6) {
+      // Solo procesa el envío si estás en el último paso
+      return;
+    }
+
+    //Foreach con console.log de cada campo del form
+    console.log('Email:', form.email);
+    console.log('Contraseña:', form.password);
+    console.log('Nombre:', form.name);
+    console.log('Apellido:', form.lastName);
+    console.log('Descripción:', form.description);
+    console.log('Puesto:', form.jobTitle);
+    console.log('Categoría:', form.category);
+    console.log('Habilidades:', form.abilities);
+    console.log('Fecha de nacimiento:', form.birthdate);
+    console.log('URL LinkedIn:', form.urlLinkedin);
+    console.log('URL Github:', form.urlGithub);
+    console.log('URL Behance:', form.urlBehance);
+    console.log('URL Imagen:', form.urlImage);
+    console.log('Número de teléfono:', form.phoneNumber);
+
     // Validación básica de campos
-    if (!form.email || !form.name || !form.password || !form.lastName || !form.age || !form.description || !form.jobTitle) {
+    if (!form.email || !form.name || !form.password || !form.lastName || !form.description || !form.jobTitle || !form.category || !form.abilities){
       toast.error('Por favor, completa todos los campos.');
       return;
     }
@@ -76,14 +110,22 @@ export default function RegisterPage() {
     try {
       await dispatch(registerUser(form)).unwrap();
       toast.success('Registro exitoso!');
-    } catch (err: any) {
-      if (err?.message) {
-        toast.error(`Registro fallido: ${err.message}`);
+    } catch (errorSubmit: any) {
+      if (errorSubmit?.message) {
+        toast.error(`Registro fallido: ${errorSubmit.message}`);
       } else {
         toast.error('Registro fallido. Inténtalo de nuevo.');
       }
     }
   };
+
+    // Convierte una fecha a formato YYYY-MM-DD
+const formatDate = (date: Date | string) => {
+  if (typeof date === 'string') {
+    return date; // Suponiendo que ya está en formato correcto
+  }
+  return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
+};
 
   // Renderizar el input actual basado en la vista
   const renderStep = () => {
@@ -157,26 +199,26 @@ export default function RegisterPage() {
               <Title>Tus datos</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="age" text="Edad" />
+              <Label htmlFor="birthdate" text="Fecha de nacimiento" />
               <InputAuth
-                type="text"
-                id="age" 
-                name="age"
-                placeholder="Escribe tu edad..."
-                value={form.age}
+                type="date"
+                id="birthdate" 
+                name="birthdate"
+                placeholder="Escribe tu fecha de nacimiento..."
+                value={form.birthdate ? formatDate(form.birthdate) : ""}
                 onChange={handleChange}
                 required
-                autoComplete="age" 
+                autoComplete="birthdate" 
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="image" text="Foto de Perfil" />
+              <Label htmlFor="urlImage" text="Foto de Perfil" />
               <InputAuth
                 type="text"
-                id="image" 
-                name="image"
+                id="urlImage" 
+                name="urlImage"
                 placeholder="Escribe la URL de tu Imagen..."
-                value={form.image}
+                value={form.urlImage}
                 onChange={handleChange}
                 autoComplete="url"
               />
@@ -190,29 +232,29 @@ export default function RegisterPage() {
               <Title>Tus habilidades</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="area" text="Selecciona una categoría" />
+              <Label htmlFor="category" text="Selecciona una categoría" />
               <Select
-                id="area" 
-                value={selectedOption}
+                id="category" 
+                value={selectedOption} 
                 onChange={handleSelectChange}
                 ariaLabel="Select area"
-                name="area"
+                name="category"
                 required
                 autoComplete="category"
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="skills" text="Habilidades" />
+              <Label htmlFor="abilities" text="Skills" />
               <TextArea
-                id="skills"
+                id="abilities"
                 value={skills}
                 onChange={handleTextAreaChange}
                 ariaLabel="Escribe tus habilidades"
-                name="skills"
+                name="abilities"
                 placeholder="Escribe aquí tus habilidades separadas por coma (máx. 200 caracteres) ..."
                 required
                 maxLength={200}
-                autoComplete="skills"
+                autoComplete="abilities"
               />
               <sub>{skills.length} / 200 caracteres</sub> {/* Mostrar contador de caracteres */}
             </DivUserInput>
@@ -265,19 +307,19 @@ export default function RegisterPage() {
                 id="phoneNumber" 
                 name="phoneNumber"
                 placeholder="Escribe tu número de teléfono..."
-                value={form.behance}
+                value={form.phoneNumber}
                 onChange={handleChange}
                 autoComplete="phone-number"
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="linkedIn" text="LinkedIn" />
+              <Label htmlFor="urlLinkedin" text="LinkedIn" />
               <InputAuth
                 type="text"
-                id="linkedIn" 
-                name="linkedIn"
+                id="urlLinkedin" 
+                name="urlLinkedin"
                 placeholder="URL de tu Perfil de LinkedIn..."
-                value={form.linkedIn}
+                value={form.urlLinkedin}
                 onChange={handleChange}
                 autoComplete="url"
               />
@@ -291,25 +333,25 @@ export default function RegisterPage() {
               <Title>Contacto</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="behance" text="Behance" />
+              <Label htmlFor="urlBehance" text="Behance" />
               <InputAuth
                 type="text"
-                id="behance" 
-                name="behance"
+                id="urlBehance" 
+                name="urlBehance"
                 placeholder="URL de tu Perfil de Behance..."
-                value={form.behance}
+                value={form.urlBehance}
                 onChange={handleChange}
                 autoComplete="url"
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="github" text="GitHub" />
+              <Label htmlFor="urlGithub" text="GitHub" />
               <InputAuth
                 type="text"
-                id="github" 
-                name="github"
+                id="urlGithub" 
+                name="urlGithub"
                 placeholder="URL de tu Perfil de GitHub..."
-                value={form.github}
+                value={form.urlGithub}
                 onChange={handleChange}
                 autoComplete="url"
               />
@@ -333,7 +375,7 @@ export default function RegisterPage() {
                 ATRÁS
               </ButtonSingUp>
             )}
-            {currentStep < 6 ? (
+            {currentStep <= 6 ? (
               <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
                 SIGUIENTE
               </ButtonSingUp>

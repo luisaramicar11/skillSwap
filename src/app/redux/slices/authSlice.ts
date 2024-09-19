@@ -1,7 +1,6 @@
-"use client";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthState, IUserLoginRequest, IUserLoginResponse } from "../../../models/login.model";
-import { IUserRegister } from "../../../models/register.model"
+import { IUserRegister } from "../../../models/register.model";
 
 // Estado inicial
 const initialState: AuthState = {
@@ -12,16 +11,19 @@ const initialState: AuthState = {
 };
 
 // Acción asíncrona para iniciar sesión
-export const loginUser = createAsyncThunk(
+export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>(
   "auth/loginUser",
-  async (credentials: IUserLoginRequest, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://skillswap-hugegnd4ewbse8ah.eastus-01.azurewebsites.net/api/UsersPost/login",
+        "https://skillswapriwi.azurewebsites.net/api/Auth/login",
         {
           method: "POST",
           headers: {
+            "accept": "*/*",
             "Content-Type": "application/json",
+            // Agregar token aquí si es necesario para la autenticación
+            // "Authorization": `Bearer ${localStorage.getItem('authToken')}`
           },
           body: JSON.stringify(credentials),
         }
@@ -30,29 +32,27 @@ export const loginUser = createAsyncThunk(
       if (!response.ok) {
         // Si la respuesta no es correcta (4xx o 5xx)
         const errorData = await response.json();
-        return rejectWithValue(errorData);
+        return rejectWithValue(errorData.error.message || "An error occurred");
       }
 
       const data = await response.json();
       return data;
     } catch (error: any) {
       // Si hay un error de red u otro problema
-      return rejectWithValue(error);
+      return rejectWithValue(error.message || "An error occurred");
     }
   }
 );
 
 // Acción asíncrona para registro
-export const registerUser = createAsyncThunk(
+export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
   "auth/registerUser",
-  async (
-    newUser:IUserRegister,
-    { rejectWithValue }
-  ) => {
+  async (newUser, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswap-hugegnd4ewbse8ah.eastus-01.azurewebsites.net/api/UsersPost", {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost", {
         method: "POST",
         headers: {
+          "accept": "*/*",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newUser),
@@ -61,18 +61,17 @@ export const registerUser = createAsyncThunk(
       if (!response.ok) {
         // Si la respuesta no es exitosa (4xx o 5xx)
         const errorData = await response.json();
-        return rejectWithValue(errorData);
+        return rejectWithValue(errorData.message || "An error occurred");
       }
 
       const data = await response.json();
       return data;
     } catch (error: any) {
       // Si hay un error de red u otro problema
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message || "An error occurred");
     }
   }
 );
-
 
 // Slice de Redux
 const authSlice = createSlice({
@@ -80,40 +79,40 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logoutUser: (state) => {
-        state.user = null;
-        state.isAuthenticated = false;
-        state.loading = false;
-        state.error = null;
+      state.user = null;
+      state.isAuthenticated = false;
+      state.loading = false;
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
     builder
-     .addCase(loginUser.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-     .addCase(loginUser.fulfilled, (state, action: PayloadAction<IUserLoginResponse>) => {
+      .addCase(loginUser.fulfilled, (state, action: PayloadAction<IUserLoginResponse>) => {
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
       })
-     .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
       })
-     .addCase(registerUser.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-     .addCase(registerUser.fulfilled, (state, action: PayloadAction<IUserLoginResponse>) => {
+      .addCase(registerUser.fulfilled, (state, action: PayloadAction<IUserLoginResponse>) => {
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
       })
-     .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = action.payload;
-     })
+      });
   }
 });
 
