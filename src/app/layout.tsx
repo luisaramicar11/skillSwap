@@ -4,6 +4,7 @@ import ClientLayout from "./ClientLayout";
 import { Providers } from './Providers';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
+import RouteHandler from './RootHandler';
 
 const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -21,9 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={urbanist.className}>
         <Providers>
-          <ClientLayout>
+        <RouteHandler>
             {children}
-          </ClientLayout>
+          </RouteHandler>
         </Providers>
         <ToastContainer />
       </body>
