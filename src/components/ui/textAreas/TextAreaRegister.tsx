@@ -5,8 +5,8 @@ import styled from "styled-components";
 // Creación de la interfaz para el componente TextArea
 interface TextAreaProps {
   id:string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
   disabled?: boolean;
   ariaLabel: string;

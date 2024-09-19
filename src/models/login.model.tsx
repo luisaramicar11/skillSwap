@@ -4,13 +4,18 @@ export interface IUserLoginRequest {
   }
 
 export interface IUserLoginResponse {
-    id: number;
+    message: string;
+    data:{
+      id: number;
+    role: number;
     email: string;
     token: string;
+    }
+    
   }
   
-  export interface AuthState {
-    user: IUserLoginResponse | null;
+  export interface AuthState {  
+    user: IUserLoginResponse | null; // es la respuesta del login
     isAuthenticated: boolean;
     loading: boolean;
     error: string | null;

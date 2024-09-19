@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '@/src/app/redux/slices/authSlice'; 
 import { toast } from 'react-toastify';
 import { AppDispatch } from '@/src/app/redux/store';
-import styled from 'styled-components';
 import InputSingUp from '../../../components/ui/inputs/InputAuth';
 import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 import Label from '../../ui/labels/LabelAuth';
@@ -38,6 +37,7 @@ export default function LoginPage() {
   // Manejar el submit del formulario de login
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    console.log("entre")
 
     const { email, password } = form;
 
@@ -49,7 +49,9 @@ export default function LoginPage() {
     const resultAction = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(resultAction)) {
-      const token = resultAction.payload?.access_token;
+      console.log(resultAction.payload)
+      const token = resultAction.payload?.data.token;
+      console.log(token)
       if (token) {
         toast.success('Login exitoso!');
         localStorage.setItem('authToken', token);
