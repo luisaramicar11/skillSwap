@@ -1,26 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import LinkProfile from "../../components/ui/links/NavLinks";
+import LinkProfile from "../ui/links/NavLinks";
 
 const ProfileHeader = styled.div`
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+  gap: 1rem;
+  justify-content: start;
   align-items: center;
   margin-bottom: 10px;
   padding-bottom: 20px;
+  padding-left: 0.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const Avatar = styled.img`
-  width: 5rem;
-  height: 5rem;
-  border-radius: 8%;
-  margin-right: 10px;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
 `;
 
 const ProfileName = styled.div`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.8rem;
   color: ${({ theme }) => theme.colors.textDark};
@@ -28,7 +28,7 @@ const ProfileName = styled.div`
 
 const Skills = styled.div`
   opacity: 0.5;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
@@ -40,7 +40,7 @@ const RatingSection = styled.div`
   margin: 20px 0;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
     font-weight: bold;
@@ -49,7 +49,7 @@ const RatingSection = styled.div`
   p {
     opacity: 0.5;
     text-align: start;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin: 0;
     color: ${({ theme }) => theme.colors.textOrange};
@@ -58,7 +58,7 @@ const RatingSection = styled.div`
 
 const Stars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
 `;
 
@@ -73,7 +73,7 @@ interface ProfileCardProps {
   rating: number;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
+const CardProfileLink: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
   return (
     <LinkProfile href="/settings" label="CONFIGURACION">
         <ProfileHeader>
@@ -91,7 +91,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
             {/* ponerle un href con link*/}
           </div>
         </ProfileHeader>
-
         <RatingSection>
           <h1>{rating}</h1>
           <DivRate>
@@ -103,4 +102,4 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
   );
 };
 
-export default ProfileCard;
+export default CardProfileLink;

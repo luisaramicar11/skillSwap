@@ -8,26 +8,27 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   height: max-content;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 1rem 1rem 2rem 1rem;
 
-  @media (max-width: 1024px) {
-    width: 80%; /* Ocupa el 80% en pantallas pequeñas */
-    height: auto;
+  @media (min-width: 565px) and (max-width: 1024px) {
     margin-top: 2.5rem;
   }
 
-  @media (min-width: 1024px) {
-    width: 20%; /* Mantén el tamaño fijo en pantallas grandes */
+  @media (min-width: 548px) and (max-width: 564px) {
+    margin: 0 !important;
+    margin-right: 1rem !important;
+    margin-top: 1rem !important;
   }
 
-  @media (max-width: 797px) {
-    margin: 0rem;
-    margin-bottom: 2rem;
-    width: 20%; /* Mantén el tamaño fijo en pantallas grandes */
+  @media (max-width: 547.5px) {
+    margin: 0 !important;
+    margin-bottom: 2rem !important;
+    margin-right: 1rem !important;
+    width: 100%; /* Ancho completo en pantallas pequeñas */
   }
 `;
 
@@ -49,19 +50,9 @@ const DivCardContent = styled.div`
   }
 `;
 
-// Estilo para el título
-const Title = styled.h3`
-  display: flex;
-  text-align: start;
-  font-size: 1.3rem;
-  color: orange;
-  padding: 0;
-  margin: 0.5rem;
-  padding-left: 0.5rem;
-`;
-
 // Sección de conexiones
 const Connections = styled.div`
+  text-align: end;
   padding: 1rem;
   margin-bottom: 0.5rem;
   font-size: 0.6rem;
@@ -87,17 +78,17 @@ const RatingSection = styled.div`
 `;
 
 const RatingStars = styled.div`
-  color: #f5c518;
+  color: ${({ theme }) => theme.colors.textYellow};
   font-size: 1.2rem;
 `;
 
 const Description = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: end;
+  text-align: end;
   padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 `;
 
 const SkillsSection = styled.div`
@@ -130,30 +121,8 @@ const P = styled.p`
 `;
 
 const Star = styled.span`
-  color: gold;
+  color: ${({ theme }) => theme.colors.textYellow};;
   font-size: 20px;
-`;
-
-const DivTitle = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  gap: 0;
-  justify-content: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
-
-  @media (min-width: 1440px) {
-    & div{
-      width: 300px !important; /* Mantén el tamaño fijo en pantallas grandes */
-    }
-  }
-
-  @media (min-width: 320px) {
-    & div{
-      width: 200px; /* Mantén el tamaño fijo en pantallas grandes */
-    }
-  }
 `;
 
 const DivConnections = styled.div`
@@ -181,12 +150,6 @@ interface CardProps {
 const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
   return (
     <CardContainer>
-      <DivTitle>
-        <div>
-          <Title>Match</Title>
-        </div>
-      </DivTitle>
-
       <DivCardContent>
         <DivConnections>
           <Connections>

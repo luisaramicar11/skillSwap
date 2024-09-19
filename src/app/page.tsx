@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Carousel from "../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
 import { Baskervville } from "next/font/google";
+import { Footer } from "../components/footer/Footer";
 
 const baskervville = Baskervville({
   weight: '400',
@@ -12,6 +13,7 @@ const baskervville = Baskervville({
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
+  padding: 54px 0;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   flex-direction: column;
@@ -24,6 +26,8 @@ const HomeContainer = styled.div`
 const Logo = styled.h1`
   background: ${({ theme }) => theme.colors.gradientText};
   font-size: 12vw;
+  margin-top: 0.57em;
+  margin-bottom: 0.4em;
   font-weight: bold;
   -webkit-background-clip: text;
   background-clip: text;
@@ -511,6 +515,7 @@ const Home = () => {
           <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
+      <Footer />
     </HomeContainer>
   );
 };

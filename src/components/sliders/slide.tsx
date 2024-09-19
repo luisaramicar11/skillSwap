@@ -16,7 +16,8 @@ interface SliderCardProps {
 const CardContainer = styled.div`
   width: 50%;
   height: 95%;
-  margin: 1rem 0;
+  min-height: 450px !important;
+  margin: 1rem 0 1rem 1rem;
   border-radius: 0.5rem;
   position: relative;
   color: white;
@@ -47,9 +48,16 @@ const CardContainer = styled.div`
     margin-left: 1rem;
     margin-top: 2.5rem;
   }
+
+  @media (max-width: 547.5px) {
+    margin-left: 0 !important;
+    margin-right: 1rem !important;
+    width: 100%; /* Ancho completo en pantallas pequeñas */
+  }
 `;
 
 const Image = styled.img`
+  min-height: 450px;
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;

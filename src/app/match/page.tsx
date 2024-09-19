@@ -4,6 +4,7 @@ import { useState } from "react";
 import SliderCard from "../../components/sliders/slide";
 import MatchCard from "../../components/cards/CardMatch";
 import { DivMatch } from "./MatchStyling";
+import ProfileCard from "@/src/components/cards/CardMatchProfile";
 
 // Tipado de la persona
 interface Person {
@@ -35,6 +36,15 @@ const Match = () => {
   };
   return (
     <DivMatch>
+      <ProfileCard 
+        name="Martín Elías"
+        skills={["JavaScript", "HTML", "Adobe"]}
+        rating={4.1}
+        rejected={["Juliana Mina"]}
+        accepted={["Andrea Mira"]}
+        pending={["Claudio Ponce"]}
+        inbox={["Carolina Rojas"]}
+        />
       <SliderCard person={people[currentIndex]} onPass={handlePass} />
       <MatchCard
         description="Back-end Software Developer | Junior"
