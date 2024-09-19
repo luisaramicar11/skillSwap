@@ -156,7 +156,6 @@ export const Navbar: React.FC = () => {
             <IconsContainer>
                 <StyledIconNavLink href="/settings" label="CONFIGURA" icon={<SettingsIcon />} />
                 <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
-                <LogoutButton icon={<FaSignOutAlt />} />
             </IconsContainer>
         </NavbarContainer>
     );
