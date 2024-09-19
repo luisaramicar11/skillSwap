@@ -5,7 +5,8 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
-import BackButton from "@/src/components/ui/buttons/ButtonBackToHome";
+import 
+BackButton from "@/src/components/ui/buttons/ButtonBackToHome";
 
 // Texto de cambio
 
