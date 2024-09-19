@@ -1,49 +1,72 @@
 import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
-import CardProfileLink from "./CardProfileLink";
+import CardProfileLink from "../cards/CardProfileLink";
 
-const ProfileCardContainer = styled.div`
-  background: ${({ theme }) => theme.colors.bgSidebar};
-  width: 100%;
-  height: 95%;
-  min-height: 450px !important;
-  display: flex;
-  margin: 1rem 0rem 2rem 1rem;
-  flex-direction: column;
-  padding: 1rem;
-  padding-top: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 0.5px solid ${({ theme }) => theme.colors.textTertiary};
+const ProfileSidebarContainer = styled.div`
+    z-index: -1;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background: ${({ theme }) => theme.colors.bgMainOpacity};
+    width: 100%;
+    height: 100%;
+    transition: 1s ease-in-out;
+    animation: appear 1s ease-in-out;
 
-  @media (max-width: 768px) {
-    display: none !important;
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    margin-top: 2.5rem !important;
+    @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
-const ProfileHeader = styled.div`
+const ProfileSidebarContent = styled.div`
+  z-index: 1;
+  background: ${({ theme }) => theme.colors.bgSidebar};
+  width: 300px !important;
+  height: 75%;
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-left: 20px;
+  overflow: hidden;
+  border-right: 0.5px solid ${({ theme }) => theme.colors.textWhite};
+  animation: move-right 1s ease-in-out;
+
+    @keyframes move-right {
+    from {
+      translate: -509px;
+    }
+    to {
+      translate: 0;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 80%; /* Ocupa más espacio en pantallas medianas */
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+  }
 `;
 
 const StatusSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   margin-bottom: 10px;
-  gap: 1.5rem;
-  padding-left: 1.5rem;
+  gap: 1rem;
+  padding-left: 2rem;
 
   .status-item {
     display: flex;
@@ -56,7 +79,7 @@ const StatusSection = styled.div`
   }
 
   .icon {
-    margin-right: 10px;
+    margin-right: 8px;
   }
 
   .rejected {
@@ -108,7 +131,39 @@ const H2StatusSection = styled.h2`
   font-size: 0.9rem;
 `;
 
-interface ProfileCardProps {
+const ModalCloseButton = styled.button`
+  z-index: 1;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.colors.bgSidebar};
+  color: ${({ theme }) => theme.colors.textDark};
+  border: none;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 330px;
+
+  & p{
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+interface ProfileSidebarProps {
   name: string;
   skills: string[];
   rating: number;
@@ -116,19 +171,26 @@ interface ProfileCardProps {
   accepted: string[];
   pending: string[];
   inbox: string[];
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   name,
   skills,
   rating,
   rejected,
   accepted,
   pending,
-  inbox
+  inbox,
+  isOpen,
+  onClose,
 }) => {
+  if (!isOpen) return null;
   return (
-    <ProfileCardContainer>
+    <ProfileSidebarContainer>
+      <ProfileSidebarContent>
+      <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
       <CardProfileLink name={name} skills={skills} rating={rating} />
       <StatusSection>
         <div className="status-item rejected">
@@ -168,8 +230,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           </div>
         </div>
       </StatusSection>
-    </ProfileCardContainer>
+      </ProfileSidebarContent>
+    </ProfileSidebarContainer>
   );
 };
 
-export default ProfileCard;
+export default ProfileSidebar;

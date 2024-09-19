@@ -8,14 +8,12 @@ export const DivMatch = styled.div`
   width: 100%;
   flex-wrap: wrap;
   overflow: hidden;
-  margin: 0;
+  margin: 54px 0;
   padding: 0;
-  gap: 0;
+  gap: 1rem;
 
   @media (min-width: 760px) {
     gap: 0;
-    flex-direction: row;
-    justify-content: space-around; // Distribuye el espacio uniformemente
   }
 
   @media (min-width: 1024px) {
@@ -27,14 +25,21 @@ export const DivMatch = styled.div`
   // Estilos para el primer hijo
   > :first-child {
     flex: 1; // Hace que cada componente hijo ocupe el mismo espacio
-    max-width: 70%; // Limita el ancho máximo de cada componente
-    min-width: 300px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
+    max-width: 33%; // Limita el ancho máximo de cada componente
+    min-width: 200px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
+  }
+
+  // Estilos para el primer hijo
+  > :nth-child(2) {
+    flex: 1; // Hace que cada componente hijo ocupe el mismo espacio
+    max-width: 33%; // Limita el ancho máximo de cada componente
+    min-width: 250px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
   }
 
   // Estilos para el último hijo
   > :last-child {
     flex: 1; // Hace que cada componente hijo ocupe el mismo espacio
-    max-width: 30%; // Limita el ancho máximo de cada componente
-    min-width: 150px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
+    max-width: 33%; // Limita el ancho máximo de cada componente
+    min-width: 250px; // Establece un ancho mínimo para evitar que los componentes se hagan demasiado pequeños
   }
 `;

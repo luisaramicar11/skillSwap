@@ -6,9 +6,14 @@ import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
+import SideBarProfile from "../sidebars/SidebarFloatingProfile"
 
 // Styled components
 const NavbarContainer = styled.div`
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index:10000;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};
     display: flex;
@@ -22,22 +27,34 @@ const NavbarContainer = styled.div`
     }
 `;
 
+const SideBarContainer = styled.div`
+    position: fixed;
+    height: 75%;
+    width: 100%;
+    z-index: 10000;
+    left: 20px;
+    top: 75px;
+`;
+
 const SidebarLink = styled.p`
     font-weight: 300;
     font-style: italic;
     display: flex;
+    align-items: center;
     font-size: 14px;
     width: max-content;
-    transition: 0.4s ease-in-out;
+    transition: 0.4s;
     gap: 10px;
 
-    & span {
-        text-decoration: underline;
+    & small {
+        margin: 0;
+        padding: 0;
     }
 
     &:hover, :focus, :active {
-        transition: 0.4s ease-in-out;
-        font-weight: 700;
+        transition: 0.4s;
+        font-weight: 600;
+        border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
     }
 
     @media (max-width: 768px) {
@@ -45,9 +62,10 @@ const SidebarLink = styled.p`
     }
 `;
 
-const SidebarLinkContainer = styled.div`
+const SidebarLinkContainer = styled.li`
     width: 100px;
     cursor: pointer;
+    list-style: none;
 `;
 
 const IconsContainer = styled.div`
@@ -108,22 +126,37 @@ const Line = styled.div`
 export const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
     return (
         <NavbarContainer>
+            <SideBarContainer>
+                <SideBarProfile name="Martín Elías"
+                    skills={["JavaScript", "HTML", "Adobe"]}
+                    rating={4.1}
+                    rejected={["Juliana Mina"]}
+                    accepted={["Andrea Mira"]}
+                    pending={["Claudio Ponce"]}
+                    inbox={["Carolina Rojas"]}
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                    />
+            </SideBarContainer>
             <SidebarLinkContainer>
-                <SidebarLink>+ <span>¿Quieres ver tu información?</span></SidebarLink>
+                <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
             </SidebarLinkContainer>
-
             <HamburgerMenu onClick={toggleMenu}>
                 <Line />
                 <Line />
                 <Line />
             </HamburgerMenu>
-
             <NavList isOpen={isOpen}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
                     <StyledNavLink href="/" label="INICIO" />

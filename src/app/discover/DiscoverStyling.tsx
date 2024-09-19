@@ -25,4 +25,5 @@ export const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin: 54px 0;
 `;

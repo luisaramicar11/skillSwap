@@ -4,7 +4,7 @@ import React from 'react';
 import { ISkillTagProps } from '@/src/models/skillTag.model';
 
 // Estilos de la etiqueta SkillTag
-const SkillTagContainer = styled.p`
+const SkillTagContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -12,7 +12,7 @@ const SkillTagContainer = styled.p`
 
     > :nth-child(2) {
         margin-left: 2rem;
-  }
+}
 `;
 
 const SkillTag = styled.p`

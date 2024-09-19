@@ -19,6 +19,8 @@ export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
         bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgMainOpacity:'#0000007f',
+        bgSidebar: '#ffffff',
         bgPink: '#FFF4F4',
         bgPrimary: '#FFFFFF',               
         textPrimary: '#ffffff',
@@ -55,6 +57,8 @@ export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'rgba(255, 255, 255, 0.025)',
         bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgMainOpacity:'#0000007f',
+        bgSidebar: 'rgba(255, 255, 255)',
         bgPrimary: '#222222',   
         bgPink: '#FFF4F4',            
         textPrimary: '#222222',             
