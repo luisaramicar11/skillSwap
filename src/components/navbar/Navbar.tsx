@@ -151,7 +151,6 @@ export const Navbar: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('INICIO')}>
                     <StyledNavLink href="/" label="INICIO" />
                 </NavItem>
-               
             </NavList>
 
             <IconsContainer>

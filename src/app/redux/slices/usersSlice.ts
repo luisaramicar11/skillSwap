@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../../models/admin.model";
+import { IUser } from "../../../models/user.model";
 
 // Estado inicial
 interface UsersState {
@@ -19,7 +19,7 @@ export const fetchUsers =  createAsyncThunk<IUser[], void, { rejectValue: string
   "users/fetchUsers",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://api.escuelajs.co/api/v1/users");
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersGet");
       if (!response.ok) {
         const errorData = await response.json();
         return rejectWithValue(errorData.message);

@@ -46,10 +46,12 @@ export default function LoginPage() {
     if (loginUser.fulfilled.match(resultAction)) {
       const token = resultAction.payload?.data.token;
       const role = resultAction.payload?.data.role; // Obtienes el role aquí
+      const idUser = resultAction.payload?.data.id;
 
       if (token) {
         toast.success('Login exitoso!');
         localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', idUser.toString());  // Guardar ID como string
         document.cookie = `authToken=${token}; path=/;`;
         console.log(localStorage.getItem('authToken'));
 

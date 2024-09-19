@@ -1,6 +1,7 @@
 "use client";
 import styled from "styled-components";
 import WidgetContainer from '../../WidgetContainer/WidgetContainer';
+import SkillTag from "../../ui/skillTag/skillTag";
 
 //Container for the whole page.tsx
 const PageContainer = styled.section`
@@ -122,7 +123,7 @@ const BgImageDiv = styled.div`
 `;
 
 // Componente principal de la página de inicio
-const UserSkills = () => {
+const UserSkills: React.FC<ISkillContainerProps> = ({ skills }) => {
   return (
     <PageContainer>
       <Banner>
@@ -134,10 +135,8 @@ const UserSkills = () => {
         <SkillsPageContainer>
           <PageContent>
             <PageBody>
+              <SkillTag skillsArray={skills} />
             </PageBody>
-            <PageAside>
-              <BgImageDiv />
-            </PageAside>
           </PageContent>
         </SkillsPageContainer>
       </PageContentContainer>
@@ -146,3 +145,7 @@ const UserSkills = () => {
 };
 
 export default UserSkills;
+
+interface ISkillContainerProps {
+  skills: string[]; // Añadido para las habilidades
+}
