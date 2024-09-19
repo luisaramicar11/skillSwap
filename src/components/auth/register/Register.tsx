@@ -232,7 +232,7 @@ const formatDate = (date: Date | string) => {
               <Title>Tus habilidades</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="category" text="Selecciona una categoría" />
+              <Label htmlFor="category" text="Selecciona una comunidad" />
               <Select
                 id="category" 
                 value={selectedOption} 

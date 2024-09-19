@@ -23,7 +23,7 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
             "accept": "*/*",
             "Content-Type": "application/json",
             // Agregar token aquí si es necesario para la autenticación
-            // "Authorization": `Bearer ${localStorage.getItem('authToken')}`
+             "Authorization": `Bearer ${localStorage.getItem('authToken')}`
           },
           body: JSON.stringify(credentials),
         }
@@ -83,6 +83,8 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.loading = false;
       state.error = null;
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId"); 
     }
   },
   extraReducers: (builder) => {
@@ -95,10 +97,12 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        localStorage.setItem("authToken", action.payload.data.token);
+        localStorage.setItem("userId", action.payload.data.id.toString()); 
       })
-      .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -111,7 +115,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   }
 });

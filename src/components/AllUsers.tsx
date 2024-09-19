@@ -1,18 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Card from "../components/cards/CardDiscover"; // Ajusta la ruta según tu estructura
+import Card from "../components/cards/CardDiscover";
 
-// Interfaz para los props de la Card
-interface CardProps {
+interface User {
   title: string;
   imageUrl: string;
   rating: number;
   skills: string[];
 }
 
-// Datos de ejemplo
-const users = [
+interface AllUsersProps {
+  users: User[];
+}
+
+export const users = [
   {
     title: "John Doe",
     imageUrl:
@@ -44,7 +46,6 @@ const users = [
   // Agrega más usuarios...
 ];
 
-// Estilos del contenedor de la lista de tarjetas
 const CardListContainer = styled.div`
   display: grid;
   justify-items: center;
@@ -80,7 +81,7 @@ const DivContainer = styled.div`
   margin-top: 3rem;
 `;
 
-const CardsWithPagination = () => {
+const AllUsers: React.FC<AllUsersProps> = ({ users }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 10; // Número de tarjetas por página
 
@@ -124,4 +125,4 @@ const CardsWithPagination = () => {
   );
 };
 
-export default CardsWithPagination;
+export default AllUsers; // Exporta solo AllUsers

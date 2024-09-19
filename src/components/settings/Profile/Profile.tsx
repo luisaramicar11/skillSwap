@@ -1,8 +1,14 @@
 "use client";
 import styled from "styled-components";
 import WidgetContainer from '../../WidgetContainer/WidgetContainer';
+import React, { useEffect, useState } from "react";
+import { IUser } from "../../../models/user.model";
 
-//Container for the whole page.tsx
+interface BannerImageDivProps {
+  urlImage: string;
+}
+
+// Container for the whole page.tsx
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
@@ -47,7 +53,7 @@ const PageContainer = styled.section`
   }
 `;
 
-//Container for page.tsx content
+// Container for page.tsx content
 const PageContentContainer = styled.article`
   width: 100%;
   height: 100%;
@@ -56,13 +62,13 @@ const PageContentContainer = styled.article`
   margin: 20px;
 `;
 
-//Containers for banner
+// Containers for banner
 const Banner = styled.article`
   top: 0;
   padding: 20px;
   position: absolute;
   width: 100%;
-  height:200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
@@ -72,10 +78,9 @@ const BannerBody = styled.div`
     width: 1000px !important;
     display: flex;
     justify-content: space-between;
-`
+`;
 
 const BannerImageDiv = styled.div`
-  background-image: url("https://imagenes.eltiempo.com/files/image_414_541/uploads/2024/06/18/66720e3f4feb4.png");
   background-size: cover;
   width: 200px;
   height: 200px;
@@ -84,7 +89,7 @@ const BannerImageDiv = styled.div`
   border: solid 0.5px ${({ theme }) => theme.colors.textBlack};
 `;
 
-//Container for INFO content
+// Container for INFO content
 const ProfilePageContainer = styled.div`
   padding-top: 200px;
   width: 100%;
@@ -108,7 +113,7 @@ const PageBody = styled.div`
   gap: 20px;
 `;
 
-//Containers for Widgets and Aside
+// Containers for Widgets and Aside
 const WidgetContent = styled.div`
   padding: 20px 30px;
   width: max-content;
@@ -131,19 +136,18 @@ const PageAside = styled.aside`
   margin: 0;
   margin-top: 50px;
 
-  & div{
+  & div {
     width: 200px !important;
   }
 `;
 
-// Componente principal de la página de inicio
-const UserProfile = () => {
+const UserProfile = ({ id, name, lastName, urlImage, jobTitle, description, birthdate, email, phoneNumber, category, abilities, abilityCategory, urlLinkedin, urlGithub, urlBehance, roleName }:IUser) => {
   return (
     <PageContainer>
       <Banner>
         <BannerBody>
           <h1>Perfil</h1>
-          <BannerImageDiv />
+          <BannerImageDiv><img src={urlImage} alt={name} /></BannerImageDiv>
         </BannerBody>
       </Banner>
       <PageContentContainer>
@@ -152,14 +156,14 @@ const UserProfile = () => {
             <PageBody>
               <WidgetContainer>
                 <WidgetBody>
-                  <h2>Martín Elías</h2>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                  <h2>{name} {lastName}</h2>
+                  <p>{jobTitle}</p>
                 </WidgetBody>
               </WidgetContainer>
               <WidgetContainer>
                 <WidgetBody>
                   <h4>Descripción</h4>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                  <p>{description}</p>
                 </WidgetBody>
               </WidgetContainer>
               <WidgetContainer>
@@ -168,7 +172,13 @@ const UserProfile = () => {
                   <WidgetContainer>
                     <WidgetBody>
                       <h4>LinkedIn</h4>
-                      <p>https://yourdomain.com</p>
+                      <p>{urlLinkedin}</p>
+                    </WidgetBody>
+                  </WidgetContainer>
+                  <WidgetContainer>
+                    <WidgetBody>
+                      <h4>GitHub</h4>
+                      <p>{urlGithub}</p>
                     </WidgetBody>
                   </WidgetContainer>
                 </WidgetContent>
@@ -178,7 +188,9 @@ const UserProfile = () => {
               <WidgetContainer>
                 <h3>User Data</h3>
                 <WidgetBody>
-                  <p>Desarrollador de SoftwareFront-end | Senior</p>
+                  <p>Rol: {roleName}</p>
+                  <p>Email: {email}</p>
+                  <p>Teléfono: {phoneNumber}</p>
                 </WidgetBody>
               </WidgetContainer>
             </PageAside>

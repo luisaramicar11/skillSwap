@@ -1,9 +1,10 @@
+"use client";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-interface BuscadorProps {
+interface SearchProps {
   label: string;
-  onSearch: (searchTerm: string) => void;
+  onSearch: (query: string) => void;
 }
 
 const Container = styled.div`
@@ -52,21 +53,22 @@ const Input = styled.input`
   }
 `;
 
-const Buscador: React.FC<BuscadorProps> = ({ label, onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+
+const Search: React.FC<SearchProps> = ({ label, onSearch }) => {
+  const [query, setQuery] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchTerm(value);
-    onSearch(value);
+    const newValue = event.target.value;
+    setQuery(newValue);
+    onSearch(newValue);
   };
 
   return (
-    <Container>
-      <Label>{label}</Label>
-      <Input type="text" value={searchTerm} onChange={handleChange} />
-    </Container>
+    <div>
+      <label>{label}</label>
+      <Input type="text" value={query} onChange={handleChange} placeholder="Buscar..." />
+    </div>
   );
 };
 
-export default Buscador;
+export default Search;

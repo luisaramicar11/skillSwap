@@ -35,13 +35,12 @@ export const FormWrapper = styled.div`
   margin: 0;
   position: relative;
   
-  
-
   @media (max-width: 1070px) { 
     border-radius: none;
-    width: 100%;
     border-radius: 15px; 
     border: 0;
+    width: 300px;
+    height: 500px;
   }
 `;
 
@@ -64,5 +63,7 @@ export const DivButtonLogin = styled.div`
 
   @media (max-width: 1070px) { 
     width: inherit;
+    display: flex;
+    justify-content: center;
   }
 `;

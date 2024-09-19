@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
-import InfoIcon from "@/public/svg/GitHubIcon";
+import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 import SideBarProfile from "../sidebars/SidebarFloatingProfile"
@@ -117,7 +117,7 @@ const Line = styled.div`
 `;
 
 // Navbar component
-export const NavbarUser: React.FC = () => {
+export const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -149,13 +149,7 @@ export const NavbarUser: React.FC = () => {
             </HamburgerMenu>
             <NavList isOpen={isOpen}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
-                    <StyledNavLink href="/user/" label="INICIO" />
-                </NavItem>
-                <NavItem onClick={() => handlePageChange('DESCUBRE')}>
-                    <StyledNavLink href="/user/discover" label="DESCUBRE" />
-                </NavItem>
-                <NavItem onClick={() => handlePageChange('MATCH')}>
-                    <StyledNavLink href="/user/match" label="MATCH" />
+                    <StyledNavLink href="/" label="INICIO" />
                 </NavItem>
             </NavList>
 
