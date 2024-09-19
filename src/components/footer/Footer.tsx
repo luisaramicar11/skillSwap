@@ -2,7 +2,11 @@
 import styled from "styled-components";
 import React from "react";
 import StyledNavLink from "../ui/links/NavLinks";
+import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
+import InstagramIcon from "@/public/svg/InstagramIcon";
+import FigmaIcon  from "@/public/svg/FigmaIcon";
+import GitHubIcon from "@/public/svg/GitHubIcon";
 
 // Estilos para el footer
 const FooterStyled = styled.footer`
@@ -29,13 +33,6 @@ const FooterStyled = styled.footer`
   .social-icons {
     display: flex;
     gap: 10px;
-
-    span {
-      width: 20px;
-      height: 20px;
-      border: 2px solid ${({ theme }) => theme.colors.textPrimary};
-      border-radius: 50%;
-    }
   }
 `;
 
@@ -68,8 +65,8 @@ export const Footer: React.FC = () => {
           <FooterNavItem onClick={() => handlePageChange('DESCUBRE')}>
             <StyledNavLink href="/discover" label="DESCUBRE" />
           </FooterNavItem>
-          <FooterNavItem onClick={() => handlePageChange('USER')}>
-            <StyledNavLink href="/settings" label="USER" />
+          <FooterNavItem onClick={() => handlePageChange('USUARIO')}>
+            <StyledNavLink href="/settings" label="USUARIO" />
           </FooterNavItem>
           <FooterNavItem onClick={() => handlePageChange('LEGAL')}>
             <StyledNavLink href="/legal" label="LEGAL" />
@@ -80,12 +77,11 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} SkillSwap, Inc. Todos los derechos reservados.
           </p>
           <div className="social-icons">
-            <span></span>
-            <span></span>
-            <span></span>
+            <StyledIconNavLink target="_blank" href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&node-type=canvas&t=SONsdrpY89xVseme-0" label="EXTERNAL" icon={<FigmaIcon />} />
+            <StyledIconNavLink target="_blank" href="https://github.com/luisaramicar11/skillSwap" label="EXTERNAL" icon={<GitHubIcon />} />
+            <StyledIconNavLink target="_blank" href="https://www.instagram.com/" label="EXTERNAL" icon={<InstagramIcon />} />
           </div>
         </Box>
       </FooterStyled>
-       
     );
 };

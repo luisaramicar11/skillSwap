@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
-import InfoIcon from "@/public/svg/InfoIcon";
+import InfoIcon from "@/public/svg/GitHubIcon";
+import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 import SideBarProfile from "../sidebars/SidebarFloatingProfile"
 
@@ -25,15 +26,6 @@ const NavbarContainer = styled.div`
     @media (max-width: 768px) {
         padding: 0 20px;
     }
-`;
-
-const SideBarContainer = styled.div`
-    position: fixed;
-    height: 75%;
-    width: 100%;
-    z-index: 10000;
-    left: 20px;
-    top: 75px;
 `;
 
 const SidebarLink = styled.p`
@@ -137,8 +129,7 @@ export const Navbar: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <SideBarContainer>
-                <SideBarProfile name="Martín Elías"
+            <SideBarProfile name="Martín Elías"
                     skills={["JavaScript", "HTML", "Adobe"]}
                     rating={4.1}
                     rejected={["Juliana Mina"]}
@@ -148,14 +139,11 @@ export const Navbar: React.FC = () => {
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     />
-            </SideBarContainer>
             <SidebarLinkContainer>
                 <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
             </SidebarLinkContainer>
             <HamburgerMenu onClick={toggleMenu}>
-                <Line />
-                <Line />
-                <Line />
+                <StyledIconNavLink href="#" icon={<ListIcon />} />
             </HamburgerMenu>
             <NavList isOpen={isOpen}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>

@@ -48,15 +48,6 @@ const ProfileSidebarContent = styled.div`
       translate: 0;
     }
   }
-
-  @media (max-width: 1024px) {
-    width: 80%; /* Ocupa más espacio en pantallas medianas */
-    height: auto;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
-  }
 `;
 
 const StatusSection = styled.div`
