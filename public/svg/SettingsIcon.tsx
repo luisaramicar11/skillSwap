@@ -1,4 +1,3 @@
-// components/icons/HomeIcon.tsx
 import React from 'react';
 
 const SettingsIcon: React.FC<{ className?: string }> = ({ className }) => (
