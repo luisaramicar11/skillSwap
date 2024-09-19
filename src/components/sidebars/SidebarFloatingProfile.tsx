@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import CardProfileLink from "../cards/CardProfileLink";
+import LogoutButton from "../Logout"
+import { FaSignOutAlt } from 'react-icons/fa';
 
 const ProfileSidebarContainer = styled.div`
     z-index: -1;
@@ -58,6 +60,10 @@ const StatusSection = styled.div`
   margin-bottom: 10px;
   gap: 1rem;
   padding-left: 2rem;
+
+  @media (max-height: 720px) {
+    display:none; /* Reduce el tamaño del texto en móviles */
+  }
 
   .status-item {
     display: flex;
@@ -154,6 +160,18 @@ const ModalCloseButton = styled.button`
   }
 `;
 
+const BoxLogout = styled.h2`
+  padding-left: 1.6rem;
+  padding-top: 3rem;
+
+  @media (max-height: 500px) {
+    padding-top: 0; /* Reduce el tamaño del texto en móviles */
+  }
+
+`;
+
+
+
 interface ProfileSidebarProps {
   name: string;
   skills: string[];
@@ -181,46 +199,49 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   return (
     <ProfileSidebarContainer>
       <ProfileSidebarContent>
-      <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
-      <CardProfileLink name={name} skills={skills} rating={rating} />
-      <StatusSection>
-        <div className="status-item rejected">
-          <H2StatusSection>Rejected</H2StatusSection>
-          <div className="status-content">
-            <FaTimes className="icon" />
-            <p>
-              {rejected.length}: {rejected.join(", ")}
-            </p>
+        <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
+        <CardProfileLink name={name} skills={skills} rating={rating} />
+        <StatusSection>
+          <div className="status-item rejected">
+            <H2StatusSection>Rejected</H2StatusSection>
+            <div className="status-content">
+              <FaTimes className="icon" />
+              <p>
+                {rejected.length}: {rejected.join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="status-item accepted">
-          <H2StatusSection>Accepted</H2StatusSection>
-          <div className="status-content">
-            <FaCheck className="icon" />
-            <p>
-              {accepted.length}: {accepted.join(", ")}
-            </p>
+          <div className="status-item accepted">
+            <H2StatusSection>Accepted</H2StatusSection>
+            <div className="status-content">
+              <FaCheck className="icon" />
+              <p>
+                {accepted.length}: {accepted.join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="status-item pending">
-          <H2StatusSection>Pending</H2StatusSection>
-          <div className="status-content">
-            <FaClock className="icon" />
-            <p>
-              {pending.length}: {pending.join(", ")}
-            </p>
+          <div className="status-item pending">
+            <H2StatusSection>Pending</H2StatusSection>
+            <div className="status-content">
+              <FaClock className="icon" />
+              <p>
+                {pending.length}: {pending.join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="status-item inbox">
-          <H2StatusSection>Inbox</H2StatusSection>
-          <div className="status-content">
-            <FaClock className="icon" />
-            <p>
-              {inbox.length}: {inbox.join(", ")}
-            </p>
+          <div className="status-item inbox">
+            <H2StatusSection>Inbox</H2StatusSection>
+            <div className="status-content">
+              <FaClock className="icon" />
+              <p>
+                {inbox.length}: {inbox.join(", ")}
+              </p>
+            </div>
           </div>
-        </div>
-      </StatusSection>
+        </StatusSection>
+        <BoxLogout>
+          <LogoutButton icon={<FaSignOutAlt />} />
+        </BoxLogout>
       </ProfileSidebarContent>
     </ProfileSidebarContainer>
   );

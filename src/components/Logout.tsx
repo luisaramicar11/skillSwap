@@ -12,18 +12,19 @@ interface LogoutButtonProps {
 const Button = styled.button`
   display: flex;
   align-items: center;
-  color: #000;
-  padding: 10px 20px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};;
+  opacity: 0.7;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color:${({ theme }) => theme.colors.gradientPrimary};;
   }
 
   svg {

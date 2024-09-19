@@ -5,8 +5,13 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
+import BackButton from "@/src/components/ui/buttons/ButtonBackToHome";
 
 // Texto de cambio
+
+
+
+
 const TextWrapper = styled.div`
   width: max-content;
   position: absolute;
@@ -203,6 +208,7 @@ export default function AuthPage() {
 
   return (
     <Container>
+      <BackButton></BackButton>
       {/* Framer Motion wrapper for form animations */}
       <motion.div
         initial={false}
