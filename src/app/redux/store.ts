@@ -6,7 +6,8 @@ import usersReducer from "./slices/usersSlice";
 const store = configureStore({
     reducer: {
         auth: authReducer, // 2. son cada uno de los estados que guardaremos en nuestro configureStore. UN STATE ES UNA ESPECIE DE LOCALSTORAGE
-        users: usersReducer, // CADA ES UNA SLICE DEL "reducer"
+        users: usersReducer,
+         // CADA ES UNA SLICE DEL "reducer"
     },
 });
 
