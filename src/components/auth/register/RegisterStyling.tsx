@@ -23,7 +23,7 @@ export const DivUserData = styled.div`
   justify-content: center;
   align-items: center;
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 0;
   }
 `;
 
@@ -31,11 +31,6 @@ export const DivUserInput = styled.div`
   sub {
     opacity: 0.7;
     color: ${({ theme }) => theme.colors.textWhite};
-  }
-  @media (max-width: 768px) {
-    sub {
-      display: none; /* Oculta los subtextos en pantallas pequeñas */
-    }
   }
 `;
 
@@ -64,7 +59,7 @@ export const DivButtonSingUp = styled.div`
   bottom: 50px;
   display: flex;
   gap: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     position: static; /* Hace que el botón no sea fijo en móviles */
     display: flex;
     justify-content: center; /* Centrar el botón */

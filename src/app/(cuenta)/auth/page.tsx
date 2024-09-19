@@ -26,24 +26,8 @@ const TextWrapper = styled.div`
   }
 `;
 
-const SwapText = styled(motion.h1)`
-  font-size: 5rem;
-  font-weight: bold;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-  line-height: 1.2;
-  text-transform: uppercase;
-
-  @media (max-width: 1070px) {
-    font-size: 3rem;
-  }
-`;
-
 const SkillSwapText = styled(motion.h1)`
-  font-size: 5rem;
+  font-size: clamp(2.8rem,4.2vw,6rem);
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -65,12 +49,12 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   width: 100%;
-  min-height: 500px;
+  min-height: 450px;
 
   @media (max-width: 1070px) {
     flex-direction: column; /* Cambia a columna en pantallas pequeñas */
     align-items: flex-start;
-    border-radius: none 
+    border-radius: none;
     /* Alinea el contenido al inicio */
   }
 `;
@@ -123,9 +107,9 @@ const OverlayPanel = styled.div`
 `;
 
 const Div = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuth};
-  border-right: 1px solid ${({ theme }) => theme.colors.borderAuth};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
+  border-right: 1px solid ${({ theme }) => theme.colors.borderAuthRight};
   background: ${({ theme }) => theme.colors.bgPrimary};
   border-radius: none;
   border-bottom-right-radius: 15px;
@@ -193,7 +177,7 @@ const SwitchButton = styled.button`
     border: none;
 
     & a:hover {
-      color: ${({ theme }) => theme.colors.textSecondary};
+      color: ${({ theme }) => theme.colors.textWhite};
     }
   }
 
@@ -253,20 +237,20 @@ export default function AuthPage() {
       {/* Overlay Panel */}
       <OverlayContainer>
         <TextWrapper>
-          <SwapText
+          <SkillSwapText
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             SWAP
-          </SwapText>
-          <SwapText
+          </SkillSwapText>
+          <SkillSwapText
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
             ← SWAP
-          </SwapText>
+          </SkillSwapText>
           <SkillSwapText
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
