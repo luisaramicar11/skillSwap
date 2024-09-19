@@ -50,6 +50,8 @@ export default function LoginPage() {
       if (token) {
         toast.success('Login exitoso!');
         localStorage.setItem('authToken', token);
+        document.cookie = `authToken=${token}; path=/;`;
+        console.log(localStorage.getItem('authToken'));
 
         // Redirigir según el rol
         if (role === 1) {

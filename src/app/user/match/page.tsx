@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import SliderCard from "../../components/sliders/slide";
-import MatchCard from "../../components/cards/CardMatch";
+import SliderCard from "../../../components/sliders/slide";
+import MatchCard from "../../../components/cards/CardMatch";
 import { DivMatch } from "./MatchStyling";
 import ProfileCard from "@/src/components/cards/CardMatchProfile";
 

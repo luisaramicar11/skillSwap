@@ -1,7 +1,7 @@
 "use client";
-import Carousel from "../../components/carousels/CarouseDiscover";
-import AllUsers from "../../components/AllUsers";
-import Search from "../../components/searchs/search";
+import Carousel from "../../../components/carousels/CarouseDiscover";
+import AllUsers from "../../../components/AllUsers";
+import Search from "../../../components/searchs/search";
 import { H2, DivContainer, DivRecentUsers } from "./DiscoverStyling";
 
 const handleSearch = () => {
