@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/utils/handlePageTheme";
-import InfoIcon from "@/public/svg/GitHubIcon";
+import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 import SideBarProfile from "../sidebars/SidebarFloatingProfile"
