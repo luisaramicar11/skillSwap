@@ -5,7 +5,7 @@ export interface IUserCardProps {
     qualification: number;
     countMatches: number;
     description: string;
-    abilities: string[];
+    abilities: string;
     imageUrl: string;
 }
 

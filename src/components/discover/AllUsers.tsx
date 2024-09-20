@@ -54,18 +54,25 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
   return (
     <DivContainer>
       <CardListContainer>
-        {currentCards.map((user, index) => (
-          <div key={index}>
-            <Card
-            id={user.id}
-            fullName={user.fullName}
-            jobTitle={user.jobTitle}
-            qualification={user.qualification}
-            abilities={user.abilities}
-            imageUrl={user.imageUrl}
-          />
-          </div>
-        ))}
+        {currentCards.map((user, index) => {
+          // Nueva constante que convierte abilities de string a array
+          const abilitiesArray = typeof user.abilities === 'string'
+            ? user.abilities.split(',').map((ability: string) => ability.trim())
+            : [];
+
+          return (
+            <div key={index}>
+              <Card
+                id={user.id}
+                fullName={user.fullName}
+                jobTitle={user.jobTitle}
+                qualification={user.qualification}
+                abilities={abilitiesArray}
+                imageUrl={user.imageUrl}
+              />
+            </div>
+          );
+        })}
       </CardListContainer>
 
       <PaginationContainer>
@@ -86,4 +93,4 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
   );
 };
 
-export default AllUsers; // Exporta solo AllUsers
+export default AllUsers;
