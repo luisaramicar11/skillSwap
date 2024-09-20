@@ -6,6 +6,7 @@ import LogoutButton from "../Logout"
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useState, useEffect } from "react";
 import { IUserCardProps } from "@/src/models/userCards.model";
+import { OurAlertsText } from "@/src/utils/ourAlertsText";
 
 const ProfileSidebarContainer = styled.div`
     z-index: -1;
@@ -184,7 +185,6 @@ const BoxLogout = styled.h2`
 `;
 
 
-
 interface ProfileSidebarProps {
   isOpen: boolean;
   onClose: () => void;
@@ -241,8 +241,13 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
   if (!isOpen) return null;
 
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <OurAlertsText>Cargando...</OurAlertsText>;
+  
+  const timer = setTimeout(() => {
+      if (error) {
+        return <OurAlertsText>Error: {error}</OurAlertsText>;
+      }
+    }, 3000);
 
   return (
     <ProfileSidebarContainer>

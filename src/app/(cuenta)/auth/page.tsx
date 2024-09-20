@@ -60,7 +60,7 @@ const Container = styled.div`
   }
 
   @media (max-width: 1024px) {
-    margin: 54px 0 !important;
+    margin-top: 154px !important;
   }
 `;
 

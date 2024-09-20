@@ -94,7 +94,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userSkills }) 
         </div>
       </ProfileHeader>
       <RatingSection>
-        <h1>{userSkills.qualification}</h1>
+        <h1>{userSkills?.qualification}</h1>
         <DivRate>
           <p>Your Rate</p>
           <Stars>★★★★☆</Stars>
