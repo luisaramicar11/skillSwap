@@ -12,3 +12,9 @@ export interface IUserCardProps {
 export interface IAllUsersCardsProps {
 users: IUserCardProps[]
 }
+
+export interface IProfileCardProps {
+    fullName: string;
+    userSkills: IUserCardProps;
+  }
+  

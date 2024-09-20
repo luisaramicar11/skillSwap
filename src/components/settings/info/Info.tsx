@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import WidgetContainer from '../../WidgetContainer/WidgetContainer';
 
 //Container for the whole page.tsx
@@ -107,8 +108,47 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
-// Componente principal de la página de inicio
 const UserInfo = () => {
+  const [accountState, setAccountState] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchAccountState = async () => {
+      const idString = localStorage.getItem('userId');
+      const idNumber = idString ? parseInt(idString, 10) : null;
+
+      if (!idNumber) {
+        setError('ID de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://skillswapriwi.azurewebsites.net/state/${idNumber}`, {
+          method: 'GET',
+          headers: {
+            'accept': '*/*',
+          },
+        });
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          throw new Error(`Error ${response.status}: ${errorMessage}`);
+        }
+
+        const data = await response.json();
+        setAccountState(data.data.obj.stateName);
+      } catch (err: any) {
+        setError(err.message || "Error desconocido");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAccountState();
+  }, []);
+
   return (
     <PageContainer>
       <Banner>
@@ -123,7 +163,13 @@ const UserInfo = () => {
               <WidgetContainer>
                 <WidgetBody>
                   <h4>Estado de Cuenta</h4>
-                  <p>blah blah blah</p>
+                  {loading ? (
+                    <p>Cargando...</p>
+                  ) : error ? (
+                    <p>{error}</p>
+                  ) : (
+                    <p>{accountState === "activo" ? "Activo" : "Inactivo"}</p>
+                  )}
                 </WidgetBody>
               </WidgetContainer>
             </PageBody>

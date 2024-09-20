@@ -4,6 +4,8 @@ import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import CardProfileLink from "../cards/CardProfileLink";
 import LogoutButton from "../Logout"
 import { FaSignOutAlt } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import { IUserCardProps } from "@/src/models/userCards.model";
 
 const ProfileSidebarContainer = styled.div`
     z-index: -1;
@@ -51,6 +53,17 @@ const ProfileSidebarContent = styled.div`
     }
   }
 `;
+
+
+const SkillItem = styled.div`
+  background: ${({ theme }) => theme.colors.bgLight};
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors.textDark};
+`;
+
 
 const StatusSection = styled.div`
   display: flex;
@@ -173,72 +186,115 @@ const BoxLogout = styled.h2`
 
 
 interface ProfileSidebarProps {
-  name: string;
-  skills: string[];
-  rating: number;
-  rejected: string[];
-  accepted: string[];
-  pending: string[];
-  inbox: string[];
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
-  name,
-  skills,
-  rating,
-  rejected,
-  accepted,
-  pending,
-  inbox,
   isOpen,
   onClose,
 }) => {
+  const [userData, setUserData] = useState<any>(null);
+  const [userSkills, setUserSkills] = useState<IUserCardProps | null>(null); // Estado para habilidades
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const idString = localStorage.getItem('userId');
+      const idNumber = idString ? parseInt(idString, 10) : null;
+
+      if (!idNumber) {
+        setError('ID de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Fetch para obtener datos de usuario
+        const userResponse = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/requests/${idNumber}`);
+        const userData = await userResponse.json();
+
+        // Fetch para obtener habilidades del usuario
+        const skillsResponse = await fetch('https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages');
+        const skillsData = await skillsResponse.json();
+
+        if (userResponse.ok && skillsResponse.ok) {
+          setUserData(userData.data.obj);
+
+          // Busca las habilidades del usuario por su nombre completo o ID
+          const matchedUser = skillsData.find((user: any) => user.id === idNumber);
+          setUserSkills(matchedUser ? matchedUser : null);
+
+        } else {
+          setError('Error al cargar los datos');
+        }
+      } catch (err) {
+        setError('Hubo un problema con la solicitud');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   if (!isOpen) return null;
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <ProfileSidebarContainer>
       <ProfileSidebarContent>
         <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
-        <CardProfileLink name={name} skills={skills} rating={rating} />
-        <StatusSection>
-          <div className="status-item rejected">
-            <H2StatusSection>Rejected</H2StatusSection>
-            <div className="status-content">
-              <FaTimes className="icon" />
-              <p>
-                {rejected.length}: {rejected.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item accepted">
-            <H2StatusSection>Accepted</H2StatusSection>
-            <div className="status-content">
-              <FaCheck className="icon" />
-              <p>
-                {accepted.length}: {accepted.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item pending">
-            <H2StatusSection>Pending</H2StatusSection>
-            <div className="status-content">
-              <FaClock className="icon" />
-              <p>
-                {pending.length}: {pending.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item inbox">
-            <H2StatusSection>Inbox</H2StatusSection>
-            <div className="status-content">
-              <FaClock className="icon" />
-              <p>
-                {inbox.length}: {inbox.join(", ")}
-              </p>
-            </div>
-          </div>
-        </StatusSection>
+        {userData && userSkills && (
+          <>
+            <CardProfileLink
+              fullName={userData.nombreUsuario}
+              userSkills={userSkills}
+            />
+            <StatusSection>
+              <div className="status-item rejected">
+                <H2StatusSection>Rejected</H2StatusSection>
+                <div className="status-content">
+                  <FaTimes className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoCanceladas}:{" "}
+                    {userData.solicitudes.ultimaCancelada || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item accepted">
+                <H2StatusSection>Accepted</H2StatusSection>
+                <div className="status-content">
+                  <FaCheck className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoAceptadas}:{" "}
+                    {userData.solicitudes.ultimaAceptada || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item pending">
+                <H2StatusSection>Pending</H2StatusSection>
+                <div className="status-content">
+                  <FaClock className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoPendientes}:{" "}
+                    {userData.solicitudes.ultimaPendiente || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item inbox">
+                <H2StatusSection>Inbox</H2StatusSection>
+                <div className="status-content">
+                  <FaClock className="icon" />
+                  <p>0: N/A</p>
+                </div>
+              </div>
+            </StatusSection>
+          </>
+        )}
         <BoxLogout>
           <LogoutButton icon={<FaSignOutAlt />} />
         </BoxLogout>
