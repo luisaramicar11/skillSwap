@@ -1,17 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Modal from '../modals/ModalMatch';
-
-interface Person {
-  fullName: string;
-  jobTitle: string;
-  image: string;
-}
-
-interface SliderCardProps {
-  person: Person;
-  onPass: () => void;
-}
+import { IPerson, ISliderCardProps } from "@/src/models/match.model";
 
 const CardContainer = styled.div`
   width: 50%;
@@ -94,7 +84,7 @@ const StarButton = styled.button`
   }
 `;
 
-const SliderCard: React.FC<SliderCardProps> = ({ person, onPass }) => {
+const SliderCard: React.FC<ISliderCardProps> = ({ person, onPass }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handlePassClick = () => {
@@ -109,13 +99,13 @@ const SliderCard: React.FC<SliderCardProps> = ({ person, onPass }) => {
     <>
       <CardContainer>
         <PassButton onClick={handlePassClick}>→ pass</PassButton>
-        <Image src={person.image} alt={person.fullName} />
+        <Image src={person.imageUrl} alt={person.fullName} />
         <Title>{person.fullName}</Title>
         <Subtitle>{person.jobTitle}</Subtitle>
         <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
       </CardContainer>
 
-      {modalOpen && <Modal  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
+      {modalOpen && <Modal userToRequest={person}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
     </>
   );
 };

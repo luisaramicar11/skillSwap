@@ -8,9 +8,11 @@ import { AppDispatch } from '@/src/app/redux/store';
 import InputSingUp from '../../../components/ui/inputs/InputAuth';
 import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 import Label from '../../ui/labels/LabelAuth';
+import { handlePageChange } from '@/src/utils/handlePageTheme';
+import StyledNavLink from '../../ui/links/NavLinks';
 
 // Styled components
-import { FormWrapper, Container, Title, DivButtonLogin } from './LoginStyling';
+import { FormWrapper, Container, Title, DivButtonLogin, BackLink, Arrow } from './LoginStyling';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -72,6 +74,9 @@ export default function LoginPage() {
   return (
     <Container>
       <FormWrapper>
+        <BackLink onClick={() => handlePageChange('INICIO')}>
+          <Arrow>&lt;</Arrow> VOLVER A <StyledNavLink href="/" label="INICIO"></StyledNavLink>
+        </BackLink>
         <Title>Iniciar Sesión</Title>
         <form onSubmit={handleSubmit}>
           <Label text="Email" htmlFor="email-login" />
