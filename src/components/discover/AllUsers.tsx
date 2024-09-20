@@ -1,50 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Card from "../components/cards/CardDiscover";
-
-interface User {
-  title: string;
-  imageUrl: string;
-  rating: number;
-  skills: string[];
-}
-
-interface AllUsersProps {
-  users: User[];
-}
-
-export const users = [
-  {
-    title: "John Doe",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-    rating: 4,
-    skills: ["JavaScript", "React", "Node.js"],
-  },
-  {
-    title: "Jane Smith",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-    rating: 5,
-    skills: ["HTML", "CSS", "React"],
-  },
-  {
-    title: "Carlos Ruiz",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-    rating: 3,
-    skills: ["Angular", "TypeScript", "Node.js"],
-  },
-  {
-    title: "Ana López",
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-    rating: 4,
-    skills: ["Python", "Django", "Flask"],
-  },
-  // Agrega más usuarios...
-];
+import Card from "../cards/CardDiscover";
+import { IUserCardProps, IAllUsersCardsProps } from "../../models/discover.model";
 
 const CardListContainer = styled.div`
   display: grid;
@@ -81,7 +39,7 @@ const DivContainer = styled.div`
   margin-top: 3rem;
 `;
 
-const AllUsers: React.FC<AllUsersProps> = ({ users }) => {
+const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 10; // Número de tarjetas por página
 
@@ -97,13 +55,16 @@ const AllUsers: React.FC<AllUsersProps> = ({ users }) => {
     <DivContainer>
       <CardListContainer>
         {currentCards.map((user, index) => (
-          <Card
-            key={index}
-            title={user.title}
+          <div key={index}>
+            <Card
+            id={user.id}
+            fullName={user.fullName}
+            jobTitle={user.jobTitle}
+            qualification={user.qualification}
+            abilities={user.abilities}
             imageUrl={user.imageUrl}
-            rating={user.rating}
-            skills={user.skills}
           />
+          </div>
         ))}
       </CardListContainer>
 
@@ -112,13 +73,13 @@ const AllUsers: React.FC<AllUsersProps> = ({ users }) => {
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          Anterior
+          ANTERIOR
         </PaginationButton>
         <PaginationButton
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === Math.ceil(users.length / cardsPerPage)}
         >
-          Siguiente
+          SIGUIENTE
         </PaginationButton>
       </PaginationContainer>
     </DivContainer>
