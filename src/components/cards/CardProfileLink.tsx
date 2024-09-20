@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LinkProfile from "../ui/links/NavLinks";
+import { IUserCardProps, IProfileCardProps } from "@/src/models/userCards.model";
 
 const ProfileHeader = styled.div`
   display: flex;
@@ -30,6 +31,8 @@ const Skills = styled.div`
   opacity: 0.5;
   font-size: 0.6rem;
   color: ${({ theme }) => theme.colors.textSecondary};
+  display: flex;
+  flex-direction: column;
 `;
 
 const RatingSection = styled.div`
@@ -67,39 +70,37 @@ const DivRate = styled.div`
   flex-direction: column;
 `;
 
-interface ProfileCardProps {
-  name: string;
-  skills: string[];
-  rating: number;
-}
+const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userSkills }) => {
+  const abilitiesArray = userSkills?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
 
-const CardProfileLink: React.FC<ProfileCardProps> = ({ name, skills, rating }) => {
   return (
     <LinkProfile href="/settings" label="CONFIGURACION">
-        <ProfileHeader>
-          <Avatar
-            src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
-            alt="profile picture"
-          />
-          <div>
-            <ProfileName>{name}</ProfileName>
+      <ProfileHeader>
+        <Avatar
+          src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
+          alt="profile picture"
+        />
+        <div>
+          <ProfileName>{fullName}</ProfileName>
+          {abilitiesArray.length > 0 ? (
             <Skills>
-              {skills.map((skill, index) => (
-                <li key={index}>{skill}</li>
+              {abilitiesArray.map((ability, index) => (
+                <li key={index}>{ability}</li>
               ))}
             </Skills>
-            {/* ponerle un href con link*/}
-          </div>
-        </ProfileHeader>
-        <RatingSection>
-          <h1>{rating}</h1>
-          <DivRate>
-            <p>Your Rate</p>
-            <Stars>★★★★☆</Stars>
-          </DivRate>
-        </RatingSection>
+          ) : (
+            <p>No se encontraron habilidades.</p>
+          )}
+        </div>
+      </ProfileHeader>
+      <RatingSection>
+        <h1>{userSkills.qualification}</h1>
+        <DivRate>
+          <p>Your Rate</p>
+          <Stars>★★★★☆</Stars>
+        </DivRate>
+      </RatingSection>
     </LinkProfile>
   );
 };
-
-export default CardProfileLink;
+export default CardProfileLink

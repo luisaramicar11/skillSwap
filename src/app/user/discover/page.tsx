@@ -4,14 +4,14 @@ import Carousel from "../../../components/carousels/CarouseDiscover";
 import Search from "@/src/components/searchs/search";
 import { H2, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/discover/AllUsers";
-import { IUserCardProps, IAllUsersCardsProps } from "../../../models/discover.model";
+import { IUserCardProps, IAllUsersCardsProps } from "../../../models/userCards.model";
 
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores
   const [allUsersData, setAllUsersData] = useState<IUserCardProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   // Estado para manejar los usuarios filtrados
   const [filteredUsers, setFilteredUsers] = useState<IUserCardProps[]>([]);
 
@@ -24,11 +24,11 @@ const Discover = () => {
     }
 
     const lowercasedQuery = query.toLowerCase().trim();
-    
+
     // Filtra por fullName y abilities
-    const filtered: IUserCardProps[] = allUsersData.filter((user) => 
+    const filtered: IUserCardProps[] = allUsersData.filter((user) =>
       // Verifica si el nombre completo incluye el query
-      user.fullName.toLowerCase().includes(lowercasedQuery) || 
+      user.fullName.toLowerCase().includes(lowercasedQuery) ||
       // Verifica si alguna de las habilidades incluye el query
       user.abilities.toLowerCase().includes(lowercasedQuery)
     );
@@ -76,7 +76,7 @@ const Discover = () => {
     <DivContainer>
       {/* Componente de búsqueda */}
       <Search label="Buscar" onSearch={handleSearch} />
-      
+
       {/* Sección del carrusel */}
       <div>
         <H2>Usuarios más recientes</H2>

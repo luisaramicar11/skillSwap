@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../cards/CardDiscover";
-import { IUserCardProps, IAllUsersCardsProps } from "../../models/discover.model";
+import { IUserCardProps, IAllUsersCardsProps } from "../../models/userCards.model";
 
 const CardListContainer = styled.div`
   display: grid;
