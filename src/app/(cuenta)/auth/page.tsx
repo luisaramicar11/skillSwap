@@ -5,13 +5,8 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
-import 
-BackButton from "@/src/components/ui/buttons/ButtonBackToHome";
-
+import { handlePageChange } from "@/src/utils/handlePageTheme";
 // Texto de cambio
-
-
-
 
 const TextWrapper = styled.div`
   width: max-content;
@@ -62,6 +57,10 @@ const Container = styled.div`
     align-items: flex-start;
     border-radius: none;
     /* Alinea el contenido al inicio */
+  }
+
+  @media (max-width: 1024px) {
+    margin: 54px 0 !important;
   }
 `;
 
@@ -190,7 +189,6 @@ const SwitchButton = styled.button`
   @media (max-width: 1070px) {
     width: inherit; /* Ajusta el tamaño del botón en pantallas pequeñas */
     font-size: 10px;
-     
   }
 `;
 
@@ -209,7 +207,6 @@ export default function AuthPage() {
 
   return (
     <Container>
-      <BackButton></BackButton>
       {/* Framer Motion wrapper for form animations */}
       <motion.div
         initial={false}

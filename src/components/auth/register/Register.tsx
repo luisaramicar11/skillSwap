@@ -6,19 +6,16 @@ import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch, RootState } from '../../../app/redux/store';
 import InputAuth from "../../../components/ui/inputs/InputAuth"
-import { DivUserData, DivUserInput, DivUserTitle } from "./RegisterStyling"
 import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
 import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
+import { handlePageChange } from '@/src/utils/handlePageTheme';
+import StyledNavLink from '../../ui/links/NavLinks';
 
 //Syled
-import { FormWrapper } from '../login/LoginStyling';
-import { Container } from '../login/LoginStyling';
-import { Title } from '../login/LoginStyling';
-import { DivButtonLogin } from '../login/LoginStyling';
-import { DivButtonSingUp } from './RegisterStyling';
-import { Form } from './RegisterStyling';
+import { DivUserData, DivUserInput, DivUserTitle, DivButtonSingUp, Form } from "./RegisterStyling"
+import { Title, BackLink, Arrow, FormWrapper, Container, DivButtonLogin } from '../login/LoginStyling';
 
 export default function RegisterPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -46,9 +43,7 @@ export default function RegisterPage() {
   const [skills, setSkills] = useState<string>("");
   const [currentStep, setCurrentStep] = useState(0); // Controla la vista actual del carrusel
 
- 
-
-  // Manejar el select
+// Manejar el select
 const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
   const { name, value } = event.target;
   setSelectedOption(value);
@@ -68,8 +63,8 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
   });
 };
 
-   // Manejar cambios en los inputs
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Manejar cambios en los inputs
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -133,6 +128,9 @@ const formatDate = (date: Date | string) => {
       case 0:
         return (
             <div>
+              <BackLink onClick={() => handlePageChange('INICIO')}>
+                <Arrow>&lt;</Arrow> VOLVER A <StyledNavLink href="/" label="INICIO"></StyledNavLink>
+              </BackLink>
               <Title>Registro</Title>
               <Label text="Email" htmlFor='email' />
               <InputAuth
