@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import SkillTag from "../ui/skillTag/skillTag";
 
-// Interfaz para los datos de la persona
+
 // Interfaz para los props de la Card
 interface CardProps {
-  title: string;
+  id: number;
+  fullName: string;
+  jobTitle: string;
+  qualification: number;
+  abilities: string[];
   imageUrl: string;
-  rating: number;
-  skills: string[]; // Añadido para las habilidades
 }
 
 // Contenedor de la tarjeta
@@ -72,37 +75,33 @@ const Skills = styled.div`
   padding-bottom: 0rem;
 `;
 
-const SkillButton = styled.button`
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.textPurple};
-  border: 1px solid ${({ theme }) => theme.colors.textPurple};
-  padding: 5px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-`;
-
-const Card: React.FC<CardProps> = ({ imageUrl, title, rating, skills }) => {
+const Card: React.FC<CardProps> = ({ 
+  id, 
+  fullName,
+  jobTitle,
+  qualification,
+  abilities,
+  imageUrl
+}) => {
   // Función para renderizar las estrellas según la calificación
   return (
-    <CardContainer>
+    <CardContainer className={`cardUserId-${id}`}>
       <ImageColumn>
-        <img src={imageUrl} alt={title} />
+        <img src={imageUrl} alt={fullName} />
       </ImageColumn>
       <InfoColumn>
-        <Name>{title}</Name>
+        <Name>{fullName}</Name>
+        <p>{jobTitle}</p>
         <StarsContainer>
           {[...Array(5)].map((_, index) => (
             <Star key={index}>
-              {index < rating ? "★" : "☆"}{" "}
+              {index < qualification ? "★" : "☆"}{" "}
               {/* Muestra estrellas llenas o vacías */}
             </Star>
           ))}
         </StarsContainer>
         <Skills>
-          {skills.map((skill, index) => (
-            <SkillButton key={index}>{skill}</SkillButton>
-          ))}
+          <SkillTag skillsArray={abilities} />
         </Skills>
       </InfoColumn>
     </CardContainer>

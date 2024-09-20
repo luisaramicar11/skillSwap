@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
 p {
     color: ${({ theme }) => theme.colors.bgPrimary};
     line-height: 1.5;
-    font-weight: lighter;
+    font-weight: 300;
     margin: 0;
 } */
 

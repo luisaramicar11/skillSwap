@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Modal from '../modals/ModalMatch';
 
 interface Person {
   fullName: string;
@@ -73,14 +74,49 @@ const PassButton = styled.button`
   cursor: pointer;
 `;
 
+const StarButton = styled.button`
+  position: absolute;
+  bottom: 4.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  z-index: 99;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 3rem;
+  }
+`;
+
 const SliderCard: React.FC<SliderCardProps> = ({ person, onPass }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handlePassClick = () => {
+    onPass();
+  };
+
+  const handleStarClick = () => {
+    setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en la estrellita
+  };
+
   return (
-    <CardContainer>
-      <PassButton onClick={onPass}>→ pass</PassButton>
-      <Image src={person.image} alt={person.fullName} />
-      <Title>{person.fullName}</Title>
-      <Subtitle>{person.jobTitle}</Subtitle>
-    </CardContainer>
+    <>
+      <CardContainer>
+        <PassButton onClick={handlePassClick}>→ pass</PassButton>
+        <Image src={person.image} alt={person.fullName} />
+        <Title>{person.fullName}</Title>
+        <Subtitle>{person.jobTitle}</Subtitle>
+        <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
+      </CardContainer>
+
+      {modalOpen && <Modal  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
+    </>
   );
 };
 
