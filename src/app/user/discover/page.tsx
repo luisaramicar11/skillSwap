@@ -30,9 +30,7 @@ const Discover = () => {
       // Verifica si el nombre completo incluye el query
       user.fullName.toLowerCase().includes(lowercasedQuery) || 
       // Verifica si alguna de las habilidades incluye el query
-      user.abilities.some((ability: string) =>
-        ability.toLowerCase().includes(lowercasedQuery)
-      )
+      user.abilities.toLowerCase().includes(lowercasedQuery)
     );
 
     setFilteredUsers(filtered);
