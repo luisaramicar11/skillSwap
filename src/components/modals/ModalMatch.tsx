@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import ConnectionRequestForm from "../forms/FormRequest"
-import { IPerson } from "@/src/models/match.model";
+import { IUserCardProps } from "@/src/models/userCards.model";
 
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userToRequest: IPerson;
+  userToRequest: IUserCardProps;
 }
 
 const ModalOverlay = styled.div`

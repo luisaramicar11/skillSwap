@@ -10,25 +10,27 @@ interface LogoutButtonProps {
 }
 
 const Button = styled.button`
+  padding: 5px 10px;
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.colors.textSecondary};
-
+  color: ${({ theme }) => theme.colors.textWhite};
   border: none;
-  border-radius: 5px;
+  border-top: 1px solid ${({ theme }) => theme.colors.textWhite};
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 500;
   transition: background-color 0.3s;
-  background-color: ${({ theme }) => theme.colors.bgPrimary};;
-  opacity: 0.7;
+  background-color: ${({ theme }) => theme.colors.bgNavbar};
+  width:300px;
 
   &:hover {
     background-color:${({ theme }) => theme.colors.gradientPrimary};;
   }
 
   svg {
-    margin-right: 8px; // Espacio entre el icono y el texto
+    margin-right: 10px; // Espacio entre el icono y el texto
   }
 `;
 
@@ -44,8 +46,7 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ icon }) => {
 
   return (
     <Button onClick={handleLogout}>
-      {icon && icon} {/* Renderizamos el ícono si está presente */}
-      Salir del Perfil
+      {icon && icon} Cerrar sesión
     </Button>
   );
 };

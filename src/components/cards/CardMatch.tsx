@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SkillTag from "../ui/skillTag/skillTag";
+import { IUserCardProps } from "@/src/models/userCards.model";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
@@ -13,12 +14,28 @@ const CardContainer = styled.div`
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 1rem 1rem 2rem 1rem;
+
+  > * {
+    width: 100% !important;
+  }
 `;
 
 const DivCardContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > * {
+    width: 60% !important;
+  }
+
+  > :nth-child(2){
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary} !important;
+  }
+
+  > :nth-child(3){
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary} !important;
+  }
 `;
 
 const Connections = styled.div`
@@ -35,11 +52,22 @@ const Connections = styled.div`
 
 const RatingSection = styled.div`
   padding: 1rem;
+  padding-bottom: 1.5rem;
   display: flex;
+  text-align: start;
   flex-direction: column;
-  margin-bottom: 0.5rem;
-  font-size: 0.6rem;
+  font-size: 0.6rem !important;
   color: ${({ theme }) => theme.colors.textSecondary};
+
+  article{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  div {
+    font-size: 1rem;
+  }
 `;
 
 const RatingStars = styled.div`
@@ -50,7 +78,8 @@ const RatingStars = styled.div`
 const Description = styled.div`
   text-align: end;
   padding: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 2rem;
 `;
 
 const SkillsSection = styled.div`
@@ -87,23 +116,25 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
     <CardContainer>
       <DivCardContent>
         <Connections>
-          <div>Connections</div>
+          <div>Conexiones</div>
           <div>🔗 30</div>
         </Connections>
 
         <RatingSection>
-          <div>Rating</div>
-          <div>{rating}</div>
-          <RatingStars>
-            {[...Array(5)].map((_, index) => (
-              <span key={index}>{index < rating ? "★" : "☆"}</span>
-            ))}
-          </RatingStars>
+          <div>Calificación</div>
+          <article>
+            <div>{rating}</div>
+            <RatingStars>
+              {[...Array(5)].map((_, index) => (
+                <span key={index}>{index < rating ? "★" : "☆"}</span>
+              ))}
+            </RatingStars>
+          </article>
         </RatingSection>
 
         <Description>
-          <SubTitle>Description</SubTitle>
-          <P>{description}</P>
+          <SubTitle>Descripción</SubTitle>
+          <P><strong>+</strong> {description}</P>
         </Description>
 
         <SkillsSection>

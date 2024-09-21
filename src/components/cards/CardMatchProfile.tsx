@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
+import { IProfileCardProps, IProfileFixedCardProps } from "@/src/models/userCards.model";
 
 const ProfileCardContainer = styled.div`
   background: ${({ theme }) => theme.colors.bgSidebar};
@@ -108,35 +109,31 @@ const H2StatusSection = styled.h2`
   font-size: 0.9rem;
 `;
 
-interface ProfileCardProps {
-  name: string;
-  skills: string[];
-  rating: number;
-  rejected: string[];
-  accepted: string[];
-  pending: string[];
-  inbox: string[];
-}
-
-const ProfileCard: React.FC<ProfileCardProps> = ({
-  name,
-  skills,
-  rating,
-  rejected,
-  accepted,
-  pending,
-  inbox
+const ProfileCard: React.FC<IProfileFixedCardProps> = ({
+  fullName,
+  userSkills,
+  ultimaAceptada,
+  ultimaPendiente,
+  ultimaCancelada,
+  // ultimaRecibida,
+  conteoAceptadas,
+  conteoPendientes,
+  conteoCanceladas,
+  // conteoRecibidas
 }) => {
   return (
     <ProfileCardContainer>
-      <CardProfileLink name={name} skills={skills} rating={rating} />
+      <CardProfileLink
+              fullName={fullName}
+              userSkills={userSkills}
+            />
       <StatusSection>
         <div className="status-item rejected">
           <H2StatusSection>Rejected</H2StatusSection>
           <div className="status-content">
             <FaTimes className="icon" />
             <p>
-              {rejected.length}: {rejected.join(", ")}
+              {conteoCanceladas}: {ultimaCancelada}
             </p>
           </div>
         </div>
@@ -145,7 +142,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <div className="status-content">
             <FaCheck className="icon" />
             <p>
-              {accepted.length}: {accepted.join(", ")}
+              {conteoAceptadas}: {ultimaAceptada}
             </p>
           </div>
         </div>
@@ -154,7 +151,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {pending.length}: {pending.join(", ")}
+              {conteoPendientes}: {ultimaPendiente}
             </p>
           </div>
         </div>
@@ -163,7 +160,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {inbox.length}: {inbox.join(", ")}
+              {/* {conteoRecibidas}: {ultimaRecibida} */}hola
             </p>
           </div>
         </div>
