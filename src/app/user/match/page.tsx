@@ -14,6 +14,7 @@ interface Person {
   countMatches: number;
   description: string;
   abilities: string;
+  imageUrl: string;
 }
 
 const Match = () => {

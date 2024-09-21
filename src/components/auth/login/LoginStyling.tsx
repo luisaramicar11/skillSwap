@@ -101,3 +101,17 @@ export const DivButtonLogin = styled.div`
     justify-content: center;
   }
 `;
+
+export const ForgotPasswordButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding-left: 0; /* Alinear a la izquierda */
+  display: block;
+  width: 100%;
+`;
