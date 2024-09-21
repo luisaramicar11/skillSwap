@@ -1,10 +1,5 @@
-export interface IPerson {
-    fullName: string;
-    jobTitle: string;
-    imageUrl: string;
-  }
-  
-  export interface ISliderCardProps {
-    person: IPerson;
+import { IUserCardProps } from "./userCards.model";
+export interface ISliderCardProps {
+    person: IUserCardProps;
     onPass: () => void;
   }

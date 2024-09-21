@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SkillTag from "../ui/skillTag/skillTag";
+import { IUserCardProps } from "@/src/models/userCards.model";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
