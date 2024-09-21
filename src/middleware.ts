@@ -18,5 +18,5 @@ export function middleware(req: NextRequest) {
 
 // Definimos en qué rutas se aplicará el middleware (puedes personalizarlo)
 export const config = {
-  matcher: ['/discover/:path*', '/profile/:path*'], // Protege rutas como /dashboard, /profile, etc.
+  matcher: ['/discover/:path*', '/profile/:path*', '/RecoverPassword/:path*'], // Protege rutas como /dashboard, /profile, etc.
 };
