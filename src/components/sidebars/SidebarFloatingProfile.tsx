@@ -20,14 +20,14 @@ const ProfileSidebarContainer = styled.div`
     height: 100%;
     transition: 1s ease-in-out;
     animation: appear 1s ease-in-out;
-
+    
     @keyframes appear {
     from {
       opacity: 0;
     }
     to {
       opacity: 1;
-    }
+    };
   }
 `;
 
@@ -38,31 +38,22 @@ const ProfileSidebarContent = styled.div`
   height: 75%;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
   padding: 0.5rem 1rem;
   margin-left: 20px;
   overflow: hidden;
-  border-right: 0.5px solid ${({ theme }) => theme.colors.textWhite};
+  border: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   animation: move-right 1s ease-in-out;
 
     @keyframes move-right {
     from {
-      translate: -509px;
+      translate: -510px;
     }
     to {
       translate: 0;
     }
   }
-`;
-
-
-const SkillItem = styled.div`
-  background: ${({ theme }) => theme.colors.bgLight};
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.textDark};
 `;
 
 
@@ -75,7 +66,7 @@ const StatusSection = styled.div`
   gap: 1rem;
   padding-left: 2rem;
 
-  @media (max-height: 720px) {
+  @media (max-height: 550px) {
     display:none; /* Reduce el tamaño del texto en móviles */
   }
 
@@ -175,15 +166,22 @@ const ModalCloseButton = styled.button`
 `;
 
 const BoxLogout = styled.h2`
-  padding-left: 1.6rem;
-  padding-top: 3rem;
+  position: fixed;
+  display: flex;
+  align-items: end !important;
+  height: 75%;
+  left: 20px;
+  animation: appearBottom 2s ease-in-out;
 
-  @media (max-height: 500px) {
-    padding-top: 0; /* Reduce el tamaño del texto en móviles */
+  @keyframes appearBottom {
+    from {
+      translate: 0 500px;
+    }
+    to {
+      translate: 0 0;
+    }
   }
-
 `;
-
 
 interface ProfileSidebarProps {
   isOpen: boolean;

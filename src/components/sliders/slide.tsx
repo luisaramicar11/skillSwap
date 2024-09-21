@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import Modal from '../modals/ModalMatch';
 import { ISliderCardProps } from "@/src/models/match.model";
-import { IUserCardProps } from "@/src/models/userCards.model";
 
 const CardContainer = styled.div`
   width: 50%;

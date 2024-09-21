@@ -8,7 +8,7 @@ import { IUserCardProps, IRequestCardProps } from "@/src/models/userCards.model"
 import { OurAlertsText } from "@/src/utils/ourAlertsText";
 
 const Match = () => {
-  const [userData, setUserData] = useState<IRequestCardProps[]>([]);
+  const [userData, setUserData] = useState<IRequestCardProps | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -38,21 +38,23 @@ const Match = () => {
           }
         );
 
-        console.log(response)
-
         const dataUser = await response.json();
         setUserData(dataUser.data.obj);
 
-        console.log(dataUser)
-
         const skillsResponse = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages"
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+          {
+            method: "GET",
+            headers: {
+              Accept: "*/*",
+            },
+          }
         );
         const skillsData = await skillsResponse.json();
         setUserSkills(skillsData);
 
         setLoading(false);
-      } catch (err) {
+      } catch (error) {
         setError("Error al cargar los datos");
         setLoading(false);
       }
@@ -69,8 +71,8 @@ const Match = () => {
     return <OurAlertsText>Error: {error}</OurAlertsText>;
   }
 
-  if (!userData) {
-    return <p>No se encontraron usuarios.</p>;
+  if (!userSkills) {
+    return <OurAlertsText>No se encontraron usuarios.</OurAlertsText>;
   }
 
   const userIndex = findUserIndex(getIdUser()); // Obtiene el índice del usuario
@@ -78,23 +80,32 @@ const Match = () => {
   const handlePass = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % userSkills.length);
   };
+
+  console.log(userIndex);
+  console.log(userData);
   
   return (
     <DivMatch>
         <ProfileCard
           fullName={userSkills[userIndex].fullName}
           userSkills={userSkills[userIndex]}
-          ultimaAceptada={userData[userIndex]?.solicitudes.ultimaAceptada}
-          ultimaPendiente={userData[userIndex]?.solicitudes.ultimaPendiente}
-          ultimaCancelada={userData[userIndex]?.solicitudes.ultimaCancelada}
-          conteoAceptadas={userData[userIndex]?.solicitudes.conteoAceptadas}
-          conteoPendientes={userData[userIndex]?.solicitudes.conteoPendientes} 
-          conteoCanceladas={userData[userIndex]?.solicitudes.conteoCanceladas}
+          ultimaAceptada={userData!.solicitudes.ultimaAceptada}
+          ultimaPendiente={userData!.solicitudes.ultimaPendiente}
+          ultimaCancelada={userData!.solicitudes.ultimaCancelada}
+          // ultimaRecibida={userData!.solicitudes.ultimaRecibida}
+          conteoAceptadas={userData!.solicitudes.conteoAceptadas}
+          conteoPendientes={userData!.solicitudes.conteoPendientes} 
+          conteoCanceladas={userData!.solicitudes.conteoCanceladas}
+          // conteoRecibidas={userData!.solicitudes.conteoRecibidas}
         />
-      <SliderCard person={userSkills[currentIndex]} onPass={() => {handlePass}} />
+      <SliderCard person={userSkills[currentIndex]} onPass={handlePass} />
       <MatchCard
         description={userSkills[currentIndex]?.description}
-        skills={userSkills[currentIndex].abilities.split(',')}
+        skills={
+                userSkills[currentIndex].abilities.split(',').map(
+                  (ability: string) => ability.trim()
+                ) || []
+              }
         rating={userSkills[currentIndex]?.qualification}
       />
     </DivMatch>

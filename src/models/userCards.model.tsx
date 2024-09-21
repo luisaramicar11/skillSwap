@@ -2,11 +2,11 @@ export interface IUserCardProps {
     id: number;
     fullName: string;
     jobTitle: string;
-    imageUrl: string;
     qualification: number;
     countMatches: number;
     description: string;
     abilities: string;
+    imageUrl: string;
 }
 
 export interface IProfileFixedCardProps extends IProfileCardProps {
@@ -36,10 +36,10 @@ export interface IRequestCardProps {
         ultimaAceptada: string
         ultimaPendiente: string
         ultimaCancelada: string
-        ultimaRecibida: string
+        // ultimaRecibida: string
         conteoAceptadas: number
         conteoPendientes: number
         conteoCanceladas: number
-        conteoRecibidas: number
+        // conteoRecibidas: number
     }
 }

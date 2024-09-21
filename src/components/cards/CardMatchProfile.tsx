@@ -160,7 +160,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {/* {conteoRecibidas}: {ultimaRecibida} */} hola
+              {/* {conteoRecibidas}: {ultimaRecibida} */}hola
             </p>
           </div>
         </div>
