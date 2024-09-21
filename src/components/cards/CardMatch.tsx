@@ -116,7 +116,7 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
     <CardContainer>
       <DivCardContent>
         <Connections>
-          <div>Conecciones</div>
+          <div>Conexiones</div>
           <div>🔗 30</div>
         </Connections>
 
