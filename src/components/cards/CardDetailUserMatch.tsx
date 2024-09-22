@@ -58,7 +58,10 @@ const Match = styled.span`
   font-weight: bold;
 `;
 
-const ProfileImage = styled.img`
+const ProfileImage = styled.div<{ urlImage: string }>`
+  background-image: url(${(props) => props.urlImage}); 
+  background-size: cover;
+  background-position: center;
   width: 13rem;
   height: 13rem;
   border-radius: 10px;
@@ -322,8 +325,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData, 
             </ConnectionsRating>
           </UserInfo>
           <ProfileImage
-            src={userDetail!.urlImage}
-            alt={userData.fullName}
+            urlImage={userDetail!.urlImage}
           />
         </Header>
 

@@ -125,6 +125,7 @@ const UserInfo = () => {
       }
 
       try {
+        //ESTO YA NO EXISTE... REVISAR ENDPOINTS
         const response = await fetch(`https://skillswapriwi.azurewebsites.net/state/${idNumber}`, {
           method: 'GET',
           headers: {

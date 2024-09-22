@@ -10,14 +10,24 @@ import styled from "styled-components";
 
 const CustomSwiper = styled(Swiper)`
   width: 80%;
+  --swiper-theme-color: ${({ theme }) => theme.colors.textSecondary} !important; 
+
+  /* Estilos para los arrows */
   .swiper-button-next,
   .swiper-button-prev {
-    color: black; /* Cambia el color al que prefieras */
+    transform: scale(0.8);
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   .swiper-button-next.swiper-button-disabled,
   .swiper-button-prev.swiper-button-disabled {
-    color: #ccc; /* Cambia el color de los botones deshabilitados */
+    color: ${({ theme }) => theme.colors.textSecondary};
+    opacity: 0.2;
+  }
+
+  .swiper-slide{
+    display: flex;
+    justify-content: center
   }
 `;
 
@@ -25,8 +35,7 @@ const Carousel = () => {
   const users = [
     {
       title: "John Doe",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
+      urlImage: "",  
       rating: 4,
     },
     {
@@ -73,27 +82,28 @@ const Carousel = () => {
       modules={[Navigation, Pagination]} // Registra los módulos de navegación y paginación
       navigation
       pagination={{ clickable: true }}
-      spaceBetween={20}
-      slidesPerView={4}
+      spaceBetween={5}
+      slidesPerView={5}
+      loop={true}
       breakpoints={{
-        375: {
+        320: {
           slidesPerView: 1, // Muestra solo 1 slide a la vez en pantallas pequeñas
-          spaceBetween: 10, // Espacio reducido entre slides
+          spaceBetween: 5, // Espacio reducido entre slides
         },
         // Cuando la pantalla sea menor de 640px
         640: {
-          slidesPerView: 1, // Muestra solo 1 slide a la vez en pantallas pequeñas
-          spaceBetween: 10, // Espacio reducido entre slides
+          slidesPerView: 2, // Muestra solo 1 slide a la vez en pantallas pequeñas
+          spaceBetween: 5, // Espacio reducido entre slides
         },
         // Cuando la pantalla sea menor de 768px
         768: {
-          slidesPerView: 2, // Muestra 2 slides en pantallas medianas
-          spaceBetween: 15,
+          slidesPerView: 3, // Muestra 2 slides en pantallas medianas
+          spaceBetween: 5,
         },
         // Cuando la pantalla sea mayor de 1024px
         1024: {
           slidesPerView: 4, // Muestra 4 slides en pantallas grandes
-          spaceBetween: 20,
+          spaceBetween: 5,
         },
       }}
     >

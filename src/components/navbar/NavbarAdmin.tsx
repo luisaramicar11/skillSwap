@@ -137,14 +137,14 @@ export const NavbarAdmin: React.FC = () => {
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
             </HamburgerMenu>
             <NavList isOpen={isOpen}>
-                <NavItem onClick={() => handlePageChange('INICIO')}>
+                <NavItem onClick={() => handlePageChange('ADMIN/INICIO')}>
                     <StyledNavLink href="/admin/" label="INICIO" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('REPORTES')}>
+                <NavItem onClick={() => handlePageChange('ADMIN/REPORTES')}>
                     <StyledNavLink href="/admin/reports" label="REPORTES" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('USERS')}>
-                    <StyledNavLink href="/admin/users" label="USERS" />
+                <NavItem onClick={() => handlePageChange('ADMIN/USUARIOS')}>
+                    <StyledNavLink href="/admin/users" label="USUARIOS" />
                 </NavItem>
             </NavList>
 

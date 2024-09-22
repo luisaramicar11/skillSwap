@@ -210,7 +210,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
       try {
         // Fetch para obtener datos de usuario
         const userResponse = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/request/${idNumber}`,
+          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${idNumber}`,
           {
             method: "GET",
             headers: {
@@ -222,7 +222,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
         // Fetch para obtener habilidades del usuario
         const metricsResponse = await fetch(
-          'https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages',
+          'https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages',
           {
             method: "GET",
             headers: {
