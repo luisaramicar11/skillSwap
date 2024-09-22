@@ -7,9 +7,7 @@ import { handlePageChange } from "@/src/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
-import SideBarProfile from "../sidebars/SidebarFloatingProfile"
-import LogoutButton from "../Logout"
-import { FaSignOutAlt } from 'react-icons/fa';
+import SideBarProfile from "../sidebars/SidebarFloatingProfile";
 
 // Styled components
 const NavbarContainer = styled.div`

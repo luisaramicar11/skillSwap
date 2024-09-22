@@ -8,7 +8,7 @@ const LogobarStyled = styled.div`
     bottom: 0;
     position: fixed;
     width: 100%;
-    height:50px;
+    height:54px;
     display: flex;
     justify-content: center;
     align-items: center;

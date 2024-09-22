@@ -4,6 +4,9 @@ import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import CardProfileLink from "../cards/CardProfileLink";
 import LogoutButton from "../Logout"
 import { FaSignOutAlt } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import { IUserCardProps } from "@/src/models/userCards.model";
+import { OurAlertsText } from "@/src/utils/ourAlertsText";
 
 const ProfileSidebarContainer = styled.div`
     z-index: -1;
@@ -17,14 +20,14 @@ const ProfileSidebarContainer = styled.div`
     height: 100%;
     transition: 1s ease-in-out;
     animation: appear 1s ease-in-out;
-
+    
     @keyframes appear {
     from {
       opacity: 0;
     }
     to {
       opacity: 1;
-    }
+    };
   }
 `;
 
@@ -35,22 +38,24 @@ const ProfileSidebarContent = styled.div`
   height: 75%;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
   padding: 0.5rem 1rem;
   margin-left: 20px;
   overflow: hidden;
-  border-right: 0.5px solid ${({ theme }) => theme.colors.textWhite};
+  border: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   animation: move-right 1s ease-in-out;
 
     @keyframes move-right {
     from {
-      translate: -509px;
+      translate: -510px;
     }
     to {
       translate: 0;
     }
   }
 `;
+
 
 const StatusSection = styled.div`
   display: flex;
@@ -61,7 +66,7 @@ const StatusSection = styled.div`
   gap: 1rem;
   padding-left: 2rem;
 
-  @media (max-height: 720px) {
+  @media (max-height: 550px) {
     display:none; /* Reduce el tamaño del texto en móviles */
   }
 
@@ -161,84 +166,138 @@ const ModalCloseButton = styled.button`
 `;
 
 const BoxLogout = styled.h2`
-  padding-left: 1.6rem;
-  padding-top: 3rem;
+  position: fixed;
+  display: flex;
+  align-items: end !important;
+  height: 75%;
+  left: 20px;
+  animation: appearBottom 2s ease-in-out;
 
-  @media (max-height: 500px) {
-    padding-top: 0; /* Reduce el tamaño del texto en móviles */
+  @keyframes appearBottom {
+    from {
+      translate: 0 500px;
+    }
+    to {
+      translate: 0 0;
+    }
   }
-
 `;
 
-
-
 interface ProfileSidebarProps {
-  name: string;
-  skills: string[];
-  rating: number;
-  rejected: string[];
-  accepted: string[];
-  pending: string[];
-  inbox: string[];
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
-  name,
-  skills,
-  rating,
-  rejected,
-  accepted,
-  pending,
-  inbox,
   isOpen,
   onClose,
 }) => {
+  const [userData, setUserData] = useState<any>(null);
+  const [userSkills, setUserSkills] = useState<IUserCardProps | null>(null); // Estado para habilidades
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const idString = localStorage.getItem('userId');
+      const idNumber = idString ? parseInt(idString, 10) : null;
+
+      if (!idNumber) {
+        setError('ID de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Fetch para obtener datos de usuario
+        const userResponse = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/requests/${idNumber}`);
+        const userData = await userResponse.json();
+
+        // Fetch para obtener habilidades del usuario
+        const skillsResponse = await fetch('https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages');
+        const skillsData = await skillsResponse.json();
+
+        if (userResponse.ok && skillsResponse.ok) {
+          setUserData(userData.data.obj);
+
+          // Busca las habilidades del usuario por su nombre completo o ID
+          const matchedUser = skillsData.find((user: any) => user.id === idNumber);
+          setUserSkills(matchedUser ? matchedUser : null);
+
+        } else {
+          setError('Error al cargar los datos');
+        }
+      } catch (err) {
+        setError('Hubo un problema con la solicitud');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   if (!isOpen) return null;
+
+  if (loading) return <OurAlertsText>Cargando...</OurAlertsText>;
+  
+  const timer = setTimeout(() => {
+      if (error) {
+        return <OurAlertsText>Error: {error}</OurAlertsText>;
+      }
+    }, 3000);
+
   return (
     <ProfileSidebarContainer>
       <ProfileSidebarContent>
         <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
-        <CardProfileLink name={name} skills={skills} rating={rating} />
-        <StatusSection>
-          <div className="status-item rejected">
-            <H2StatusSection>Rejected</H2StatusSection>
-            <div className="status-content">
-              <FaTimes className="icon" />
-              <p>
-                {rejected.length}: {rejected.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item accepted">
-            <H2StatusSection>Accepted</H2StatusSection>
-            <div className="status-content">
-              <FaCheck className="icon" />
-              <p>
-                {accepted.length}: {accepted.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item pending">
-            <H2StatusSection>Pending</H2StatusSection>
-            <div className="status-content">
-              <FaClock className="icon" />
-              <p>
-                {pending.length}: {pending.join(", ")}
-              </p>
-            </div>
-          </div>
-          <div className="status-item inbox">
-            <H2StatusSection>Inbox</H2StatusSection>
-            <div className="status-content">
-              <FaClock className="icon" />
-              <p>
-                {inbox.length}: {inbox.join(", ")}
-              </p>
-            </div>
-          </div>
-        </StatusSection>
+        {userData && userSkills && (
+          <>
+            <CardProfileLink
+              fullName={userData.nombreUsuario}
+              userSkills={userSkills}
+            />
+            <StatusSection>
+              <div className="status-item rejected">
+                <H2StatusSection>Rejected</H2StatusSection>
+                <div className="status-content">
+                  <FaTimes className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoCanceladas}:{" "}
+                    {userData.solicitudes.ultimaCancelada || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item accepted">
+                <H2StatusSection>Accepted</H2StatusSection>
+                <div className="status-content">
+                  <FaCheck className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoAceptadas}:{" "}
+                    {userData.solicitudes.ultimaAceptada || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item pending">
+                <H2StatusSection>Pending</H2StatusSection>
+                <div className="status-content">
+                  <FaClock className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoPendientes}:{" "}
+                    {userData.solicitudes.ultimaPendiente || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item inbox">
+                <H2StatusSection>Inbox</H2StatusSection>
+                <div className="status-content">
+                  <FaClock className="icon" />
+                  <p>0: N/A</p>
+                </div>
+              </div>
+            </StatusSection>
+          </>
+        )}
         <BoxLogout>
           <LogoutButton icon={<FaSignOutAlt />} />
         </BoxLogout>

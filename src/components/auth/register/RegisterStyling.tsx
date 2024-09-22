@@ -8,11 +8,11 @@ export const Container = styled.div`
   justify-content: center;
   height: 100vh;
   padding: 0 20px; /* Añadido para asegurar margen en móviles */
+  
   @media (max-width: 768px) {
     height: auto; /* Ajustar la altura para pantallas pequeñas */
     padding: 20px;
-    border-radius: 0;
- 
+    border-radius: 0; 
   }
 `;
 

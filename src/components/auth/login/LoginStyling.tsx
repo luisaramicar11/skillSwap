@@ -1,6 +1,40 @@
 'use client'
 import styled from 'styled-components';
 
+export const Arrow = styled.span`
+  margin-right: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  transform: scaleX(0.5);
+`;
+
+export const BackLink = styled.div` 
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background-color: transparent;
+  border: none;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.textWhite};
+  text-decoration: none;
+  gap:5px;
+  margin: 0;
+  padding-bottom: 5px;
+
+  a {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+`;
+
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
@@ -66,4 +100,18 @@ export const DivButtonLogin = styled.div`
     display: flex;
     justify-content: center;
   }
+`;
+
+export const ForgotPasswordButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding-left: 0; /* Alinear a la izquierda */
+  display: block;
+  width: 100%;
 `;

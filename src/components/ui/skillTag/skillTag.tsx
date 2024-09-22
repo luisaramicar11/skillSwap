@@ -17,7 +17,8 @@ const SkillTagContainer = styled.div`
 
 const SkillTag = styled.p`
     display: inline-block;
-    width: 80%;
+    width: min-content;
+    min-width: 100px;
     text-align: center;
     margin: 5px 5px 0 0;
     padding: 5px 10px;

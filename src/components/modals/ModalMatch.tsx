@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import ConnectionRequestForm from "../forms/FormRequest"
+import { IUserCardProps } from "@/src/models/userCards.model";
 
-interface ModalProps {
+interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
+  userToRequest: IUserCardProps;
 }
 
 const ModalOverlay = styled.div`
@@ -25,6 +27,7 @@ const ModalOverlay = styled.div`
 const ModalContainer = styled.div`
   background-color: white;
   width: 50%;
+  height: 75%;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   position: relative;
@@ -171,7 +174,7 @@ const Star = styled.span`
   margin: 0 2px;
 `;
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -210,8 +213,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             </DivConnections>
             <UserDetail>
               <UserName>
-                <div>Alicia Keys</div>
-                <p>Back-end Software Developer | Junior</p>
+                <div>{userToRequest.fullName}</div>
+                <p>{userToRequest.jobTitle}</p>
               </UserName>
               <VerifiedBadge>Verified</VerifiedBadge>
             </UserDetail>
