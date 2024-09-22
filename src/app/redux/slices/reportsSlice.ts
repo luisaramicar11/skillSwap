@@ -19,7 +19,7 @@ export const fetchReports = createAsyncThunk<IReportGet[], void, { rejectValue: 
   "reports/fetchReports",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/ReportGet/Reports");
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/ReportGet/GetReportsAll");
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData)

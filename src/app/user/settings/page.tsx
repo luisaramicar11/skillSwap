@@ -28,7 +28,7 @@ const UserSettings = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          `https://skillswapriwi.azurewebsites.net/${idNumber}`,
+          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`,
           {
             method: "GET",
             headers: {

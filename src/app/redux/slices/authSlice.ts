@@ -16,7 +16,7 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://skillswapriwi.azurewebsites.net/api/Auth/login",
+        "https://skillswapriwi.azurewebsites.net/api/Auth/PostAuthLogin",
         {
           method: "POST",
           headers: {
@@ -49,7 +49,7 @@ export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
   "auth/registerUser",
   async (newUser, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost", {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost/PostUserCreate", {
         method: "POST",
         headers: {
           "accept": "*/*",

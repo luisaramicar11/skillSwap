@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../../models/admin.users.model";
+import { IUser, IUserUpdateAdmin } from "../../../models/user.model";
 
 // Estado inicial
 interface UsersState {
@@ -19,7 +19,7 @@ export const fetchUsers = createAsyncThunk<IUser[], void, { rejectValue: string 
   "users/fetchUsers",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersGet");
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersAll");
       if (!response.ok) {
         const errorData = await response.json();
         return rejectWithValue(errorData.message);
@@ -33,17 +33,21 @@ export const fetchUsers = createAsyncThunk<IUser[], void, { rejectValue: string 
         lastName: user.lastName,
         jobTitle: user.jobTitle,
         description: user.description,
-        dateBirthday: new Date(user.birthdate), // Convertir fecha a Date
-        urlImage: user.urlImage,
+        birthdate: new Date(user.birthdate), // Convertir fecha a Date
         email: user.email,
-        category: user.abilityCategory,
-        skills: user.abilities.split(',').map((skill: string) => skill.trim()), // Convertir string a array
+        urlImage: user.urlImage,
         phoneNumber: user.phoneNumber,
+        abilityCategory: user.abilityCategory,
+        abilities: user.abilities.split(',').map((skill: string) => skill.trim()), // Convertir string a array
         urlLinkedin: user.urlLinkedin,
         urlGithub: user.urlGithub,
         urlBehance: user.urlBehance,
-        role: user.roleName, // Asignar roleName a role
-        idState: 0, // Dependiendo de la estructura, puedes ajustar esto
+        idStateUser: user.idStateUser,
+        idRoleUser: user.idRoleUser,
+        suspensionDate: user.suspensionDate,
+        reactivationDate: user.reactivationDate,
+        nameStateUser: user.nameStateUser,
+        roleName: user.roleName, // Asignar roleName a role
       }));
 
       return users;
@@ -59,10 +63,7 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    createUser: (state, action: PayloadAction<IUser>) => {
-      state.users.push(action.payload);
-    },
-    updateUser: (state, action: PayloadAction<IUser>) => {
+    updateUser: (state, action: PayloadAction<IUserUpdateAdmin>) => {
       const updatedUser = action.payload;
       const index = state.users.findIndex((user) => user.id === updatedUser.id);
       if (index !== -1) {
