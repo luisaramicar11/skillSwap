@@ -2,14 +2,7 @@
 import styled from "styled-components";
 import Carousel from "../../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
-import { Baskervville } from "next/font/google";
 import { Footer } from "../../components/footer/Footer";
-
-const baskervville = Baskervville({
-  weight: '400',
-  subsets: ['latin'],
-  style: 'normal'
-});
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
@@ -34,7 +27,7 @@ const Logo = styled.h1`
   -webkit-text-fill-color: transparent; 
 
   @media (max-width: 768px) {
-    font-size: 10vw;
+    padding: 20px 0;
   }
 `;
 
@@ -43,12 +36,12 @@ const Button = styled.button`
   color: ${({ theme }) => theme.colors.textOrange};
   border: ${({ theme }) => theme.colors.textOrange} 1px solid;
   padding: 15px 70px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  border-radius: 10px;
   transition: 0.5s ease-in-out;
   margin-bottom: 50px;
+  border-radius: 10px;
 
   &:hover {
     background: ${({ theme }) => theme.colors.gradientPrimary};
@@ -58,8 +51,8 @@ const Button = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 10px 50px;
-    font-size: 14px;
+    padding: 10px 35px;
+    font-size: 10px;
   }
 `;
 // Estilos para el texto principal
@@ -81,7 +74,7 @@ const MainText = styled.div`
 
 // Estilos para cada cuadro de texto
 const Text = styled.div`
- display: flex;
+  display: flex;
   flex: 1;
   text-align: start;
   padding: 45px;
@@ -92,7 +85,7 @@ const Text = styled.div`
   background-clip: text;
   -webkit-text-fill-color: transparent;   
   width: 50%;
-  border: 5px solid ${({ theme }) => theme.colors.textYellow};
+  border: 4px solid ${({ theme }) => theme.colors.textYellow};
   align-items: end;
 
   &:first-child {
@@ -113,7 +106,7 @@ const Text = styled.div`
   @media (max-width: 768px) {
     padding: 20px;
     width: 100%;
-    border: none;
+
     & h2 {
       font-size: 6vw;
     }
@@ -121,13 +114,13 @@ const Text = styled.div`
 `;
 
 const Text2 = styled.div`
- flex: 1;
+  flex: 1;
   text-align: center;
   padding: 50px;
   background: transparent;
   font-size: 27px;
   width: 50%;
-  border: 5px solid ${({ theme }) => theme.colors.textSecondary};
+  border: 4px solid ${({ theme }) => theme.colors.textSecondary};
   text-align: end;
 
   &:first-child {
@@ -149,6 +142,7 @@ const Text2 = styled.div`
     padding: 20px;
     width: 100%;
     border: none;
+
     & h2 {
       font-size: 6vw;
     }
@@ -167,7 +161,8 @@ const Container = styled.div`
   gap: 50px;
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 100px 20px;
+    gap: 80px;
   }
 `;
 
@@ -193,8 +188,16 @@ const Section2 = styled.div`
   font-weight: 100;
   color: ${({ theme }) => theme.colors.textOrange2};
 
+  :nth-child(3){
+    display: none;
+  }
+
   @media (max-width: 1070px) {
     flex-direction: column;
+
+    :nth-child(3){
+      display: block;
+    }
   }
 `;
 
@@ -247,6 +250,10 @@ const Title = styled.h1`
   @media (max-width: 768px) {
     font-size: 1.5rem;
   }
+
+  @media (max-width: 555px) {
+    display: none
+  }
 `;
 
 const ProfileBox = styled.div`
@@ -254,7 +261,7 @@ const ProfileBox = styled.div`
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.textSecondary};
   padding: 30px 100px 30px 50px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: start;
   align-items: start;
   justify-content: flex-start;
@@ -265,6 +272,10 @@ const ProfileBox = styled.div`
     transition: 1s;
     transform: scale(1.05);
   }
+
+  @media (max-width: 1070px) {
+    width: 100%;
+  }
 `;
 
 const ProfileBox2 = styled.div`
@@ -272,7 +283,7 @@ const ProfileBox2 = styled.div`
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.textOrange2};
   padding: 30px 100px 30px 50px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-align: start;
   align-items: start;
   justify-content: flex-start;
@@ -285,7 +296,8 @@ const ProfileBox2 = styled.div`
   }
 
   @media (max-width: 1070px) {
-    width: 100%;
+    width: 100vw;
+    border-radius: 0;
   }
 `;
 
@@ -305,7 +317,7 @@ const Message2 = styled.p`
   color: ${({ theme }) => theme.colors.bgSecondary};
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 15px;
   }
 `;
 
@@ -313,6 +325,10 @@ const Message = styled.p`
   font-size: 1.1rem;
   margin-bottom: 20px;
   color:${({ theme }) => theme.colors.bgSecondary};;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -365,12 +381,12 @@ const LeftSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  border-left: 5px solid ${({ theme }) => theme.colors.textYellow};
+  border-left: 4px solid ${({ theme }) => theme.colors.textYellow};
   padding-left: 50px;
 
   @media (max-width: 768px) {
     padding-left: 20px;
-    border-left: 5px solid ${({ theme }) => theme.colors.textYellow};
+    border-left: 4px solid ${({ theme }) => theme.colors.textYellow};
   }
 `;
 
@@ -397,12 +413,15 @@ const SwapText = styled.h1`
 
 const SubText = styled.p`
   font-size: clamp(10px, 2vw, 2rem);
-  font-weight: bold;
+  font-weight: 400;
   color: ${({ theme }) => theme.colors.textYellow};
   margin: 10px 0 30px;
+  font-style: italic;
 `;
 
 const DiscoverButton = styled(Button)`
+  color: ${({ theme }) => theme.colors.textYellow};
+  border: ${({ theme }) => theme.colors.textYellow} 1px solid;
   display:flex;
   justify-content:center;
   align-items: center;
@@ -411,7 +430,6 @@ const DiscoverButton = styled(Button)`
 
   @media (max-width: 768px) {
     margin-top: 100px;
-    /* display: none; */
   }
 `;
 
@@ -422,14 +440,14 @@ const RightTextLine1 = styled.div`
 `;
 
 const RightTextLine2 = styled.div`
-  border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
+  border-right: 4px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 400;
 `;
 
 const RightTextLine3 = styled.div`
-  border-right: 5px solid ${({ theme }) => theme.colors.textSecondary};
+  border-right: 4px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 800;
@@ -447,7 +465,6 @@ const Home = () => {
       <Logo>
         SkillSwap
       </Logo>
-      <Button onClick={handleClick}>INICIAR SESIÓN</Button>
       <MainText>
         <Text>
           <h2>LOOKING FOR <br></br>SKILL</h2>
@@ -501,7 +518,7 @@ const Home = () => {
         <LeftSection>
           <div>
             <SwapText>Swap.</SwapText>
-            <SubText><span>simple. dinámico. libre.</span></SubText>
+            <SubText>simple. dinámico. libre.</SubText>
           </div>
           <DiscoverButton>DESCUBRE</DiscoverButton>
         </LeftSection>

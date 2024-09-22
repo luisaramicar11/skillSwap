@@ -13,15 +13,33 @@ const FooterStyled = styled.footer`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.bgSecondary};
   color: ${({ theme }) => theme.colors.textPrimary};
-  padding: 100px 50px;
+  padding: 120px 40px 100px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
 
+  article {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+  }
+
+    @media (max-width: 679px) {
+      article {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    div {
+      justify-content: center;
+    }
+  }
+
   a {
     color:${({ theme }) => theme.colors.textPrimary};
-    margin: 20px;
     text-decoration: none;
     font-size: 14px;
 
@@ -31,17 +49,20 @@ const FooterStyled = styled.footer`
   }
 
   .social-icons {
+    height: min-content;
     display: flex;
-    gap: 10px;
+    gap: 20px;
   }
 `;
 
-const Box = styled.div`
+const Box = styled.article`
+  height: min-content;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 50px;
   border-top: 1px solid ${({ theme }) => theme.colors.textPrimary};
-  padding-top: 50px;
+  padding-top: 30px;
   width: 80%;
 `;
 
@@ -55,7 +76,7 @@ export const Footer: React.FC = () => {
     return (
 
         <FooterStyled>
-        <div>
+        <article>
           <FooterNavItem onClick={() => handlePageChange('INICIO')}>
             <StyledNavLink href="/" label="INICIO" />
           </FooterNavItem>
@@ -65,13 +86,13 @@ export const Footer: React.FC = () => {
           <FooterNavItem onClick={() => handlePageChange('DESCUBRE')}>
             <StyledNavLink href="/discover" label="DESCUBRE" />
           </FooterNavItem>
-          <FooterNavItem onClick={() => handlePageChange('USUARIO')}>
+          <FooterNavItem onClick={() => handlePageChange('CONFIGURA')}>
             <StyledNavLink href="/settings" label="USUARIO" />
           </FooterNavItem>
           <FooterNavItem onClick={() => handlePageChange('LEGAL')}>
             <StyledNavLink href="/legal" label="LEGAL" />
           </FooterNavItem>
-        </div>
+        </article>
         <Box>
           <p>
             © {new Date().getFullYear()} SkillSwap, Inc. Todos los derechos reservados.

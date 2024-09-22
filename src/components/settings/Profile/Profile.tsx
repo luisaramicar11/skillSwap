@@ -80,13 +80,15 @@ const BannerBody = styled.div`
     justify-content: space-between;
 `;
 
-const BannerImageDiv = styled.div`
+const BannerImageDiv = styled.div<{ urlImage: string }>`
+  background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
+  background-position: center;
   width: 200px;
   height: 200px;
   translate: 0 30px;
   border-radius: 10px;
-  border: solid 0.5px ${({ theme }) => theme.colors.textBlack};
+  border: solid 1px ${({ theme }) => theme.colors.textBlack};
 `;
 
 // Container for INFO content
@@ -147,7 +149,7 @@ const UserProfile = ({ id, name, lastName, urlImage, jobTitle, description, birt
       <Banner>
         <BannerBody>
           <h1>Perfil</h1>
-          <BannerImageDiv><img src={urlImage} alt={name} /></BannerImageDiv>
+          <BannerImageDiv urlImage={urlImage}></BannerImageDiv>
         </BannerBody>
       </Banner>
       <PageContentContainer>

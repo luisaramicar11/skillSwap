@@ -7,7 +7,7 @@ import { handlePageChange } from "@/src/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
-import SideBarProfile from "../sidebars/SidebarFloatingProfile";
+import ProfileSidebar from "../sidebars/SidebarFloatingProfile";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -43,7 +43,7 @@ const SidebarLink = styled.p`
         padding: 0;
     }
 
-    &:hover, :focus, :active {
+    &:hover {
         transition: 0.4s;
         font-weight: 600;
         border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
@@ -129,16 +129,7 @@ export const NavbarUser: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <SideBarProfile name="Martín Elías"
-                    skills={["JavaScript", "HTML", "Adobe"]}
-                    rating={4.1}
-                    rejected={["Juliana Mina"]}
-                    accepted={["Andrea Mira"]}
-                    pending={["Claudio Ponce"]}
-                    inbox={["Carolina Rojas"]}
-                    isOpen={isModalOpen}
-                    onClose={closeModal}
-                    />
+            <ProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
             <SidebarLinkContainer>
                 <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
             </SidebarLinkContainer>

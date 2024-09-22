@@ -56,7 +56,6 @@ const ProfileSidebarContent = styled.div`
   }
 `;
 
-
 const StatusSection = styled.div`
   display: flex;
   flex-direction: column;
