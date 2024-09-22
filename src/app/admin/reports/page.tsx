@@ -9,12 +9,6 @@ import Table from "../../../components/tables/TableReports";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
-// IReportGet extiende IReport y añade propiedades adicionales
-export interface IReportGet extends IReport {
-  state?:        string;
-  user?:         string;
-  reportedUser?: string;
-}
 
 const Title = styled.h2`
   margin-top: 15px;
@@ -29,7 +23,9 @@ const Reports: React.FC = () => {
   const reports = useSelector((state: RootState) => state.reports.reports);
   const dispatch = useDispatch<AppDispatch>();
   const [editedReport, setEditedReport] = useState<IReport | null>(null);
-
+ 
+  console.log(reports)
+  
   // Llamar a la acción asíncrona para obtener reportes
   useEffect(() => {
     dispatch(fetchReports());
@@ -46,67 +42,64 @@ const Reports: React.FC = () => {
   };
 
   // Crear reporte
-  const handleCreateReport = async (newReport: Omit<IReportGet, 'id'>) => {
+  const handleCreateReport = async (newReport: Omit<IReport, 'id'>) => {
     try {
-        const token = getToken();
-        const reportToPost: Omit<IReportGet, 'id'> = {
-            titleReport: newReport.titleReport,
-            description: newReport.description,
-            dateReport: newReport.dateReport,
-            actionTaken: newReport.actionTaken,
-            idState: newReport.idState,
-            idUser: newReport.idUser, 
-            idReportedUser: newReport.idReportedUser, 
-        };
-
-        const response = await fetch("https://skillswapriwi.azurewebsites.net/api/ReportsPost", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-            },
-            body: JSON.stringify(reportToPost),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Error creando reporte:", errorData);
-            toast.error(`Error al crear el reporte: ${errorData.message}`);
-            return;
-        }
-
-        const createdReport: IReportGet = await response.json();
-        dispatch(createReport(createdReport));
-        toast.success("Reporte creado exitosamente!");
+      const token = getToken();
+      const reportToPost: Omit<IReport, 'id'> = {
+        titleReport: newReport.titleReport,
+        description: newReport.description,
+        dateReport: newReport.dateReport,
+        actionTaken: newReport.actionTaken,
+        idState: newReport.idState,
+        idUser: newReport.idUser,
+        idReportedUser: newReport.idReportedUser,
+      };
+  
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/ReportsPost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(reportToPost),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error creando reporte:", errorData);
+        toast.error(`Error al crear el reporte: ${errorData.message}`);
+        return;
+      }
+  
+      const createdReport: IReport = await response.json();
+      dispatch(createReport(createdReport));
+      toast.success("Reporte creado exitosamente!");
     } catch (error) {
-        console.error("Error creando reporte:", error);
-        toast.error("Error al crear el reporte");
+      console.error("Error creando reporte:", error);
+      toast.error("Error al crear el reporte");
     }
-};
-
+  };
   // Actualizar reporte
-  const handleUpdateReport = async (updatedReport: IReportGet) => {
+  const handleUpdateReport = async (reportToUpdate: IReport) => { // Cambia el nombre aquí
     try {
-      const token = getToken(); // Obtener token
-      const { actionTaken, id, idReportedUser } = updatedReport; // Asegúrate de que estos valores existan
-
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportPut/PutActionOnReport?action=${actionTaken}&idReport=${id}&idUserReport=${idReportedUser}`, {
+      const token = getToken();
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportPut/PutActionOnReport`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Usar token
+          //"Authorization": `Bearer ${token}`, // Asegúrate de descomentar esta línea
         },
-        body: JSON.stringify(updatedReport),
+        body: JSON.stringify(reportToUpdate), // Usa la información del reporte que quieres actualizar
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Error actualizando reporte:", errorData);
         toast.error("Error al actualizar el reporte.");
         return;
       }
-
-      dispatch(updateReport(updatedReport));
+  
+      dispatch(updateReport(reportToUpdate)); // Aquí usas la acción de Redux
       setEditedReport(null);
       toast.success("Reporte actualizado exitosamente!");
     } catch (error) {
@@ -114,15 +107,17 @@ const Reports: React.FC = () => {
       toast.error("Error al actualizar el reporte.");
     }
   };
-
+  
   // Eliminar reporte
   const handleDeleteReport = async (reportId: number) => {
+    console.log(reportId)
     try {
       const token = getToken(); // Obtener token
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/Reports/${reportId}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportDelete/${reportId}`, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${token}`, // Usar token
+          "accept": "*/*",
+          //"Authorization": `Bearer ${token}`, // Usar token
         },
       });
 
@@ -144,15 +139,12 @@ const Reports: React.FC = () => {
   return (
     <>
       <Title>Formulario de Reportes</Title>
-
       <CreateForm
         createData={handleCreateReport}
         updateData={handleUpdateReport}
         dataToEdit={editedReport}
         setDataToEdit={setEditedReport}
       />
-
-      <Title>Lista de Reportes</Title>
       <Table 
         data={reports}
         setDataToEdit={setEditedReport}

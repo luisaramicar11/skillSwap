@@ -26,6 +26,9 @@ const TableHeaderReport: React.FC = () => {
           <Th>Descripción</Th> {/* "Descripción" ya estaba bien */}
           <Th>Fecha de creación</Th> {/* "Fecha del reporte" puede ser más claro como "Fecha de creación" */}
           <Th>Acción tomada</Th> {/* No hay cambios aquí */}
+          <Th>Id del Estado</Th> {/* "Administrador" puede ser más claro como "Nombre del administrador" */}
+          <Th>Id del Usuario</Th> {/* "Administrador" puede ser más claro como "Nombre del administrador" */}
+          <Th>Id del Reportado</Th> {/* "Administrador" puede ser más claro como "Nombre del administrador" */}
           <Th>Estado</Th> {/* Cambiado a simplemente "Estado" */}
           <Th>Nombre del usuario</Th> {/* Ajuste del nombre para mayor claridad */}
           <Th>Nombre del reportado</Th> {/* No hay cambios aquí */}

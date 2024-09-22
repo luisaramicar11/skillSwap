@@ -18,9 +18,13 @@ const Title = styled.h2`
   font-size: 15pt;
 `;
 
+const Div= styled.div`
+  margin: 54px 0;
+`
+
 const Users: React.FC = () => {
   const users = useSelector((state: RootState) => state.users.users);
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
   const [editedUser, setEditedUser] = useState<IUser | null>(null);
 
   // Llamar a la acción asíncrona para obtener usuarios
@@ -42,7 +46,7 @@ const Users: React.FC = () => {
   const handleCreateUser = async (newUser: Omit<IUser, 'id'>) => {
     try {
       const token = getToken(); // Obtener token
-      const response = await fetch("https://api.escuelajs.co/api/v1/users", {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,23 +74,22 @@ const Users: React.FC = () => {
   // Actualizar usuario
   const handleUpdateUser = async (updatedUser: IUser) => {
     try {
-      const token = getToken(); // Obtener token
-      const response = await fetch(`https://api.escuelajs.co/api/v1/users/${updatedUser.id}`, {
+      console.log("Datos que se están enviando:", updatedUser); // Añade esto para depurar
+      const token = getToken();
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/Admin/${updatedUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Usar token
+          "accept": "*/*",
         },
         body: JSON.stringify(updatedUser),
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Error updating user:", errorData);
         toast.error("Error al actualizar el usuario.");
         return;
       }
-
       dispatch(updateUser(updatedUser));
       setEditedUser(null);
       toast.success("Usuario actualizado exitosamente!");
@@ -95,12 +98,13 @@ const Users: React.FC = () => {
       toast.error("Error al actualizar el usuario.");
     }
   };
+  
 
   // Eliminar usuario
   const handleDeleteUser = async (userId: number) => {
     try {
       const token = getToken(); // Obtener token
-      const response = await fetch(`https://api.escuelajs.co/api/v1/users/${userId}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersDelete/${userId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`, // Usar token
@@ -123,7 +127,7 @@ const Users: React.FC = () => {
   };
 
   return (
-    <>
+    <Div>
       <Title>Formulario Usuarios</Title>
 
       <CreateForm
@@ -132,15 +136,14 @@ const Users: React.FC = () => {
         dataToEdit={editedUser}
         setDataToEdit={setEditedUser}
       />
-
-      <Title>Lista de usuarios</Title>
       <Table 
         data={users}
         setDataToEdit={setEditedUser}
         deleteData={handleDeleteUser} 
       />
-    </>
+    </Div>
   );
 };
 
 export default Users;
+

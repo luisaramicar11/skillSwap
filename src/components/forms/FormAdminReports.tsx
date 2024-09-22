@@ -1,6 +1,6 @@
 "use client";
 import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
-import { IReport } from "../../models/admin.reports.model";
+import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -63,22 +63,15 @@ interface CreateReportFormProps {
   setDataToEdit: (data: IReport | null) => void;
 }
 
-// IReportGet extiende IReport y añade propiedades adicionales
-export interface IReportGet extends IReport {
-  state?:        string;
-  user?:         string;
-  reportedUser?: string;
-}
-
-const initialForm: IReportGet = {
+const initialForm: IReport = {
   id: 0,
   titleReport: "",
   description: "",
   dateReport: new Date(),
   actionTaken: "",
-  state: "",
-  user: "",
-  reportedUser: "",
+  idState: 0,
+  idUser: 0,
+  idReportedUser: 0,
 };
 
 const CreateReportForm: React.FC<CreateReportFormProps> = ({
@@ -170,6 +163,33 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             required
           />
           <Input
+            type="number"
+            name="idState"
+            placeholder="Id del Estado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idState}
+            required
+          />
+          <Input
+            type="number"
+            name="idUser"
+            placeholder="Id del User"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idUser}
+            required
+          />
+          <Input
+            type="number"
+            name="idReportedUser"
+            placeholder="Id del usuario reportado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idReportedUser}
+            required
+          />
+          <Input
             type="text"
             name="state"
             placeholder="Estado"
@@ -188,7 +208,7 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             required
           />
           <Input
-            type="email"
+            type="text"
             name="reportedUser"
             placeholder="Usuario reportado"
             onBlur={handleChange}

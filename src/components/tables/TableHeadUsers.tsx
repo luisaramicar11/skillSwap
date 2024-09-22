@@ -37,7 +37,6 @@ const TableHeaderUser: React.FC = () => {
           <Th>Github</Th>
           <Th>Rol</Th>
           <Th>Id Estado</Th>
-          <Th>Estado</Th>
           <Th>Actions</Th>
         </Tr>
       </thead>

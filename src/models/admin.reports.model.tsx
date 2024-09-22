@@ -5,8 +5,8 @@ export interface Report {
 }
 
 export interface IReports {
-    report: IReport[];
-}
+    obj: IReportGet[]; // Cambiar "report" a "obj"
+  }
 
 export interface IReport {
     id:            number;
@@ -25,6 +25,9 @@ export interface IReportGet {
     description?:   string;
     dateReport?:   Date;
     actionTaken?:   string;
+    idState?:       number;
+    idUser?:        number;
+    idReportedUser?: number;
     state?:        string;
     user?:        string;
     reportedUser?: string;

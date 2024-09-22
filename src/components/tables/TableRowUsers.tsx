@@ -48,10 +48,6 @@ const DeleteButton = styled.button`
 
 const Tr = styled.tr`
   text-align: center;
-
-  &:nth-child(even) {
-    background-color: #f2f2f2;
-  }
 `;
 
 interface TableRowProps {
@@ -60,19 +56,41 @@ interface TableRowProps {
   deleteData: (userId: number) => void;
 }
 
-const TableRowUser: React.FC<TableRowProps> = ({ user, setDataToEdit, deleteData }) => {
+const TableRowUser: React.FC<TableRowProps> = ({
+  user,
+  setDataToEdit,
+  deleteData,
+}) => {
   const formatSkills = (skills: string[] | undefined) => {
     return skills ? skills.join(", ") : "No skills available";
   };
 
   const formatDate = (date: Date | string) => {
-    if (typeof date === 'string') {
+    if (typeof date === "string") {
       return date; // Suponiendo que ya está en formato correcto
     }
-    return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
+    return date.toISOString().split("T")[0]; // Extrae solo la parte de la fecha
   };
-  
-  const { id, name, lastName, jobTitle, description, dateBirthday, urlImage, email, category, skills, phoneNumber, urlLinkedin, urlBehance, urlGithub, role, idState, stateName } = user;
+
+  const {
+    id,
+    name,
+    lastName,
+    jobTitle,
+    description,
+    dateBirthday,
+    urlImage,
+    email,
+    category,
+    skills,
+    phoneNumber,
+    urlLinkedin,
+    urlBehance,
+    urlGithub,
+    role,
+    idState,
+  } = user; // Eliminado stateName
+
   return (
     <Tr>
       <Td>{name}</Td>
@@ -81,11 +99,10 @@ const TableRowUser: React.FC<TableRowProps> = ({ user, setDataToEdit, deleteData
       <Td>{description}</Td>
       <Td>{dateBirthday ? formatDate(dateBirthday) : ""}</Td>
       <Td>
-        {urlImage && (
-          <Img 
-            src={urlImage} 
-            alt={`Avatar of ${name}`} 
-          />
+        {urlImage && urlImage !== "no hay aun" ? (
+          <Img src={urlImage} alt={`Avatar of ${name}`} />
+        ) : (
+          "No Image"
         )}
       </Td>
       <Td>{email}</Td>
@@ -97,7 +114,6 @@ const TableRowUser: React.FC<TableRowProps> = ({ user, setDataToEdit, deleteData
       <Td>{urlGithub}</Td>
       <Td>{role}</Td>
       <Td>{idState}</Td>
-      <Td>{stateName}</Td>    
       <Td>
         <EditButton onClick={() => setDataToEdit(user)}>Editar</EditButton>
         <DeleteButton onClick={() => deleteData(id)}>Eliminar</DeleteButton>
@@ -107,3 +123,4 @@ const TableRowUser: React.FC<TableRowProps> = ({ user, setDataToEdit, deleteData
 };
 
 export default TableRowUser;
+

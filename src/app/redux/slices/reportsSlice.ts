@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IReport, IReportGet, Report } from "../../../models/admin.reports.model";
+import { IReportGet, IReport } from "../../../models/admin.reports.model"; // Usa IReportGet para los reportes GET
 
 // Estado inicial
 interface UsersState {
-  reports: IReport[];
+  reports: IReportGet[];  // Cambiado a IReportGet[]
   loading: boolean;
   error: string | null;
 }
@@ -15,20 +15,21 @@ const initialState: UsersState = {
 };
 
 // Acción asíncrona para obtener reportes
-export const fetchReports = createAsyncThunk<IReport[], void, { rejectValue: string }>(
+export const fetchReports = createAsyncThunk<IReportGet[], void, { rejectValue: string }>(
   "reports/fetchReports",
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch("https://skillswapriwi.azurewebsites.net/ReportGet/Reports");
       if (!response.ok) {
         const errorData = await response.json();
+        console.log(errorData)
         return rejectWithValue(errorData.message);
       }
 
       const data = await response.json();
-      const reports = data.data.obj; // Aquí accedes al array 'obj'
+      const reports = data.data.response; // Accedes a 'obj' correctamente
 
-      return reports; // Devuelves el array de reportes
+      return reports as IReportGet[]; // Devuelves el array de reportes con el tipo adecuado
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -42,14 +43,14 @@ const usersSlice = createSlice({
   reducers: {
     createReport: (state, action: PayloadAction<IReport>) => {
       const newReport: IReport = {
-        id: Date.now(), // Generar un ID temporal o basado en la lógica que manejes
+        id: Date.now(),
         titleReport: action.payload.titleReport,
         description: action.payload.description,
-        dateReport: new Date(), // Fecha actual
+        dateReport: new Date(),
         actionTaken: "pendiente",
-        idState: 1, // Estado inicial del reporte
-        idUser: action.payload.idUser, 
-        idReportedUser: Date.now(), // Convertir idReportedUse de número a string
+        idState: 1,
+        idUser: action.payload.idUser,
+        idReportedUser: action.payload.idReportedUser,
       };
     
       state.reports.push(newReport);
@@ -64,7 +65,6 @@ const usersSlice = createSlice({
       }
     },
     
-    
     deleteReport: (state, action: PayloadAction<number>) => {
       state.reports = state.reports.filter((report) => report.id !== action.payload);
     },
@@ -75,7 +75,7 @@ const usersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchReports.fulfilled, (state, action: PayloadAction<IReport[]>) => {
+      .addCase(fetchReports.fulfilled, (state, action: PayloadAction<IReportGet[]>) => {
         state.loading = false;
         state.reports = action.payload;
       })

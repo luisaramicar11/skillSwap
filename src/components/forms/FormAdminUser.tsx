@@ -57,14 +57,13 @@ const Title = styled.h2`
 `;
 
 interface CreateUserFormProps {
-  createData: (user: Omit<IUser, "id">) => void; // Cambia a Omit<User, 'id'>
+  createData: (user: Omit<IUser, "id">) => void; // Cambia a Omit<IUser, 'id'>
   updateData: (user: IUser) => void;
   dataToEdit: IUser | null;
   setDataToEdit: (data: IUser | null) => void;
 }
 
-const initialForm: IUser = {
-  id: 0, // Inicialmente tiene un ID por defecto, se actualizará cuando sea necesario
+const initialForm: Omit<IUser, "id"> = {
   name: "",
   lastName: "",
   jobTitle: "",
@@ -78,10 +77,8 @@ const initialForm: IUser = {
   urlLinkedin: "",
   urlBehance: "",
   urlGithub: "",
-  //createdAt: new Date().toISOString(),
   role: "",
-  idState: "",
-  stateName: "",
+  idState: 0,
 };
 
 const CreateUserForm: React.FC<CreateUserFormProps> = ({
@@ -90,11 +87,12 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
   dataToEdit,
   setDataToEdit,
 }) => {
-  const [form, setForm] = useState<IUser>(initialForm);
+  const [form, setForm] = useState<Omit<IUser, "id">>(initialForm);
 
   useEffect(() => {
     if (dataToEdit) {
-      setForm(dataToEdit);
+      const { id, ...userWithoutId } = dataToEdit; // Excluir id
+      setForm(userWithoutId);
     } else {
       setForm(initialForm);
     }
@@ -114,11 +112,10 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!form.id || form.id === 0) {
-      const { id, ...userWithoutId } = form;
-      createData(userWithoutId as Omit<IUser, "id">);
+    if (!dataToEdit) {
+      createData(form); // Crear nuevo usuario
     } else {
-      updateData(form);
+      updateData({ ...form, id: dataToEdit.id }); // Actualizar usuario existente
     }
     handleReset(e);
   };
@@ -132,13 +129,12 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
   };
 
   // Convierte una fecha a formato YYYY-MM-DD
-const formatDate = (date: Date | string) => {
-  if (typeof date === 'string') {
-    return date; // Suponiendo que ya está en formato correcto
-  }
-  return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
-};
-
+  const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') {
+      return date; // Suponiendo que ya está en formato correcto
+    }
+    return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
+  };
 
   return (
     <main>
@@ -149,7 +145,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="name"
             placeholder="Nombre del usuario"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.name}
             required
@@ -158,7 +153,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="lastName"
             placeholder="Apellidos del usuario"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.lastName}
             required
@@ -167,7 +161,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="jobTitle"
             placeholder="Cargo/profesión"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.jobTitle}
             required
@@ -176,7 +169,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="description"
             placeholder="Descripción"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.description}
             required
@@ -185,16 +177,14 @@ const formatDate = (date: Date | string) => {
             type="date"
             name="dateBirthday"
             placeholder="Fecha de nacimiento"
-            onBlur={handleChange}
             onChange={handleChange}
-            value={form.dateBirthday ? formatDate(form.dateBirthday) : ""}
+            value={formatDate(form.dateBirthday)}
             required
           />
           <Input
             type="text"
             name="urlImage"
             placeholder="Imagen"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.urlImage}
             required
@@ -203,7 +193,6 @@ const formatDate = (date: Date | string) => {
             type="email"
             name="email"
             placeholder="Email"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.email}
             required
@@ -212,7 +201,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="category"
             placeholder="Escribe la categoría"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.category}
             required
@@ -220,17 +208,15 @@ const formatDate = (date: Date | string) => {
           <Input
             type="text"
             name="skills"
-            placeholder="Escribe las habilidades"
-            onBlur={handleChange}
+            placeholder="Escribe las habilidades (separadas por comas)"
             onChange={handleChange}
-            value={form.skills}
+            value={form.skills.join(", ")} // Mostrar como cadena
             required
           />
           <Input
             type="text"
             name="phoneNumber"
             placeholder="Escribe el teléfono"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.phoneNumber}
             required
@@ -239,7 +225,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="urlLinkedin"
             placeholder="Escribe la url del Linkedin"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.urlLinkedin}
             required
@@ -248,7 +233,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="urlBehance"
             placeholder="Escribe la url del Behance"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.urlBehance}
             required
@@ -257,7 +241,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="urlGithub"
             placeholder="Escribe la url del Github"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.urlGithub}
             required
@@ -266,7 +249,6 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="role"
             placeholder="Rol del usuario"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.role}
             required
@@ -275,17 +257,9 @@ const formatDate = (date: Date | string) => {
             type="text"
             name="idState"
             placeholder="Id del estado"
-            onBlur={handleChange}
             onChange={handleChange}
             value={form.idState}
-          />
-          <Input
-            type="text"
-            name="stateName"
-            placeholder="Nombre del estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.stateName || ""}
+            required
           />
           <Div>
             <Button type="submit">Enviar</Button>
@@ -298,3 +272,4 @@ const formatDate = (date: Date | string) => {
 };
 
 export default CreateUserForm;
+
