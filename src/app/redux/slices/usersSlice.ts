@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../../models/user.model";
+import { IUser } from "../../../models/admin.users.model";
 
 // Estado inicial
 interface UsersState {
@@ -15,7 +15,7 @@ const initialState: UsersState = {
 };
 
 // Acción asíncrona para obtener usuarios
-export const fetchUsers =  createAsyncThunk<IUser[], void, { rejectValue: string }>(
+export const fetchUsers = createAsyncThunk<IUser[], void, { rejectValue: string }>(
   "users/fetchUsers",
   async (_, { rejectWithValue }) => {
     try {
@@ -24,12 +24,35 @@ export const fetchUsers =  createAsyncThunk<IUser[], void, { rejectValue: string
         const errorData = await response.json();
         return rejectWithValue(errorData.message);
       }
-      return response.json();
+      
+      // Extraer y mapear los datos
+      const data = await response.json();
+      const users = data.data.obj.map((user: any): IUser => ({
+        id: user.id,
+        name: user.name,
+        lastName: user.lastName,
+        jobTitle: user.jobTitle,
+        description: user.description,
+        dateBirthday: new Date(user.birthdate), // Convertir fecha a Date
+        urlImage: user.urlImage,
+        email: user.email,
+        category: user.abilityCategory,
+        skills: user.abilities.split(',').map((skill: string) => skill.trim()), // Convertir string a array
+        phoneNumber: user.phoneNumber,
+        urlLinkedin: user.urlLinkedin,
+        urlGithub: user.urlGithub,
+        urlBehance: user.urlBehance,
+        role: user.roleName, // Asignar roleName a role
+        idState: 0, // Dependiendo de la estructura, puedes ajustar esto
+      }));
+
+      return users;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
 );
+
 
 // Slice de Redux
 const usersSlice = createSlice({
