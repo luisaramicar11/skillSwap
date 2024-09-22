@@ -117,7 +117,7 @@ const Line = styled.div`
 `;
 
 // Navbar component
-export const NavbarUser: React.FC = () => {
+export const NavbarAdmin: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -149,13 +149,13 @@ export const NavbarUser: React.FC = () => {
             </HamburgerMenu>
             <NavList isOpen={isOpen}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
-                    <StyledNavLink href="/user/" label="INICIO" />
+                    <StyledNavLink href="/admin/" label="INICIO" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('DESCUBRE')}>
-                    <StyledNavLink href="/user/discover" label="DESCUBRE" />
+                <NavItem onClick={() => handlePageChange('REPORTES')}>
+                    <StyledNavLink href="/admin/reports" label="REPORTES" />
                 </NavItem>
-                <NavItem onClick={() => handlePageChange('MATCH')}>
-                    <StyledNavLink href="/user/match" label="MATCH" />
+                <NavItem onClick={() => handlePageChange('USERS')}>
+                    <StyledNavLink href="/admin/users" label="USERS" />
                 </NavItem>
             </NavList>
 

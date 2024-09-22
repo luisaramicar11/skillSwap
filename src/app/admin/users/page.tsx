@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, createUser, deleteUser, updateUser } from "../../redux/slices/usersSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { IUser } from "../../../models/admin.model"; 
+import { IUser } from "../../../models/admin.users.model"; 
 import CreateForm from "../../../components/forms/FormAdminUser";
 import Table from "../../../components/tables/TableUsers";
 import styled from "styled-components";

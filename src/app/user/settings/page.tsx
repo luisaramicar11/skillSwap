@@ -1,5 +1,5 @@
 'use client'
-import UserProfile from "@/src/components/settings/profile/Profile";
+import UserProfile from "../../../components/settings/Profile/Profile";
 import UserSkills from "@/src/components/settings/skills/Skills";
 import UserInfo from "@/src/components/settings/info/Info";
 import styled from "styled-components";

@@ -1,6 +1,6 @@
 "use client";
 import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
-import { IUser } from "../../models/admin.model";
+import { IUser } from "../../models/admin.users.model";
 import styled from "styled-components";
 
 const Form = styled.form`

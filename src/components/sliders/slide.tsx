@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-//import Modal from './Modal';
+import Modal from '../modals/ModalMatch';
 
 interface Person {
-  name: string;
-  role: string;
+  fullName: string;
+  jobTitle: string;
   image: string;
 }
 
@@ -34,26 +34,6 @@ const CardContainer = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
-
-  @media (max-width: 1024px) {
-    width: 80%; /* Aumenta el ancho en pantallas más pequeñas */
-    height: auto;
-    margin-top: 2.5rem;
-    margin-left: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%; /* Para pantallas más pequeñas aún, usa todo el ancho */
-    height: auto;
-    margin-left: 1rem;
-    margin-top: 2.5rem;
-  }
-
-  @media (max-width: 547.5px) {
-    margin-left: 0 !important;
-    margin-right: 1rem !important;
-    width: 100%; /* Ancho completo en pantallas pequeñas */
-  }
 `;
 
 const Image = styled.img`
@@ -62,10 +42,6 @@ const Image = styled.img`
   height: 100%;
   border-radius: 0.5rem;
   object-fit: cover;
-
-  @media (max-width: 768px) {
-    height: auto; /* Ajusta la altura automáticamente en pantallas pequeñas */
-  }
 `;
 
 const Title = styled.h3`
@@ -74,18 +50,6 @@ const Title = styled.h3`
   bottom: 2.5rem;
   left: 1.5rem;
   z-index: 99;
-
-  @media (max-width: 768px) {
-    font-size: 2.5rem; /* Reduce el tamaño de la fuente en pantallas más pequeñas */
-    bottom: 2.5rem;
-    left: 2.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 2rem; /* Aún más pequeño en móviles */
-    bottom: 1.5rem;
-    left: 1.5rem;
-  }
 `;
 
 const Subtitle = styled.p`
@@ -96,18 +60,6 @@ const Subtitle = styled.p`
   left: 1.5rem;
   z-index: 99;
   color: #ccc;
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem; /* Ajusta la fuente para pantallas más pequeñas */
-    bottom: 1.5rem;
-    left: 2.5rem;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.2rem; /* Aún más pequeño en pantallas muy pequeñas */
-    bottom: 1rem;
-    left: 1.5rem;
-  }
 `;
 
 const PassButton = styled.button`
@@ -119,16 +71,7 @@ const PassButton = styled.button`
   color: white;
   font-size: 2rem;
   z-index: 99;
-  font-weight: 100;
   cursor: pointer;
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem; /* Disminuye el tamaño en pantallas pequeñas */
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem; /* Disminuye aún más para móviles */
-  }
 `;
 
 const StarButton = styled.button`
@@ -143,11 +86,11 @@ const StarButton = styled.button`
   cursor: pointer;
 
   @media (max-width: 768px) {
-    font-size: 4rem; /* Ajusta el tamaño para pantallas más pequeñas */
+    font-size: 4rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 3rem; /* Aún más pequeño en pantallas móviles */
+    font-size: 3rem;
   }
 `;
 
@@ -159,20 +102,20 @@ const SliderCard: React.FC<SliderCardProps> = ({ person, onPass }) => {
   };
 
   const handleStarClick = () => {
-    setModalOpen(true);
+    setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en la estrellita
   };
 
   return (
     <>
       <CardContainer>
         <PassButton onClick={handlePassClick}>→ pass</PassButton>
-        <Image src={person.image} alt={person.name} />
-        <Title>{person.name}</Title>
-        <Subtitle>{person.role}</Subtitle>
-        <StarButton onClick={handleStarClick}>★</StarButton>
+        <Image src={person.image} alt={person.fullName} />
+        <Title>{person.fullName}</Title>
+        <Subtitle>{person.jobTitle}</Subtitle>
+        <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
       </CardContainer>
 
-      {/* {modalOpen && <Modal onClose={() => setModalOpen(false)} />} */}
+      {modalOpen && <Modal  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
     </>
   );
 };

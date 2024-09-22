@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "../../../models/user.model";
+import { IUser } from "../../../models/admin.users.model";
 
 // Estado inicial
 interface UsersState {

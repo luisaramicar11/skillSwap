@@ -1,6 +1,6 @@
 import React from "react";
 import TableRow from "./TableRowUsers"
-import {TableDataUsers } from "../../models/admin.model"; 
+import {TableDataUsers } from "../../models/admin.users.model"; 
 import styled from "styled-components";
 import TableHeader from "./TableHeadUsers"
 
