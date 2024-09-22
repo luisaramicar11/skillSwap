@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReportForm from "../forms/FormReport"
+import ReportForm from "../forms/FormReport";
 
 interface ModalProps {
   isOpen: boolean;
@@ -43,7 +43,7 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
 
-  span{
+  span {
     color: ${({ theme }) => theme.colors.textPink};
   }
 `;
@@ -60,7 +60,7 @@ const ModalCloseButton = styled.button`
 const DivRoute = styled.div`
   display: flex;
   justify-content: flex-start;
-  background-color:#fff;
+  background-color: #fff;
   padding: 0.5rem;
   padding-left: 1rem;
   margin: 0.8rem;
@@ -71,7 +71,7 @@ const DivRoute = styled.div`
 const ModalContent = styled.div`
   display: flex;
   margin: 1rem;
-  margin-top:2rem;
+  margin-top: 2rem;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -102,7 +102,7 @@ const AlertText = styled.p`
   align-items: center;
   gap: 10px;
 
-  span{
+  span {
     padding-right: 0.5rem;
     font-size: 1rem;
   }
@@ -116,16 +116,16 @@ const PoliceInfo = styled.div`
 `;
 
 const DivAlertText = styled.div`
- display: flex;
- flex-direction: column;
- border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const DivColor = styled.div`
   background: ${({ theme }) => theme.colors.backgroundGreen};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
   margin: 0;
-  padding:0;
+  padding: 0;
   width: 100%;
   height: 2rem;
 `;
@@ -143,33 +143,39 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     <ModalOverlay>
       <ModalContainer>
         <ModalHeader>
-          <div>SkillSwap <span>Safety</span></div>
+          <div>
+            SkillSwap <span>Safety</span>
+          </div>
           <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
         </ModalHeader>
-        <DivRoute>C:\ User\ Documents\ SafetyTyps</DivRoute>
+        <DivRoute>C:\ User\ Documents\ SafetyTips</DivRoute>
         <ModalContent>
-          {/* Left section with the tips */}
+          {/* Left section with the report form */}
           <LeftSection>
-            <ReportForm/>
+            {/* Pasar la función onClose como prop */}
+            <ReportForm closeModal={onClose} />
           </LeftSection>
 
           {/* Right section with warnings */}
           <RightSection>
             <DivAlertText>
-            <DivColor /> 
-            <DivTexts>
-            <AlertText>
-              <span>⚠️</span> No dudes en reportar. La seguridad mutua es primera.
-            </AlertText>
-            <AlertText>
-              <span>🔵</span> En el panel de Ayuda del User puedes ver más sobre Reportes y Seguridad.
-            </AlertText>
-            <AlertText>
-              <span>⛔</span> Cualquier tipo de abuso o actividad ilegal nos interpela a tomar medidas.
-            </AlertText>
-            </DivTexts>  
+              <DivColor />
+              <DivTexts>
+                <AlertText>
+                  <span>⚠️</span> No dudes en reportar. La seguridad mutua es
+                  primera.
+                </AlertText>
+                <AlertText>
+                  <span>🔵</span> En el panel de Ayuda del User puedes ver más
+                  sobre Reportes y Seguridad.
+                </AlertText>
+                <AlertText>
+                  <span>⛔</span> Cualquier tipo de abuso o actividad ilegal nos
+                  interpela a tomar medidas.
+                </AlertText>
+              </DivTexts>
             </DivAlertText>
-        
+
             <PoliceInfo>
               Policía Nacional - CAI Virtual <br />
               Línea Nacional: 0 8000 91 1190 <br />

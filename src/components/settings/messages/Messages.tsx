@@ -36,6 +36,7 @@ const PageBody = styled.div`
 
 // Estilos adicionales para los botones y el contenedor de los mensajes
 const MessageContainer = styled.div`
+  width: 50%;
   padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
   border-radius: 8px;
@@ -56,13 +57,37 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 5px;
   border: none;
-  background-color: ${({ theme }) => theme.colors.bgButton};
+  background-color: #000;
   color: ${({ theme }) => theme.colors.textPrimary};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.bgButtonHover};
   }
 `;
+
+// Función para enviar la actualización del estado de la solicitud
+const updateRequestState = async (idRequest: number, idStateRequest: number) => {
+  try {
+    const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsPatch/PatchRequestState/${idRequest}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        idStateRequest
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar el estado de la solicitud');
+    }
+
+    const data = await response.json();
+    console.log('Estado de la solicitud actualizado:', data);
+  } catch (error) {
+    console.error('Error al hacer el PATCH:', error);
+  }
+};
 
 // Componente principal de la página de mensajes
 const UserMessagess = () => {
@@ -95,6 +120,14 @@ const UserMessagess = () => {
     }
   }, [userId]);
 
+  const handleAccept = (id: number) => {
+    updateRequestState(id, 2); // Actualizar con idStateRequest = 2 (Aceptar)
+  };
+
+  const handleReject = (id: number) => {
+    updateRequestState(id, 3); // Actualizar con idStateRequest = 3 (Rechazar)
+  };
+
   return (
     <PageContainer>
       <Banner>
@@ -114,8 +147,8 @@ const UserMessagess = () => {
                       <p>{message.description}</p>
                     </div>
                     <ButtonsContainer>
-                      <Button>Aceptar</Button>
-                      <Button>Rechazar</Button>
+                      <Button onClick={() => handleAccept(message.id)}>Aceptar</Button>
+                      <Button onClick={() => handleReject(message.id)}>Rechazar</Button>
                     </ButtonsContainer>
                   </MessageContainer>
                 ))
@@ -131,3 +164,5 @@ const UserMessagess = () => {
 };
 
 export default UserMessagess;
+
+
