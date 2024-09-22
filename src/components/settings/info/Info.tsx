@@ -138,7 +138,7 @@ const UserInfo = () => {
         }
 
         const data = await response.json();
-        setAccountState(data.data.obj.stateName);
+        setAccountState(data.data.response.stateName);
       } catch (err: any) {
         setError(err.message || "Error desconocido");
       } finally {

@@ -68,7 +68,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
                 jobTitle={user.jobTitle}
                 qualification={user.qualification}
                 abilities={abilitiesArray}
-                imageUrl={user.imageUrl}
+                urlImage={user.urlImage}
               />
             </div>
           );

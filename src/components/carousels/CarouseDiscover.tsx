@@ -25,43 +25,43 @@ const Carousel = () => {
   const users = [
     {
       title: "John Doe",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 4,
     },
     {
       title: "Jane Smith",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 5,
     },
     {
       title: "Carlos Ruiz",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 3,
     },
     {
       title: "Carlos Ruiz",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 3,
     },
     {
       title: "Carlos Ruiz",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 3,
     },
     {
       title: "Carlos Ruiz",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 3,
     },
     {
       title: "Carlos Ruiz",
-      imageUrl:
+      urlImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
       rating: 3,
     },
@@ -101,7 +101,7 @@ const Carousel = () => {
         <SwiperSlide key={index}>
           <Card
             title={user.title}
-            imageUrl={user.imageUrl}
+            urlImage={user.urlImage}
             rating={user.rating}
           />
         </SwiperSlide>

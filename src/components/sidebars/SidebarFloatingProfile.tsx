@@ -104,7 +104,7 @@ const StatusSection = styled.div`
     }
   }
 
-  .pending {
+  .sent {
     opacity: 0.7;
     color: ${({ theme }) => theme.colors.textSecondary};
 
@@ -193,7 +193,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   onClose,
 }) => {
   const [userData, setUserData] = useState<any>(null);
-  const [userSkills, setUserSkills] = useState<IUserCardProps | null>(null); // Estado para habilidades
+  const [userMetrics, setUserMetrics] = useState<IUserCardProps | null>(null); // Estado para habilidades
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -210,19 +210,35 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
       try {
         // Fetch para obtener datos de usuario
-        const userResponse = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/requests/${idNumber}`);
+        const userResponse = await fetch(
+          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/request/${idNumber}`,
+          {
+            method: "GET",
+            headers: {
+              "accept" : "*/*"
+            },
+          }
+        );
         const userData = await userResponse.json();
 
         // Fetch para obtener habilidades del usuario
-        const skillsResponse = await fetch('https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages');
-        const skillsData = await skillsResponse.json();
+        const metricsResponse = await fetch(
+          'https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages',
+          {
+            method: "GET",
+            headers: {
+              "accept" : "*/*",
+            },
+          }
+        );
+        const metricsData = await metricsResponse.json();
 
-        if (userResponse.ok && skillsResponse.ok) {
-          setUserData(userData.data.obj);
+        if (userResponse.ok && metricsResponse.ok) {
+          setUserData(userData.data.response);
 
           // Busca las habilidades del usuario por su nombre completo o ID
-          const matchedUser = skillsData.find((user: any) => user.id === idNumber);
-          setUserSkills(matchedUser ? matchedUser : null);
+          const matchedUser = metricsData.data.response.find((user: any) => user.id === idNumber);
+          setUserMetrics(matchedUser ? matchedUser : null);
 
         } else {
           setError('Error al cargar los datos');
@@ -251,15 +267,15 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
     <ProfileSidebarContainer>
       <ProfileSidebarContent>
         <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
-        {userData && userSkills && (
+        {userData && userMetrics && (
           <>
             <CardProfileLink
               fullName={userData.nombreUsuario}
-              userSkills={userSkills}
+              userMetrics={userMetrics}
             />
             <StatusSection>
               <div className="status-item rejected">
-                <H2StatusSection>Rejected</H2StatusSection>
+                <H2StatusSection>Rechazadas</H2StatusSection>
                 <div className="status-content">
                   <FaTimes className="icon" />
                   <p>
@@ -269,7 +285,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 </div>
               </div>
               <div className="status-item accepted">
-                <H2StatusSection>Accepted</H2StatusSection>
+                <H2StatusSection>Aceptadas</H2StatusSection>
                 <div className="status-content">
                   <FaCheck className="icon" />
                   <p>
@@ -278,8 +294,8 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                   </p>
                 </div>
               </div>
-              <div className="status-item pending">
-                <H2StatusSection>Pending</H2StatusSection>
+              <div className="status-item sent">
+                <H2StatusSection>Enviadas</H2StatusSection>
                 <div className="status-content">
                   <FaClock className="icon" />
                   <p>
@@ -289,10 +305,13 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 </div>
               </div>
               <div className="status-item inbox">
-                <H2StatusSection>Inbox</H2StatusSection>
+                <H2StatusSection>Recibidas</H2StatusSection>
                 <div className="status-content">
                   <FaClock className="icon" />
-                  <p>0: N/A</p>
+                  <p>
+                    {userData.solicitudes.conteoEnviadass}:{" "}
+                    {userData.solicitudes.ultimoEnviado || "N/A"}
+                  </p>
                 </div>
               </div>
             </StatusSection>

@@ -70,14 +70,14 @@ const DivRate = styled.div`
   flex-direction: column;
 `;
 
-const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userSkills }) => {
-  const abilitiesArray = userSkills?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
+const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics }) => {
+  const abilitiesArray = userMetrics?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
 
   return (
     <LinkProfile href="/settings" label="CONFIGURACION">
       <ProfileHeader>
         <Avatar
-          src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
+          src={userMetrics.urlImage}
           alt="profile picture"
         />
         <div>
@@ -94,7 +94,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userSkills }) 
         </div>
       </ProfileHeader>
       <RatingSection>
-        <h1>{userSkills?.qualification}</h1>
+        <h1>{userMetrics?.qualification}</h1>
         <DivRate>
           <p>Your Rate</p>
           <Stars>★★★★☆</Stars>

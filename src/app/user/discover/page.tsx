@@ -41,7 +41,15 @@ const Discover = () => {
   useEffect(() => {
     const fetchAllUsersData = async () => {
       try {
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages`);
+        const response = await fetch(
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+          {
+            method: "GET",
+            headers: {
+              "accept" : "*/*",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Error al obtener datos de los usuarios.");
@@ -50,7 +58,7 @@ const Discover = () => {
         const responseData = await response.json();
 
         // Guarda todos los usuarios en el estado
-        setAllUsersData(responseData);
+        setAllUsersData(responseData.data.response);
 
         // Por defecto, todos los usuarios son los "filtrados" hasta que se realice una búsqueda
         setFilteredUsers(responseData);

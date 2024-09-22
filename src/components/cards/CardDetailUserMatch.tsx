@@ -2,6 +2,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import ModalRequest from "../modals/ModalMatch"
+import { IRequestOnDetailUserCardProps } from "@/src/models/detailUser.model";
+import SkillTag from "../ui/skillTag/skillTag";
 
 const ProfileContainer = styled.div`
   width: 70%;
@@ -46,17 +48,7 @@ const VerificationStatus = styled.div`
   margin-top: 0.1rem;
 `;
 
-const Verified = styled.span`
-  color: ${({ theme }) => theme.colors.textBlueDark};
-  padding: 1.5px 20px;
-  border-radius: 20px;
-  text-align: center;
-  border: 2px solid ${({ theme }) => theme.colors.textBlueDark};
-  font-size: 12px;
-  font-weight: bold;
-`;
-
-const Unknown = styled.span`
+const Match = styled.span`
   color: ${({ theme }) => theme.colors.textDark};
   padding: 1.5px 20px;
   border-radius: 20px;
@@ -289,31 +281,34 @@ const Arrow = styled.span`
   margin-left: 10px;
 `;
 
-const UserProfile = () => {
+const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData, userDetail }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const abilitiesArray = typeof userData.abilities === 'string'
+    ? userData.abilities.split(',').map((ability: string) => ability.trim())
+    : [];
   return (
     <>
       <ProfileContainer>
         <Header>
           <UserInfo>
-            <UserName>Alicia Keys</UserName>
-            <UserTitle>Back-end Software Developer | Junior</UserTitle>
+            <UserName>{userData.fullName}</UserName>
+            <UserTitle>{userDetail!.jobTitle}</UserTitle>
             <VerificationStatus>
-              <Verified>Verified</Verified>
-              <Unknown>Unknown</Unknown>
+              <Match>Match</Match>
             </VerificationStatus>
             <ConnectionsRating>
               <Connections>
-                <span>Connections</span>
-                <span>30</span>
+                <span>Conexiones</span>
+                <span>{userData.countMatches}</span>
               </Connections>
               <RatingSection>
-                <div>Rating</div>
+                <div>Calificación</div>
                 <DivRating>
-                  <div>4.5</div>
+                  <div>{userData.qualification}</div>
                   <RatingStars>
                     {[...Array(5)].map((_, index) => (
                       <Star key={index}>
@@ -327,27 +322,25 @@ const UserProfile = () => {
             </ConnectionsRating>
           </UserInfo>
           <ProfileImage
-            src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
-            alt="User Image"
+            src={userDetail!.urlImage}
+            alt={userData.fullName}
           />
         </Header>
 
         <Skills>
-          <SkillButton>HTML - Beginner</SkillButton>
-          <SkillButton>Java - Beginner</SkillButton>
-          <SkillButton>SpringBoot - Beginner</SkillButton>
+          <SkillTag skillsArray={abilitiesArray} />
         </Skills>
         <DivUserDescription>
           <UserDescription>
-            <H3>Description</H3>
-            <P>Back-end Software Developer | Junior</P>
+            <H3>Descripción</H3>
+            <P>{userDetail!.description}</P>
             <ContactInfo>
               <h3>Email</h3>
-              <span>hola@gmail.com</span>
+              <span>{userDetail!.email}</span>
             </ContactInfo>
             <ContactInfo>
-              <h3>Phone</h3>
-              <span>123</span>
+              <h3>Teléfono</h3>
+              <span>{userDetail!.phoneNumber}</span>
             </ContactInfo>
           </UserDescription>
         </DivUserDescription>
@@ -355,24 +348,24 @@ const UserProfile = () => {
         <RequestContainer>
           <MediaContainer>
             <SectionTitle>
-              <span>External Media</span>
+              <span>Enlaces Externos</span>
             </SectionTitle>
 
             <SocialButtons>
-              <SocialButtonLinkedin>LinkedIn</SocialButtonLinkedin>
-              <SocialButtonGithub>GitHub</SocialButtonGithub>
-              <SocialButtonBehance>Behance</SocialButtonBehance>
+              <SocialButtonLinkedin>{userDetail!.urlLinkedin}</SocialButtonLinkedin>
+              <SocialButtonGithub>{userDetail!.urlGithub}</SocialButtonGithub>
+              <SocialButtonBehance>{userDetail!.urlBehance}</SocialButtonBehance>
             </SocialButtons>
           </MediaContainer>
         </RequestContainer>
         <SendButton>
-          <ButtonText>SEND REQUEST</ButtonText>
+          <ButtonText>ENVIAR SOLICITUD</ButtonText>
           <Arrow onClick={openModal}>→</Arrow>
         </SendButton>
-        <ModalRequest isOpen={isModalOpen} onClose={closeModal}/>
+        <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal} />
       </ProfileContainer>
     </>
   );
 };
 
-export default UserProfile;
+export default UserProfileDetail;

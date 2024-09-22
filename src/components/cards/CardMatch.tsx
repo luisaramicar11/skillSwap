@@ -108,16 +108,17 @@ const P = styled.p`
 interface CardProps {
   description: string;
   rating: number;
+  countMatches: number;
   skills: string[];
 }
 
-const MatchCard: React.FC<CardProps> = ({ description, skills, rating }) => {
+const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatches }) => {
   return (
     <CardContainer>
       <DivCardContent>
         <Connections>
           <div>Conexiones</div>
-          <div>🔗 30</div>
+          <div>🔗 {countMatches}</div>
         </Connections>
 
         <RatingSection>

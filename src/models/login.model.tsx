@@ -7,9 +7,9 @@ export interface IUserLoginResponse {
     message: string;
     data:{
       id: number;
-    role: number;
-    email: string;
-    token: string;
+      role: number;
+      email: string;
+      token: string;
     }
     
   }
@@ -20,5 +20,3 @@ export interface IUserLoginResponse {
     loading: boolean;
     error: string | null;
   }
-
- 
