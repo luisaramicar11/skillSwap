@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit"; // 1. es como configurar O MANEJADOR DEL el local storage pero solo para mi proyecto
 import authReducer from "./slices/authSlice";
 import usersReducer from "./slices/usersSlice";
+import reportsReducer from "./slices/reportsSlice"
 
 const store = configureStore({
     reducer: {
         auth: authReducer, // 2. son cada uno de los estados que guardaremos en nuestro configureStore. UN STATE ES UNA ESPECIE DE LOCALSTORAGE
         users: usersReducer,
+        reports: reportsReducer,
          // CADA ES UNA SLICE DEL "reducer"
     },
 });
