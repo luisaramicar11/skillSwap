@@ -23,7 +23,7 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
             "accept": "*/*",
             "Content-Type": "application/json",
             // Agregar token aquí si es necesario para la autenticación
-             "Authorization": `Bearer ${localStorage.getItem('authToken')}`
+            "Authorization": `Bearer ${localStorage.getItem('authToken')}`
           },
           body: JSON.stringify(credentials),
         }

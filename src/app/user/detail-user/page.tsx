@@ -34,7 +34,7 @@ const DetailAboutUser = () => {
 
       try {
         const responseDetail = await fetch(
-          `https://skillswapriwi.azurewebsites.net/${idNumber}`,
+          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`,
           {
             method: "GET",
             headers: {
@@ -47,7 +47,7 @@ const DetailAboutUser = () => {
         setUserData(detailUser.data.response);
 
         const userDataResponse = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
           {
             method: "GET",
             headers: {

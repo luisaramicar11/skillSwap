@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Carousel from "../../../components/carousels/CarouseDiscover";
+import Carousel from "../../../components/carousels/CarouselDiscover";
 import Search from "@/src/components/searchs/search";
-import { H2, DivContainer } from "./DiscoverStyling";
+import { LineTitles, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/discover/AllUsers";
 import { IUserCardProps, IAllUsersCardsProps } from "../../../models/userCards.model";
 
@@ -42,7 +42,7 @@ const Discover = () => {
     const fetchAllUsersData = async () => {
       try {
         const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
           {
             method: "GET",
             headers: {
@@ -61,7 +61,7 @@ const Discover = () => {
         setAllUsersData(responseData.data.response);
 
         // Por defecto, todos los usuarios son los "filtrados" hasta que se realice una búsqueda
-        setFilteredUsers(responseData);
+        setFilteredUsers(responseData.data.response);
         setLoading(false);
       } catch (error: any) {
         setError(error.message);
@@ -83,20 +83,20 @@ const Discover = () => {
   return (
     <DivContainer>
       {/* Componente de búsqueda */}
-      <Search label="Buscar" onSearch={handleSearch} />
-
+      <Search label="⌕" onSearch={handleSearch} />
       {/* Sección del carrusel */}
       <div>
-        <H2>Usuarios más recientes</H2>
+        <LineTitles></LineTitles>
+        <hr />
         <Carousel />
+        <hr />
+        <LineTitles></LineTitles>
       </div>
-
       {/* Sección de todos los usuarios o usuarios filtrados por búsqueda */}
-      <div>
-        <H2>Todos los usuarios</H2>
+      <article>
         {/* Se pasa el estado filteredUsers que puede ser todos o los filtrados */}
         <AllUsers users={filteredUsers} />
-      </div>
+      </article>
     </DivContainer>
   );
 };

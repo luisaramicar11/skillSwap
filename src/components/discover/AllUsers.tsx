@@ -2,14 +2,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../cards/CardDiscover";
-import { IUserCardProps, IAllUsersCardsProps } from "../../models/userCards.model";
+import { IAllUsersCardsProps } from "../../models/userCards.model";
 
 const CardListContainer = styled.div`
   display: grid;
   justify-items: center;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+  & div{
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 // Estilos para los botones de paginación
@@ -20,33 +25,44 @@ const PaginationContainer = styled.div`
 `;
 
 const PaginationButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  border: none;
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  border: ${({ theme }) => theme.colors.textDark} 1px solid;
   padding: 10px 20px;
   margin: 0 10px;
   cursor: pointer;
+  transition: 0.4s;
   border-radius: 5px;
 
+  &:hover {
+    transition: 0.4s;
+    background-color: ${({ theme }) => theme.colors.bgSecondary};
+    color: white;
+  }
+
   &:disabled {
-    background-color: #ccc;
+    transition: 0.4s;
+    transform: scale(0.9);
+    opacity: 0.4;
     cursor: not-allowed;
   }
 `;
 
-const DivContainer = styled.div`
+const DivContainer = styled.article`
+  padding-top: 0;
+  margin-top: 0;
   width: 100%;
-  margin-top: 3rem;
+  height: max-content;
 `;
 
 const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 10; // Número de tarjetas por página
+  const cardsPerPage = 8; // Número de tarjetas por página
 
   // Calcular las tarjetas que se deben mostrar en la página actual
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = users.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = Array.isArray(users) ? users.slice(indexOfFirstCard, indexOfLastCard) : [];
 
   // Función para cambiar de página
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);

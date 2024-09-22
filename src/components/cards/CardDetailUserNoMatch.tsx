@@ -58,7 +58,10 @@ const Unknown = styled.span`
   font-weight: bold;
 `;
 
-const ProfileImage = styled.img`
+const ProfileImage = styled.div<{ urlImage: string }>`
+  background-image: url(${(props) => props.urlImage}); 
+  background-size: cover;
+  background-position: center;
   width: 13rem;
   height: 13rem;
   border-radius: 10px;
@@ -257,10 +260,7 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData 
               </RatingSection>
             </ConnectionsRating>
           </UserInfo>
-          <ProfileImage
-            src={userData.urlImage}
-            alt={userData.fullName}
-          />
+          <ProfileImage urlImage={userData.urlImage}/>
         </Header>
 
         <Skills>

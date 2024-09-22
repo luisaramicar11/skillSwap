@@ -34,7 +34,7 @@ const Match = () => {
 
       try {
         const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
           {
             method: "GET",
             headers: {
@@ -47,7 +47,7 @@ const Match = () => {
         setUserData(dataUser.data.response);
 
         const metricsResponse = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/request/${idNumber}`,
+          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${idNumber}`,
           {
             method: "GET",
             headers: {

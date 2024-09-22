@@ -10,16 +10,18 @@ interface CardProps {
 
 // Estilos para el Card
 const CardContainer = styled.div`
-  margin-top: 2rem;
-  padding: 10px;
+  padding-bottom: 10px;
   border-radius: 10px;
   text-align: center;
-  background: #fff; /* Fondo blanco para la tarjeta */
+  max-width: 6rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardImage = styled.img`
-  width: 10rem; /* Tamaño fijo para una imagen circular */
-  height: 10rem; /* Debe ser igual al ancho para mantener la forma circular */
+  border: 1px solid ${({ theme }) => theme.colors.bgBanner};
+  width: 5rem; /* Tamaño fijo para una imagen circular */
+  height: 5rem; /* Debe ser igual al ancho para mantener la forma circular */
   object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
   border-radius: 50%; /* Redondea la imagen en forma de círculo */
   display: block; /* Asegura que la imagen se comporte como un bloque */
@@ -27,7 +29,7 @@ const CardImage = styled.img`
 `;
 
 const CardContent = styled.div`
-  padding: 15px;
+  padding: 10px;
   text-align: center; /* Centra el texto */
   flex-grow: 1;
 `;
@@ -35,19 +37,15 @@ const CardContent = styled.div`
 const CardTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  color: #000;
-  margin: 0 auto;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin: 0;
+  padding: 0;
 `;
 
-const StarsContainer = styled.div`
+const CategoryContainer = styled.p`
   display: flex;
   justify-content: center;
-`;
-
-const Star = styled.span`
-  color: gold;
-  font-size: 20px;
-  margin: 0 2px;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const Card: React.FC<CardProps> = ({ title, urlImage, rating }) => {
@@ -56,14 +54,9 @@ const Card: React.FC<CardProps> = ({ title, urlImage, rating }) => {
       <CardImage src={urlImage} alt={title} />
       <CardContent>
         <CardTitle>{title}</CardTitle>
-        <StarsContainer>
-          {[...Array(5)].map((_, index) => (
-            <Star key={index}>
-              {index < rating ? "★" : "☆"}{" "}
-              {/* Muestra estrellas llenas o vacías */}
-            </Star>
-          ))}
-        </StarsContainer>
+        <CategoryContainer>
+          Entretenimiento
+        </CategoryContainer>
       </CardContent>
     </CardContainer>
   );
