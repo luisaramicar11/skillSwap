@@ -55,7 +55,7 @@ const Reports: React.FC = () => {
         idReportedUser: newReport.idReportedUser,
       };
   
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/ReportsPost", {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/ReportsPost/PostReportCreate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const Reports: React.FC = () => {
   const handleUpdateReport = async (reportToUpdate: IReport) => { // Cambia el nombre aquí
     try {
       const token = getToken();
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportPut/PutActionOnReport`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportPut/PutReportByAction`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +113,7 @@ const Reports: React.FC = () => {
     console.log(reportId)
     try {
       const token = getToken(); // Obtener token
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportDelete/${reportId}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportDelete/DeleteReportById/${reportId}`, {
         method: "DELETE",
         headers: {
           "accept": "*/*",

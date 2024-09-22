@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, createUser, deleteUser, updateUser } from "../../redux/slices/usersSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { IUser } from "../../../models/admin.users.model"; 
+import { IUser } from "../../../models/user.model"; 
 import CreateForm from "../../../components/forms/FormAdminUser";
 import Table from "../../../components/tables/TableUsers";
 import styled from "styled-components";
@@ -76,7 +76,7 @@ const Users: React.FC = () => {
     try {
       console.log("Datos que se están enviando:", updatedUser); // Añade esto para depurar
       const token = getToken();
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/Admin/${updatedUser.id}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByUserAdmin?id=${updatedUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const Users: React.FC = () => {
   const handleDeleteUser = async (userId: number) => {
     try {
       const token = getToken(); // Obtener token
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersDelete/${userId}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersDelete/DeleteUserById?id=${userId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`, // Usar token

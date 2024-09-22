@@ -158,7 +158,7 @@ const UserInfo = () => {
       }
 
       try {
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/${idNumber}`, {
+        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`, {
           method: 'GET',
           headers: {
             'accept': '*/*',
@@ -191,7 +191,7 @@ const UserInfo = () => {
     const newAction = accountState === 'activo' ? 'deshabilitar' : 'habilitar';
 
     try {
-      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserAction?id=${idNumber}&action=${newAction}`, {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByAction?id=${idNumber}&action=${newAction}`, {
         method: 'PUT',
         headers: {
           'accept': '*/*',
