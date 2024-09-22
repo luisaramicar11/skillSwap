@@ -62,7 +62,7 @@ const RatingSection = styled.div`
   article{
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   div {

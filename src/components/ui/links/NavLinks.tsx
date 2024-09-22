@@ -9,10 +9,12 @@ const NavLinkComponent = styled(Link)`
   padding: 15px;
   margin: 0;
   color: ${({ theme }) => theme.colors.textWhite};
-  font-weight: bold;
+  font-weight: 400;
+  transition: 0.4s;
 
   &:hover {
-    font-weight: 900;
+    font-weight: 700;
+    transition: 0.4s;
   }
 `;
 

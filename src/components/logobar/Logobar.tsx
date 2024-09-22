@@ -7,13 +7,13 @@ const LogobarStyled = styled.div`
     z-index: 1000;
     bottom: 0;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height:54px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${({ theme }) => theme.colors.bgPrimary};
-    border-top: solid 0.5px ${({ theme }) => theme.colors.textSecondary};
+    border-top: solid 1px ${({ theme }) => theme.colors.textSecondary};
 
     & h1 {
         background: ${({ theme }) => theme.colors.gradientText};

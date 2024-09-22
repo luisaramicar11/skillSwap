@@ -50,7 +50,7 @@ const VerificationStatus = styled.div`
 
 const Match = styled.span`
   color: ${({ theme }) => theme.colors.textDark};
-  padding: 1.5px 20px;
+  padding: 1px 20px;
   border-radius: 20px;
   text-align: center;
   border: 2px solid ${({ theme }) => theme.colors.textDark};

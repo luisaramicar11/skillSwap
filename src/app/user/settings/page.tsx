@@ -6,7 +6,6 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { IUser } from "../../../models/user.model";
 
-
 const SettingsContainer = styled.div`
     width: 100%;
     height: 100%;
@@ -53,7 +52,7 @@ const UserSettings = () => {
     };
 
     fetchUserData();
-  }, [idString]);
+  }, [idNumber]);
 
   // Muestra loading, error o los datos del usuario
   if (loading) {
@@ -76,7 +75,7 @@ const UserSettings = () => {
           roleName={userData.roleName}
           email={userData.email}
           phoneNumber={userData.phoneNumber}
-          urlImage="/path-to-default-image.jpg" // o podrías agregar la URL real de la imagen si está disponible
+          urlImage={userData.urlImage}
         />
       )}
             <UserSkills skills={["JavaScript", "HTML", "Adobe"]} />

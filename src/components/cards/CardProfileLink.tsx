@@ -14,7 +14,10 @@ const ProfileHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
-const Avatar = styled.img`
+const Avatar = styled.div<{ urlImage: string }>`
+  background-image: url(${(props) => props.urlImage}); 
+  background-size: cover;
+  background-position: center;
   width: 4rem;
   height: 4rem;
   border-radius: 10px;
@@ -74,12 +77,9 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics })
   const abilitiesArray = userMetrics?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
 
   return (
-    <LinkProfile href="/settings" label="CONFIGURACION">
+    <LinkProfile href="/user/settings" label="CONFIGURACION">
       <ProfileHeader>
-        <Avatar
-          src={userMetrics.urlImage}
-          alt="profile picture"
-        />
+        <Avatar urlImage={userMetrics.urlImage}/>
         <div>
           <ProfileName>{fullName}</ProfileName>
           {abilitiesArray.length > 0 ? (

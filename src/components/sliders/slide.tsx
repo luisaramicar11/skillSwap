@@ -26,12 +26,15 @@ const CardContainer = styled.div`
   }
 `;
 
-const Image = styled.img`
+const Image = styled.div<{ urlImage: string }>`
+  background-image: url(${(props) => props.urlImage}); 
+  background-size: cover;
+  background-position: center;
   min-height: 450px;
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-  object-fit: cover;
+  border: solid 1px ${({ theme }) => theme.colors.textBlack};
 `;
 
 const Title = styled.h3`
@@ -62,6 +65,16 @@ const PassButton = styled.button`
   font-size: 2rem;
   z-index: 99;
   cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0.6;
+
+  & div {
+    font-weight: 300;
+    font-style: normal;
+    transform: scaleX(0.5) scaleY(1.4)  !important;
+    opacity: 0.6;
+  }
 `;
 
 const StarButton = styled.button`
@@ -98,8 +111,8 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
     return (
       <>
         <CardContainer>
-          <PassButton onClick={handlePassClick}>→ pass</PassButton>
-          <Image src={user.urlImage} alt={user.fullName} />
+          <PassButton onClick={handlePassClick}><div>&lt;</div> pass</PassButton>
+          <Image urlImage={user.urlImage} />
           <Title>{user.fullName}</Title>
           <Subtitle>{user.jobTitle}</Subtitle>
           <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}

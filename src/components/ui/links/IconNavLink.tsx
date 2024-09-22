@@ -7,9 +7,10 @@ import { handlePageChange } from '@/src/utils/handlePageTheme';
 const IconNavLinkComponent = styled(Link)`
   text-decoration: none;
   padding: 15px;
-  font-weight: bold;
+  font-weight: 400;
   color: ${({ theme }) => theme.colors.textWhite};
   display: flex;
+  transition: 0.4s;
   align-items: center; 
   justify-content: center;
 
@@ -23,7 +24,9 @@ const IconNavLinkComponent = styled(Link)`
   }
 
   &:hover {
-    font-weight: 900; // Bold on hover
+    transition: 0.4s;
+    transform: scale(0.9);
+    font-weight: 700; 
   }
 `;
 
