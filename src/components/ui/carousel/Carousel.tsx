@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface CardProps {
   angle: number; // Definimos la prop 'angle' como número
-  imgSrc: string; // URL de la imagen para la tarjeta
+  imgsrc: string; // URL de la imagen para la tarjeta
 }
 
 // Contenedor principal
@@ -84,7 +84,7 @@ const Card = styled.div<CardProps>`
   margin: 5px;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  background-image: url(${props => props.imgSrc});
+  background-image: url(${props => props.imgsrc});
   background-size: cover;
   background-position: center;
   width: 150px; // Valor predeterminado
@@ -147,13 +147,13 @@ const Carousel: React.FC = () => {
       <Title>MATCH<span> con tu skill ideal</span></Title>
       <Subtitle>“A VECES NI SABEMOS QUE LO<br></br>NECESITAMOS, HASTA QUE LO VEMOS.”</Subtitle>
       <CardsContainer>
-        <Card angle={-10}imgSrc="https://img.freepik.com/fotos-premium/concepto-personas-felicidad-adolescente-sonriente-sobre-fondo-blanco_380164-63917.jpg"/>
-        <Card angle={-5}imgSrc="https://st.depositphotos.com/1024381/2148/i/450/depositphotos_21484663-stock-photo-happy-teen-girl-beautiful-young.jpg"/>
-        <Card angle={0} imgSrc="https://img.freepik.com/foto-gratis/hombre-sonriendo-brazos-cruzados_1149-1711.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726531200&semt=ais_hybrid"/>
-        <Card angle={0} imgSrc="https://media.istockphoto.com/id/494711330/es/foto/hombre-joven-latina-en-un-estudio.jpg?s=612x612&w=0&k=20&c=Ye9u097upgUhpcVttIB5i39Dj8XOPheoL4HB6SHC9iA="/>
-        <Card angle={0} imgSrc="https://st.depositphotos.com/1003989/3636/i/450/depositphotos_36365377-stock-photo-woman-with-phone.jpg"/>
-        <Card angle={5} imgSrc="https://st.depositphotos.com/1269204/1219/i/950/depositphotos_12196477-stock-photo-smiling-men-isolated-on-the.jpg"/>
-        <Card angle={10}imgSrc="https://media.istockphoto.com/id/1348560795/es/foto/mujer-de-negocios-segura-de-s%C3%AD-misma-con-anteojos-sonriendo-a-la-c%C3%A1mara.jpg?s=612x612&w=0&k=20&c=yX6ro57Rg3IxvS-GFi0KtuRPm1RW8qndB5dc_tZbUb4="/>
+        <Card angle={-10}imgsrc="https://img.freepik.com/fotos-premium/concepto-personas-felicidad-adolescente-sonriente-sobre-fondo-blanco_380164-63917.jpg"/>
+        <Card angle={-5}imgsrc="https://st.depositphotos.com/1024381/2148/i/450/depositphotos_21484663-stock-photo-happy-teen-girl-beautiful-young.jpg"/>
+        <Card angle={0} imgsrc="https://img.freepik.com/foto-gratis/hombre-sonriendo-brazos-cruzados_1149-1711.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726531200&semt=ais_hybrid"/>
+        <Card angle={0} imgsrc="https://media.istockphoto.com/id/494711330/es/foto/hombre-joven-latina-en-un-estudio.jpg?s=612x612&w=0&k=20&c=Ye9u097upgUhpcVttIB5i39Dj8XOPheoL4HB6SHC9iA="/>
+        <Card angle={0} imgsrc="https://st.depositphotos.com/1003989/3636/i/450/depositphotos_36365377-stock-photo-woman-with-phone.jpg"/>
+        <Card angle={5} imgsrc="https://st.depositphotos.com/1269204/1219/i/950/depositphotos_12196477-stock-photo-smiling-men-isolated-on-the.jpg"/>
+        <Card angle={10}imgsrc="https://media.istockphoto.com/id/1348560795/es/foto/mujer-de-negocios-segura-de-s%C3%AD-misma-con-anteojos-sonriendo-a-la-c%C3%A1mara.jpg?s=612x612&w=0&k=20&c=yX6ro57Rg3IxvS-GFi0KtuRPm1RW8qndB5dc_tZbUb4="/>
       </CardsContainer>
     </Container>
   );

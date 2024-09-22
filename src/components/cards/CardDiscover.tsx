@@ -10,7 +10,7 @@ interface CardProps {
   jobTitle: string;
   qualification: number;
   abilities: string[];
-  imageUrl: string;
+  urlImage: string;
 }
 
 // Contenedor de la tarjeta
@@ -81,13 +81,13 @@ const Card: React.FC<CardProps> = ({
   jobTitle,
   qualification,
   abilities,
-  imageUrl
+  urlImage
 }) => {
   // Función para renderizar las estrellas según la calificación
   return (
-    <CardContainer className={`cardUserId-${id}`}>
+    <CardContainer>
       <ImageColumn>
-        <img src={imageUrl} alt={fullName} />
+        <img src={urlImage} alt={fullName} />
       </ImageColumn>
       <InfoColumn>
         <Name>{fullName}</Name>

@@ -84,7 +84,7 @@ const StarButton = styled.button`
   }
 `;
 
-const SliderCard: React.FC<ISliderCardProps> = ({ person, onPass }) => {
+const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handlePassClick = () => {
@@ -95,19 +95,19 @@ const SliderCard: React.FC<ISliderCardProps> = ({ person, onPass }) => {
     setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en la estrellita
   };
 
-  return (
-    <>
-      <CardContainer>
-        <PassButton onClick={handlePassClick}>→ pass</PassButton>
-        <Image src={person.imageUrl} alt={person.fullName} />
-        <Title>{person.fullName}</Title>
-        <Subtitle>{person.jobTitle}</Subtitle>
-        <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
-      </CardContainer>
-
-      {modalOpen && <Modal userToRequest={person}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
-    </>
-  );
+    return (
+      <>
+        <CardContainer>
+          <PassButton onClick={handlePassClick}>→ pass</PassButton>
+          <Image src={user.urlImage} alt={user.fullName} />
+          <Title>{user.fullName}</Title>
+          <Subtitle>{user.jobTitle}</Subtitle>
+          <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
+        </CardContainer>
+  
+        {modalOpen && <Modal userToRequest={user}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
+      </>
+    );
 };
 
 export default SliderCard;

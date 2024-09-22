@@ -2,6 +2,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import ModalRequest from "../modals/ModalMatch"
+import { IRequestOnDetailUserCardProps } from "@/src/models/detailUser.model";
+import SkillTag from "../ui/skillTag/skillTag";
 
 const ProfileContainer = styled.div`
   width: 70%;
@@ -44,16 +46,6 @@ const VerificationStatus = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 0.1rem;
-`;
-
-const Verified = styled.span`
-  color: ${({ theme }) => theme.colors.textBlueDark};
-  padding: 1.5px 20px;
-  border-radius: 20px;
-  text-align: center;
-  border: 2px solid ${({ theme }) => theme.colors.textBlueDark};
-  font-size: 12px;
-  font-weight: bold;
 `;
 
 const Unknown = styled.span`
@@ -196,23 +188,6 @@ const InfoBox = styled.div`
   margin-bottom: 20px;
 `;
 
-const Placeholder = styled.div`
-  text-align: center;
-`;
-
-const SmallText = styled.p`
-  font-size: 16px;
-  color: #b3b3b3;
-  margin: 0;
-`;
-
-const LargeText = styled.p`
-  font-size: 18px;
-  color: #b3b3b3;
-  font-weight: bold;
-  margin: 0;
-`;
-
 const SendButton = styled.button`
   display: flex;
   justify-content: space-between;
@@ -242,31 +217,34 @@ const Arrow = styled.span`
   margin-left: 10px;
 `;
 
-const UserProfile = () => {
+const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData })  => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const abilitiesArray = typeof userData.abilities === 'string'
+            ? userData.abilities.split(',').map((ability: string) => ability.trim())
+            : [];
   return (
     <>
       <ProfileContainer>
         <Header>
           <UserInfo>
-            <UserName>Alicia Keys</UserName>
-            <UserTitle>Back-end Software Developer | Junior</UserTitle>
+            <UserName>{userData.fullName}</UserName>
+            <UserTitle>{userData.jobTitle}</UserTitle>
             <VerificationStatus>
-              <Verified>Verified</Verified>
               <Unknown>Unknown</Unknown>
             </VerificationStatus>
             <ConnectionsRating>
               <Connections>
-                <span>Connections</span>
-                <span>30</span>
+                <span>Conexiones</span>
+                <span>{userData.countMatches}</span>
               </Connections>
               <RatingSection>
-                <div>Rating</div>
+                <div>Calificación</div>
                 <DivRating>
-                  <div>4.5</div>
+                  <div>{userData.qualification}</div>
                   <RatingStars>
                     {[...Array(5)].map((_, index) => (
                       <Star key={index}>
@@ -280,25 +258,23 @@ const UserProfile = () => {
             </ConnectionsRating>
           </UserInfo>
           <ProfileImage
-            src="https://cdn-p.smehost.net/sites/005297e5d91d4996984e966fac4389ea/wp-content/uploads/2020/09/Alicia-Keys-69194_SP1_200107_AK_MZ_SHOT_01_074_a.jpg"
-            alt="User Image"
+            src={userData.urlImage}
+            alt={userData.fullName}
           />
         </Header>
 
         <Skills>
-          <SkillButton>HTML - Beginner</SkillButton>
-          <SkillButton>Java - Beginner</SkillButton>
-          <SkillButton>SpringBoot - Beginner</SkillButton>
+          <SkillTag skillsArray={abilitiesArray} />
         </Skills>
         <DivUserDescription>
         <SendButton>
-          <ButtonText>SEND REQUEST</ButtonText>
+          <ButtonText>ENVIAR SOLICITUD</ButtonText>
           <Arrow onClick={openModal}>→</Arrow>
         </SendButton>
-        <ModalRequest isOpen={isModalOpen} onClose={closeModal}/>
+        <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal}/>
           <UserDescription>
-            <H3>Description</H3>
-            <P>Back-end Software Developer | Junior</P>
+            <H3>Descripción</H3>
+            <P>{userData.description}</P>
           </UserDescription>
         </DivUserDescription>
 
@@ -319,4 +295,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserProfileNoDetail;

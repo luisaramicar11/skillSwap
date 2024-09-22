@@ -23,20 +23,28 @@ const UserSettings = () => {
 
   const idString = localStorage.getItem('userId');
   const idNumber = idString ? parseInt(idString, 10) : null;
-  console.log(idString);
 
   // Fetch para obtener datos de usuario
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/${idString}`);
+        const response = await fetch(
+          `https://skillswapriwi.azurewebsites.net/${idNumber}`,
+          {
+            method: "GET",
+            headers: {
+              "accept" : "*/*"
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Error al obtener datos del usuario");
         }
 
         const data = await response.json();
-        setUserData(data.data.obj); // Asumiendo que obj es un solo usuario
+        setUserData(data.data.response);
+        
         setLoading(false);
       } catch (err: any) {
         setError(err.message);

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
-import { IProfileCardProps, IProfileFixedCardProps } from "@/src/models/userCards.model";
+import { IProfileFixedCardProps } from "@/src/models/userCards.model";
 
 const ProfileCardContainer = styled.div`
   background: ${({ theme }) => theme.colors.bgSidebar};
@@ -25,16 +25,6 @@ const ProfileCardContainer = styled.div`
   @media (min-width: 769px) and (max-width: 1024px) {
     margin-top: 2.5rem !important;
   }
-`;
-
-const ProfileHeader = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const StatusSection = styled.div`
@@ -80,7 +70,7 @@ const StatusSection = styled.div`
     }
   }
 
-  .pending {
+  .sent {
     opacity: 0.7;
     color: ${({ theme }) => theme.colors.textSecondary};
 
@@ -111,25 +101,26 @@ const H2StatusSection = styled.h2`
 
 const ProfileCard: React.FC<IProfileFixedCardProps> = ({
   fullName,
-  userSkills,
+  userMetrics,
   ultimaAceptada,
   ultimaPendiente,
   ultimaCancelada,
-  // ultimaRecibida,
-  conteoAceptadas,
+  ultimoEnviado,
+  conteoConexiones,
   conteoPendientes,
   conteoCanceladas,
-  // conteoRecibidas
+  conteoEnviadas,
+  conteoAceptadas
 }) => {
   return (
     <ProfileCardContainer>
       <CardProfileLink
-              fullName={fullName}
-              userSkills={userSkills}
-            />
+          fullName={fullName}
+          userMetrics={userMetrics}
+        />
       <StatusSection>
         <div className="status-item rejected">
-          <H2StatusSection>Rejected</H2StatusSection>
+          <H2StatusSection>Rechazadas</H2StatusSection>
           <div className="status-content">
             <FaTimes className="icon" />
             <p>
@@ -138,7 +129,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
           </div>
         </div>
         <div className="status-item accepted">
-          <H2StatusSection>Accepted</H2StatusSection>
+          <H2StatusSection>Aceptadas</H2StatusSection>
           <div className="status-content">
             <FaCheck className="icon" />
             <p>
@@ -146,21 +137,21 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
             </p>
           </div>
         </div>
-        <div className="status-item pending">
-          <H2StatusSection>Pending</H2StatusSection>
+        <div className="status-item sent">
+          <H2StatusSection>Enviadas</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {conteoPendientes}: {ultimaPendiente}
+              {conteoEnviadas}: {ultimoEnviado}
             </p>
           </div>
         </div>
         <div className="status-item inbox">
-          <H2StatusSection>Inbox</H2StatusSection>
+          <H2StatusSection>Recibidas</H2StatusSection>
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {/* {conteoRecibidas}: {ultimaRecibida} */}hola
+              {conteoPendientes}: {ultimaPendiente}
             </p>
           </div>
         </div>

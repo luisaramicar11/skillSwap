@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import React, { useState, useEffect } from "react";
 import SliderCard from "../../../components/sliders/slide";
 import MatchCard from "../../../components/cards/CardMatch";
@@ -8,11 +8,12 @@ import { IUserCardProps, IRequestCardProps } from "@/src/models/userCards.model"
 import { OurAlertsText } from "@/src/utils/ourAlertsText";
 
 const Match = () => {
-  const [userData, setUserData] = useState<IRequestCardProps | null>(null);
+  const [userData, setUserData] =  useState<IUserCardProps[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [userSkills, setUserSkills] = useState<IUserCardProps[]>([]);
+
+  const [userMetrics, setUserMetrics] = useState<IRequestCardProps | null>(null);
 
   const getIdUser = (): number => {
     const idString = localStorage.getItem("userId");
@@ -20,7 +21,11 @@ const Match = () => {
   };
 
   const findUserIndex = (id: number): number => {
-    return userSkills.findIndex((user) => user.id === id);
+    // Verificar que userMetrics es un array antes de llamar a findIndex
+    if (Array.isArray(userData)) {
+      return userData.findIndex((user) => user.id == id);
+    }
+    return -1; // Si no es un array o no encuentra coincidencia, retorna -1
   };
 
   useEffect(() => {
@@ -29,29 +34,30 @@ const Match = () => {
 
       try {
         const response = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/requests/${idNumber}`,
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
           {
             method: "GET",
             headers: {
-              Accept: "*/*",
+              "accept" : "*/*",
             },
           }
         );
 
         const dataUser = await response.json();
-        setUserData(dataUser.data.obj);
+        setUserData(dataUser.data.response);
 
-        const skillsResponse = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/ForImages",
+        const metricsResponse = await fetch(
+          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/request/${idNumber}`,
           {
             method: "GET",
             headers: {
-              Accept: "*/*",
+              "accept" : "*/*",
             },
           }
         );
-        const skillsData = await skillsResponse.json();
-        setUserSkills(skillsData);
+
+        const metricsData = await metricsResponse.json();
+        setUserMetrics(metricsData.data.response);
 
         setLoading(false);
       } catch (error) {
@@ -71,42 +77,50 @@ const Match = () => {
     return <OurAlertsText>Error: {error}</OurAlertsText>;
   }
 
-  if (!userSkills) {
+  if (!userData || userData.length === 0) {
     return <OurAlertsText>No se encontraron usuarios.</OurAlertsText>;
   }
 
   const userIndex = findUserIndex(getIdUser()); // Obtiene el índice del usuario
 
   const handlePass = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % userSkills.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % userData.length);
   };
 
+  const idCurrentUser = getIdUser()
   console.log(userIndex);
   console.log(userData);
+  console.log(idCurrentUser);
+
   
+
   return (
     <DivMatch>
+      {userIndex !== -1 && (
         <ProfileCard
-          fullName={userSkills[userIndex].fullName}
-          userSkills={userSkills[userIndex]}
-          ultimaAceptada={userData!.solicitudes.ultimaAceptada}
-          ultimaPendiente={userData!.solicitudes.ultimaPendiente}
-          ultimaCancelada={userData!.solicitudes.ultimaCancelada}
-          // ultimaRecibida={userData!.solicitudes.ultimaRecibida}
-          conteoAceptadas={userData!.solicitudes.conteoAceptadas}
-          conteoPendientes={userData!.solicitudes.conteoPendientes} 
-          conteoCanceladas={userData!.solicitudes.conteoCanceladas}
-          // conteoRecibidas={userData!.solicitudes.conteoRecibidas}
+          fullName={userData[userIndex]?.fullName}
+          userMetrics={userData[userIndex]}
+          ultimaAceptada={userMetrics!.solicitudes?.ultimaAceptada}
+          ultimaPendiente={userMetrics!.solicitudes?.ultimaPendiente}
+          ultimaCancelada={userMetrics!.solicitudes?.ultimaCancelada}
+          ultimoEnviado={userMetrics!.solicitudes?.ultimoEnviado}
+          conteoConexiones={userMetrics!.solicitudes?.conteoConexiones}
+          conteoPendientes={userMetrics!.solicitudes?.conteoPendientes}
+          conteoCanceladas={userMetrics!.solicitudes?.conteoCanceladas}
+          conteoEnviadas={userMetrics!.solicitudes?.conteoEnviadas}
+          conteoAceptadas={userMetrics!.solicitudes?.conteoAceptadas}
         />
-      <SliderCard person={userSkills[currentIndex]} onPass={handlePass} />
+      )}
+      <SliderCard user={userData[currentIndex]} onPass={handlePass} />
       <MatchCard
-        description={userSkills[currentIndex]?.description}
+        description={userData[currentIndex]?.description}
         skills={
-                userSkills[currentIndex].abilities.split(',').map(
-                  (ability: string) => ability.trim()
-                ) || []
-              }
-        rating={userSkills[currentIndex]?.qualification}
+          userData[currentIndex]?.abilities
+            ? userData[currentIndex].abilities.split(',').map((ability: string) => ability.trim())
+            : []
+        }
+        rating={userData[currentIndex]?.qualification}
+        countMatches={userData[currentIndex]?.countMatches}
       />
     </DivMatch>
   );

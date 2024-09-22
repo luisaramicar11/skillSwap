@@ -6,18 +6,31 @@ export interface IUserCardProps {
     countMatches: number;
     description: string;
     abilities: string;
-    imageUrl: string;
+    urlImage: string;
 }
 
 export interface IProfileFixedCardProps extends IProfileCardProps {
     ultimaAceptada: string
     ultimaPendiente: string
     ultimaCancelada: string
-    // ultimaRecibida: string
+    ultimoEnviado: string
+    conteoEnviadas: number
     conteoAceptadas: number
     conteoPendientes: number
     conteoCanceladas: number
-    // conteoRecibidas: number
+    conteoConexiones: number
+}
+
+export interface IUserProfileProps extends IUserCardProps {
+    ultimaAceptada: string
+    ultimaPendiente: string
+    ultimaCancelada: string
+    ultimoEnviado: string
+    conteoEnviadas: number
+    conteoAceptadas: number
+    conteoPendientes: number
+    conteoCanceladas: number
+    conteoConexiones: number
 }
 
 export interface IAllUsersCardsProps {
@@ -26,7 +39,7 @@ users: IUserCardProps[]
 
 export interface IProfileCardProps {
     fullName: string;
-    userSkills: IUserCardProps;
+    userMetrics: IUserCardProps;
 }
 
 export interface IRequestCardProps {
@@ -36,10 +49,11 @@ export interface IRequestCardProps {
         ultimaAceptada: string
         ultimaPendiente: string
         ultimaCancelada: string
-        // ultimaRecibida: string
+        ultimoEnviado: string
+        conteoEnviadas: number
         conteoAceptadas: number
         conteoPendientes: number
         conteoCanceladas: number
-        // conteoRecibidas: number
+        conteoConexiones: number
     }
 }

@@ -4,7 +4,7 @@ import styled from "styled-components";
 // Interfaz para los props de la Card
 interface CardProps {
   title: string;
-  imageUrl: string;
+  urlImage: string;
   rating: number; // Añadido para las estrellas
 }
 
@@ -50,10 +50,10 @@ const Star = styled.span`
   margin: 0 2px;
 `;
 
-const Card: React.FC<CardProps> = ({ title, imageUrl, rating }) => {
+const Card: React.FC<CardProps> = ({ title, urlImage, rating }) => {
   return (
     <CardContainer>
-      <CardImage src={imageUrl} alt={title} />
+      <CardImage src={urlImage} alt={title} />
       <CardContent>
         <CardTitle>{title}</CardTitle>
         <StarsContainer>

@@ -92,15 +92,6 @@ const UserName = styled.h3`
   }
 `;
 
-const VerifiedBadge = styled.span`
-  color: ${({ theme }) => theme.colors.textBlueDark};
-  border: 1px solid ${({ theme }) => theme.colors.textBlueDark};
-  font-weight: bold;
-  border-radius: 3rem;
-  padding: 2px 20px;
-  font-size: 1rem;
-`;
-
 const DivRoute = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -193,7 +184,7 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
             <DivConnections>
               <Connections>
                 <div>Connections</div>
-                <div>🔗 30</div>
+                <div>🔗 {userToRequest.countMatches}</div>
               </Connections>
 
               <RatingSection>
@@ -216,7 +207,6 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
                 <div>{userToRequest.fullName}</div>
                 <p>{userToRequest.jobTitle}</p>
               </UserName>
-              <VerifiedBadge>Verified</VerifiedBadge>
             </UserDetail>
           </UserInfo>
         </Div>
