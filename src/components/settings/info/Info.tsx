@@ -108,16 +108,49 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
+const DivDesactivateAccount = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+`
+
+const ButtonDesactivate = styled.button`
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+  color: #000;
+  padding: 10px 20px;
+  border: 2px solid ${({ theme }) => theme.colors.bgButton};
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.bgButtonHover};
+    color: ${({ theme }) => theme.colors.textSecondary};
+    border-color: ${({ theme }) => theme.colors.bgButtonHover};
+  }
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.bgDisabled};
+    color: ${({ theme }) => theme.colors.textDisabled};
+    cursor: not-allowed;
+  }
+`;
+
 const UserInfo = () => {
   const [accountState, setAccountState] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  
+
+  // Obtener el estado actual de la cuenta
   useEffect(() => {
     const fetchAccountState = async () => {
       const idString = localStorage.getItem('userId');
       const idNumber = idString ? parseInt(idString, 10) : null;
-
+      
       if (!idNumber) {
         setError('ID de usuario no encontrado');
         setLoading(false);
@@ -125,8 +158,7 @@ const UserInfo = () => {
       }
 
       try {
-        //ESTO YA NO EXISTE... REVISAR ENDPOINTS
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/state/${idNumber}`, {
+        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`, {
           method: 'GET',
           headers: {
             'accept': '*/*',
@@ -139,7 +171,7 @@ const UserInfo = () => {
         }
 
         const data = await response.json();
-        setAccountState(data.data.response.stateName);
+        setAccountState(data.data.response.nameStateUser); // "activo", "deshabilitar" o "suspendido"
       } catch (err: any) {
         setError(err.message || "Error desconocido");
       } finally {
@@ -150,6 +182,36 @@ const UserInfo = () => {
     fetchAccountState();
   }, []);
 
+  // Función para cambiar el estado de la cuenta
+  const toggleAccountState = async () => {
+    const idString = localStorage.getItem('userId');
+    const idNumber = idString ? parseInt(idString, 10) : null;
+    if (!idNumber) return;
+
+    const newAction = accountState === 'activo' ? 'deshabilitar' : 'habilitar';
+
+    try {
+      const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByAction?id=${idNumber}&action=${newAction}`, {
+        method: 'PUT',
+        headers: {
+          'accept': '*/*',
+        },
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`Error ${response.status}: ${errorMessage}`);
+      }
+
+      const data = await response.json();
+      setAccountState(data.data.response.estado); // Actualiza el estado con el nuevo valor
+
+    } catch (err: any) {
+      setError(err.message || "Error al cambiar el estado de la cuenta");
+    }
+  };
+
+  // Render del componente
   return (
     <PageContainer>
       <Banner>
@@ -169,9 +231,24 @@ const UserInfo = () => {
                   ) : error ? (
                     <p>{error}</p>
                   ) : (
-                    <p>{accountState === "activo" ? "Activo" : "Inactivo"}</p>
+                    <p>{accountState}</p>
                   )}
                 </WidgetBody>
+                <DivDesactivateAccount>
+                  <ButtonDesactivate
+                    onClick={toggleAccountState}
+                    disabled={accountState === 'suspendido'} // Deshabilita el botón si está suspendido
+                  >
+                    {accountState === 'activo' ? 'Deshabilitar cuenta' : 'Habilitar cuenta'}
+                  </ButtonDesactivate>
+                  {accountState === 'suspendido' && (
+                    <p>Tu cuenta ha sido suspendida por un administrador. No puedes cambiar el estado hasta que el administrador lo restaure.</p>
+                  )}
+                  <div>
+                    <h5>Desactivar tu cuenta</h5>
+                    <p>Estás a punto de desactivar tu cuenta. Esto no eliminará tus datos personales. Si deseas restaurarla, puedes contactar a nuestro equipo de soporte.</p>
+                  </div>
+                </DivDesactivateAccount>
               </WidgetContainer>
             </PageBody>
           </PageContent>
