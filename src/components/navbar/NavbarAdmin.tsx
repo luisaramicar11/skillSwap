@@ -23,7 +23,7 @@ const NavbarContainer = styled.div`
     padding: 0 50px;
     gap: 50px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
         padding: 0 20px;
     }
 `;
@@ -49,7 +49,7 @@ const SidebarLink = styled.p`
         border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
         display: none;
     }
 `;
@@ -58,6 +58,10 @@ const SidebarLinkContainer = styled.li`
     width: 100px;
     cursor: pointer;
     list-style: none;
+
+    @media (max-width: 790px) {
+        display: none;
+    }
 `;
 
 const IconsContainer = styled.div`
@@ -66,7 +70,7 @@ const IconsContainer = styled.div`
     justify-content: center;
     gap: 20px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
         gap: 10px;
     }
 `;
@@ -77,17 +81,37 @@ const NavList = styled.ul<{ isOpen: boolean }>`
     display: flex;
     gap: 50px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
         display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
         flex-direction: column;
-        position: absolute;
-        top: 30px;
+        align-items: start;
+        height: 100%;
+        width: 50%;
+        position: fixed;
+        margin: 0;
+        top: 54px;
         left: 0;
-        right: 0;
-        background-color: ${({ theme }) => theme.colors.bgNavbar};
+        transition: 1s ease-in-out;
+        background-color: ${({ theme }) => theme.colors.bgPrimary};
+        border: 1px solid ${({ theme }) => theme.colors.textDark};
         padding: 20px;
         gap: 20px;
+        animation: move 1s ease-in-out;
         z-index: 100;
+
+        & a{
+            font-size: 18px;
+            color: ${({ theme }) => theme.colors.textSecondary} !important;
+        }
+    
+        @keyframes move {
+            from {
+                translate: -510px;
+            }
+            to {
+                translate: 0;
+            };
+        }
     }
 `;
 
@@ -102,16 +126,9 @@ const HamburgerMenu = styled.div`
     cursor: pointer;
     justify-content: center;
 
-    @media (max-width: 768px) {
+    @media (max-width: 790px) {
         display: block;
     }
-`;
-
-const Line = styled.div`
-    width: 25px;
-    height: 3px;
-    background-color: ${({ theme }) => theme.colors.textWhite};
-    margin: 4px 0;
 `;
 
 // Navbar component

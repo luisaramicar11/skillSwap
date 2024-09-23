@@ -89,7 +89,7 @@ const ProfileImage = styled.div<{ urlImage: string }>`
   top: 6rem;
   right: 3rem;
   margin-bottom: 0rem;
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
 `;
 
 const ConnectionsRating = styled.div`

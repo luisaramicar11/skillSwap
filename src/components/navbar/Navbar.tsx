@@ -5,7 +5,6 @@ import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
-import ListIcon from "@/public/svg/ListIcon";
 import ProfileSidebar from "../sidebars/SidebarFloatingProfile";
 
 // Styled components
@@ -106,10 +105,6 @@ export const Navbar: React.FC = () => {
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
 
     return (
         <NavbarContainer isOpen={isOpen}>

@@ -38,7 +38,7 @@ const PageBody = styled.div`
 const MessageContainer = styled.div`
   width: 50%;
   padding: 15px;
-  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
   border-radius: 8px;
   display: flex;
   justify-content: space-between;

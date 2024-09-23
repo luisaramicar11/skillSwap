@@ -8,7 +8,13 @@ const DivLinkComponent = styled(Link)`
     width: 100%;
     height: 100%;
     text-decoration: none;
+    transition: 0.4s ease-in-out;
     color: ${({ theme }) => theme.colors.textSecondary};
+
+    &:hover {
+        transform: scale(1.05);
+        transition: 0.4s ease-in-out;
+    }
 `;
 
 const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, clickedUserId, id, children }) => {

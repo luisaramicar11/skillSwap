@@ -188,7 +188,8 @@ const SwitchButton = styled.button`
   }
 
   @media (max-width: 1070px) {
-    width: inherit; /* Ajusta el tamaño del botón en pantallas pequeñas */
+    width: inherit; 
+    padding: 0 20px !important;
     font-size: 10px;
   }
 `;

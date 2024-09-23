@@ -49,6 +49,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   @media (max-width: 768px) {
     gap: 0.3rem; /* Reducir el espacio entre elementos en móviles */
   }
@@ -59,6 +60,7 @@ export const DivButtonSingUp = styled.div`
   bottom: 50px;
   display: flex;
   gap: 20px;
+
   @media (max-width: 1200px) {
     position: static; /* Hace que el botón no sea fijo en móviles */
     display: flex;

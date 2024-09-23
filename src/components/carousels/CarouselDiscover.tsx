@@ -9,6 +9,7 @@ import Card from "../cards/CardCarouselDiscover";
 import styled from "styled-components";
 import { IUserCarouselProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import DivLink from "../ui/links/CardUserLink";
 
 const CustomSwiper = styled(Swiper)`
   width: 80%;
@@ -18,18 +19,23 @@ const CustomSwiper = styled(Swiper)`
   .swiper-button-next,
   .swiper-button-prev {
     transform: scale(0.8);
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textDark};
   }
 
   .swiper-button-next.swiper-button-disabled,
   .swiper-button-prev.swiper-button-disabled {
-    color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textDark};
     opacity: 0.2;
   }
 
   .swiper-slide {
     display: flex;
     justify-content: center;
+  }
+
+  & a{
+    width: auto !important;
+    height: auto !important;
   }
 `;
 
@@ -111,13 +117,15 @@ const Carousel = () => {
         },
       }}
     >
-      {allUsersData.slice(0, maxUsersToShow).map((user) => (
+      {allUsersData.slice(0, maxUsersToShow).map((user, index) => (
         <SwiperSlide key={user.id}>
-          <Card
-            name={user.name}
-            urlImage={user.urlImage}
-            category={user.category}
-          />
+          <DivLink key={index} href="/user/detailUser" label="DETALLE" id={user.id.toString()} >
+            <Card
+              name={user.name}
+              urlImage={user.urlImage}
+              category={user.category}
+            />
+          </DivLink>
         </SwiperSlide>
       ))}
     </CustomSwiper>

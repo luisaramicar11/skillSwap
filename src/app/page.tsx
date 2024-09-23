@@ -259,7 +259,7 @@ const Title = styled.h1`
 const ProfileBox = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
   padding: 30px 100px 30px 50px;
   border-radius: 10px;
   text-align: start;

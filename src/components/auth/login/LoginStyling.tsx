@@ -66,6 +66,19 @@ export const FormWrapper = styled.div`
   align-items: center;  
   margin: 0;
   position: relative;
+
+  @media (max-width: 1070px) {
+    & form{
+        display: flex;
+        flex-direction: column;
+
+        & :nth-child(5){
+        display: flex;
+        align-self: center !important;
+      }
+    }
+    
+  }
   
   @media (max-width: 1070px) { 
     border-radius: none;
