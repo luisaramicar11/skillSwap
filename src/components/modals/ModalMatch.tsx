@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ConnectionRequestForm from "../forms/FormRequest"
+import ConnectionRequestForm from "../forms/FormRequest";
 import { IUserCardProps } from "@/src/models/userCards.model";
 
 interface IModalProps {
@@ -70,7 +70,7 @@ const UserDetail = styled.div`
   margin-bottom: 10px;
   text-align: end;
   padding: 1.5rem;
-  padding-top:2rem;
+  padding-top: 2rem;
 `;
 
 const UserName = styled.h3`
@@ -78,13 +78,13 @@ const UserName = styled.h3`
   flex-direction: column;
   align-items: flex-end;
 
-  div{
+  div {
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
 
-  p{
+  p {
     color: #000;
     font-size: 0.8rem;
     font-weight: 500;
@@ -122,7 +122,7 @@ const DivConnections = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
-  margin:0;
+  margin: 0;
 `;
 
 const Connections = styled.div`
@@ -165,6 +165,12 @@ const Star = styled.span`
   margin: 0 2px;
 `;
 
+interface IModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userToRequest: IUserCardProps;
+}
+
 const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -178,24 +184,28 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
         <DivRoute>C:\ User\ RequestConnection</DivRoute>
         <Div>
           <DivRequest>
-          <ConnectionRequestForm/>
+            {/* Pasamos onClose al formulario */}
+            <ConnectionRequestForm idReceivingUser={userToRequest.id} onClose={onClose} />
           </DivRequest>
           <UserInfo>
             <DivConnections>
+              {/* Información del usuario */}
               <Connections>
                 <div>Connections</div>
                 <div>🔗 {userToRequest.countMatches}</div>
               </Connections>
-
               <RatingSection>
                 <div>Rating</div>
                 <DivRating>
-                  <div>4.5</div>
+                  <div>{userToRequest.qualification}</div>
                   <RatingStars>
                     {[...Array(5)].map((_, index) => (
                       <Star key={index}>
-                        {index < 4.5 ? "★" : "☆"}{" "}
-                        {/* Muestra estrellas llenas o vacías */}
+                        {userToRequest.qualification >= index + 1
+                          ? "★"
+                          : userToRequest.qualification >= index + 0.5
+                          ? "☆"
+                          : "☆"}
                       </Star>
                     ))}
                   </RatingStars>
@@ -216,4 +226,3 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
 };
 
 export default Modal;
-
