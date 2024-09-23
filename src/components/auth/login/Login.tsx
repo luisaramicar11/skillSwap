@@ -58,9 +58,9 @@ export default function LoginPage() {
     const resultAction = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(resultAction)) {
-      const token = resultAction.payload?.data.token;
-      const role = resultAction.payload?.data.role;
-      const idUser = resultAction.payload?.data.id;
+      const token = resultAction.payload?.data.response.token;
+      const role = resultAction.payload?.data.response.role;
+      const idUser = resultAction.payload?.data.response.id;
 
       if (token) {
         toast.success("Login exitoso!");

@@ -1,6 +1,6 @@
 "use client";
-import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
-import { IUser } from "../../models/admin.users.model";
+import React, { useEffect, useState } from "react";
+import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -56,89 +56,113 @@ const Title = styled.h2`
   font-size: 15pt;
 `;
 
-interface CreateUserFormProps {
-  createData: (user: Omit<IUser, "id">) => void; // Cambia a Omit<IUser, 'id'>
-  updateData: (user: IUser) => void;
-  dataToEdit: IUser | null;
-  setDataToEdit: (data: IUser | null) => void;
+interface EditUserFormProps {
+  updateData: (user: IUserUpdateAdmin) => void;
+  dataToEdit: IUserUpdateAdmin | null;
+  setDataToEdit: (data: IUserUpdateAdmin | null) => void;
 }
 
-const initialForm: Omit<IUser, "id"> = {
-  name: "",
-  lastName: "",
-  jobTitle: "",
-  description: "",
-  dateBirthday: new Date(),
-  urlImage: "",
-  email: "",
-  category: "",
-  skills: [],
-  phoneNumber: "",
-  urlLinkedin: "",
-  urlBehance: "",
-  urlGithub: "",
-  role: "",
-  idState: 0,
-};
-
-const CreateUserForm: React.FC<CreateUserFormProps> = ({
-  createData,
+const FormUsers: React.FC<EditUserFormProps> = ({
   updateData,
   dataToEdit,
   setDataToEdit,
 }) => {
-  const [form, setForm] = useState<Omit<IUser, "id">>(initialForm);
+  const initialFormState: IUserUpdateAdmin = {
+    name: "",
+    lastName: "",
+    abilities: "",
+    category: "",
+    idStateUser: 0,
+    idRoleUser: 0,
+    suspensionDate: null,
+    reactivationDate: null,
+    urlImage: "",
+    birthdate: "",
+  };
+
+  const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
 
   useEffect(() => {
+    const initialFormState: IUserUpdateAdmin = {
+      name: "",
+      lastName: "",
+      abilities: "",
+      category: "",
+      idStateUser: 0,
+      idRoleUser: 0,
+      suspensionDate: null,
+      reactivationDate: null,
+      urlImage: "",
+      birthdate: "",
+    };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
-      setForm(userWithoutId);
+      setForm({
+        ...userWithoutId,
+        suspensionDate: userWithoutId.suspensionDate || null,
+        reactivationDate: userWithoutId.reactivationDate || null,
+      });
     } else {
-      setForm(initialForm);
+      setForm(initialFormState);
     }
   }, [dataToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]:
-        name === "skills"
-          ? value.split(",").map((skill) => skill.trim())
-          : value,
-    });
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === "suspensionDate" || name === "reactivationDate" ? (value ? value : null) : value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (dataToEdit) {
+        // Crea el objeto a actualizar filtrando las propiedades innecesarias
+        // Función para formatear la fecha
+        const formatDate = (date: Date | null): string | null => {
+          if (!date) return null;
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0'); // Asegura que el mes tenga dos dígitos
+          const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+          return `${year}-${month}-${day}`;
+      };
 
-    if (!dataToEdit) {
-      createData(form); // Crear nuevo usuario
-    } else {
-      updateData({ ...form, id: dataToEdit.id }); // Actualizar usuario existente
+        const userToUpdate = {
+            id: dataToEdit.id, // Mantén el ID existente
+            name: form.name,
+            lastName: form.lastName,
+            urlImage: form.urlImage,
+            jobTitle: form.jobTitle,
+            description: form.description,
+            birthdate: form.birthdate, // Mantener el formato de string
+            email: form.email,
+            phoneNumber: form.phoneNumber,
+            category: form.category,
+            abilities: form.abilities,
+            urlLinkedin: form.urlLinkedin,
+            urlGithub: form.urlGithub,
+            urlBehance: form.urlBehance,
+            idStateUser: form.idStateUser,
+            idRoleUser: form.idRoleUser,
+            suspensionDate: form.suspensionDate,
+            reactivationDate: form.reactivationDate,
+        };
+
+        // Envía solo las propiedades necesarias
+        updateData(userToUpdate);
+        handleReset();
     }
-    handleReset(e);
-  };
+};
 
-  const handleReset = (
-    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    setForm(initialForm);
+  const handleReset = () => {
+    setForm(initialFormState);
     setDataToEdit(null);
-  };
-
-  // Convierte una fecha a formato YYYY-MM-DD
-  const formatDate = (date: Date | string) => {
-    if (typeof date === 'string') {
-      return date; // Suponiendo que ya está en formato correcto
-    }
-    return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
   };
 
   return (
     <main>
-      <Title>{dataToEdit ? "Editar Usuario" : "Agregar Usuario"}</Title>
+      <Title>Editar Usuario</Title>
       <Div>
         <Form onSubmit={handleSubmit}>
           <Input
@@ -159,111 +183,53 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
           />
           <Input
             type="text"
-            name="jobTitle"
-            placeholder="Cargo/profesión"
+            name="abilities"
+            placeholder="Habilidades"
             onChange={handleChange}
-            value={form.jobTitle}
-            required
-          />
-          <Input
-            type="text"
-            name="description"
-            placeholder="Descripción"
-            onChange={handleChange}
-            value={form.description}
-            required
-          />
-          <Input
-            type="date"
-            name="dateBirthday"
-            placeholder="Fecha de nacimiento"
-            onChange={handleChange}
-            value={formatDate(form.dateBirthday)}
-            required
-          />
-          <Input
-            type="text"
-            name="urlImage"
-            placeholder="Imagen"
-            onChange={handleChange}
-            value={form.urlImage}
-            required
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            value={form.email}
+            value={form.abilities}
             required
           />
           <Input
             type="text"
             name="category"
-            placeholder="Escribe la categoría"
+            placeholder="Categoría"
             onChange={handleChange}
             value={form.category}
             required
           />
           <Input
-            type="text"
-            name="skills"
-            placeholder="Escribe las habilidades (separadas por comas)"
+            type="number"
+            name="idStateUser"
+            placeholder="idStateUser"
             onChange={handleChange}
-            value={form.skills.join(", ")} // Mostrar como cadena
+            value={form.idStateUser}
             required
           />
           <Input
-            type="text"
-            name="phoneNumber"
-            placeholder="Escribe el teléfono"
+            type="number"
+            name="idRoleUser"
+            placeholder="idRoleUser"
             onChange={handleChange}
-            value={form.phoneNumber}
+            value={form.idRoleUser}
             required
           />
           <Input
-            type="text"
-            name="urlLinkedin"
-            placeholder="Escribe la url del Linkedin"
+            type="date"
+            name="suspensionDate"
             onChange={handleChange}
-            value={form.urlLinkedin}
-            required
+            value={form.suspensionDate || ""}
           />
           <Input
-            type="text"
-            name="urlBehance"
-            placeholder="Escribe la url del Behance"
+            type="date"
+            name="reactivationDate"
             onChange={handleChange}
-            value={form.urlBehance}
-            required
-          />
-          <Input
-            type="text"
-            name="urlGithub"
-            placeholder="Escribe la url del Github"
-            onChange={handleChange}
-            value={form.urlGithub}
-            required
-          />
-          <Input
-            type="text"
-            name="role"
-            placeholder="Rol del usuario"
-            onChange={handleChange}
-            value={form.role}
-            required
-          />
-          <Input
-            type="text"
-            name="idState"
-            placeholder="Id del estado"
-            onChange={handleChange}
-            value={form.idState}
-            required
+            value={form.reactivationDate || ""}
           />
           <Div>
-            <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={handleReset}>Limpiar</Button>
+            <Button type="submit">Actualizar</Button>
+            <Button type="button" onClick={handleReset}>
+              Limpiar
+            </Button>
           </Div>
         </Form>
       </Div>
@@ -271,5 +237,10 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({
   );
 };
 
-export default CreateUserForm;
+export default FormUsers;
+
+
+
+
+
 

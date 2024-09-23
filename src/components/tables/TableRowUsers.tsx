@@ -1,19 +1,11 @@
 import React from "react";
-import { IUser } from "../../models/admin.users.model"; // Asegúrate de actualizar la ruta si es necesario
+import { IUser, IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
 import styled from "styled-components";
 
 const Td = styled.td`
   padding: 5px;
   border: 1px solid #ddd;
   text-align: center;
-`;
-
-// Estilos para las imágenes en la tabla
-const Img = styled.img`
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%; /* Opcional: para un estilo circular en las imágenes de perfil */
 `;
 
 const EditButton = styled.button`
@@ -51,8 +43,8 @@ const Tr = styled.tr`
 `;
 
 interface TableRowProps {
-  user: IUser;
-  setDataToEdit: (user: IUser) => void;
+  user: IUserUpdateAdmin;
+  setDataToEdit: (user: IUserUpdateAdmin) => void;
   deleteData: (userId: number) => void;
 }
 
@@ -61,66 +53,36 @@ const TableRowUser: React.FC<TableRowProps> = ({
   setDataToEdit,
   deleteData,
 }) => {
-  const formatSkills = (skills: string[] | undefined) => {
-    return skills ? skills.join(", ") : "No skills available";
-  };
-
-  const formatDate = (date: Date | string) => {
-    if (typeof date === "string") {
-      return date; // Suponiendo que ya está en formato correcto
-    }
-    return date.toISOString().split("T")[0]; // Extrae solo la parte de la fecha
-  };
-
+  
   const {
-    id,
     name,
     lastName,
-    jobTitle,
-    description,
-    dateBirthday,
-    urlImage,
-    email,
+    abilities,
     category,
-    skills,
-    phoneNumber,
-    urlLinkedin,
-    urlBehance,
-    urlGithub,
-    role,
-    idState,
-  } = user; // Eliminado stateName
+    idStateUser,
+    idRoleUser,
+    suspensionDate,
+    reactivationDate,
+  } = user;
 
   return (
     <Tr>
       <Td>{name}</Td>
       <Td>{lastName}</Td>
-      <Td>{jobTitle}</Td>
-      <Td>{description}</Td>
-      <Td>{dateBirthday ? formatDate(dateBirthday) : ""}</Td>
-      <Td>
-        {urlImage && urlImage !== "no hay aun" ? (
-          <Img src={urlImage} alt={`Avatar of ${name}`} />
-        ) : (
-          "No Image"
-        )}
-      </Td>
-      <Td>{email}</Td>
+      <Td>{abilities}</Td>
       <Td>{category}</Td>
-      <Td>{formatSkills(skills)}</Td>
-      <Td>{phoneNumber}</Td>
-      <Td>{urlLinkedin}</Td>
-      <Td>{urlBehance}</Td>
-      <Td>{urlGithub}</Td>
-      <Td>{role}</Td>
-      <Td>{idState}</Td>
+      <Td>{idStateUser}</Td>
+      <Td>{idRoleUser}</Td>
+      <Td>{suspensionDate || "N/A"}</Td>
+      <Td>{reactivationDate || "N/A"}</Td>
       <Td>
         <EditButton onClick={() => setDataToEdit(user)}>Editar</EditButton>
-        <DeleteButton onClick={() => deleteData(id)}>Eliminar</DeleteButton>
+        <DeleteButton onClick={() => deleteData(user.id!)}>Eliminar</DeleteButton>
       </Td>
     </Tr>
   );
 };
 
 export default TableRowUser;
+
 

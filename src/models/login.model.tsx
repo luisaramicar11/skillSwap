@@ -6,10 +6,13 @@ export interface IUserLoginRequest {
 export interface IUserLoginResponse {
     message: string;
     data:{
-      id: number;
+      response:{
+        id: number;
       role: number;
       email: string;
       token: string;
+      }
+      
     }
     
   }

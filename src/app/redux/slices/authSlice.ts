@@ -22,8 +22,6 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
           headers: {
             "accept": "*/*",
             "Content-Type": "application/json",
-            // Agregar token aquí si es necesario para la autenticación
-            "Authorization": `Bearer ${localStorage.getItem('authToken')}`
           },
           body: JSON.stringify(credentials),
         }
@@ -36,6 +34,7 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
       }
 
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (error: any) {
       // Si hay un error de red u otro problema
@@ -97,8 +96,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        localStorage.setItem("authToken", action.payload.data.token);
-        localStorage.setItem("userId", action.payload.data.id.toString()); 
+        localStorage.setItem("authToken", action.payload.data.response.token);
+        localStorage.setItem("userId", action.payload.data.response.id.toString()); 
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
