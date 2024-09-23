@@ -1,8 +1,8 @@
 import React from "react";
-import TableRow from "./TableRowUsers";
-import { TableDataUsers } from "../../models/admin.users.model";
+import TableRowUser from "./TableRowUsers"; // Asegúrate de que la ruta sea correcta
+import { IUser, IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
 import styled from "styled-components";
-import TableHeader from "./TableHeadUsers";
+import TableHeaderUser from "./TableHeadUsers"; // Asegúrate de que la ruta sea correcta
 
 const TableContainer = styled.div`
   padding: 20px;
@@ -18,7 +18,6 @@ const TableStyle = styled.table`
   border-collapse: collapse;
   min-width: 1000px; /* Opcional: define un ancho mínimo para forzar el scroll horizontal si hay muchas columnas */
 `;
-
 
 const Title = styled.h3`
   text-align: center;
@@ -42,7 +41,13 @@ const Tr = styled.tr`
   }
 `;
 
-const TableUser: React.FC<TableDataUsers> = ({
+interface TableUserProps {
+  data: IUserUpdateAdmin[];
+  setDataToEdit: (user: IUserUpdateAdmin) => void;
+  deleteData: (userId: number) => void;
+}
+
+const TableUser: React.FC<TableUserProps> = ({
   data,
   setDataToEdit,
   deleteData,
@@ -51,11 +56,11 @@ const TableUser: React.FC<TableDataUsers> = ({
     <TableContainer>
       <Title>Tabla de usuarios</Title>
       <TableStyle>
-        <TableHeader />
+        <TableHeaderUser />
         <tbody>
           {data.length ? (
             data.map((user) => (
-              <TableRow
+              <TableRowUser
                 key={user.id}
                 user={user}
                 setDataToEdit={setDataToEdit}
@@ -64,7 +69,7 @@ const TableUser: React.FC<TableDataUsers> = ({
             ))
           ) : (
             <Tr>
-              <Td colSpan={17}>Sin datos</Td>
+              <Td colSpan={8}>Sin datos</Td> {/* Cambia el valor de colSpan según el número de columnas en tu tabla */}
             </Tr>
           )}
         </tbody>
@@ -74,3 +79,4 @@ const TableUser: React.FC<TableDataUsers> = ({
 };
 
 export default TableUser;
+

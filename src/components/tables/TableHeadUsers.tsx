@@ -19,28 +19,22 @@ const Tr = styled.tr`
 `;
 
 const TableHeaderUser: React.FC = () => {
-    return (
-      <thead>
-        <Tr>
-          <Th>Nombre</Th>
-          <Th>Apellido</Th>
-          <Th>Cargo/profesión</Th>
-          <Th>Descripción del cargo/profesión</Th>
-          <Th>Fecha de nacimiento</Th>
-          <Th>Imagen</Th>
-          <Th>Email</Th>
-          <Th>Categoria</Th>
-          <Th>Habilidades</Th>
-          <Th>Teléfono</Th>
-          <Th>LinkedIn</Th>
-          <Th>Behance</Th>
-          <Th>Github</Th>
-          <Th>Rol</Th>
-          <Th>Id Estado</Th>
-          <Th>Actions</Th>
-        </Tr>
-      </thead>
-    );
+  return (
+    <thead>
+      <Tr>
+        <Th>Nombre</Th>
+        <Th>Apellido</Th>
+        <Th>Habilidades</Th>
+        <Th>Categoría</Th>
+        <Th>ID Estado</Th>
+        <Th>ID Rol</Th>
+        <Th>Fecha de suspensión</Th>
+        <Th>Fecha de reactivación</Th>
+        <Th>Acciones</Th>
+      </Tr>
+    </thead>
+  );
 };
 
 export default TableHeaderUser;
+

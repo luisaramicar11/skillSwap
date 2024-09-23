@@ -63,9 +63,7 @@ function RecoverPassword() {
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
-    }
-
-  
+    }  
     router.push("/auth");
   };
 

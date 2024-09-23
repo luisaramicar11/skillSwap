@@ -12,43 +12,44 @@ export interface IUser {
     id?:              number;
     name?:            string;
     lastName?:        string;
-    urlImage:        string;
+    urlImage?:        string;
     jobTitle?:        string;
     description?:     string;
-    birthdate?:       Date;
+    birthdate?:       string;
     email?:           string;
     phoneNumber?:     string;
-    category?: string;
-    abilities?:       string[];
+    category?:        string;
+    abilities?:       string;
     urlLinkedin?:     URL;
     urlGithub?:       URL;
     urlBehance?:      URL;
-    idStateUser:      number;
-    idRoleUser:       number;
-    suspensionDate:   string | null,
-    reactivationDate: string | null,
-    nameStateUser:    string,
+    idStateUser?:      number;
+    idRoleUser?:       number;
+    suspensionDate?:   string | null,
+    reactivationDate?: string | null,
+    nameStateUser?:    string,
     roleName?:        RoleName;
 }
 
 export interface IUserUpdateAdmin {
+    id?:              number;
     name?:            string;
     lastName?:        string;
     urlImage:        string;
     jobTitle?:        string;
     description?:     string;
-    birthdate?:       Date;
+    birthdate?:       string;
     email?:           string;
     phoneNumber?:     string;
     category?:        string;
-    abilities?:       string[];
+    abilities?:       string;
     urlLinkedin?:     URL;
     urlGithub?:       URL;
     urlBehance?:      URL;
-    idState:          number;
-    idRol:            number;
-    suspensionDate:   string | null,
-    reactivationDate: string | null,
+    idStateUser?:      number;
+    idRoleUser?:       number;
+    suspensionDate?:   string | null,
+    reactivationDate?: string | null,
 }
 
 
