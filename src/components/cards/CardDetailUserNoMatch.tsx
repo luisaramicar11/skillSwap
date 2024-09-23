@@ -4,11 +4,31 @@ import styled from "styled-components";
 import ModalRequest from "../modals/ModalMatch"
 import { IRequestOnDetailUserCardProps } from "@/src/models/detailUser.model";
 import SkillTag from "../ui/skillTag/skillTag";
+import { Urbanist } from "next/font/google";
+
+const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 const ProfileContainer = styled.div`
   width: 70%;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
   margin-bottom: 1rem;
+  padding-top: 1rem;
+
+  & span{
+    font-style: normal;
+    font-family: ${urbanist.style.fontFamily};
+    
+    & p{
+      color: ${({ theme }) => theme.colors.textSecondary};
+    }
+  }
+
+  & h3{
+    background: ${({ theme }) => theme.colors.gradientSecondary};
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 `;
 
 const Header = styled.div`
@@ -17,9 +37,9 @@ const Header = styled.div`
   padding-left: 1.5rem;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
-  margin-top: 2rem;
   position: relative;
+  border-radius: 10px;
+  width: 100%;
 `;
 
 const UserInfo = styled.div`
@@ -36,7 +56,7 @@ const UserName = styled.h1`
 
 const UserTitle = styled.h2`
   font-size: 18px;
-  color: #777;
+  color: ${({ theme }) => theme.colors.textDark};
   font-style: italic;
   font-weight: 400;
   margin-top: 0;
@@ -50,7 +70,7 @@ const VerificationStatus = styled.div`
 
 const Unknown = styled.span`
   color: ${({ theme }) => theme.colors.textDark};
-  padding: 2px 20px;
+  padding: 2px 15px;
   border-radius: 20px;
   text-align: center;
   border: 2px solid ${({ theme }) => theme.colors.textDark};
@@ -62,13 +82,14 @@ const ProfileImage = styled.div<{ urlImage: string }>`
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
-  width: 13rem;
-  height: 13rem;
+  width: 12rem;
+  height: 12rem;
   border-radius: 10px;
   position: absolute;
-  top: 3.5rem;
+  top: 6rem;
   right: 3rem;
   margin-bottom: 0rem;
+  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
 `;
 
 const ConnectionsRating = styled.div`
@@ -86,9 +107,17 @@ const Connections = styled.div`
   font-size: 1rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   padding-bottom: 0;
+  padding-left: 0;
 
-  div {
+  span {
     font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+
+    & p{ 
+      color: ${({ theme }) => theme.colors.textSecondary};
+    }
   }
 `;
 
@@ -101,28 +130,20 @@ const Skills = styled.div`
   padding-bottom: 0rem;
 `;
 
-const SkillButton = styled.button`
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.textPurple};
-  border: 1px solid ${({ theme }) => theme.colors.textPurple};
-  padding: 5px 40px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-`;
-
 const UserDescription = styled.div`
   width: 12rem;
-  height: 13rem;
+  height: 100%;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textDark};
   margin-top: 0rem;
+  gap: 1rem;
   margin-right: 3rem;
+  translate: 0 -50px;
 `;
 
 const H3 = styled.h3`
   text-align: start;
-  padding: 0.3rem 1rem;
+  padding: 5px 1rem;
   margin: 0;
   font-size: 18px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textDark};
@@ -133,7 +154,7 @@ const P = styled.p`
   padding: 0.6rem 1rem;
   margin: 0;
   font-size: 0.8rem;
-  color: #000;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: 400;
 `;
 
@@ -149,7 +170,7 @@ const RatingSection = styled.div`
 `;
 
 const RatingStars = styled.div`
-  color: #f5c518;
+  color: ${({ theme }) => theme.colors.textYellow};
   font-size: 1.2rem;
 `;
 
@@ -160,9 +181,8 @@ const DivRating = styled.div`
 `;
 
 const Star = styled.span`
-  color: gold;
+  color: ${({ theme }) => theme.colors.textYellow};
   font-size: 20px;
-  margin: 0 2px;
 `;
 
 const DivUserDescription = styled.div`
@@ -171,42 +191,23 @@ const DivUserDescription = styled.div`
   align-items: flex-end;
   margin-left: 2rem;
 `;
-const RequestContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 22rem;
-  align-items: flex-start;
-  width: 70%;
-`;
-
-const InfoBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 20px;
-`;
 
 const SendButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;
-  color: #fff;
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.textSecondary};
   padding: 15px 25px;
-  width: 50%;
-  height: 3rem;
-  border: none;
+  width: 60%;
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
   border-radius: 5px;
+  margin-right: 2rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #333;
+    background-color: ${({ theme }) => theme.colors.bgBanner};
   }
 `;
 
@@ -237,12 +238,12 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData 
             <UserName>{userData.fullName}</UserName>
             <UserTitle>{userData.jobTitle}</UserTitle>
             <VerificationStatus>
-              <Unknown>Unknown</Unknown>
+              <Unknown>？Unknown</Unknown>
             </VerificationStatus>
             <ConnectionsRating>
               <Connections>
                 <span>Conexiones</span>
-                <span>{userData.countMatches}</span>
+                <span><p>↺</p>{userData.countMatches}</span>
               </Connections>
               <RatingSection>
                 <div>Calificación</div>
@@ -277,19 +278,6 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData 
             <P>{userData.description}</P>
           </UserDescription>
         </DivUserDescription>
-
-        <RequestContainer>
-          {/* <InfoBox>
-  <Placeholder>
-    <SmallText>Wanting to know more?</SmallText>
-    <LargeText>Send a request.</LargeText>
-  </Placeholder>
-</InfoBox> */}
-          {/* <SendButton>
-  <ButtonText>SEND REQUEST</ButtonText>
-  <Arrow>→</Arrow>
-</SendButton> */}
-        </RequestContainer>
       </ProfileContainer>
     </>
   );

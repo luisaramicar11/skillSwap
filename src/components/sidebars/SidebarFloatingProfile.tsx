@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
+import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "../cards/CardProfileLink";
 import LogoutButton from "../Logout"
 import { FaSignOutAlt } from 'react-icons/fa';
@@ -214,7 +214,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
           {
             method: "GET",
             headers: {
-              "accept" : "*/*"
+              "accept": "*/*"
             },
           }
         );
@@ -226,7 +226,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
           {
             method: "GET",
             headers: {
-              "accept" : "*/*",
+              "accept": "*/*",
             },
           }
         );
@@ -255,12 +255,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   if (!isOpen) return null;
 
   if (loading) return <OurAlertsText>Cargando...</OurAlertsText>;
-  
+
   const timer = setTimeout(() => {
-      if (error) {
-        return <OurAlertsText>Error: {error}</OurAlertsText>;
-      }
-    }, 3000);
+    if (error) {
+      return <OurAlertsText>Error: {error}</OurAlertsText>;
+    }
+  }, 3000);
 
   return (
     <ProfileSidebarContainer>
@@ -296,10 +296,11 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
               <div className="status-item sent">
                 <H2StatusSection>Enviadas</H2StatusSection>
                 <div className="status-content">
-                  <FaClock className="icon" />
+                  <FaArrowUp className="icon" />
                   <p>
-                    {userData.solicitudes.conteoPendientes}:{" "}
-                    {userData.solicitudes.ultimaPendiente || "N/A"}
+                    {userData.solicitudes.conteoEnviadas}:{" "}
+                    {userData.solicitudes.ultimoEnviado || "N/A"}
+
                   </p>
                 </div>
               </div>
@@ -308,8 +309,8 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                 <div className="status-content">
                   <FaClock className="icon" />
                   <p>
-                    {userData.solicitudes.conteoEnviadass}:{" "}
-                    {userData.solicitudes.ultimoEnviado || "N/A"}
+                    {userData.solicitudes.conteoPendientes}:{" "}
+                    {userData.solicitudes.ultimaPendiente || "N/A"}
                   </p>
                 </div>
               </div>

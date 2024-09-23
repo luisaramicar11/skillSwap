@@ -47,6 +47,13 @@ const Connections = styled.div`
 
   div {
     font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+
+    & p{ 
+      color: ${({ theme }) => theme.colors.textSecondary};
+    }
   }
 `;
 
@@ -67,12 +74,18 @@ const RatingSection = styled.div`
 
   div {
     font-size: 1rem;
+    display: flex;
+    gap: 0.3rem;
   }
 `;
 
 const RatingStars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
   font-size: 1.2rem;
+
+  & span {
+      font-style: normal;
+    }
 `;
 
 const Description = styled.div`
@@ -118,7 +131,7 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatc
       <DivCardContent>
         <Connections>
           <div>Conexiones</div>
-          <div>🔗 {countMatches}</div>
+          <div><p>↺</p>{countMatches}</div>
         </Connections>
 
         <RatingSection>

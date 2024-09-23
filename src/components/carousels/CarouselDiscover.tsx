@@ -1,12 +1,15 @@
 "use client";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useState, useEffect } from "react";
 import "swiper/css"; // Importa el CSS principal de Swiper
 import "swiper/css/navigation"; // Importa el CSS de navegación
 import "swiper/css/pagination"; // Importa el CSS de paginación
 import { Navigation, Pagination } from "swiper/modules"; // Importa los módulos de Swiper
 import Card from "../cards/CardCarouselDiscover"; // Ajusta la ruta según tu estructura de carpetas
 import styled from "styled-components";
+import { IUserCarouselProps } from "@/src/models/userCards.model";
+import { OurAlertsText } from "@/src/utils/ourAlertsText";
 
 const CustomSwiper = styled(Swiper)`
   width: 80%;
@@ -32,54 +35,56 @@ const CustomSwiper = styled(Swiper)`
 `;
 
 const Carousel = () => {
-  const users = [
-    {
-      title: "John Doe",
-      urlImage: "",  
-      rating: 4,
-    },
-    {
-      title: "Jane Smith",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 5,
-    },
-    {
-      title: "Carlos Ruiz",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 3,
-    },
-    {
-      title: "Carlos Ruiz",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 3,
-    },
-    {
-      title: "Carlos Ruiz",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 3,
-    },
-    {
-      title: "Carlos Ruiz",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 3,
-    },
-    {
-      title: "Carlos Ruiz",
-      urlImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRro6dZi4xjThJaEVMEh4F5EgzGNJPvCNLFbg&s",
-      rating: 3,
-    },
-    // ... más usuarios
-  ];
+  // Estados para manejar a todos los usuarios, loading y errores
+  const [allUsersData, setAllUsersData] = useState<IUserCarouselProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch de los usuarios
+  useEffect(() => {
+    const fetchAllUsersData = async () => {
+      try {
+        const response = await fetch(
+          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserSortedCreated",
+          {
+            method: "GET",
+            headers: {
+              "accept": "*/*",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al obtener datos de los usuarios.");
+        }
+
+        const responseData = await response.json();
+
+        // Guarda todos los usuarios en el estado
+        setAllUsersData(responseData);
+
+      } catch (error: any) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchAllUsersData();
+  }, []);
+
+  if (loading) {
+    return <OurAlertsText>Cargando...</OurAlertsText>;
+  }
+
+  if (error) {
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
+  }
+
+  console.log(allUsersData)
 
   return (
     <CustomSwiper
-      modules={[Navigation, Pagination]} // Registra los módulos de navegación y paginación
+      modules={[Navigation, Pagination]}
       navigation
       pagination={{ clickable: true }}
       spaceBetween={5}
@@ -87,32 +92,32 @@ const Carousel = () => {
       loop={true}
       breakpoints={{
         320: {
-          slidesPerView: 1, // Muestra solo 1 slide a la vez en pantallas pequeñas
-          spaceBetween: 5, // Espacio reducido entre slides
+          slidesPerView: 1,
+          spaceBetween: 5,
         },
         // Cuando la pantalla sea menor de 640px
         640: {
-          slidesPerView: 2, // Muestra solo 1 slide a la vez en pantallas pequeñas
-          spaceBetween: 5, // Espacio reducido entre slides
+          slidesPerView: 2,
+          spaceBetween: 5,
         },
         // Cuando la pantalla sea menor de 768px
         768: {
-          slidesPerView: 3, // Muestra 2 slides en pantallas medianas
+          slidesPerView: 3,
           spaceBetween: 5,
         },
         // Cuando la pantalla sea mayor de 1024px
         1024: {
-          slidesPerView: 4, // Muestra 4 slides en pantallas grandes
+          slidesPerView: 4,
           spaceBetween: 5,
         },
       }}
     >
-      {users.map((user, index) => (
-        <SwiperSlide key={index}>
+      {allUsersData.map((user) => (
+        <SwiperSlide key={user.id}>
           <Card
-            title={user.title}
+            name={user.name}
             urlImage={user.urlImage}
-            rating={user.rating}
+            category={user.category}
           />
         </SwiperSlide>
       ))}

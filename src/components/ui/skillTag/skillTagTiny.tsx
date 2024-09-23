@@ -17,7 +17,7 @@ const SkillTagTiny = styled.p`
     text-align: center;
     padding: 2px !important;
     border-radius: 20px;
-    color: ${({ theme }) => theme.colors.textPurple};
+    color: ${({ theme }) => theme.colors.textPurple} !important;
     border: 1px solid ${({ theme }) => theme.colors.textPurple};
     font-size: 12px;
 `;

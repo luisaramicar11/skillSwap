@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
+import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
 import { IProfileFixedCardProps } from "@/src/models/userCards.model";
 
@@ -31,7 +31,7 @@ const StatusSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   margin-bottom: 10px;
   gap: 1.5rem;
   padding-left: 1.5rem;
@@ -140,7 +140,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
         <div className="status-item sent">
           <H2StatusSection>Enviadas</H2StatusSection>
           <div className="status-content">
-            <FaClock className="icon" />
+            <FaArrowUp className="icon" />
             <p>
               {conteoEnviadas}: {ultimoEnviado}
             </p>
