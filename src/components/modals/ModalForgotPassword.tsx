@@ -1,8 +1,7 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation"; 
 import styled from "styled-components";
-import { useState } from "react"; // Importa useState
-import { h2 } from "framer-motion/client";
 
 interface ModalPasswordRecoveryProps {
   isOpen: boolean;
@@ -16,8 +15,8 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); // Fondo oscuro
-  z-index: 1000; // Asegura que el modal esté enfrente de todo
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
 `;
 
 const ModalContent = styled.div`
@@ -32,18 +31,6 @@ const ModalContent = styled.div`
   max-width: 500px;
   z-index: 1001;
 `;
-const Title = styled.h2`
-   background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 5px;
-  width: 100% !important;
-`;
-
-
-
-
 
 const CloseButton = styled.button`
   position: absolute;
@@ -79,45 +66,45 @@ const SubmitButton = styled.button`
 `;
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
-  const [email, setEmail] = useState(""); // Estado para almacenar el correo
-  const [loading, setLoading] = useState(false); // Estado para manejar el estado de carga
-  const router = useRouter(); // Uso del hook useRouter
+  const [email, setEmail] = useState("");
+  const router = useRouter(); 
 
-  // Maneja el submit del formulario
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
-
+  
     try {
       const response = await fetch('https://skillswapriwi.azurewebsites.net/api/Auth/RequestEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }), // Envía el email en el cuerpo
+        body: JSON.stringify({ email }),
       });
-
-      if (response.ok) {
-        // Maneja la respuesta exitosa
-        alert('Correo enviado con éxito. Revisa tu bandeja de entrada.'); // O usa una librería de notificaciones
-        onClose(); // Cierra el modal
-      } else {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.message || 'No se pudo enviar el correo.'}`); // Muestra el mensaje de error
+  
+      if (!response.ok) {
+        throw new Error('Error del servidor');
       }
-    } catch (error) {
-      alert('Ocurrió un error al intentar conectar con el servidor.');
-      console.error('Error al enviar el correo:', error);
-    } finally {
-      setLoading(false); // Restablece el estado de carga
+  
+      const data = await response.json();
+      console.log('Correo enviado:', data);
+      alert('Correo enviado correctamente');
+    } catch (error: unknown) {
+      let errorMessage = 'Ocurrió un error desconocido';
+  
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+  
+      alert(`Error al enviar el correo: ${errorMessage}`);
     }
   };
+  
 
   return (
     <ModalOverlay isOpen={isOpen}>
       <ModalContent>
         <CloseButton onClick={onClose}>×</CloseButton>
-        <Title>Recuperar contraseña</Title>
+        <h2>Recuperar contraseña</h2>
         <form onSubmit={handleSubmit}>
           <FormLabel htmlFor="email-recovery">Ingresa tu correo electrónico</FormLabel>
           <Input
@@ -125,11 +112,11 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
             id="email-recovery"
             placeholder="Correo electrónico"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} // Actualiza el estado del email
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <SubmitButton type="submit" disabled={loading}>
-            {loading ? 'Enviando...' : 'Enviar'}
+          <SubmitButton type="submit">
+            Enviar
           </SubmitButton>
         </form>
       </ModalContent>
