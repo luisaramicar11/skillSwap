@@ -6,7 +6,7 @@ import UserProfileDetail from "@/src/components/cards/CardDetailUserMatch";
 import { Div, DivProfile } from "./DetailStyling";
 import { IUserProfileProps } from "@/src/models/userCards.model";
 import { IUser } from "@/src/models/user.model";
-import { OurAlertsText } from "@/src/utils/ourAlertsText";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const DetailAboutUser = () => {
   const [userDetail, setUserDetail] = useState<IUser | null>(null);

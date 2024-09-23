@@ -5,7 +5,7 @@ import MatchCard from "../../../components/cards/CardMatch";
 import { DivMatch } from "./MatchStyling";
 import ProfileCard from "@/src/components/cards/CardMatchProfile";
 import { IUserCardProps, IRequestCardProps } from "@/src/models/userCards.model";
-import { OurAlertsText } from "@/src/utils/ourAlertsText";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const Match = () => {
   const [userData, setUserData] =  useState<IUserCardProps[]>([]);

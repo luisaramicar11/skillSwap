@@ -9,7 +9,7 @@ import { AppDispatch } from "@/src/app/redux/store";
 import InputSingUp from "../../../components/ui/inputs/InputAuth";
 import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
 import Label from "../../ui/labels/LabelAuth";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
 import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
 

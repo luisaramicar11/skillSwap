@@ -8,9 +8,9 @@ export interface IUserLoginResponse {
     data:{
       response:{
         id: number;
-      role: number;
-      email: string;
-      token: string;
+        role: number;
+        email: string;
+        token: string;
       }
       
     }

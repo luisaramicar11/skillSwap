@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from 'next/navigation';
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../app/redux/slices/authSlice"; 
+import { logoutUser } from "../../../app/redux/slices/authSlice"; 
 
 // Definimos los tipos de props para el componente
 interface LogoutButtonProps {
@@ -41,6 +41,8 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ icon }) => {
   const handleLogout = () => {
     dispatch(logoutUser());
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("clickedUserId");
     router.push("/auth");
   };
 

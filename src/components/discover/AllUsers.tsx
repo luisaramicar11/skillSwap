@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Card from "../cards/CardDiscover";
 import { IAllUsersCardsProps } from "../../models/userCards.model";
 import DivLink from "../ui/links/CardUserLink";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 
 const CardListContainer = styled.div`
   display: grid;
@@ -74,7 +74,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
             : [];
 
           return (
-            <DivLink key={index} href="/user/detail-user" label="DETALLE" id={user.id.toString()} >
+            <DivLink key={index} href="/user/detailUser" label="DETALLE" id={user.id.toString()} >
               <Card
                 id={user.id}
                 fullName={user.fullName}

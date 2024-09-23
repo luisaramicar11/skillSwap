@@ -3,7 +3,10 @@ import { createGlobalStyle } from "styled-components";
 import { Urbanist, Baskervville } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 const baskervville = Baskervville({
     weight: '400',

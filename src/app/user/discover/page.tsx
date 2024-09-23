@@ -4,7 +4,7 @@ import Carousel from "../../../components/carousels/CarouselDiscover";
 import Search from "@/src/components/searchs/search";
 import { LineTitles, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/discover/AllUsers";
-import { IUserCardProps, IAllUsersCardsProps } from "../../../models/userCards.model";
+import { IUserCardProps } from "../../../models/userCards.model";
 
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores

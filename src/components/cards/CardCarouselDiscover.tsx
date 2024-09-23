@@ -14,9 +14,10 @@ const CardContainer = styled.div`
   padding-bottom: 10px;
   border-radius: 10px;
   text-align: center;
-  max-width: 6rem;
+  max-width: 7rem;
   display: flex;
   flex-direction: column;
+  align-items: center;  
 `;
 
 const CardImage = styled.img`
@@ -38,6 +39,8 @@ const CardContent = styled.div`
 const CardTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
+  width: max-content;
+  text-align: center;
   color: ${({ theme }) => theme.colors.textSecondary};
   margin: 0;
   padding: 0;

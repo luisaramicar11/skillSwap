@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import ProfileSidebar from "../sidebars/SidebarFloatingProfile";

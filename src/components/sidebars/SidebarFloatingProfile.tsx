@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "../cards/CardProfileLink";
-import LogoutButton from "../Logout"
+import LogoutButton from "../ui/buttons/ButtonLogout"
 import { FaSignOutAlt } from 'react-icons/fa';
 import { useState, useEffect } from "react";
 import { IUserCardProps } from "@/src/models/userCards.model";
-import { OurAlertsText } from "@/src/utils/ourAlertsText";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const ProfileSidebarContainer = styled.div`
     z-index: -1;

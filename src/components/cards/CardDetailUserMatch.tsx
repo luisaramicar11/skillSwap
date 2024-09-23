@@ -138,7 +138,6 @@ const UserDescription = styled.div`
   margin-top: 0rem;
   gap: 1rem;
   margin-right: 3rem;
-  translate: 0 -50px;
 `;
 
 const H3 = styled.h3`
