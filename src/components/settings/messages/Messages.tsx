@@ -68,15 +68,18 @@ const Button = styled.button`
 // Función para enviar la actualización del estado de la solicitud
 const updateRequestState = async (idRequest: number, idStateRequest: number) => {
   try {
-    const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsPatch/PatchRequestState/${idRequest}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        idStateRequest
-      }),
-    });
+    const response = await fetch(
+      `https://skillswapriwi.azurewebsites.net/api/RequestsPatch/PatchRequestState/${idRequest}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idStateRequest
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error('Error al actualizar el estado de la solicitud');
@@ -84,8 +87,10 @@ const updateRequestState = async (idRequest: number, idStateRequest: number) => 
 
     const data = await response.json();
     console.log('Estado de la solicitud actualizado:', data);
+    return data;
   } catch (error) {
     console.error('Error al hacer el PATCH:', error);
+    throw error;
   }
 };
 
@@ -104,7 +109,9 @@ const UserMessagess = () => {
           return;
         }
 
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestMessagesById/${userIdNumber}`);
+        const response = await fetch(
+          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestMessagesById/${userIdNumber}`
+        );
         const data = await response.json();
 
         if (data?.message === "Success") {
@@ -120,12 +127,22 @@ const UserMessagess = () => {
     }
   }, [userId]);
 
-  const handleAccept = (id: number) => {
-    updateRequestState(id, 2); // Actualizar con idStateRequest = 2 (Aceptar)
+  const handleAccept = async (id: number) => {
+    try {
+      await updateRequestState(id, 2); // Actualizar con idStateRequest = 2 (Aceptar)
+      setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id)); // Eliminar el mensaje aceptado
+    } catch (error) {
+      console.error('Error al aceptar la solicitud:', error);
+    }
   };
 
-  const handleReject = (id: number) => {
-    updateRequestState(id, 3); // Actualizar con idStateRequest = 3 (Rechazar)
+  const handleReject = async (id: number) => {
+    try {
+      await updateRequestState(id, 3); // Actualizar con idStateRequest = 3 (Rechazar)
+      setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id)); // Eliminar el mensaje rechazado
+    } catch (error) {
+      console.error('Error al rechazar la solicitud:', error);
+    }
   };
 
   return (
@@ -164,5 +181,6 @@ const UserMessagess = () => {
 };
 
 export default UserMessagess;
+
 
 

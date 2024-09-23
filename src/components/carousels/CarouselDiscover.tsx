@@ -34,6 +34,7 @@ const CustomSwiper = styled(Swiper)`
   }
 `;
 
+
 const Carousel = () => {
   // Estados para manejar a todos los usuarios, loading y errores
   const [allUsersData, setAllUsersData] = useState<IUserCarouselProps[]>([]);
@@ -41,36 +42,37 @@ const Carousel = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch de los usuarios
-  useEffect(() => {
-    const fetchAllUsersData = async () => {
-      try {
-        const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserSortedCreated",
-          {
-            method: "GET",
-            headers: {
-              "accept": "*/*",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Error al obtener datos de los usuarios.");
+ // Fetch de los usuarios
+useEffect(() => {
+  const fetchAllUsersData = async () => {
+    try {
+      const response = await fetch(
+        "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserSortedCreated",
+        {
+          method: "GET",
+          headers: {
+            accept: "*/*",
+          },
         }
+      );
 
-        const responseData = await response.json();
-
-        // Guarda todos los usuarios en el estado
-        setAllUsersData(responseData);
-
-      } catch (error: any) {
-        setError(error.message);
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error("Error al obtener datos de los usuarios.");
       }
-    };
 
-    fetchAllUsersData();
-  }, []);
+      const responseData: IUserCarouselProps[] = await response.json();
+
+      // Guarda todos los usuarios en el estado
+      setAllUsersData(responseData);
+      setLoading(false);  // Importante para dejar de mostrar el loading cuando los datos se cargan
+    } catch (error: any) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  fetchAllUsersData();
+}, []);
 
   if (loading) {
     return <OurAlertsText>Cargando...</OurAlertsText>;

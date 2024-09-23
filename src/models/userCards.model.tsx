@@ -12,11 +12,11 @@ export interface IUserCardProps {
 export interface IUserCarouselProps {
     id: number;
     name: string;
-    category: string;
     urlImage: string;
-    createdAt: Date;
-}
-
+    category: string;
+    createdAt: string;
+  }
+  
 export interface IProfileFixedCardProps extends IProfileCardProps {
     ultimaAceptada: string
     ultimaPendiente: string
