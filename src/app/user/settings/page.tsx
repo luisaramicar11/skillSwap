@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { IUser } from "../../../models/user.model";
 import UserMessagess from "../../../components/settings/messages/Messages"
 import Reports from "../../../components/settings/reports/reports"
+import Metrics from "../../../components/settings/metrics/Metrics"
 
 const SettingsContainer = styled.div`
     width: 100%;
@@ -84,6 +85,7 @@ const UserSettings = () => {
             <UserInfo />
             <UserMessagess />
             <Reports />
+            <Metrics />
         </SettingsContainer>
     )
 }
