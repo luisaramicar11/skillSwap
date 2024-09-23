@@ -1,5 +1,7 @@
+"use client"
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { toast } from "react-toastify";
 
 export const FormContainer = styled.form`
   display: flex;
@@ -31,23 +33,70 @@ const SendButton = styled.button`
   font-weight: 800;
 `;
 
-const ConnectionRequestForm: React.FC = () => {
-  const [message, setMessage] = useState('');
+interface IConnectionRequestFormProps {
+  idReceivingUser: number;
+  onClose: () => void;  // Añadimos onClose como prop
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
+const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceivingUser, onClose }) => {
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica para enviar la solicitud de conexión
-    console.log({ message });
+    setLoading(true);
+    setError(null);
+
+    const idRequestingUser = parseInt(localStorage.getItem("userId") as string, 10);
+
+    const requestBody = {
+      disponibilitySchedule: "string",
+      description: message,
+      idReceivingUser,
+      idRequestingUser,
+    };
+
+    try {
+      const response = await fetch('https://skillswapriwi.azurewebsites.net/api/RequestsPost/PostRequestCreate', {
+        method: 'POST',
+        headers: {
+          'accept': '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al enviar la solicitud");
+      }
+
+      setMessage('');
+      toast.success("Solicitud enviada con éxito");
+
+      // Cierra el modal después de enviar con éxito
+      onClose();
+
+    } catch (err) {
+      toast.error("Error al enviar la solicitud");
+      setError("Error al enviar la solicitud");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <FormContainer onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
       <TextArea 
         placeholder="Type here the content for your connection request..." 
         value={message} 
         onChange={(e) => setMessage(e.target.value)} 
+        disabled={loading}
       />
-      <SendButton type="submit">ENVIAR</SendButton>
+      <SendButton type="submit" disabled={loading}>
+        {loading ? "Enviando..." : "ENVIAR"}
+      </SendButton>
     </FormContainer>
   );
 };

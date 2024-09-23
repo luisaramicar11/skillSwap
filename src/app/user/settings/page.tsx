@@ -5,6 +5,9 @@ import UserInfo from "@/src/components/settings/info/Info";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { IUser } from "../../../models/user.model";
+import UserMessagess from "../../../components/settings/messages/Messages"
+import Reports from "../../../components/settings/reports/reports"
+import Metrics from "../../../components/settings/metrics/Metrics"
 
 const SettingsContainer = styled.div`
     width: 100%;
@@ -80,6 +83,9 @@ const UserSettings = () => {
       )}
             <UserSkills skills={["JavaScript", "HTML", "Adobe"]} />
             <UserInfo />
+            <UserMessagess />
+            <Reports />
+            <Metrics />
         </SettingsContainer>
     )
 }

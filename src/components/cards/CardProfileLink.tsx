@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import LinkProfile from "../ui/links/NavLinks";
-import { IUserCardProps, IProfileCardProps } from "@/src/models/userCards.model";
+import {
+  IUserCardProps,
+  IProfileCardProps,
+} from "@/src/models/userCards.model";
 
 const ProfileHeader = styled.div`
   display: flex;
@@ -76,14 +79,29 @@ const DivRate = styled.div`
     font-size: 0.7rem;
   }
 `;
+const RatingStars = styled.div`
+  color: #f5c518;
+  font-size: 1.2rem;
+`;
 
-const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics }) => {
-  const abilitiesArray = userMetrics?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
+const Star = styled.span`
+  color: gold;
+  font-size: 20px;
+  margin: 0 2px;
+`;
+const CardProfileLink: React.FC<IProfileCardProps> = ({
+  fullName,
+  userMetrics,
+}) => {
+  const abilitiesArray =
+    userMetrics?.abilities
+      ?.split(",")
+      .map((ability: string) => ability.trim()) || [];
 
   return (
     <LinkProfile href="/user/settings" label="CONFIGURACION">
       <ProfileHeader>
-        <Avatar urlImage={userMetrics.urlImage}/>
+        <Avatar urlImage={userMetrics.urlImage} />
         <div>
           <ProfileName>{fullName}</ProfileName>
           {abilitiesArray.length > 0 ? (
@@ -101,10 +119,20 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics })
         <h1>{userMetrics?.qualification}</h1>
         <DivRate>
           <p>Calificación</p>
-          <Stars>★★★★☆</Stars>
+          <RatingStars>
+            {[...Array(5)].map((_, index) => (
+              <Star key={index}>
+                {userMetrics?.qualification >= index + 1
+                  ? "★"
+                  : userMetrics?.qualification >= index + 0.5
+                  ? "☆"
+                  : "☆"}
+              </Star>
+            ))}
+          </RatingStars>
         </DivRate>
       </RatingSection>
     </LinkProfile>
   );
 };
-export default CardProfileLink
+export default CardProfileLink;
