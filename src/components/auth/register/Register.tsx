@@ -10,7 +10,7 @@ import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
 import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
-import { handlePageChange } from '@/src/utils/handlePageTheme';
+import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
 import StyledNavLink from '../../ui/links/NavLinks';
 
 //Syled
@@ -87,7 +87,7 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
     console.log('Apellido:', form.lastName);
     console.log('Descripción:', form.description);
     console.log('Puesto:', form.jobTitle);
-    console.log('Categoría:', form.category);
+    console.log('Comunidad:', form.category);
     console.log('Habilidades:', form.abilities);
     console.log('Fecha de nacimiento:', form.birthdate);
     console.log('URL LinkedIn:', form.urlLinkedin);
@@ -97,7 +97,7 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
     console.log('Número de teléfono:', form.phoneNumber);
 
     // Validación básica de campos
-    if (!form.email || !form.name || !form.password || !form.lastName || !form.description || !form.jobTitle || !form.category || !form.abilities){
+    if (!form.email || !form.name || !form.urlImage || !form.password || !form.lastName || !form.description || !form.jobTitle || !form.category || !form.abilities){
       toast.error('Por favor, completa todos los campos.');
       return;
     }
@@ -163,7 +163,7 @@ const formatDate = (date: Date | string) => {
               <Title>Tus datos</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="name" text="Nombre*" />
+              <Label htmlFor="name" text="Nombre *" />
               <InputAuth
                 type="text"
                 id="name" 
@@ -176,7 +176,7 @@ const formatDate = (date: Date | string) => {
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="lastName" text="Apellidos*" />
+              <Label htmlFor="lastName" text="Apellidos *" />
               <InputAuth
                 type="text"
                 id="lastName" 
@@ -197,7 +197,7 @@ const formatDate = (date: Date | string) => {
               <Title>Tus datos</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="birthdate" text="Fecha de nacimiento" />
+              <Label htmlFor="birthdate" text="Fecha de nacimiento *" />
               <InputAuth
                 type="date"
                 id="birthdate" 
@@ -210,7 +210,7 @@ const formatDate = (date: Date | string) => {
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="urlImage" text="Foto de Perfil" />
+              <Label htmlFor="urlImage" text="Foto de Perfil *" />
               <InputAuth
                 type="text"
                 id="urlImage" 
@@ -218,7 +218,8 @@ const formatDate = (date: Date | string) => {
                 placeholder="Escribe la URL de tu Imagen..."
                 value={form.urlImage}
                 onChange={handleChange}
-                autoComplete="url"
+                required
+                autoComplete="url-image"
               />
             </DivUserInput>
           </DivUserData>
@@ -230,7 +231,7 @@ const formatDate = (date: Date | string) => {
               <Title>Tus habilidades</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="category" text="Selecciona una comunidad" />
+              <Label htmlFor="category" text="Selecciona una Comunidad *" />
               <Select
                 id="category" 
                 value={selectedOption} 
@@ -242,7 +243,7 @@ const formatDate = (date: Date | string) => {
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="abilities" text="Skills" />
+              <Label htmlFor="abilities" text="Skills *" />
               <TextArea
                 id="abilities"
                 value={skills}
@@ -265,7 +266,7 @@ const formatDate = (date: Date | string) => {
               <Title>Sobre tu experiencia</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="jobTitle" text="Trabajo/título" />
+              <Label htmlFor="jobTitle" text="Trabajo/título *" />
               <InputAuth
                 type="text"
                 id="jobTitle"
@@ -278,7 +279,7 @@ const formatDate = (date: Date | string) => {
               />
             </DivUserInput>
             <DivUserInput>
-              <Label htmlFor="description" text="Descripción" />
+              <Label htmlFor="description" text="Descripción *" />
               <InputAuth
                 type="text"
                 id="description" 

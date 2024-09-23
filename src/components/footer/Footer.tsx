@@ -3,7 +3,7 @@ import styled from "styled-components";
 import React from "react";
 import StyledNavLink from "../ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InstagramIcon from "@/public/svg/InstagramIcon";
 import FigmaIcon  from "@/public/svg/FigmaIcon";
 import GitHubIcon from "@/public/svg/GitHubIcon";

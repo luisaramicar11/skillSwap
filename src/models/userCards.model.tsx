@@ -15,8 +15,8 @@ export interface IUserCarouselProps {
     urlImage: string;
     category: string;
     createdAt: string;
-  }
-  
+}
+
 export interface IProfileFixedCardProps extends IProfileCardProps {
     ultimaAceptada: string
     ultimaPendiente: string

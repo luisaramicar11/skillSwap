@@ -12,7 +12,7 @@ export interface IUser {
     id?:              number;
     name?:            string;
     lastName?:        string;
-    urlImage?:        string;
+    urlImage:        string;
     jobTitle?:        string;
     description?:     string;
     birthdate?:       string;

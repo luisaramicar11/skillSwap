@@ -6,7 +6,7 @@ export interface Report {
 
 export interface IReports {
     obj: IReportGet[]; // Cambiar "report" a "obj"
-  }
+}
 
 export interface IReport {
     id:            number;

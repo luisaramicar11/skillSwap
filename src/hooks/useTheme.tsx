@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GlobalDarkTheme, GlobalTheme } from '../app/GlobalStyling';
-import { darkThemeLabels } from '../utils/handlePageTheme';
+import { darkThemeLabels } from '../lib/utils/handlePageTheme';
 import { IGlobalTheme } from '../models/globalTheme.model';
 
 // Custom hook to manage theme
