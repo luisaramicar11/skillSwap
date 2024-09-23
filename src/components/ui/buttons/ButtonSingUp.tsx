@@ -10,11 +10,11 @@ type ButtonProps = {
 };
 
 const StyledButtonSingUp = styled.button`
-  padding: 15px;
+  padding: 10px;
   color: ${({ theme }) => theme.colors.textOrange};
   border-radius: 20px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
   width: 120px;
   background-color: ${({ theme }) => theme.colors.textWhite};
   border: none; // Ajusta el color de fondo si es necesario

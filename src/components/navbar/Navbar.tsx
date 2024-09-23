@@ -88,6 +88,7 @@ const IconsContainer = styled.div`
     justify-content: center;
     gap: 20px;
 
+
     > * {
         cursor: pointer;
     }

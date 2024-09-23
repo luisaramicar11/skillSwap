@@ -9,7 +9,7 @@ const NavLinkComponent = styled(Link)`
   padding: 15px;
   margin: 0;
   color: ${({ theme }) => theme.colors.textWhite};
-  font-weight: 400;
+  font-weight: 500;
   transition: 0.4s;
 
   &:hover {

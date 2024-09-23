@@ -1,11 +1,12 @@
+"use client"
 import React from "react";
 import styled from "styled-components";
 
 // Interfaz para los props de la Card
-interface CardProps {
-  title: string;
+interface ICardCarouselProps {
+  name: string;
   urlImage: string;
-  rating: number; // Añadido para las estrellas
+  category: string;
 }
 
 // Estilos para el Card
@@ -48,14 +49,14 @@ const CategoryContainer = styled.p`
   color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const Card: React.FC<CardProps> = ({ title, urlImage, rating }) => {
+const Card: React.FC<ICardCarouselProps> = ({ name, urlImage, category }) => {
   return (
     <CardContainer>
-      <CardImage src={urlImage} alt={title} />
+      <CardImage src={urlImage} alt={name} />
       <CardContent>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle>{name}</CardTitle>
         <CategoryContainer>
-          Entretenimiento
+          {category}
         </CategoryContainer>
       </CardContent>
     </CardContainer>

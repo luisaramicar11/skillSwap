@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../cards/CardDiscover";
 import { IAllUsersCardsProps } from "../../models/userCards.model";
+import DivLink from "../ui/links/CardUserLink";
+import { handlePageChange } from "@/src/utils/handlePageTheme";
 
 const CardListContainer = styled.div`
   display: grid;
@@ -10,11 +12,6 @@ const CardListContainer = styled.div`
   width: 80%;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
-  & div{
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 // Estilos para los botones de paginación
@@ -69,7 +66,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
 
   return (
     <DivContainer>
-      <CardListContainer>
+      <CardListContainer onClick={() => handlePageChange('DETALLE')} >
         {currentCards.map((user, index) => {
           // Nueva constante que convierte abilities de string a array
           const abilitiesArray = typeof user.abilities === 'string'
@@ -77,7 +74,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
             : [];
 
           return (
-            <div key={index}>
+            <DivLink key={index} href="/user/detail-user" label="DETALLE" id={user.id.toString()} >
               <Card
                 id={user.id}
                 fullName={user.fullName}
@@ -86,7 +83,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
                 abilities={abilitiesArray}
                 urlImage={user.urlImage}
               />
-            </div>
+            </DivLink>
           );
         })}
       </CardListContainer>

@@ -15,6 +15,7 @@ const ProfileHeader = styled.div`
 `;
 
 const Avatar = styled.div<{ urlImage: string }>`
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
@@ -65,12 +66,15 @@ const RatingSection = styled.div`
 const Stars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
   font-size: 0.9rem;
-  margin: 0;
 `;
 
 const DivRate = styled.div`
   display: flex;
   flex-direction: column;
+
+  & p {
+    font-size: 0.7rem;
+  }
 `;
 
 const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics }) => {
@@ -96,7 +100,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics })
       <RatingSection>
         <h1>{userMetrics?.qualification}</h1>
         <DivRate>
-          <p>Your Rate</p>
+          <p>Calificación</p>
           <Stars>★★★★☆</Stars>
         </DivRate>
       </RatingSection>

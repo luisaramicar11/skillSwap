@@ -147,7 +147,7 @@ const H1 = styled.h1`
 
   p {
     font-size: 1rem;
-    color: black;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   @media (max-width: 1070px) {
@@ -163,7 +163,7 @@ const SwitchButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.textOrange};
   background-color: transparent;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500;
   transition: background-color 0.6s ease;
   display: flex;
   align-items: center;
@@ -174,6 +174,7 @@ const SwitchButton = styled.button`
     height: 100% !important;
     color: ${({ theme }) => theme.colors.textOrange};
     border: 0;
+    padding: 10px;
     
   }
 

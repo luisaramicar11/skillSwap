@@ -44,11 +44,9 @@ export const Container = styled.div`
   border: none;
 
   @media (max-width: 1070px) {
-    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
-    align-items: center; /* Alinea el contenido al inicio */
+    flex-direction: column;
+    align-items: center; 
     justify-content: center; 
-    
-     /* Alinea el contenido al inicio */
   }
 `;
 
@@ -105,13 +103,14 @@ export const DivButtonLogin = styled.div`
 export const ForgotPasswordButton = styled.button`
   background: none;
   border: none;
-  color: white;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  opacity: 0.7;
   text-decoration: underline;
   cursor: pointer;
   text-align: left;
   font-size: 0.9rem;
   margin-top: 0.5rem;
-  padding-left: 0; /* Alinear a la izquierda */
+  padding-left: 0;
   display: block;
   width: 100%;
 `;

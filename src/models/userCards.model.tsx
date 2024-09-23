@@ -9,6 +9,14 @@ export interface IUserCardProps {
     urlImage: string;
 }
 
+export interface IUserCarouselProps {
+    id: number;
+    name: string;
+    category: string;
+    urlImage: string;
+    createdAt: Date;
+}
+
 export interface IProfileFixedCardProps extends IProfileCardProps {
     ultimaAceptada: string
     ultimaPendiente: string

@@ -72,7 +72,7 @@ const StarsContainer = styled.div`
 `;
 
 const Star = styled.span`
-  color: gold;
+  color: ${({ theme }) => theme.colors.textYellow};;
   font-size: 16px;
   margin: 0 2px;
   font-style: normal;
