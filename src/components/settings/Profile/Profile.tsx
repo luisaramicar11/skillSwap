@@ -143,7 +143,7 @@ const PageAside = styled.aside`
   }
 `;
 
-const UserProfile = ({ id, name, lastName, urlImage, jobTitle, description, birthdate, email, phoneNumber, category, abilities, abilityCategory, urlLinkedin, urlGithub, urlBehance, roleName }:IUser) => {
+const UserProfile = ({ id, name, lastName, urlImage, jobTitle, description, birthdate, email, phoneNumber, category, abilities, urlLinkedin, urlGithub, urlBehance, roleName }:IUser) => {
   return (
     <PageContainer>
       <Banner>
