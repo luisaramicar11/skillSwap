@@ -1,6 +1,8 @@
 "use client";
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useRouter } from "next/navigation";
 import styled from "styled-components";
+import { useState } from "react"; // Importa useState
+import { h2 } from "framer-motion/client";
 
 interface ModalPasswordRecoveryProps {
   isOpen: boolean;
@@ -30,6 +32,18 @@ const ModalContent = styled.div`
   max-width: 500px;
   z-index: 1001;
 `;
+const Title = styled.h2`
+   background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 5px;
+  width: 100% !important;
+`;
+
+
+
+
 
 const CloseButton = styled.button`
   position: absolute;
@@ -65,32 +79,57 @@ const SubmitButton = styled.button`
 `;
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
+  const [email, setEmail] = useState(""); // Estado para almacenar el correo
+  const [loading, setLoading] = useState(false); // Estado para manejar el estado de carga
   const router = useRouter(); // Uso del hook useRouter
 
   // Maneja el submit del formulario
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Previene el comportamiento por defecto del formulario
-    // Aquí puedes agregar lógica para manejar el envío del correo electrónico
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
 
-    // Redirigir a la página de recuperación de contraseña
-    router.push('/recoverPassword'); // Cambia '/reset-password' por la ruta a la que quieras redirigir
+    try {
+      const response = await fetch('https://skillswapriwi.azurewebsites.net/api/Auth/RequestEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }), // Envía el email en el cuerpo
+      });
+
+      if (response.ok) {
+        // Maneja la respuesta exitosa
+        alert('Correo enviado con éxito. Revisa tu bandeja de entrada.'); // O usa una librería de notificaciones
+        onClose(); // Cierra el modal
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.message || 'No se pudo enviar el correo.'}`); // Muestra el mensaje de error
+      }
+    } catch (error) {
+      alert('Ocurrió un error al intentar conectar con el servidor.');
+      console.error('Error al enviar el correo:', error);
+    } finally {
+      setLoading(false); // Restablece el estado de carga
+    }
   };
 
   return (
     <ModalOverlay isOpen={isOpen}>
       <ModalContent>
         <CloseButton onClick={onClose}>×</CloseButton>
-        <h2>Recuperar contraseña</h2>
+        <Title>Recuperar contraseña</Title>
         <form onSubmit={handleSubmit}>
           <FormLabel htmlFor="email-recovery">Ingresa tu correo electrónico</FormLabel>
           <Input
             type="email"
             id="email-recovery"
             placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Actualiza el estado del email
             required
           />
-          <SubmitButton type="submit">
-            Enviar
+          <SubmitButton type="submit" disabled={loading}>
+            {loading ? 'Enviando...' : 'Enviar'}
           </SubmitButton>
         </form>
       </ModalContent>
