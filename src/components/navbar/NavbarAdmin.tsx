@@ -7,7 +7,7 @@ import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
-import ProfileSidebar from "../sidebars/SidebarFloatingProfile"
+import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline"
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -146,7 +146,7 @@ export const NavbarAdmin: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <ProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
+            <OnlineProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
             <SidebarLinkContainer>
                 <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
             </SidebarLinkContainer>

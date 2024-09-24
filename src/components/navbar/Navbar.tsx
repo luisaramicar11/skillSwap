@@ -5,7 +5,7 @@ import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
-import ProfileSidebar from "../sidebars/SidebarFloatingProfile";
+import OfflineProfileSidebar from "../sidebars/SidebarFloatingOffline";
 
 // Styled components
 const NavbarContainer = styled.div<{ isOpen: boolean }>`
@@ -108,11 +108,10 @@ export const Navbar: React.FC = () => {
 
     return (
         <NavbarContainer isOpen={isOpen}>
-            <ProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
+            <OfflineProfileSidebar isOpen={isModalOpen} onClose={closeModal} />
             <SidebarLinkContainer>
                 <SidebarLink onClick={openModal}>+ <small>SkillSwap</small></SidebarLink>
             </SidebarLinkContainer>
-
             <IconsContainer>
                 <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
                 <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />

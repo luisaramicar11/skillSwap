@@ -55,6 +55,7 @@ const Button = styled.button`
     font-size: 10px;
   }
 `;
+
 // Estilos para el texto principal
 const MainText = styled.div`
   display: flex;

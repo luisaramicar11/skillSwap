@@ -10,9 +10,6 @@ export const LineTitles = styled.div`
   opacity: 0.3;
   width: 100vw !important;
   text-align: start;
-
-  @media (min-width: 760px) {
-  }
 `;
 
 export const DivRecentUsers = styled.div`
