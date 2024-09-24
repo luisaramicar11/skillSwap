@@ -1,10 +1,147 @@
 "use client"
+import WidgetContainer from '@/src/components/containers/WidgetContainer/WidgetContainer';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const MetricsContainer = styled.div`
   margin: 54px 0;
 `;
+
+
+
+const PageContainer = styled.section`
+  width: 100%;
+  height: 100%;
+  margin: 54px 0;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+
+  & h1 {
+      margin: 0;
+      height: min-content;
+      translate: 0 30px;
+      font-size: 100px;
+      opacity: 0.15;
+      padding-left: 1.7rem;
+    }
+
+  & h2 {
+      margin: 0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      width: 70%;
+      font-size: 40px;
+      border-bottom: 2px solid  ${({ theme }) => theme.colors.textYellow};
+      background: ${({ theme }) => theme.colors.gradientSecondary};
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+  & h3 {
+      margin: 0;
+      padding: 10px 30px;
+      width: 100% !important;
+      font-size: 25px;
+      border-bottom: 1px solid  ${({ theme }) => theme.colors.textBlack};
+    }
+
+  & h4 {
+      margin: 0;
+      margin-bottom: 10px;
+      width: 100%;
+      font-size: 25px;
+    }
+
+  & p{
+      margin: 0;
+      width: 100%;
+      font-size: 16px;
+      color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+//Container for page.tsx content
+const PageContentContainer = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
+
+//Containers for banner
+const Banner = styled.article`
+  top: 0;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  height:200px;
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgBanner};
+`;
+
+const BannerBody = styled.div`
+    width: 1000px !important;
+    display: flex;
+    justify-content: space-between;
+`
+
+//Container for INFO content
+const InfoPageContainer = styled.div`
+  padding-top: 200px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+`;
+
+const PageContent = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+`;
+
+const PageBody = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 2rem;
+`;
+
+//Containers for Widgets and Aside
+const WidgetBody = styled.div`
+  padding: 20px 30px;
+  width: 100%;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const DivDeactivateAccount = styled.div`
+width: 100%;
+display: flex;
+justify-content: end;
+align-items: end;
+padding: 2rem; 
+gap: 2rem;
+
+& div{
+  max-width: 400px;
+
+  & p {
+    font-size: 15px;
+  }
+}
+`;
+
+
 
 const Metrics: React.FC = () => {
   const [requestData, setRequestData] = useState<any>(null);
@@ -50,20 +187,48 @@ const Metrics: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <MetricsContainer>
-      <h2>Metricas de {requestData.nombreUsuario}</h2>
-      <ul>
-        <li>Última Aceptada: {requestData.solicitudes.ultimaAceptada}</li>
-        <li>Última Pendiente: {requestData.solicitudes.ultimaPendiente}</li>
-        <li>Última Cancelada: {requestData.solicitudes.ultimaCancelada || 'N/A'}</li>
-        <li>Último Enviado: {requestData.solicitudes.ultimoEnviado || 'N/A'}</li>
-        <li>Conteo de Conexiones: {requestData.solicitudes.conteoConexiones}</li>
-        <li>Conteo Aceptadas: {requestData.solicitudes.conteoAceptadas}</li>
-        <li>Conteo Pendientes: {requestData.solicitudes.conteoPendientes}</li>
-        <li>Conteo Canceladas: {requestData.solicitudes.conteoCanceladas}</li>
-        <li>Conteo Enviadas: {requestData.solicitudes.conteoEnviadas}</li>
-      </ul>
-    </MetricsContainer>
+    <PageContainer>
+      <Banner>
+        <BannerBody>
+          <h1>Metricas</h1>
+        </BannerBody>
+      </Banner>
+      <PageContentContainer>
+        <InfoPageContainer>
+          <PageContent>
+            <PageBody>
+            <h2>{requestData.nombreUsuario}</h2>
+            <WidgetContainer>
+              <WidgetBody>
+          
+                 
+                  <h4>Ultima Aceptada</h4>{requestData.solicitudes.ultimaAceptada} <br />
+                  <br />
+                  <h4>Ultima Pendeinete</h4>{requestData.solicitudes.ultimaPendiente} <br />
+                  <br />
+                  <h4>Última Cancelada: </h4>{requestData.solicitudes.ultimaCancelada || 'N/A'} <br />
+                  <br />
+                  <h4>Último Enviado: </h4>{requestData.solicitudes.ultimoEnviado || 'N/A'} <br />
+                  <br />
+                  <h4>Conteo de Conexiones: </h4> {requestData.solicitudes.conteoConexiones} <br />
+                  <br />
+                  <h4>Conteo Aceptadas:</h4>{requestData.solicitudes.conteoAceptadas} <br />
+                  <br />
+                  <h4>Conteo Pendientes: </h4> {requestData.solicitudes.conteoPendientes} <br />
+                  <br />
+                  <h4>Conteo Canceladas: </h4> {requestData.solicitudes.conteoCanceladas} <br />
+                  <br />
+                  <h4>Conteo Enviadas:</h4> {requestData.solicitudes.conteoEnviadas} <br />
+                  
+      
+              </WidgetBody>
+           </WidgetContainer>
+            </PageBody>
+          </PageContent>
+        </InfoPageContainer>
+
+      </PageContentContainer>
+    </PageContainer>
   );
 };
 
