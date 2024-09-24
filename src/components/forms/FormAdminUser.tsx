@@ -1,54 +1,41 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { IUserUpdateAdmin } from "../../models/user.model";
+import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
+import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
-// Estilos del formulario y los elementos
+// Contenedor principal del formulario, ajustado para ser responsive
 const Form = styled.form`
-  /* Aquí puedes agregar los estilos que necesites para el formulario */
+
 `;
+
 
 const BoxForm = styled.form`
   padding: 30px;
   border-radius: 20px;
-  width: 80%;
+  width: 90%;
   display: flex;
+  flex-direction: column; /* Por defecto en columna */
   gap: 20px;
   background-color: ${({ theme }) => theme.colors.bgPrimay};
   border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    flex-direction: row; /* Cambia a fila en pantallas medianas */
+    width: 80%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 70%; /* Reducir el ancho en pantallas más grandes */
+  }
 `;
 
-const Message = styled.div`
-  padding: 5px;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  font-weight: bolder;
-  display: flex;
-  text-align: center;
-  gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bgPrimay};
-  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
-  color: #fff;
-  margin: 0 auto;
-`;
-
-const H2 = styled.h2`
-  font-size: 16px;
-`;
-
-const P = styled.p`
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.bgSecondary};
-`;
-
+// Estilo para el contenedor de los inputs del formulario
 const Div1 = styled.div`
   padding: 30px;
   border-radius: 20px;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -56,25 +43,19 @@ const Div1 = styled.div`
   border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
-  display: flex;
+
+  @media (min-width: 768px) {
+    width: 50%; /* Ancho de 50% para pantallas medianas y grandes */
+  }
 `;
 
-const Div2 = styled.div`
-  padding: 30px;
-  border-radius: 20px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange};
-  color: #fff;
-  margin: 0 auto;
-  display: flex;
+const Div2 = styled(Div1)`
+  @media (min-width: 768px) {
+    width: 50%; /* Misma lógica que el Div1 */
+  }
 `;
 
 const Input = styled.input`
-  border-radius: 10px;
   font-size: 16px;
   box-sizing: border-box;
   width: 100%;
@@ -84,16 +65,52 @@ const Input = styled.input`
   background: transparent;
   color: ${({ theme }) => theme.colors.textWhite};
   border-color: ${({ theme }) => theme.colors.bgSecondary};
+  border-radius: 10px;
 
   &::placeholder {
     opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textWhite}!important; /* Ajusta la opacidad si es necesario */
+    color: ${({ theme }) => theme.colors.textWhite};
   }
 
   &:focus {
     border-color: #f39c12;
     outline: none;
   }
+`;
+
+const Title = styled.h3`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.textWhite};
+  margin-bottom: 20px;
+`;
+
+const Message = styled.div`
+  padding: 5px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: #fff;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 90%; /* Ancho más grande en pantallas pequeñas */
+  }
+`;
+
+const H2 = styled.h2`
+  font-size: 16px;
+`;
+
+const P = styled.p`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.bgSecondary};
 `;
 
 const Button = styled.button`
@@ -106,210 +123,198 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const ButtonSecondary = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.textSecondary};
-  color: #000;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.textOrange0};
-  }
-`;
-
-const Div = styled.div`
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Subtitle = styled.h3`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.textWhite};
-  margin-bottom: 20px;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
-// Componente principal
-interface EditUserFormProps {
-  updateData: (user: IUserUpdateAdmin) => void;
-  dataToEdit: IUserUpdateAdmin | null;
-  setDataToEdit: (data: IUserUpdateAdmin | null) => void;
+interface CreateReportFormProps {
+  createData: (user: Omit<IReport, "id">) => void;
+  updateData: (user: IReport) => void;
+  dataToEdit: IReport | null;
+  setDataToEdit: (data: IReport | null) => void;
 }
 
-const FormUsers: React.FC<EditUserFormProps> = ({
+const initialForm: IReport = {
+  id: 0,
+  titleReport: "",
+  description: "",
+  dateReport: new Date(),
+  actionTaken: "",
+  idState: 0,
+  idUser: 0,
+  idReportedUser: 0,
+};
+
+const CreateReportForm: React.FC<CreateReportFormProps> = ({
+  createData,
   updateData,
   dataToEdit,
   setDataToEdit,
 }) => {
-  const initialFormState: IUserUpdateAdmin = {
-    name: "",
-    lastName: "",
-    abilities: "",
-    category: "",
-    idStateUser: 0,
-    idRoleUser: 0,
-    suspensionDate: null,
-    reactivationDate: null,
-    urlImage: "",
-    birthdate: "",
-  };
-
-  const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
+  const [form, setForm] = useState<IReportGet>(initialForm);
 
   useEffect(() => {
     if (dataToEdit) {
-      const { id, ...userWithoutId } = dataToEdit; // Excluir id
-      setForm({
-        ...userWithoutId,
-        suspensionDate: userWithoutId.suspensionDate || null,
-        reactivationDate: userWithoutId.reactivationDate || null,
-      });
+      setForm(dataToEdit);
     } else {
-      setForm(initialFormState);
+      setForm(initialForm);
     }
   }, [dataToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]:
-        name === "suspensionDate" || name === "reactivationDate"
-          ? value || null
-          : value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (dataToEdit) {
-      const userToUpdate = {
-        ...form,
-      };
-      updateData(userToUpdate);
-      handleReset();
+
+    if (!form.id || form.id === 0) {
+      const { id, ...userWithoutId } = form;
+      createData(userWithoutId as Omit<IReport, "id">);
+    } else {
+      updateData(form);
     }
+    handleReset(e);
   };
 
-  const handleReset = () => {
-    setForm(initialFormState);
+  const handleReset = (
+    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    setForm(initialForm);
     setDataToEdit(null);
+  };
+
+  const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') {
+      return date;
+    }
+    return date.toISOString().split('T')[0];
   };
 
   return (
     <main>
-      <Subtitle>Editar Usuarios</Subtitle>
-      <Form onSubmit={handleSubmit}>
+      <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
+        <Form onSubmit={handleSubmit}>
         <Message>
-          <H2>Estos son valores de estados:</H2>
-          <P>1 = ACTIVO</P>
-          <P>2 = INACTIVO</P>
-          <P>3 = SUSPENDIDO</P>
+         <H2>En la accion tomada se debe escribir una de esas opciones </H2> 
+         <P>1 = suspender </P>
+         <P>2 = habilitar</P>
+         <P>3 = deshabilitar </P>
         </Message>
-        <BoxForm>
-          <Div1>
-            <label htmlFor="name">Nombre del usuario</label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Nombre del usuario"
-              onChange={handleChange}
-              value={form.name}
-              required
-            />
+          <BoxForm>
+            <Div1>         
+          <Input
+            type="text"
+            name="title"
+            placeholder="Nombre del reporte"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.titleReport}
+            required
+          />
+          <Input
+            type="text"
+            name="description"
+            placeholder="Descripción del reporte"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.description}
+            required
+          />
+          <Input
+            type="date"
+            name="dateReport"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.dateReport ? formatDate(form.dateReport) : ""}
+            required
+          />
+          <Input
 
-            <label htmlFor="lastName">Apellidos del usuario</label>
-            <Input
-              type="text"
-              name="lastName"
-              id="lastName"
-              placeholder="Apellidos del usuario"
-              onChange={handleChange}
-              value={form.lastName}
-              required
+            type="text"
+            name="actionTaken"
+            placeholder="Acción tomada"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.actionTaken}
+            required
+          />
+         
+          <Input
+            type="number"
+            name="idState"
+            placeholder="Id del Estado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idState}
+            required
             />
-
-            <label htmlFor="abilities">Habilidades</label>
-            <Input
-              type="text"
-              name="abilities"
-              id="abilities"
-              placeholder="Habilidades"
-              onChange={handleChange}
-              value={form.abilities}
-              required
-            />
-
-            <label htmlFor="category">Categoría</label>
-            <Input
-              type="text"
-              name="category"
-              id="category"
-              placeholder="Categoría"
-              onChange={handleChange}
-              value={form.category}
-              required
-            />
-          </Div1>
+            </Div1>
 
           <Div2>
-            <label htmlFor="idStateUser">Estado del usuario</label>
-            <Input
-              type="number"
-              name="idStateUser"
-              id="idStateUser"
-              placeholder="Estado del usuario"
-              onChange={handleChange}
-              value={form.idStateUser}
-              required
-            />
-
-            <label htmlFor="idRoleUser">Rol del usuario</label>
-            <Input
-              type="number"
-              name="idRoleUser"
-              id="idRoleUser"
-              placeholder="Rol del usuario"
-              onChange={handleChange}
-              value={form.idRoleUser}
-              required
-            />
-
-            <label htmlFor="suspensionDate">Fecha de suspensión</label>
-            <Input
-              type="date"
-              name="suspensionDate"
-              id="suspensionDate"
-              onChange={handleChange}
-              value={form.suspensionDate || ""}
-            />
-
-            <label htmlFor="reactivationDate">Fecha de reactivación</label>
-            <Input
-              type="date"
-              name="reactivationDate"
-              id="reactivationDate"
-              onChange={handleChange}
-              value={form.reactivationDate || ""}
-            />
+          <Input
+            type="number"
+            name="idUser"
+            placeholder="Id del User"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idUser}
+            required
+          />
+          <Input
+            type="number"
+            name="idReportedUser"
+            placeholder="Id del usuario reportado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idReportedUser}
+            required
+          />
+          <Input
+            type="text"
+            name="state"
+            placeholder="Estado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.state}
+            required
+          />
+          <Input
+            type="text"
+            name="user"
+            placeholder="Usuario quien reporta"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.user}
+            required
+          />
+          <Input
+            type="text"
+            name="reportedUser"
+            placeholder="Usuario reportado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.reportedUser}
+            required
+          />
           </Div2>
         </BoxForm>
-        <ButtonContainer>
-          <ButtonSecondary type="button" onClick={handleReset}>
-            Limpiar
-          </ButtonSecondary>
-          <Button type="submit">Actualizar</Button>
-        </ButtonContainer>
-      </Form>
+          <ButtonContainer>
+            <Button type="submit">Enviar</Button>
+            <Button type="button" onClick={handleReset}>Limpiar</Button>
+          </ButtonContainer>
+        </Form>
     </main>
   );
 };
 
-export default FormUsers;
+export default CreateReportForm;
