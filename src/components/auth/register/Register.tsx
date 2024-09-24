@@ -105,6 +105,8 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
     try {
       await dispatch(registerUser(form)).unwrap();
       toast.success('Registro exitoso!');
+      window.location.reload(); 
+      
     } catch (errorSubmit: any) {
       if (errorSubmit?.message) {
         toast.error(`Registro fallido: ${errorSubmit.message}`);

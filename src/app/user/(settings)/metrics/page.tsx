@@ -2,6 +2,7 @@
 import WidgetContainer from '@/src/components/containers/WidgetContainer/WidgetContainer';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Modal from "../../../../components/modals/ModalSafety"
 
 const MetricsContainer = styled.div`
   margin: 54px 0;
@@ -141,12 +142,34 @@ gap: 2rem;
 }
 `;
 
+const SecurityButton = styled.button`
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textSecondary};
 
+  & :hover {
+    transform: scale(1.05)
+    }
+`;
+
+const Security = styled.div`
+  width: 50%;
+  height: 100%;
+`;
 
 const Metrics: React.FC = () => {
   const [requestData, setRequestData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     const userIdString = localStorage.getItem('userId');
@@ -222,7 +245,14 @@ const Metrics: React.FC = () => {
                   
       
               </WidgetBody>
+             
            </WidgetContainer>
+           <Security>
+              <WidgetContainer>
+                <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
+              </WidgetContainer>
+            </Security>
             </PageBody>
           </PageContent>
         </InfoPageContainer>

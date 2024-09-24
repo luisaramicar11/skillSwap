@@ -1,320 +1,246 @@
 "use client";
-import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
-import { IReportGet, IReport } from "../../models/admin.reports.model";
+import React, { useEffect, useState } from "react";
+import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
-// Contenedor principal del formulario, ajustado para ser responsive
 const Form = styled.form`
-
-`;
-
-
-const BoxForm = styled.form`
-  padding: 30px;
+  padding: 15px;
   border-radius: 20px;
-  width: 90%;
-  display: flex;
-  flex-direction: column; /* Por defecto en columna */
-  gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange};
-  color: #fff;
-  margin: 0 auto;
-
-  @media (min-width: 768px) {
-    flex-direction: row; /* Cambia a fila en pantallas medianas */
-    width: 80%;
-  }
-
-  @media (min-width: 1024px) {
-    width: 70%; /* Reducir el ancho en pantallas más grandes */
-  }
-`;
-
-// Estilo para el contenedor de los inputs del formulario
-const Div1 = styled.div`
-  padding: 30px;
-  border-radius: 20px;
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange};
-  color: #fff;
-  margin: 0 auto;
-
-  @media (min-width: 768px) {
-    width: 50%; /* Ancho de 50% para pantallas medianas y grandes */
-  }
-`;
-
-const Div2 = styled(Div1)`
-  @media (min-width: 768px) {
-    width: 50%; /* Misma lógica que el Div1 */
-  }
+  gap: 5px;
+  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
 `;
 
 const Input = styled.input`
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 100%;
-  height: 40px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textWhite};
-  border-color: ${({ theme }) => theme.colors.bgSecondary};
   border-radius: 10px;
-
-  &::placeholder {
-    opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textWhite};
-  }
-
-  &:focus {
-    border-color: #f39c12;
-    outline: none;
-  }
-`;
-
-const Title = styled.h3`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.textWhite};
-  margin-bottom: 20px;
-`;
-
-const Message = styled.div`
-  padding: 5px;
-  border-radius: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 70%;
-  font-weight: bold;
-  display: flex;
-  text-align: center;
-  gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bgPrimay};
-  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
-  color: #fff;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    width: 90%; /* Ancho más grande en pantallas pequeñas */
-  }
-`;
-
-const H2 = styled.h2`
-  font-size: 16px;
-`;
-
-const P = styled.p`
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.bgSecondary};
+  border: 1px #ccc solid;
+  padding: 7px;
+  font-size: small;
+  color: black;
 `;
 
 const Button = styled.button`
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 10px 20px;
-  background-color: ${({ theme }) => theme.colors.gradientText};
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-size: 16px;
-  cursor: pointer;
-`;
-
-const ButtonContainer = styled.div`
+  margin-top: 5px;
+  margin-right: 10px;
   display: flex;
-  justify-content: space-around;
-  padding: 50px;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px green solid;
+  color: green;
+  cursor: pointer;
+  background: none;
+  padding: 5px 10px;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 20px;
+  &:hover {
+    background-color: green;
+    color: white;
   }
 `;
 
-interface CreateReportFormProps {
-  createData: (user: Omit<IReport, "id">) => void;
-  updateData: (user: IReport) => void;
-  dataToEdit: IReport | null;
-  setDataToEdit: (data: IReport | null) => void;
+const Div = styled.div`
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Title = styled.h2`
+  margin-top: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: black;
+  font-weight: bold;
+  font-size: 15pt;
+`;
+
+interface EditUserFormProps {
+  updateData: (user: IUserUpdateAdmin) => void;
+  dataToEdit: IUserUpdateAdmin | null;
+  setDataToEdit: (data: IUserUpdateAdmin | null) => void;
 }
 
-const initialForm: IReport = {
-  id: 0,
-  titleReport: "",
-  description: "",
-  dateReport: new Date(),
-  actionTaken: "",
-  idState: 0,
-  idUser: 0,
-  idReportedUser: 0,
-};
-
-const CreateReportForm: React.FC<CreateReportFormProps> = ({
-  createData,
+const FormUsers: React.FC<EditUserFormProps> = ({
   updateData,
   dataToEdit,
   setDataToEdit,
 }) => {
-  const [form, setForm] = useState<IReportGet>(initialForm);
+  const initialFormState: IUserUpdateAdmin = {
+    name: "",
+    lastName: "",
+    abilities: "",
+    category: "",
+    idStateUser: 0,
+    idRoleUser: 0,
+    suspensionDate: null,
+    reactivationDate: null,
+    urlImage: "",
+    birthdate: "",
+  };
+
+  const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
 
   useEffect(() => {
+    const initialFormState: IUserUpdateAdmin = {
+      name: "",
+      lastName: "",
+      abilities: "",
+      category: "",
+      idStateUser: 0,
+      idRoleUser: 0,
+      suspensionDate: null,
+      reactivationDate: null,
+      urlImage: "",
+      birthdate: "",
+    };
     if (dataToEdit) {
-      setForm(dataToEdit);
+      const { id, ...userWithoutId } = dataToEdit; // Excluir id
+      setForm({
+        ...userWithoutId,
+        suspensionDate: userWithoutId.suspensionDate || null,
+        reactivationDate: userWithoutId.reactivationDate || null,
+      });
     } else {
-      setForm(initialForm);
+      setForm(initialFormState);
     }
   }, [dataToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === "suspensionDate" || name === "reactivationDate" ? (value ? value : null) : value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (dataToEdit) {
+        // Crea el objeto a actualizar filtrando las propiedades innecesarias
+        // Función para formatear la fecha
+        const formatDate = (date: Date | null): string | null => {
+          if (!date) return null;
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0'); // Asegura que el mes tenga dos dígitos
+          const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
+          return `${year}-${month}-${day}`;
+      };
 
-    if (!form.id || form.id === 0) {
-      const { id, ...userWithoutId } = form;
-      createData(userWithoutId as Omit<IReport, "id">);
-    } else {
-      updateData(form);
+        const userToUpdate = {
+            id: dataToEdit.id, // Mantén el ID existente
+            name: form.name,
+            lastName: form.lastName,
+            urlImage: form.urlImage,
+            jobTitle: form.jobTitle,
+            description: form.description,
+            birthdate: form.birthdate, // Mantener el formato de string
+            email: form.email,
+            phoneNumber: form.phoneNumber,
+            category: form.category,
+            abilities: form.abilities,
+            urlLinkedin: form.urlLinkedin,
+            urlGithub: form.urlGithub,
+            urlBehance: form.urlBehance,
+            idStateUser: form.idStateUser,
+            idRoleUser: form.idRoleUser,
+            suspensionDate: form.suspensionDate,
+            reactivationDate: form.reactivationDate,
+        };
+
+        // Envía solo las propiedades necesarias
+        updateData(userToUpdate);
+        handleReset();
     }
-    handleReset(e);
-  };
+};
 
-  const handleReset = (
-    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    setForm(initialForm);
+  const handleReset = () => {
+    setForm(initialFormState);
     setDataToEdit(null);
-  };
-
-  const formatDate = (date: Date | string) => {
-    if (typeof date === 'string') {
-      return date;
-    }
-    return date.toISOString().split('T')[0];
   };
 
   return (
     <main>
-      <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
+      <Title>Editar Usuario</Title>
+      <Div>
         <Form onSubmit={handleSubmit}>
-        <Message>
-         <H2>En la accion tomada se debe escribir una de esas opciones </H2> 
-         <P>1 = suspender </P>
-         <P>2 = habilitar</P>
-         <P>3 = deshabilitar </P>
-        </Message>
-          <BoxForm>
-            <Div1>         
           <Input
             type="text"
-            name="title"
-            placeholder="Nombre del reporte"
-            onBlur={handleChange}
+            name="name"
+            placeholder="Nombre del usuario"
             onChange={handleChange}
-            value={form.titleReport}
+            value={form.name}
             required
           />
           <Input
             type="text"
-            name="description"
-            placeholder="Descripción del reporte"
-            onBlur={handleChange}
+            name="lastName"
+            placeholder="Apellidos del usuario"
             onChange={handleChange}
-            value={form.description}
+            value={form.lastName}
+            required
+          />
+          <Input
+            type="text"
+            name="abilities"
+            placeholder="Habilidades"
+            onChange={handleChange}
+            value={form.abilities}
+            required
+          />
+          <Input
+            type="text"
+            name="category"
+            placeholder="Categoría"
+            onChange={handleChange}
+            value={form.category}
+            required
+          />
+          <Input
+            type="number"
+            name="idStateUser"
+            placeholder="idStateUser"
+            onChange={handleChange}
+            value={form.idStateUser}
+            required
+          />
+          <Input
+            type="number"
+            name="idRoleUser"
+            placeholder="idRoleUser"
+            onChange={handleChange}
+            value={form.idRoleUser}
             required
           />
           <Input
             type="date"
-            name="dateReport"
-            onBlur={handleChange}
+            name="suspensionDate"
             onChange={handleChange}
-            value={form.dateReport ? formatDate(form.dateReport) : ""}
-            required
+            value={form.suspensionDate || ""}
           />
           <Input
-
-            type="text"
-            name="actionTaken"
-            placeholder="Acción tomada"
-            onBlur={handleChange}
+            type="date"
+            name="reactivationDate"
             onChange={handleChange}
-            value={form.actionTaken}
-            required
+            value={form.reactivationDate || ""}
           />
-         
-          <Input
-            type="number"
-            name="idState"
-            placeholder="Id del Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idState}
-            required
-            />
-            </Div1>
-
-          <Div2>
-          <Input
-            type="number"
-            name="idUser"
-            placeholder="Id del User"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idUser}
-            required
-          />
-          <Input
-            type="number"
-            name="idReportedUser"
-            placeholder="Id del usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idReportedUser}
-            required
-          />
-          <Input
-            type="text"
-            name="state"
-            placeholder="Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.state}
-            required
-          />
-          <Input
-            type="text"
-            name="user"
-            placeholder="Usuario quien reporta"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.user}
-            required
-          />
-          <Input
-            type="text"
-            name="reportedUser"
-            placeholder="Usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.reportedUser}
-            required
-          />
-          </Div2>
-        </BoxForm>
-          <ButtonContainer>
-            <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={handleReset}>Limpiar</Button>
-          </ButtonContainer>
+          <Div>
+            <Button type="submit">Actualizar</Button>
+            <Button type="button" onClick={handleReset}>
+              Limpiar
+            </Button>
+          </Div>
         </Form>
+      </Div>
     </main>
   );
 };
 
-export default CreateReportForm;
+export default FormUsers;
+
+
+
+
+
+

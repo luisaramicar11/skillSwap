@@ -1,9 +1,8 @@
-// pages/login/LoginPage.tsx
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "@/src/app/redux/slices/authSlice";
+import { loginUser, registerUser } from "@/src/app/redux/slices/authSlice";
 import { toast } from "react-toastify";
 import { AppDispatch } from "@/src/app/redux/store";
 import InputSingUp from "../../../components/ui/inputs/InputAuth";
@@ -58,33 +57,37 @@ export default function LoginPage() {
     const resultAction = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(resultAction)) {
-      const token = resultAction.payload?.data.response.token;
-      const role = resultAction.payload?.data.response.role;
-      const idUser = resultAction.payload?.data.response.id;
-
-      if (token) {
-        toast.success("Login exitoso!", {
-          style: {
-            marginTop: '10px', // Cambia el padding
-          },
-        });
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("userId", idUser.toString());
-        document.cookie = `authToken=${token}; path=/;`;
-        console.log(localStorage.getItem("authToken"));
-
-        if (role === 1) {
-          router.push("/admin");
-        } else if (role === 2) {
-          router.push("/user");
-        } else {
-          toast.error("Rol no reconocido.");
-        }
-      }
+      handleLoginSuccess(resultAction.payload);
     } else {
       toast.error("Error al intentar iniciar sesión.");
     }
   }
+
+  const handleLoginSuccess = (payload: any) => {
+    const token = payload?.data.response.token;
+    const role = payload?.data.response.role;
+    const idUser = payload?.data.response.id;
+
+    if (token) {
+      toast.success("Login exitoso!", {
+        style: {
+          marginTop: '10px', // Cambia el padding
+        },
+      });
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userId", idUser.toString());
+      document.cookie = `authToken=${token}; path=/;`;
+      console.log(localStorage.getItem("authToken"));
+
+      if (role === 1) {
+        router.push("/admin");
+      } else if (role === 2) {
+        router.push("/user");
+      } else {
+        toast.error("Rol no reconocido.");
+      }
+    }
+  };
 
   return (
     <Container>

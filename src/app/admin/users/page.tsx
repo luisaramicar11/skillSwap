@@ -10,15 +10,12 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 
 const Title = styled.h2`
-   margin-top: 15px;
+  margin-top: 15px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  color: black;
   font-weight: bold;
-  font-size: 40px;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 15pt;
 `;
 
 const Div = styled.div`
