@@ -7,7 +7,9 @@ import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
-import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline"
+import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
+import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
+import ProfileSidebarAdmin from "../sidebars/SidebarFloatingAdmin";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -37,6 +39,7 @@ const SidebarLink = styled.p`
     width: max-content;
     transition: 0.4s;
     gap: 10px;
+    color: ${({ theme }) => theme.colors.textWhite};
 
     & small {
         margin: 0;
@@ -134,9 +137,10 @@ const HamburgerMenu = styled.div`
 // Navbar component
 export const NavbarAdmin: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [isSidebarSettingsOpen, setIsSidebarSettingsOpen] = useState<boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+    
+    const closeSidebarSettings = () => setIsSidebarSettingsOpen(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
@@ -146,9 +150,10 @@ export const NavbarAdmin: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <OnlineProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
+            <ProfileSidebarAdmin isOpen={isModalOpen} onClose={closeModal}/>
+            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
             <SidebarLinkContainer>
-                <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
+                <SidebarLink onClick={openModal}>+ <small>Perfil</small></SidebarLink>
             </SidebarLinkContainer>
             <HamburgerMenu onClick={toggleMenu}>
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
@@ -166,8 +171,8 @@ export const NavbarAdmin: React.FC = () => {
             </NavList>
 
             <IconsContainer>
-                <StyledIconNavLink href="/user/settings" label="SOCIAL" icon={<SettingsIcon />} />
-                <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
+                {/* <StyledIconNavLink href="/user/settings" label="SOCIAL" icon={<SettingsIcon />} /> */}
+                <StyledIconNavLink href="/admin/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
     );
