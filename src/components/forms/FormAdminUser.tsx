@@ -5,19 +5,21 @@ import styled from "styled-components";
 
 // Estilos del formulario y los elementos
 const Form = styled.form`
-
+  /* Aquí puedes agregar los estilos que necesites para el formulario */
 `;
+
 const BoxForm = styled.form`
   padding: 30px;
   border-radius: 20px;
   width: 80%;
   display: flex;
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
 `;
+
 const Message = styled.div`
   padding: 5px;
   border-radius: 20px;
@@ -28,18 +30,21 @@ const Message = styled.div`
   display: flex;
   text-align: center;
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border: 1px solid  ${({ theme }) => theme.colors.bgSecondary };
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
   color: #fff;
   margin: 0 auto;
 `;
+
 const H2 = styled.h2`
   font-size: 16px;
 `;
+
 const P = styled.p`
   font-size: 16px;
-  color:  ${({ theme }) => theme.colors.bgSecondary};
+  color: ${({ theme }) => theme.colors.bgSecondary};
 `;
+
 const Div1 = styled.div`
   padding: 30px;
   border-radius: 20px;
@@ -47,12 +52,13 @@ const Div1 = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
   display: flex;
 `;
+
 const Div2 = styled.div`
   padding: 30px;
   border-radius: 20px;
@@ -60,30 +66,30 @@ const Div2 = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
   display: flex;
 `;
 
 const Input = styled.input`
-   border-radius: 10px;
+  border-radius: 10px;
   font-size: 16px;
   box-sizing: border-box;
   width: 100%;
-  height:40px;
+  height: 40px;
   padding: 10px;
   margin-bottom: 10px;
   background: transparent;
   color: ${({ theme }) => theme.colors.textWhite};
-  border-color: ${({ theme }) => theme.colors.bgSecondary};;
-  
+  border-color: ${({ theme }) => theme.colors.bgSecondary};
+
   &::placeholder {
     opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
+    color: ${({ theme }) => theme.colors.textWhite}!important; /* Ajusta la opacidad si es necesario */
   }
-  
+
   &:focus {
     border-color: #f39c12;
     outline: none;
@@ -94,19 +100,18 @@ const Button = styled.button`
   border-radius: 10px;
   border: 1px solid #fff;
   padding: 10px 20px;
-  background-color: ${({ theme }) => theme.colors.gradientText};;
-  color: ${({ theme }) => theme.colors.textPrimary};;
+  background-color: ${({ theme }) => theme.colors.gradientText};
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 16px;
   cursor: pointer;
-
 `;
 
 const ButtonSecondary = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.textSecondary};;
+  background-color: ${({ theme }) => theme.colors.textSecondary};
   color: #000;
 
   &:hover {
-    background-color:${({ theme }) => theme.colors.textOrange0};;
+    background-color: ${({ theme }) => theme.colors.textOrange0};
   }
 `;
 
@@ -117,7 +122,6 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 
 const Subtitle = styled.h3`
   text-align: center;
@@ -159,18 +163,6 @@ const FormUsers: React.FC<EditUserFormProps> = ({
   const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
 
   useEffect(() => {
-    const initialFormState: IUserUpdateAdmin = {
-      name: "",
-      lastName: "",
-      abilities: "",
-      category: "",
-      idStateUser: 0,
-      idRoleUser: 0,
-      suspensionDate: null,
-      reactivationDate: null,
-      urlImage: "",
-      birthdate: "",
-    };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
       setForm({
@@ -213,12 +205,12 @@ const FormUsers: React.FC<EditUserFormProps> = ({
   return (
     <main>
       <Subtitle>Editar Usuarios</Subtitle>
-      <Form >
+      <Form onSubmit={handleSubmit}>
         <Message>
-         <H2>Estos son valores de estados: </H2> 
-         <P>1 = ACTIVO </P>
-         <P>2 = INACTIVO </P>
-         <P>3 = SUSPENDIDO </P>
+          <H2>Estos son valores de estados:</H2>
+          <P>1 = ACTIVO</P>
+          <P>2 = INACTIVO</P>
+          <P>3 = SUSPENDIDO</P>
         </Message>
         <BoxForm>
           <Div1>
@@ -293,7 +285,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
           <Button type="submit">Actualizar</Button>
         </ButtonContainer>
       </Form>
-    </main >
+    </main>
   );
 };
 

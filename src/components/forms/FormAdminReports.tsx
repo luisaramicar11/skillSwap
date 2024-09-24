@@ -3,20 +3,79 @@ import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
 import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
+// Contenedor principal del formulario, ajustado para ser responsive
 const Form = styled.form`
 
 `;
 
+
 const BoxForm = styled.form`
   padding: 30px;
   border-radius: 20px;
-  width: 80%;
+  width: 90%;
   display: flex;
+  flex-direction: column; /* Por defecto en columna */
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
   color: #fff;
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    flex-direction: row; /* Cambia a fila en pantallas medianas */
+    width: 80%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 70%; /* Reducir el ancho en pantallas más grandes */
+  }
+`;
+
+// Estilo para el contenedor de los inputs del formulario
+const Div1 = styled.div`
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 50%; /* Ancho de 50% para pantallas medianas y grandes */
+  }
+`;
+
+const Div2 = styled(Div1)`
+  @media (min-width: 768px) {
+    width: 50%; /* Misma lógica que el Div1 */
+  }
+`;
+
+const Input = styled.input`
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textWhite};
+  border-color: ${({ theme }) => theme.colors.bgSecondary};
+  border-radius: 10px;
+
+  &::placeholder {
+    opacity: 0.7;
+    color: ${({ theme }) => theme.colors.textWhite};
+  }
+
+  &:focus {
+    border-color: #f39c12;
+    outline: none;
+  }
 `;
 
 const Title = styled.h3`
@@ -24,96 +83,55 @@ const Title = styled.h3`
   color: ${({ theme }) => theme.colors.textWhite};
   margin-bottom: 20px;
 `;
+
 const Message = styled.div`
   padding: 5px;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
   width: 70%;
-  font-weight: bolder;
+  font-weight: bold;
   display: flex;
   text-align: center;
   gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border: 1px solid  ${({ theme }) => theme.colors.bgSecondary };
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
   color: #fff;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 90%; /* Ancho más grande en pantallas pequeñas */
+  }
 `;
+
 const H2 = styled.h2`
   font-size: 16px;
 `;
 
 const P = styled.p`
   font-size: 16px;
-  color:  ${({ theme }) => theme.colors.bgSecondary};
-`;
-
-const Input = styled.input`
-  font-size: 16px;
-  box-sizing: border-box;
-  width: 100%;
-  height:40px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textWhite};
-  border-color: ${({ theme }) => theme.colors.bgSecondary};;
-  border-radius: 10px;
-  
-  &::placeholder {
-    opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textWhite}!important;// Ajusta la opacidad si es necesario
-  }
-  
-  &:focus {
-    border-color: #f39c12;
-    outline: none;
-  }
+  color: ${({ theme }) => theme.colors.bgSecondary};
 `;
 
 const Button = styled.button`
   border-radius: 10px;
   border: 1px solid #fff;
   padding: 10px 20px;
-  background-color: ${({ theme }) => theme.colors.gradientText};;
-  color: ${({ theme }) => theme.colors.textPrimary};;
+  background-color: ${({ theme }) => theme.colors.gradientText};
+  color: ${({ theme }) => theme.colors.textPrimary};
   font-size: 16px;
   cursor: pointer;
-
-`;
-
-
-const Div1 = styled.div`
-  padding: 30px;
-  border-radius: 20px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
-  color: #fff;
-  margin: 0 auto;
-  display: flex;
-`;
-const Div2 = styled.div`
-  padding: 30px;
-  border-radius: 20px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color:  ${({ theme }) => theme.colors.bgPrimay};
-  border-color: ${({ theme }) => theme.colors.textOrange}; ;
-  color: #fff;
-  margin: 0 auto;
-  display: flex;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 interface CreateReportFormProps {
