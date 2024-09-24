@@ -203,116 +203,143 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
   return (
     <main>
       <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
-        <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Message>
-         <H2>En la accion tomada se debe escribir una de esas opciones </H2> 
-         <P>1 = suspender </P>
-         <P>2 = habilitar</P>
-         <P>3 = deshabilitar </P>
+          <H2>En la accion tomada se debe escribir una de esas opciones </H2>
+          <P>1 = suspender </P>
+          <P>2 = habilitar</P>
+          <P>3 = deshabilitar </P>
         </Message>
-          <BoxForm>
-            <Div1>         
-          <Input
-            type="text"
-            name="title"
-            placeholder="Nombre del reporte"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.titleReport}
-            required
-          />
-          <Input
-            type="text"
-            name="description"
-            placeholder="Descripción del reporte"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.description}
-            required
-          />
-          <Input
-            type="date"
-            name="dateReport"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.dateReport ? formatDate(form.dateReport) : ""}
-            required
-          />
-          <Input
-
-            type="text"
-            name="actionTaken"
-            placeholder="Acción tomada"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.actionTaken}
-            required
-          />
-         
-          <Input
-            type="number"
-            name="idState"
-            placeholder="Id del Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idState}
-            required
+        <BoxForm>
+          <Div1>
+            <label htmlFor="titleReport">Nombre del reporte</label>
+            <Input
+              type="text"
+              id="titleReport"
+              name="titleReport"
+              placeholder="Nombre del reporte"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.titleReport}
+              required
             />
-            </Div1>
+
+            <label htmlFor="description">Descripción del reporte</label>
+            <Input
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Descripción del reporte"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.description}
+              required
+            />
+
+            <label htmlFor="dateReport">Fecha del reporte</label>
+            <Input
+              type="date"
+              id="dateReport"
+              name="dateReport"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.dateReport ? formatDate(form.dateReport) : ""}
+              required
+            />
+
+            <label htmlFor="actionTaken">Acción tomada</label>
+            <Input
+              type="text"
+              id="actionTaken"
+              name="actionTaken"
+              placeholder="Acción tomada"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.actionTaken}
+              required
+            />
+
+            <label htmlFor="idState">Id del Estado</label>
+            <Input
+              type="number"
+              id="idState"
+              name="idState"
+              placeholder="Id del Estado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idState}
+              required
+            />
+          </Div1>
 
           <Div2>
-          <Input
-            type="number"
-            name="idUser"
-            placeholder="Id del User"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idUser}
-            required
-          />
-          <Input
-            type="number"
-            name="idReportedUser"
-            placeholder="Id del usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idReportedUser}
-            required
-          />
-          <Input
-            type="text"
-            name="state"
-            placeholder="Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.state}
-            required
-          />
-          <Input
-            type="text"
-            name="user"
-            placeholder="Usuario quien reporta"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.user}
-            required
-          />
-          <Input
-            type="text"
-            name="reportedUser"
-            placeholder="Usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.reportedUser}
-            required
-          />
+            <label htmlFor="idUser">Id del Usuario</label>
+            <Input
+              type="number"
+              id="idUser"
+              name="idUser"
+              placeholder="Id del Usuario"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idUser}
+              required
+            />
+
+            <label htmlFor="idReportedUser">Id del Usuario Reportado</label>
+            <Input
+              type="number"
+              id="idReportedUser"
+              name="idReportedUser"
+              placeholder="Id del Usuario Reportado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idReportedUser}
+              required
+            />
+
+            <label htmlFor="state">Estado</label>
+            <Input
+              type="text"
+              id="state"
+              name="state"
+              placeholder="Estado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.state}
+              required
+            />
+
+            <label htmlFor="user">Usuario quien reporta</label>
+            <Input
+              type="text"
+              id="user"
+              name="user"
+              placeholder="Usuario quien reporta"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.user}
+              required
+            />
+
+            <label htmlFor="reportedUser">Usuario reportado</label>
+            <Input
+              type="text"
+              id="reportedUser"
+              name="reportedUser"
+              placeholder="Usuario reportado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.reportedUser}
+              required
+            />
           </Div2>
         </BoxForm>
-          <ButtonContainer>
-            <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={handleReset}>Limpiar</Button>
-          </ButtonContainer>
-        </Form>
+
+        <ButtonContainer>
+          <Button type="submit">Enviar</Button>
+          <Button type="button" onClick={handleReset}>Limpiar</Button>
+        </ButtonContainer>
+      </Form>
     </main>
   );
 };
