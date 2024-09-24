@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import UserProfile from "../../../components/settings/Profile/Profile";
 import UserSkills from "@/src/components/settings/skills/Skills";
 import UserInfo from "@/src/components/settings/info/Info";

@@ -48,14 +48,14 @@ const InfoColumn = styled.div`
 
 
 // Estilo para el nombre
-const ImageCard = styled.div<{ urlImage: string }>`
-    background-image: url(${(props) => props.urlImage}); 
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    border: solid 1px ${({ theme }) => theme.colors.bgBanner}
+const ImageCard = styled.div<{ urlImage?: string }>`
+  background-image: url(${(props) => props.urlImage || 'https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg'});
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: solid 1px ${({ theme }) => theme.colors.bgBanner};
 `;
 
 // Estilo para el nombre

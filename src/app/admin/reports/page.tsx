@@ -86,6 +86,7 @@ const Reports: React.FC = () => {
       const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/ReportPut/PutReportByAction`, {
         method: "PUT",
         headers: {
+          'accept': '*/*',
           "Content-Type": "application/json",
           //"Authorization": `Bearer ${token}`, // Asegúrate de descomentar esta línea
         },
