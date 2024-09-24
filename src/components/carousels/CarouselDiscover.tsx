@@ -13,19 +13,13 @@ import DivLink from "../ui/links/CardUserLink";
 
 const CustomSwiper = styled(Swiper)`
   width: 80%;
-  --swiper-theme-color: ${({ theme }) => theme.colors.textSecondary} !important; 
+  --swiper-theme-color: ${({ theme }) => theme.colors.textOrange + "66"} !important; 
 
   /* Estilos para los arrows */
   .swiper-button-next,
   .swiper-button-prev {
     transform: scale(0.8);
-    color: ${({ theme }) => theme.colors.textDark};
-  }
-
-  .swiper-button-next.swiper-button-disabled,
-  .swiper-button-prev.swiper-button-disabled {
-    color: ${({ theme }) => theme.colors.textDark};
-    opacity: 0.2;
+    color: ${({ theme }) => theme.colors.textBlack};
   }
 
   .swiper-slide {

@@ -8,7 +8,7 @@ const Widget = styled.div`
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 10px;
 `
 

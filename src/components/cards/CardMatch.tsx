@@ -10,7 +10,7 @@ const CardContainer = styled.div`
   align-items: center;
   height: max-content;
   padding: 1rem 0;
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 1rem 1rem 2rem 1rem;

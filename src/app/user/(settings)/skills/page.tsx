@@ -1,11 +1,15 @@
 "use client";
 import styled from "styled-components";
-import WidgetContainer from '../../WidgetContainer/WidgetContainer';
-import SkillTag from "../../ui/skillTag/skillTag";
+import WidgetContainer from '../../../../components/containers/WidgetContainer/WidgetContainer';
+import SkillTag from "../../../../components/ui/skillTag/skillTag";
+import { useState, useEffect } from "react";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import { IUser } from "@/src/models/user.model";
 
 //Container for the whole page.tsx
 const PageContainer = styled.section`
   width: 100%;
+  margin: 54px 0;
   height: 100%;
   display: flex;
   position: relative;
@@ -13,13 +17,18 @@ const PageContainer = styled.section`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
 
   & h1 {
+      padding-left: 1.7rem;
       margin: 0;
       height: min-content;
       translate: 0 30px;
       font-size: 100px;
       width: 30vw;
       min-width: 300px !important;
-      border-bottom: solid 5px black;
+      border-bottom: solid 5px  ${({ theme }) => theme.colors.textYellow};
+      background: ${({ theme }) => theme.colors.gradientSecondary};
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
   & h2 {
@@ -102,28 +111,60 @@ const PageBody = styled.div`
   gap: 20px;
 `;
 
-//Containers for Aside Background Image
-
-const PageAside = styled.aside`
-  width: 200px;
-  padding: 0;
-  margin: 0;
-  margin-top: 50px;
-`;
-
-const BgImageDiv = styled.div`
-  top:0 ;
-  position: absolute;
-  background-image: url("https://png.pngtree.com/png-vector/20220929/ourmid/pngtree-3d-dna-illustration-design-in-red-and-blue-colors-png-image_6223384.png");
-  background-size: contain;
-  filter: grayscale();
-  opacity: 0.1;
-  width: 200px;
-  height: 100%;
-`;
-
 // Componente principal de la página de inicio
-const UserSkills: React.FC<ISkillContainerProps> = ({ skills }) => {
+const UserSkills: React.FC<ISkillContainerProps> = () => {
+  // Estado para almacenar los datos del usuario
+  const [userData, setUserData] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const idString = localStorage.getItem('userId');
+  const idNumber = idString ? parseInt(idString, 10) : null;
+
+  // Fetch para obtener datos de usuario
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`,
+          {
+            method: "GET",
+            headers: {
+              "accept" : "*/*"
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al obtener datos del usuario");
+        }
+
+        const data = await response.json();
+        setUserData(data.data.response);
+        
+        setLoading(false);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [idNumber]);
+
+  // Muestra loading, error o los datos del usuario
+  if (loading) {
+    return <OurAlertsText>Cargando...</OurAlertsText>;
+  }
+
+  if (error) {
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
+  }
+
+  const abilitiesArray = typeof userData!.abilities === 'string'
+    ? userData!.abilities.split(',').map((ability: string) => ability.trim())
+    : [];
+
   return (
     <PageContainer>
       <Banner>
@@ -135,7 +176,7 @@ const UserSkills: React.FC<ISkillContainerProps> = ({ skills }) => {
         <SkillsPageContainer>
           <PageContent>
             <PageBody>
-              <SkillTag skillsArray={skills} />
+              <SkillTag skillsArray={abilitiesArray} />
             </PageBody>
           </PageContent>
         </SkillsPageContainer>
@@ -147,5 +188,5 @@ const UserSkills: React.FC<ISkillContainerProps> = ({ skills }) => {
 export default UserSkills;
 
 interface ISkillContainerProps {
-  skills: string[]; // Añadido para las habilidades
+  skills: string[]; 
 }

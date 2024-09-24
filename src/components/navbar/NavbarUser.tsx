@@ -3,11 +3,12 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsIcon from "@/public/svg/SettingsIcon";
 import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
+import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -93,7 +94,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
         left: 0;
         transition: 1s ease-in-out;
         background-color: ${({ theme }) => theme.colors.bgPrimary};
-        border: 1px solid ${({ theme }) => theme.colors.textDark};
+        border: 1px solid ${({ theme }) => theme.colors.textBlack};
         padding: 20px;
         gap: 20px;
         animation: move 1s ease-in-out;
@@ -133,27 +134,28 @@ const HamburgerMenu = styled.div`
 
 // Navbar component
 export const NavbarUser: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenToggle, setIsOpenToggle] = useState(false);
+    const [isSidebarProfileOpen, setIsSidebarProfileOpen] = useState<boolean>(false);
+    const [isSidebarSettingsOpen, setIsSidebarSettingsOpen] = useState<boolean>(false);
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    const openSidebarProfile = () => setIsSidebarProfileOpen(true);
+    const closeSidebarProfile = () => setIsSidebarProfileOpen(false);
+    const openSidebarSettings = () => setIsSidebarSettingsOpen(true);
+    const closeSidebarSettings = () => setIsSidebarSettingsOpen(false);
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsOpenToggle(!isOpenToggle);
     };
 
     return (
         <NavbarContainer>
-            <OnlineProfileSidebar isOpen={isModalOpen} onClose={closeModal}/>
-            <SidebarLinkContainer>
-                <SidebarLink onClick={openModal}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
-            </SidebarLinkContainer>
+            <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile}/>
+            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
+            <SidebarLink onClick={openSidebarProfile}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
             <HamburgerMenu onClick={toggleMenu}>
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
             </HamburgerMenu>
-            <NavList isOpen={isOpen}>
+            <NavList isOpen={isOpenToggle}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
                     <StyledNavLink href="/user/" label="INICIO" />
                 </NavItem>
@@ -166,7 +168,7 @@ export const NavbarUser: React.FC = () => {
             </NavList>
 
             <IconsContainer>
-                <StyledIconNavLink href="/user/settings" label="CONFIGURA" icon={<SettingsIcon />} />
+                <StyledIconNavLink onClick={openSidebarSettings} href="#" icon={<SettingsIcon />} />
                 <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>

@@ -12,10 +12,10 @@ const SkillTagTinyContainer = styled.div`
 
 const SkillTagTiny = styled.p`
     display: inline-block;
-    width: min-content;
     min-width: 60px;
+    width: auto;
     text-align: center;
-    padding: 2px !important;
+    padding: 3px !important;
     border-radius: 20px;
     color: ${({ theme }) => theme.colors.textPurple} !important;
     border: 1px solid ${({ theme }) => theme.colors.textPurple};

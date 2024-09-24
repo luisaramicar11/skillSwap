@@ -93,7 +93,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
         left: 0;
         transition: 1s ease-in-out;
         background-color: ${({ theme }) => theme.colors.bgPrimary};
-        border: 1px solid ${({ theme }) => theme.colors.textDark};
+        border: 1px solid ${({ theme }) => theme.colors.textBlack};
         padding: 20px;
         gap: 20px;
         animation: move 1s ease-in-out;
@@ -166,7 +166,7 @@ export const NavbarAdmin: React.FC = () => {
             </NavList>
 
             <IconsContainer>
-                <StyledIconNavLink href="/user/settings" label="CONFIGURA" icon={<SettingsIcon />} />
+                <StyledIconNavLink href="/user/settings" label="SOCIAL" icon={<SettingsIcon />} />
                 <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>

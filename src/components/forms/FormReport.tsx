@@ -112,11 +112,11 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
       });
 
       if (response.ok) {
-        toast.success('Reporte enviado con éxito', { autoClose: 3000 }); // Muestra un mensaje de éxito al enviar el reporte
+        toast.success('Reporte enviado con éxito', { autoClose: 3000 }); // Muestra un solicitud de éxito al enviar el reporte
         console.log('Reporte enviado con éxito');
         closeModal(); // Llama a la función closeModal después de enviar el reporte
       } else {
-        toast.error('Error al enviar el reporte', { autoClose: 3000 }); // Muestra un mensaje de error al enviar el reporte
+        toast.error('Error al enviar el reporte', { autoClose: 3000 }); // Muestra un solicitud de error al enviar el reporte
         console.error('Error al enviar el reporte');
       }
     } catch (error) {

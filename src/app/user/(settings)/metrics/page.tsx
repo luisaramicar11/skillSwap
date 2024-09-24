@@ -1,5 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+const MetricsContainer = styled.div`
+  margin: 54px 0;
+`;
 
 const Metrics: React.FC = () => {
   const [requestData, setRequestData] = useState<any>(null);
@@ -45,7 +50,7 @@ const Metrics: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
+    <MetricsContainer>
       <h2>Metricas de {requestData.nombreUsuario}</h2>
       <ul>
         <li>Última Aceptada: {requestData.solicitudes.ultimaAceptada}</li>
@@ -58,7 +63,7 @@ const Metrics: React.FC = () => {
         <li>Conteo Canceladas: {requestData.solicitudes.conteoCanceladas}</li>
         <li>Conteo Enviadas: {requestData.solicitudes.conteoEnviadas}</li>
       </ul>
-    </div>
+    </MetricsContainer>
   );
 };
 

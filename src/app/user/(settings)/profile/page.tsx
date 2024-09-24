@@ -1,18 +1,16 @@
 "use client";
 import styled from "styled-components";
-import WidgetContainer from '../../WidgetContainer/WidgetContainer';
+import WidgetContainer from '../../../../components/containers/WidgetContainer/WidgetContainer';
 import React, { useEffect, useState } from "react";
-import { IUser } from "../../../models/user.model";
-
-interface BannerImageDivProps {
-  urlImage: string;
-}
+import { IUser } from "../../../../models/user.model";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 // Container for the whole page.tsx
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
   display: flex;
+  margin: 54px 0;
   position: relative;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -22,13 +20,18 @@ const PageContainer = styled.section`
       height: min-content;
       translate: 0 30px;
       font-size: 100px;
-      opacity: 0.3;
+      opacity: 0.15;
+      padding-left: 1.7rem;
     }
 
   & h2 {
       margin: 0;
       width: 100%;
       font-size: 40px;
+      background: ${({ theme }) => theme.colors.gradientSecondary};
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
   & h3 {
@@ -36,7 +39,11 @@ const PageContainer = styled.section`
       padding: 10px 30px;
       width: 100% !important;
       font-size: 25px;
-      border-bottom: 1px solid  ${({ theme }) => theme.colors.bgSecondary};
+      background: ${({ theme }) => theme.colors.gradientSecondary};
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      border-bottom: 1px solid  ${({ theme }) => theme.colors.textBlack};
     }
 
   & h4 {
@@ -88,7 +95,7 @@ const BannerImageDiv = styled.div<{ urlImage: string }>`
   height: 200px;
   translate: 0 30px;
   border-radius: 10px;
-  border: solid 1px ${({ theme }) => theme.colors.textDark};
+  border: solid 1px ${({ theme }) => theme.colors.textBlack};
 `;
 
 // Container for INFO content
@@ -104,6 +111,7 @@ const ProfilePageContainer = styled.div`
 const PageContent = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   gap: 20px;
 `;
@@ -143,59 +151,108 @@ const PageAside = styled.aside`
   }
 `;
 
-const UserProfile = ({ id, name, lastName, urlImage, jobTitle, description, birthdate, email, phoneNumber, category, abilities, urlLinkedin, urlGithub, urlBehance, roleName }:IUser) => {
+
+const UserProfile = () => {
+  // Estado para almacenar los datos del usuario
+  const [userData, setUserData] = useState<IUser | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const idString = localStorage.getItem('userId');
+  const idNumber = idString ? parseInt(idString, 10) : null;
+
+  // Fetch para obtener datos de usuario
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`,
+          {
+            method: "GET",
+            headers: {
+              "accept": "*/*"
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error al obtener datos del usuario");
+        }
+
+        const data = await response.json();
+        setUserData(data.data.response);
+
+        setLoading(false);
+      } catch (err: any) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [idNumber]);
+
+  // Muestra loading, error o los datos del usuario
+  if (loading) {
+    return <OurAlertsText>Cargando...</OurAlertsText>;
+  }
+
+  if (error) {
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
+  }
+
   return (
     <PageContainer>
       <Banner>
         <BannerBody>
           <h1>Perfil</h1>
-          <BannerImageDiv urlImage={urlImage}></BannerImageDiv>
+          <BannerImageDiv urlImage={userData!.urlImage}></BannerImageDiv>
         </BannerBody>
       </Banner>
       <PageContentContainer>
         <ProfilePageContainer>
           <PageContent>
+            <PageAside>
+              <WidgetContainer>
+                <h3>User Data</h3>
+                <WidgetBody>
+                  <p><strong> Rol:</strong> {userData?.roleName}</p>
+                  <p><strong>Email: </strong>{userData?.email}</p>
+                  <p><strong>Teléfono: </strong> {userData?.phoneNumber}</p>
+                </WidgetBody>
+              </WidgetContainer>
+            </PageAside>
             <PageBody>
               <WidgetContainer>
                 <WidgetBody>
-                  <h2>{name} {lastName}</h2>
-                  <p>{jobTitle}</p>
+                  <h2>{userData?.name} {userData?.lastName}</h2>
+                  <p>{userData?.jobTitle}</p>
                 </WidgetBody>
               </WidgetContainer>
               <WidgetContainer>
                 <WidgetBody>
                   <h4>Descripción</h4>
-                  <p>{description}</p>
+                  <p>{userData?.description}</p>
                 </WidgetBody>
               </WidgetContainer>
               <WidgetContainer>
-                <h3>Enlaces</h3>
+                <h3>Enlaces Externos</h3>
                 <WidgetContent>
                   <WidgetContainer>
                     <WidgetBody>
                       <h4>LinkedIn</h4>
-                      <p>{urlLinkedin}</p>
+                      <p>{userData?.urlLinkedin}</p>
                     </WidgetBody>
                   </WidgetContainer>
                   <WidgetContainer>
                     <WidgetBody>
                       <h4>GitHub</h4>
-                      <p>{urlGithub}</p>
+                      <p>{userData?.urlGithub}</p>
                     </WidgetBody>
                   </WidgetContainer>
                 </WidgetContent>
               </WidgetContainer>
             </PageBody>
-            <PageAside>
-              <WidgetContainer>
-                <h3>User Data</h3>
-                <WidgetBody>
-                  <p>Rol: {roleName}</p>
-                  <p>Email: {email}</p>
-                  <p>Teléfono: {phoneNumber}</p>
-                </WidgetBody>
-              </WidgetContainer>
-            </PageAside>
           </PageContent>
         </ProfilePageContainer>
       </PageContentContainer>

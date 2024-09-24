@@ -26,7 +26,6 @@ const ModalContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.bgPink};
   width: 60%;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   position: relative;
   margin: 0;
   padding: 0;
