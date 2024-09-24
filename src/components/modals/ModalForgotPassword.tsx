@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 import styled from "styled-components";
 
 interface ModalPasswordRecoveryProps {
@@ -66,11 +66,11 @@ const SubmitButton = styled.button`
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
-  const router = useRouter();
+  const router = useRouter(); 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch('https://skillswapriwi.azurewebsites.net/api/Auth/RequestEmail', {
         method: 'POST',
@@ -79,25 +79,25 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
         },
         body: JSON.stringify({ email }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Error del servidor');
       }
-
+  
       const data = await response.json();
       console.log('Correo enviado:', data);
       alert('Correo enviado correctamente');
     } catch (error: unknown) {
       let errorMessage = 'Ocurrió un error desconocido';
-
+  
       if (error instanceof Error) {
         errorMessage = error.message;
       }
-
+  
       alert(`Error al enviar el correo: ${errorMessage}`);
     }
   };
-
+  
 
   return (
     <ModalOverlay isOpen={isOpen}>
