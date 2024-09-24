@@ -145,7 +145,7 @@ const H3 = styled.h3`
   padding: 5px 1rem;
   margin: 0;
   font-size: 18px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textDark};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
   font-weight: bold;
 `;
 const P = styled.p`
@@ -234,7 +234,7 @@ const SectionTitle = styled.div`
   font-size: 18px;
   margin: 0;
   padding-left: 1rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textDark};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
   margin-bottom: 20px;
 
   & h3{

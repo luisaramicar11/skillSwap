@@ -86,7 +86,7 @@ export const Footer: React.FC = () => {
           <FooterNavItem onClick={() => handlePageChange('DESCUBRE')}>
             <StyledNavLink href="/discover" label="DESCUBRE" />
           </FooterNavItem>
-          <FooterNavItem onClick={() => handlePageChange('CONFIGURA')}>
+          <FooterNavItem onClick={() => handlePageChange('SOCIAL')}>
             <StyledNavLink href="/settings" label="USUARIO" />
           </FooterNavItem>
           <FooterNavItem onClick={() => handlePageChange('LEGAL')}>

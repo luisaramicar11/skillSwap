@@ -34,7 +34,7 @@ const Image = styled.div<{ urlImage: string, alt: string }>`
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
-  border: solid 1px ${({ theme }) => theme.colors.textDark};
+  border: solid 1px ${({ theme }) => theme.colors.textBlack};
 `;
 
 const Title = styled.h3`

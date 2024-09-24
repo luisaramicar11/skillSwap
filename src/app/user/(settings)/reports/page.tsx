@@ -1,5 +1,5 @@
 "use client"
-import Modal from "../../modals/ModalReport"
+import Modal from "../../../../components/modals/ModalReport"
 import React, { useState } from 'react';
 
 const Reports: React.FC = () => {

@@ -6,6 +6,6 @@ export interface ILinkProps {
     label?: string; 
     target?: string;
     icon?: ReactNode;
-    onClick?: (label: string) => string;
+    onClick?: ((label: string) => string) | (() => void);
     children?: ReactNode;
 }

@@ -29,9 +29,9 @@ const ModalContainer = styled.div`
   width: 50%;
   height: 75%;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   position: relative;
   margin: 0;
+  border-radius: 10px;
   padding: 0;
 `;
 
@@ -44,6 +44,8 @@ const ModalHeader = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
   display: flex;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   justify-content: space-between;
 `;
 
@@ -59,6 +61,8 @@ const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -69,8 +73,8 @@ const UserDetail = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.textTertiary};
   margin-bottom: 10px;
   text-align: end;
-  padding: 1.5rem;
   padding-top: 2rem;
+  border-bottom-right-radius: 10px;
 `;
 
 const UserName = styled.h3`
@@ -79,7 +83,7 @@ const UserName = styled.h3`
   align-items: flex-end;
 
   div {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
   }
@@ -88,7 +92,6 @@ const UserName = styled.h3`
     color: #000;
     font-size: 0.8rem;
     font-weight: 500;
-    font-style: italic;
   }
 `;
 
@@ -98,6 +101,7 @@ const DivRoute = styled.div`
   padding: 0.5rem;
   padding-left: 1rem;
   margin: 0.8rem;
+  border-radius: 10px;
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -110,11 +114,22 @@ const DivRequest = styled.div`
   gap: 0.5rem;
   margin: 0.5rem;
   padding: 1rem;
+
+  & textarea{
+    max-height: 200px;
+    border-radius: 10px;
+  }
+
+  & button{
+    border-radius: 10px;
+  }
 `;
 
 const Div = styled.div`
   display: flex;
+  border-radius: 10px;
   margin: 0.8rem;
+  max-height: 300px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 const DivConnections = styled.div`
@@ -128,11 +143,11 @@ const DivConnections = styled.div`
 const Connections = styled.div`
   padding: 1rem;
   margin-bottom: 0.5rem;
-  font-size: 0.6rem;
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.textSecondary};
 
   div {
-    font-size: 1rem;
+    font-size: 16px;
   }
 `;
 
@@ -140,11 +155,11 @@ const Connections = styled.div`
 const RatingSection = styled.div`
   padding: 1rem;
   margin-bottom: 0.5rem;
-  font-size: 0.6rem;
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.textSecondary};
 
   div {
-    font-size: 1rem;
+    font-size: 16px;
   }
 `;
 
@@ -161,8 +176,9 @@ const RatingStars = styled.div`
 
 const Star = styled.span`
   color: gold;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0 2px;
+  font-style: normal;
 `;
 
 interface IModalProps {

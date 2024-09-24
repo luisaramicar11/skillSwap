@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../ui/links/NavLinks";
@@ -26,7 +26,6 @@ const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
   }
 `;
 
-
 const OfflineSidebarContent = styled.div`
   z-index: 1;
   background: ${({ theme }) => theme.colors.bgSidebar};
@@ -41,7 +40,7 @@ const OfflineSidebarContent = styled.div`
   border-radius: 10px;
   animation: move-right 1s ease-in-out;
 
-    @keyframes move-right {
+  @keyframes move-right {
     from {
       translate: -510px;
     }
@@ -84,7 +83,7 @@ const OfflineProfile = styled.div`
   }
 `;
 
-const ModalCloseButton = styled.button`
+const SidebarCloseButton = styled.button`
   z-index: 1;
   border-radius: 10px;
   background: ${({ theme }) => theme.colors.bgSidebar};
@@ -190,10 +189,26 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ isOpen, onClose }) => {
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
     <OfflineSidebarContainer isOpen={isOpen}>
-      <OfflineSidebarContent>
-        <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
+      <OfflineSidebarContent ref={sidebarRef}>
+        <SidebarCloseButton onClick={onClose}>x</SidebarCloseButton>
         <Disclaimer>
           <OfflineProfile>
             <ProfileHeader>

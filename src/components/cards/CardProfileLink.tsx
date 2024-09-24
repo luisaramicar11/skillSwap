@@ -18,7 +18,7 @@ const ProfileHeader = styled.div`
 `;
 
 const Avatar = styled.div<{ urlImage: string }>`
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
@@ -49,26 +49,21 @@ const RatingSection = styled.div`
   text-align: center;
   margin: 20px 0;
 
-  h1 {
+  & h1 {
     font-size: 2.2rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
     font-weight: bold;
   }
 
-  p {
-    opacity: 0.5;
+  & p {
+    opacity: 0.7;
     text-align: start;
-    font-size: 0.9rem;
+    font-size: 1rem !important;
     font-weight: bold;
     margin: 0;
-    color: ${({ theme }) => theme.colors.textOrange};
+    color: ${({ theme }) => theme.colors.textYellow};
   }
-`;
-
-const Stars = styled.div`
-  color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 0.9rem;
 `;
 
 const DivRate = styled.div`
@@ -80,14 +75,15 @@ const DivRate = styled.div`
   }
 `;
 const RatingStars = styled.div`
-  color: #f5c518;
-  font-size: 1.2rem;
+  color: ${({ theme }) => theme.colors.textYellow};
+  opacity: 0.7;
 `;
 
 const Star = styled.span`
-  color: gold;
-  font-size: 20px;
+  color: ${({ theme }) => theme.colors.textYellow};
+  font-size: 16px;
   margin: 0 2px;
+  font-style: normal;
 `;
 const CardProfileLink: React.FC<IProfileCardProps> = ({
   fullName,
@@ -99,7 +95,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
       .map((ability: string) => ability.trim()) || [];
 
   return (
-    <LinkProfile href="/user/settings" label="CONFIGURACION">
+    <LinkProfile href="/user/settings" label="CONFIGURA">
       <ProfileHeader>
         <Avatar urlImage={userMetrics.urlImage} />
         <div>

@@ -16,7 +16,7 @@ const ProfileCardContainer = styled.div`
   padding-top: 0;
   overflow: hidden;
   border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
 
   @media (max-width: 768px) {
     display: none !important;
@@ -51,7 +51,7 @@ const StatusSection = styled.div`
   }
 
   .rejected {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textRed};
 
     & p {
@@ -61,7 +61,7 @@ const StatusSection = styled.div`
   }
 
   .accepted {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textBlueDark};
 
     & p {
@@ -71,7 +71,7 @@ const StatusSection = styled.div`
   }
 
   .sent {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textSecondary};
 
     & p {
@@ -81,12 +81,12 @@ const StatusSection = styled.div`
   }
 
   .inbox {
-    opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textYellow};
+    opacity: 0.5;
+    color: ${({ theme }) => theme.colors.textOrange};
 
     & p {
       font-weight: 500;
-      color: ${({ theme }) => theme.colors.textYellow};
+      color: ${({ theme }) => theme.colors.textOrange};
     }
   }
 `;

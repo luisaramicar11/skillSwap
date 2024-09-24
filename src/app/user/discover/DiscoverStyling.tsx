@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LineTitles = styled.div`
-  font-size: clamp(1.5rem,3vw,4rem);
+  font-size: clamp(1rem,2vw,3rem);
   margin: 0;
   padding: 0;
   color: ${({ theme }) => theme.colors.textOrange};
@@ -9,7 +9,7 @@ export const LineTitles = styled.div`
   font-weight: bold;
   opacity: 0.3;
   width: 100vw !important;
-  text-align: start;
+  text-align: center;
 `;
 
 export const DivRecentUsers = styled.div`

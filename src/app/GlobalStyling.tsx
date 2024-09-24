@@ -51,7 +51,7 @@ export const GlobalTheme: IGlobalTheme = {
         borderAuthRight: '#F0AC27',  
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientSecondary: 'linear-gradient(270deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientSecondary: 'linear-gradient(270deg, #F0AC2799 20%,  #da731e99 80%, #ea242499 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }

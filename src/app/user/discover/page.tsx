@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "../../../components/carousels/CarouselDiscover";
 import Search from "@/src/components/searchs/search";
 import { LineTitles, DivContainer } from "./DiscoverStyling";
-import AllUsers from "../../../components/discover/AllUsers";
+import AllUsers from "../../../components/containers/AllUsersContainer/AllUsers";
 import { IUserCardProps } from "../../../models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
@@ -87,7 +87,7 @@ const Discover = () => {
       <Search label="⌕" onSearch={handleSearch} />
       {/* Sección del carrusel */}
       <div>
-        <LineTitles></LineTitles>
+        <LineTitles>¡Nuevos Talentos!</LineTitles>
         <hr />
         <Carousel />
         <hr />
