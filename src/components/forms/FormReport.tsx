@@ -9,7 +9,12 @@ export const FormContainer = styled.form`
   align-items: flex-end;
   gap: 20px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
+
+  > * {
+    font-size: 14px !important ;
+  }
 `;
 
 export const Input = styled.input`
@@ -126,7 +131,6 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <h2>Reportar Usuario</h2>
       
       <Input
         type="text"

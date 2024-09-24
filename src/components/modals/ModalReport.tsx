@@ -20,15 +20,26 @@ const ModalOverlay = styled.div`
   z-index: 1000;
   margin: 0;
   padding: 0;
+
+  > * {
+    font-size: 14px !important ;
+  }
 `;
 
 const ModalContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.bgPink};
-  width: 60%;
+  background-color: white;
+  width: 50%;
+  height: 75%;
   padding: 20px;
   position: relative;
   margin: 0;
+  border-radius: 10px;
   padding: 0;
+
+  & h2{
+    margin: 0;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -63,6 +74,7 @@ const DivRoute = styled.div`
   padding: 0.5rem;
   padding-left: 1rem;
   margin: 0.8rem;
+  margin-bottom: 0 ;
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -71,6 +83,7 @@ const ModalContent = styled.div`
   display: flex;
   margin: 1rem;
   margin-top: 2rem;
+  max-height: 400px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -82,6 +95,11 @@ const LeftSection = styled.div`
   gap: 15px;
   padding: 1rem;
   width: 60%;
+
+  & textarea {
+    max-height: 100px;
+    border-radius: 10px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -100,6 +118,7 @@ const AlertText = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
+  width: auto !important;
 
   span {
     padding-right: 0.5rem;
@@ -116,6 +135,7 @@ const PoliceInfo = styled.div`
 
 const DivAlertText = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -133,6 +153,7 @@ const DivTexts = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  width: 100%;
 `;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
@@ -143,7 +164,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       <ModalContainer>
         <ModalHeader>
           <div>
-            SkillSwap <span>Safety</span>
+            SkillSwap Safety
           </div>
           <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
         </ModalHeader>
@@ -161,16 +182,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               <DivColor />
               <DivTexts>
                 <AlertText>
-                  <span>⚠️</span> No dudes en reportar. La seguridad mutua es
-                  primera.
+                  <span>⚠️</span> No dudes en reportar.
                 </AlertText>
                 <AlertText>
-                  <span>🔵</span> En el panel de Ayuda del User puedes ver más
-                  sobre Reportes y Seguridad.
+                  <span>🔵</span> La seguridad es lo primero.
                 </AlertText>
                 <AlertText>
-                  <span>⛔</span> Cualquier tipo de abuso o actividad ilegal nos
-                  interpela a tomar medidas.
+                  <span>⛔</span> Reprobamos cualquier tipo de abuso o ilegalidad.
                 </AlertText>
               </DivTexts>
             </DivAlertText>

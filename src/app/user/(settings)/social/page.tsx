@@ -13,6 +13,11 @@ const PageContainer = styled.section`
   position: relative;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
+
+  p {
+    width: 50%;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
 `;
 
 const PageContentContainer = styled.article`
@@ -54,20 +59,17 @@ const BannerBody = styled.div`
   }
 `;
 
-const RequestPageContent = styled.div`
+const PagesContent = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
-`;
+  gap: 50px;
 
-const ReportsPageContent = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  & h2{
+    font-size: 2rem;
+  }
 `;
 
 const Reports = styled.div`
@@ -89,38 +91,99 @@ const PageBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: end;
   gap: 20px;
 `;
 
 // Estilos para los botones y el contenedor de las solicitudes
 const WidgetContainer = styled.div`
   width: 50%;
-  padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 8px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
 `;
 
-const ButtonsContainer = styled.div`
+const RequestBody = styled.div`
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  & p{
+    padding: 15px;
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  & h3{
+    background: ${({ theme }) => theme.colors.gradientSecondary};
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    padding: 15px;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
+  }
 `;
 
-const Button = styled.button`
+const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  gap: 10px;
+  padding: 15px;
+`;
+
+const RequestButton = styled.button`
   padding: 8px 12px;
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
-  border: none;
-  background-color: #000;
-  color: ${({ theme }) => theme.colors.textPrimary};
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.textYellow};
+  color: ${({ theme }) => theme.colors.textYellow};
 
-  &:hover {
+  :hover {
     background-color: ${({ theme }) => theme.colors.bgButtonHover};
   }
+`;
+
+const ReportsText = styled.div`
+  display: flex;
+flex-direction: column;
+width: 100%;
+align-items: start;
+  & p {
+    text-align: start;
+  }
+`;
+
+const RequestsText = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+align-items: end;
+  & p {
+    text-align: end;
+  }
+`;
+
+const ReportButton = styled.button`
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textSecondary};
+
+  & :hover {
+    transform: scale(1.05)
+    }
 `;
 
 // Función para enviar la actualización del estado de la solicitud
@@ -153,7 +216,7 @@ const updateRequestState = async (idRequest: number, idStateRequest: number) => 
 // Componente principal de la página de solicitudes
 const UserRequests = () => {
   const [requests, setRequests] = useState<any[]>([]);
-  const userId = localStorage.getItem("userId"); 
+  const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState<boolean>(true);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -165,7 +228,7 @@ const UserRequests = () => {
     // Fetch para obtener las solicitudes desde la API
     const fetchRequests = async () => {
       try {
-        const userIdNumber = Number(userId); 
+        const userIdNumber = Number(userId);
         if (isNaN(userIdNumber)) {
           console.error("userId no es un número válido.");
           return;
@@ -223,18 +286,22 @@ const UserRequests = () => {
       </Banner>
       <PageContentContainer>
         <RequestPageContainer>
-          <RequestPageContent>
+          <PagesContent>
+            <RequestsText>
+              <h2>Solicitudes</h2>
+              <p>Revisa tus peticiones de conexión y decide con quién intercambiar conocimientos y experiencia.</p>
+            </RequestsText>
             <PageBody>
               {requests.length > 0 ? (
                 requests.map((request) => (
                   <WidgetContainer key={request.id}>
-                    <div>
+                    <RequestBody>
                       <h3>{request.userNameRequesting}</h3>
                       <p>{request.description}</p>
-                    </div>
+                    </RequestBody>
                     <ButtonsContainer>
-                      <Button onClick={() => handleAccept(request.id)}>ACEPTAR</Button>
-                      <Button onClick={() => handleReject(request.id)}>RECHAZAR</Button>
+                      <RequestButton onClick={() => handleAccept(request.id)}>ACEPTAR</RequestButton>
+                      <RequestButton onClick={() => handleReject(request.id)}>RECHAZAR</RequestButton>
                     </ButtonsContainer>
                   </WidgetContainer>
                 ))
@@ -242,16 +309,19 @@ const UserRequests = () => {
                 <p>No hay solicitudes disponibles.</p>
               )}
             </PageBody>
-          </RequestPageContent>
-          <ReportsPageContent>
-          <Reports>
-            <WidgetContainer>
-              <h1>Reportes</h1>
-              <button onClick={openModal}>Abrir </button>
-              <Modal isOpen={isModalOpen} onClose={closeModal} />
-            </WidgetContainer>
-          </Reports>
-          </ReportsPageContent>
+          </PagesContent>
+          <PagesContent>
+            <ReportsText>
+              <h2>Reportes</h2>
+              <p>En este espacio podrás realizar reportes a usuarios con conductas inadecuadas.</p>
+            </ReportsText>
+            <Reports>
+              <WidgetContainer>
+                <ReportButton onClick={openModal}>REPORTAR USUARIO </ReportButton>
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
+              </WidgetContainer>
+            </Reports>
+          </PagesContent>
         </RequestPageContainer>
       </PageContentContainer>
     </PageContainer>

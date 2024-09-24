@@ -42,6 +42,7 @@ const SidebarLink = styled.p`
     & small {
         margin: 0;
         padding: 0;
+        cursor: pointer !important;
     }
 
     &:hover {
