@@ -206,6 +206,7 @@ const UserInfo = () => {
         }
 
         const data = await response.json();
+        console.log(data)
         setAccountState(data.data.response.nameStateUser); // "activo", "deshabilitar" o "suspendido"
       } catch (err: any) {
         setError(err.message || "Error desconocido");
@@ -224,13 +225,14 @@ const UserInfo = () => {
 
     if (!idNumber) return;
 
-    const newAction = accountState === 'activo' ? 'deshabilitar' : 'habilitar';
+    const newAction = accountState === 'Activo' ? 'deshabilitar' : 'habilitar';
 
     try {
       const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByAction?id=${idNumber}&action=${newAction}`, {
         method: 'PUT',
         headers: {
           'accept': '*/*',
+          'Content-Type': 'application/json'
         },
       });
 
@@ -238,8 +240,9 @@ const UserInfo = () => {
         const errorMessage = await response.text();
         throw new Error(`Error ${response.status}: ${errorMessage}`);
       }
-
+      
       const data = await response.json();
+      console.log(data)
       setAccountState(data.data.response.estado); // Actualiza el estado con el nuevo valor
 
     } catch (err: any) {
@@ -274,11 +277,11 @@ const UserInfo = () => {
                 <DivDeactivateAccount>
                   <ButtonDeactivate
                     onClick={toggleAccountState}
-                    disabled={accountState === 'suspendido'} // Deshabilita el botón si está suspendido
+                    disabled={accountState === 'Suspendido'} // Deshabilita el botón si está suspendido
                   >
-                    {accountState === 'activo' ? 'Deshabilitar Cuenta' : 'Habilitar Cuenta'}
+                    {accountState === 'Activo' ? 'Deshabilitar Cuenta' : 'Habilitar Cuenta'}
                   </ButtonDeactivate>
-                  {accountState === 'suspendido' && (
+                  {accountState === 'Suspendido' && (
                     <p>Tu cuenta ha sido suspendida por un administrador. No puedes cambiar el estado hasta que el administrador lo restaure.</p>
                   )}
                   <div>
