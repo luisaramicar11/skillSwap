@@ -3,39 +3,115 @@ import React, { useEffect, useState } from "react";
 import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
+// Estilos del formulario y los elementos
 const Form = styled.form`
-  padding: 15px;
+  /* Aquí puedes agregar los estilos que necesites para el formulario */
+`;
+
+const BoxForm = styled.form`
+  padding: 30px;
   border-radius: 20px;
-  width: 50%;
+  width: 80%;
+  display: flex;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
+`;
+
+const Message = styled.div`
+  padding: 5px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  font-weight: bolder;
+  display: flex;
+  text-align: center;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: #fff;
+  margin: 0 auto;
+`;
+
+const H2 = styled.h2`
+  font-size: 16px;
+`;
+
+const P = styled.p`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.bgSecondary};
+`;
+
+const Div1 = styled.div`
+  padding: 30px;
+  border-radius: 20px;
+  width: 80%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
+  display: flex;
+`;
+
+const Div2 = styled.div`
+  padding: 30px;
+  border-radius: 20px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
+  display: flex;
 `;
 
 const Input = styled.input`
   border-radius: 10px;
-  border: 1px #ccc solid;
-  padding: 7px;
-  font-size: small;
-  color: black;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textWhite};
+  border-color: ${({ theme }) => theme.colors.bgSecondary};
+
+  &::placeholder {
+    opacity: 0.7;
+    color: ${({ theme }) => theme.colors.textWhite}!important; /* Ajusta la opacidad si es necesario */
+  }
+
+  &:focus {
+    border-color: #f39c12;
+    outline: none;
+  }
 `;
 
 const Button = styled.button`
-  margin-top: 5px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
   border-radius: 10px;
-  border: 1px green solid;
-  color: green;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  background-color: ${({ theme }) => theme.colors.gradientText};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: 16px;
   cursor: pointer;
-  background: none;
-  padding: 5px 10px;
+`;
+
+const ButtonSecondary = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.textSecondary};
+  color: #000;
 
   &:hover {
-    background-color: green;
-    color: white;
+    background-color: ${({ theme }) => theme.colors.textOrange0};
   }
 `;
 
@@ -47,15 +123,19 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h2`
-  margin-top: 15px;
+const Subtitle = styled.h3`
   text-align: center;
+  color: ${({ theme }) => theme.colors.textWhite};
   margin-bottom: 20px;
-  color: black;
-  font-weight: bold;
-  font-size: 15pt;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+`;
+
+// Componente principal
 interface EditUserFormProps {
   updateData: (user: IUserUpdateAdmin) => void;
   dataToEdit: IUserUpdateAdmin | null;
@@ -83,18 +163,6 @@ const FormUsers: React.FC<EditUserFormProps> = ({
   const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
 
   useEffect(() => {
-    const initialFormState: IUserUpdateAdmin = {
-      name: "",
-      lastName: "",
-      abilities: "",
-      category: "",
-      idStateUser: 0,
-      idRoleUser: 0,
-      suspensionDate: null,
-      reactivationDate: null,
-      urlImage: "",
-      birthdate: "",
-    };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
       setForm({
@@ -111,49 +179,23 @@ const FormUsers: React.FC<EditUserFormProps> = ({
     const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: name === "suspensionDate" || name === "reactivationDate" ? (value ? value : null) : value,
+      [name]:
+        name === "suspensionDate" || name === "reactivationDate"
+          ? value || null
+          : value,
     }));
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (dataToEdit) {
-        // Crea el objeto a actualizar filtrando las propiedades innecesarias
-        // Función para formatear la fecha
-        const formatDate = (date: Date | null): string | null => {
-          if (!date) return null;
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0'); // Asegura que el mes tenga dos dígitos
-          const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
-          return `${year}-${month}-${day}`;
+      const userToUpdate = {
+        ...form,
       };
-
-        const userToUpdate = {
-            id: dataToEdit.id, // Mantén el ID existente
-            name: form.name,
-            lastName: form.lastName,
-            urlImage: form.urlImage,
-            jobTitle: form.jobTitle,
-            description: form.description,
-            birthdate: form.birthdate, // Mantener el formato de string
-            email: form.email,
-            phoneNumber: form.phoneNumber,
-            category: form.category,
-            abilities: form.abilities,
-            urlLinkedin: form.urlLinkedin,
-            urlGithub: form.urlGithub,
-            urlBehance: form.urlBehance,
-            idStateUser: form.idStateUser,
-            idRoleUser: form.idRoleUser,
-            suspensionDate: form.suspensionDate,
-            reactivationDate: form.reactivationDate,
-        };
-
-        // Envía solo las propiedades necesarias
-        updateData(userToUpdate);
-        handleReset();
+      updateData(userToUpdate);
+      handleReset();
     }
-};
+  };
 
   const handleReset = () => {
     setForm(initialFormState);
@@ -162,85 +204,89 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 
   return (
     <main>
-      <Title>Editar Usuario</Title>
-      <Div>
-        <Form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Nombre del usuario"
-            onChange={handleChange}
-            value={form.name}
-            required
-          />
-          <Input
-            type="text"
-            name="lastName"
-            placeholder="Apellidos del usuario"
-            onChange={handleChange}
-            value={form.lastName}
-            required
-          />
-          <Input
-            type="text"
-            name="abilities"
-            placeholder="Habilidades"
-            onChange={handleChange}
-            value={form.abilities}
-            required
-          />
-          <Input
-            type="text"
-            name="category"
-            placeholder="Categoría"
-            onChange={handleChange}
-            value={form.category}
-            required
-          />
-          <Input
-            type="number"
-            name="idStateUser"
-            placeholder="idStateUser"
-            onChange={handleChange}
-            value={form.idStateUser}
-            required
-          />
-          <Input
-            type="number"
-            name="idRoleUser"
-            placeholder="idRoleUser"
-            onChange={handleChange}
-            value={form.idRoleUser}
-            required
-          />
-          <Input
-            type="date"
-            name="suspensionDate"
-            onChange={handleChange}
-            value={form.suspensionDate || ""}
-          />
-          <Input
-            type="date"
-            name="reactivationDate"
-            onChange={handleChange}
-            value={form.reactivationDate || ""}
-          />
-          <Div>
-            <Button type="submit">Actualizar</Button>
-            <Button type="button" onClick={handleReset}>
-              Limpiar
-            </Button>
-          </Div>
-        </Form>
-      </Div>
+      <Subtitle>Editar Usuarios</Subtitle>
+      <Form onSubmit={handleSubmit}>
+        <Message>
+          <H2>Estos son valores de estados:</H2>
+          <P>1 = ACTIVO</P>
+          <P>2 = INACTIVO</P>
+          <P>3 = SUSPENDIDO</P>
+        </Message>
+        <BoxForm>
+          <Div1>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Nombre del usuario"
+              onChange={handleChange}
+              value={form.name}
+              required
+            />
+            <Input
+              type="text"
+              name="lastName"
+              placeholder="Apellidos del usuario"
+              onChange={handleChange}
+              value={form.lastName}
+              required
+            />
+            <Input
+              type="text"
+              name="abilities"
+              placeholder="Habilidades"
+              onChange={handleChange}
+              value={form.abilities}
+              required
+            />
+            <Input
+              type="text"
+              name="category"
+              placeholder="Categoría"
+              onChange={handleChange}
+              value={form.category}
+              required
+            />
+          </Div1>
+          <Div2>
+            <Input
+              type="number"
+              name="idStateUser"
+              placeholder="Estado del usuario"
+              onChange={handleChange}
+              value={form.idStateUser}
+              required
+            />
+            <Input
+              type="number"
+              name="idRoleUser"
+              placeholder="Rol del usuario"
+              onChange={handleChange}
+              value={form.idRoleUser}
+              required
+            />
+            <Input
+              type="date"
+              name="suspensionDate"
+              onChange={handleChange}
+              value={form.suspensionDate || ""}
+            />
+            <Input
+              type="date"
+              name="reactivationDate"
+              onChange={handleChange}
+              value={form.reactivationDate || ""}
+            />
+          </Div2>
+        </BoxForm>
+        <ButtonContainer>
+          <ButtonSecondary type="button" onClick={handleReset}>
+            Limpiar
+          </ButtonSecondary>
+          <Button type="submit">Actualizar</Button>
+        </ButtonContainer>
+      </Form>
     </main>
   );
 };
 
 export default FormUsers;
-
-
-
-
-
-

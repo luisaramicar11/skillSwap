@@ -1,70 +1,49 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styled from "styled-components";
 
-// Styled Components para el formulario
-const FormContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-`;
-
-const FormWrapper = styled.div`
-  padding: 2rem;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-`;
-
-const Title = styled.h2`
-  color: #e9a401;
-  margin-bottom: 1.5rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-`;
-
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1rem;
-
-  &:hover {
-    background-color: #333;
-  }
-`;
+import { FormContainer,
+  FormWrapper,
+  Title,
+  Input,
+  SubmitButton }
+  from "./RecoverPasswordStyling";
 
 function RecoverPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Lógica de verificación de contraseñas y petición al backend
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
       return;
-    }  
-    router.push("/auth");
+    }
+
+    try {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/Auth/ResetPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: password,
+          confirmPassword: confirmPassword,
+          // Aquí agrega cualquier otro dato necesario que el backend requiera
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al actualizar la contraseña");
+      }
+
+      alert("Contraseña actualizada con éxito");
+      router.push("/auth"); // Redirige al login
+    } catch (error: any) {
+      alert(error.message || "Ocurrió un error");
+    }
   };
 
   return (

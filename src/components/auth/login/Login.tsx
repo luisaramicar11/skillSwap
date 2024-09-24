@@ -63,7 +63,11 @@ export default function LoginPage() {
       const idUser = resultAction.payload?.data.response.id;
 
       if (token) {
-        toast.success("Login exitoso!");
+        toast.success("Login exitoso!", {
+          style: {
+            marginTop: '10px', // Cambia el padding
+          },
+        });
         localStorage.setItem("authToken", token);
         localStorage.setItem("userId", idUser.toString());
         document.cookie = `authToken=${token}; path=/;`;

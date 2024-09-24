@@ -3,57 +3,135 @@ import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
 import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
+// Contenedor principal del formulario, ajustado para ser responsive
 const Form = styled.form`
-  padding: 15px;
+
+`;
+
+
+const BoxForm = styled.form`
+  padding: 30px;
   border-radius: 20px;
-  width: 50%;
+  width: 90%;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
-`;
+  flex-direction: column; /* Por defecto en columna */
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
 
-const Input = styled.input`
-  border-radius: 10px;
-  border: 1px #ccc solid;
-  padding: 7px;
-  font-size: small;
-  color: black;
-`;
+  @media (min-width: 768px) {
+    flex-direction: row; /* Cambia a fila en pantallas medianas */
+    width: 80%;
+  }
 
-const Button = styled.button`
-  margin-top: 5px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  border: 1px green solid;
-  color: green;
-  cursor: pointer;
-  background: none;
-  padding: 5px 10px;
-
-  &:hover {
-    background-color: green;
-    color: white;
+  @media (min-width: 1024px) {
+    width: 70%; /* Reducir el ancho en pantallas más grandes */
   }
 `;
 
-const Div = styled.div`
-  margin: 15px;
+// Estilo para el contenedor de los inputs del formulario
+const Div1 = styled.div`
+  padding: 30px;
+  border-radius: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border-color: ${({ theme }) => theme.colors.textOrange};
+  color: #fff;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 50%; /* Ancho de 50% para pantallas medianas y grandes */
+  }
 `;
 
-const Title = styled.h2`
-  margin-top: 15px;
+const Div2 = styled(Div1)`
+  @media (min-width: 768px) {
+    width: 50%; /* Misma lógica que el Div1 */
+  }
+`;
+
+const Input = styled.input`
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textWhite};
+  border-color: ${({ theme }) => theme.colors.bgSecondary};
+  border-radius: 10px;
+
+  &::placeholder {
+    opacity: 0.7;
+    color: ${({ theme }) => theme.colors.textWhite};
+  }
+
+  &:focus {
+    border-color: #f39c12;
+    outline: none;
+  }
+`;
+
+const Title = styled.h3`
   text-align: center;
+  color: ${({ theme }) => theme.colors.textWhite};
   margin-bottom: 20px;
-  color: black;
+`;
+
+const Message = styled.div`
+  padding: 5px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
   font-weight: bold;
-  font-size: 15pt;
+  display: flex;
+  text-align: center;
+  gap: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimay};
+  border: 1px solid ${({ theme }) => theme.colors.bgSecondary};
+  color: #fff;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 90%; /* Ancho más grande en pantallas pequeñas */
+  }
+`;
+
+const H2 = styled.h2`
+  font-size: 16px;
+`;
+
+const P = styled.p`
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.bgSecondary};
+`;
+
+const Button = styled.button`
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  background-color: ${({ theme }) => theme.colors.gradientText};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 interface CreateReportFormProps {
@@ -73,6 +151,8 @@ const initialForm: IReport = {
   idUser: 0,
   idReportedUser: 0,
 };
+
+
 
 const CreateReportForm: React.FC<CreateReportFormProps> = ({
   createData,
@@ -125,8 +205,17 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
   return (
     <main>
       <Title>{dataToEdit ? "Editar Reporte" : "Agregar Reporte"}</Title>
-      <Div>
         <Form onSubmit={handleSubmit}>
+        <Message>
+         <H2>En la accion tomada se debe escribir una de esas opciones </H2> 
+         <P>1 = SUSPENDER </P>
+         <P>2 = HABILITAR</P>
+         <P>3 = DESABILITAR </P>
+        </Message>
+          <BoxForm>
+            <Div1>
+
+            
           <Input
             type="text"
             name="title"
@@ -154,6 +243,7 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             required
           />
           <Input
+
             type="text"
             name="actionTaken"
             placeholder="Acción tomada"
@@ -162,6 +252,7 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             value={form.actionTaken}
             required
           />
+         
           <Input
             type="number"
             name="idState"
@@ -170,7 +261,10 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             onChange={handleChange}
             value={form.idState}
             required
-          />
+            />
+            </Div1>
+
+          <Div2>
           <Input
             type="number"
             name="idUser"
@@ -216,12 +310,13 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             value={form.reportedUser}
             required
           />
-          <Div>
+          </Div2>
+        </BoxForm>
+          <ButtonContainer>
             <Button type="submit">Enviar</Button>
             <Button type="button" onClick={handleReset}>Limpiar</Button>
-          </Div>
+          </ButtonContainer>
         </Form>
-      </Div>
     </main>
   );
 };
