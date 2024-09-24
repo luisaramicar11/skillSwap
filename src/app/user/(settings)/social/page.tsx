@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import Reports from "../reports/page";
+import Modal from "../../../../components/modals/ModalReport"
 
 // Estilos
 const PageContainer = styled.section`
@@ -70,6 +70,10 @@ const ReportsPageContent = styled.div`
   gap: 20px;
 `;
 
+const Reports = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const RequestPageContainer = styled.div`
   padding-top: 200px;
@@ -89,7 +93,7 @@ const PageBody = styled.div`
 `;
 
 // Estilos para los botones y el contenedor de las solicitudes
-const RequestContainer = styled.div`
+const WidgetContainer = styled.div`
   width: 50%;
   padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
@@ -152,6 +156,10 @@ const UserRequests = () => {
   const userId = localStorage.getItem("userId"); 
   const [loading, setLoading] = useState<boolean>(true);
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     // Fetch para obtener las solicitudes desde la API
@@ -219,7 +227,7 @@ const UserRequests = () => {
             <PageBody>
               {requests.length > 0 ? (
                 requests.map((request) => (
-                  <RequestContainer key={request.id}>
+                  <WidgetContainer key={request.id}>
                     <div>
                       <h3>{request.userNameRequesting}</h3>
                       <p>{request.description}</p>
@@ -228,16 +236,21 @@ const UserRequests = () => {
                       <Button onClick={() => handleAccept(request.id)}>ACEPTAR</Button>
                       <Button onClick={() => handleReject(request.id)}>RECHAZAR</Button>
                     </ButtonsContainer>
-                  </RequestContainer>
+                  </WidgetContainer>
                 ))
               ) : (
                 <p>No hay solicitudes disponibles.</p>
               )}
             </PageBody>
-            
           </RequestPageContent>
           <ReportsPageContent>
-            <Reports />
+          <Reports>
+            <WidgetContainer>
+              <h1>Reportes</h1>
+              <button onClick={openModal}>Abrir </button>
+              <Modal isOpen={isModalOpen} onClose={closeModal} />
+            </WidgetContainer>
+          </Reports>
           </ReportsPageContent>
         </RequestPageContainer>
       </PageContentContainer>
