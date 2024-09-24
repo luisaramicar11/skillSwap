@@ -152,8 +152,6 @@ const initialForm: IReport = {
   idReportedUser: 0,
 };
 
-
-
 const CreateReportForm: React.FC<CreateReportFormProps> = ({
   createData,
   updateData,
@@ -204,18 +202,16 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
 
   return (
     <main>
-      <Title>{dataToEdit ? "Editar Reporte" : "Agregar Reporte"}</Title>
+      <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
         <Form onSubmit={handleSubmit}>
         <Message>
          <H2>En la accion tomada se debe escribir una de esas opciones </H2> 
-         <P>1 = SUSPENDER </P>
-         <P>2 = HABILITAR</P>
-         <P>3 = DESABILITAR </P>
+         <P>1 = suspender </P>
+         <P>2 = habilitar</P>
+         <P>3 = deshabilitar </P>
         </Message>
           <BoxForm>
-            <Div1>
-
-            
+            <Div1>         
           <Input
             type="text"
             name="title"
