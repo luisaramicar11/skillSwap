@@ -28,7 +28,6 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
       );
 
       if (!response.ok) {
-        // Si la respuesta no es correcta (4xx o 5xx)
         const errorData = await response.json();
         return rejectWithValue(errorData.error.message || "An error occurred");
       }
@@ -37,7 +36,6 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
       console.log(data);
       return data;
     } catch (error: any) {
-      // Si hay un error de red u otro problema
       return rejectWithValue(error.message || "An error occurred");
     }
   }
@@ -46,7 +44,7 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
 // Acción asíncrona para registro
 export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
   "auth/registerUser",
-  async (newUser, { rejectWithValue }) => {
+  async (newUser, { dispatch, rejectWithValue }) => {
     try {
       const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost/PostUserCreate", {
         method: "POST",
@@ -58,15 +56,22 @@ export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
       });
 
       if (!response.ok) {
-        // Si la respuesta no es exitosa (4xx o 5xx)
         const errorData = await response.json();
         return rejectWithValue(errorData.message || "An error occurred");
       }
 
       const data = await response.json();
+      
+      // Inicia sesión automáticamente después de registrar el usuario
+      const loginCredentials: IUserLoginRequest = {
+        email: newUser.email,
+        password: newUser.password,
+      };
+
+      await dispatch(loginUser(loginCredentials)); // Ejecutar loginUser después de registrar
+
       return data;
     } catch (error: any) {
-      // Si hay un error de red u otro problema
       return rejectWithValue(error.message || "An error occurred");
     }
   }
@@ -97,7 +102,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthenticated = true;
         localStorage.setItem("authToken", action.payload.data.response.token);
-        localStorage.setItem("userId", action.payload.data.response.id.toString()); 
+        localStorage.setItem("userId", action.payload.data.response.id.toString());
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

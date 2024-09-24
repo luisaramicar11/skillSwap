@@ -5,7 +5,7 @@ export interface IResponseUsers {
 }
 
 export interface Data {
-    obj: IUser[];
+    response: IUser[];
 }
 
 export interface IUser {
