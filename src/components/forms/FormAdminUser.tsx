@@ -214,65 +214,88 @@ const FormUsers: React.FC<EditUserFormProps> = ({
         </Message>
         <BoxForm>
           <Div1>
+            <label htmlFor="name">Nombre del usuario</label>
             <Input
               type="text"
               name="name"
+              id="name"
               placeholder="Nombre del usuario"
               onChange={handleChange}
               value={form.name}
               required
             />
+
+            <label htmlFor="lastName">Apellidos del usuario</label>
             <Input
               type="text"
               name="lastName"
+              id="lastName"
               placeholder="Apellidos del usuario"
               onChange={handleChange}
               value={form.lastName}
               required
             />
+
+            <label htmlFor="abilities">Habilidades</label>
             <Input
               type="text"
               name="abilities"
+              id="abilities"
               placeholder="Habilidades"
               onChange={handleChange}
               value={form.abilities}
               required
             />
+
+            <label htmlFor="category">Categoría</label>
             <Input
               type="text"
               name="category"
+              id="category"
               placeholder="Categoría"
               onChange={handleChange}
               value={form.category}
               required
             />
           </Div1>
+
           <Div2>
+            <label htmlFor="idStateUser">Estado del usuario</label>
             <Input
               type="number"
               name="idStateUser"
+              id="idStateUser"
               placeholder="Estado del usuario"
               onChange={handleChange}
               value={form.idStateUser}
               required
             />
+
+            <label htmlFor="idRoleUser">Rol del usuario</label>
             <Input
               type="number"
               name="idRoleUser"
+              id="idRoleUser"
               placeholder="Rol del usuario"
               onChange={handleChange}
               value={form.idRoleUser}
               required
             />
+
+            <label htmlFor="suspensionDate">Fecha de suspensión</label>
             <Input
               type="date"
               name="suspensionDate"
+              id="suspensionDate"
               onChange={handleChange}
               value={form.suspensionDate || ""}
             />
+
+            <label htmlFor="reactivationDate">Fecha de reactivación</label>
             <Input
               type="date"
               name="reactivationDate"
+              id="reactivationDate"
               onChange={handleChange}
               value={form.reactivationDate || ""}
             />

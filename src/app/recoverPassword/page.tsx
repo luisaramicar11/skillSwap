@@ -1,18 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-import { FormContainer,
-  FormWrapper,
-  Title,
-  Input,
-  SubmitButton }
-  from "./RecoverPasswordStyling";
+import { FormContainer, FormWrapper, Title, Input, SubmitButton } from "./RecoverPasswordStyling";
 
 function RecoverPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [token, setToken] = useState(""); // Estado para el token
   const router = useRouter();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromURL = params.get("token"); // Obtener el token de la URL
+    if (tokenFromURL) {
+      setToken(tokenFromURL); // Guardar el token en el estado
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,9 +32,8 @@ function RecoverPassword() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          password: password,
-          confirmPassword: confirmPassword,
-          // Aquí agrega cualquier otro dato necesario que el backend requiera
+          token: token, // Incluimos el token que recibimos por la URL
+          newPassword: password, // La nueva contraseña
         }),
       });
 
