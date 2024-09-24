@@ -11,12 +11,15 @@ import { toast } from "react-toastify";
 
 
 const Title = styled.h2`
-  margin-top: 15px;
+   margin-top: 15px;
   text-align: center;
   margin-bottom: 20px;
-  color: black;
   font-weight: bold;
-  font-size: 15pt;
+  font-size: 40px;
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const Reports: React.FC = () => {
