@@ -26,7 +26,7 @@ const CardContainer = styled.div`
   }
 `;
 
-const Image = styled.div<{ urlImage: string }>`
+const Image = styled.div<{ urlImage: string, alt: string }>`
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
@@ -112,7 +112,7 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
       <>
         <CardContainer>
           <PassButton onClick={handlePassClick}><div>&lt;</div> pass</PassButton>
-          <Image urlImage={user.urlImage} />
+          <Image urlImage={user.urlImage} alt= {user.fullName}/>
           <Title>{user.fullName}</Title>
           <Subtitle>{user.jobTitle}</Subtitle>
           <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
