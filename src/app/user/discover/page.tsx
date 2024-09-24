@@ -5,6 +5,7 @@ import Search from "@/src/components/searchs/search";
 import { LineTitles, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/discover/AllUsers";
 import { IUserCardProps } from "../../../models/userCards.model";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores
@@ -73,11 +74,11 @@ const Discover = () => {
   }, []);
 
   if (loading) {
-    return <p>Cargando...</p>;
+    return <OurAlertsText>Cargando...</OurAlertsText>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
   }
 
   return (

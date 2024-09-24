@@ -8,6 +8,7 @@ import { IUser } from "../../../models/user.model";
 import UserMessagess from "../../../components/settings/messages/Messages"
 import Reports from "../../../components/settings/reports/reports"
 import Metrics from "../../../components/settings/metrics/Metrics"
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const SettingsContainer = styled.div`
     width: 100%;
@@ -59,11 +60,11 @@ const UserSettings = () => {
 
   // Muestra loading, error o los datos del usuario
   if (loading) {
-    return <p>Cargando...</p>;
+    return <OurAlertsText>Cargando...</OurAlertsText>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
   }
     return (
         <SettingsContainer>

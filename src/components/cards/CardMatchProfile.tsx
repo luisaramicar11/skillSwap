@@ -16,7 +16,7 @@ const ProfileCardContainer = styled.div`
   padding-top: 0;
   overflow: hidden;
   border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
 
   @media (max-width: 768px) {
     display: none !important;

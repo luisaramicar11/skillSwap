@@ -88,7 +88,7 @@ const BannerImageDiv = styled.div<{ urlImage: string }>`
   height: 200px;
   translate: 0 30px;
   border-radius: 10px;
-  border: solid 1px ${({ theme }) => theme.colors.textBlack};
+  border: solid 1px ${({ theme }) => theme.colors.textDark};
 `;
 
 // Container for INFO content

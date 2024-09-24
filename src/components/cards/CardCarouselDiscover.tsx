@@ -22,17 +22,17 @@ const CardContainer = styled.div`
 
 const CardImage = styled.img`
   border: 1px solid ${({ theme }) => theme.colors.bgBanner};
-  width: 5rem; /* Tamaño fijo para una imagen circular */
-  height: 5rem; /* Debe ser igual al ancho para mantener la forma circular */
-  object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
-  border-radius: 50%; /* Redondea la imagen en forma de círculo */
-  display: block; /* Asegura que la imagen se comporte como un bloque */
-  margin: 0 auto; /* Centra la imagen dentro del contenedor */
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
 `;
 
 const CardContent = styled.div`
   padding: 10px;
-  text-align: center; /* Centra el texto */
+  text-align: center;
   flex-grow: 1;
 `;
 

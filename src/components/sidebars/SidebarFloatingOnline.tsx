@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
-const ProfileSidebarContainer = styled.div`
+const OnlineSidebarContainer = styled.div`
     z-index: -1;
     top: 0;
     left: 0;
@@ -31,7 +31,7 @@ const ProfileSidebarContainer = styled.div`
   }
 `;
 
-const ProfileSidebarContent = styled.div`
+const OnlineSidebarContent = styled.div`
   z-index: 1;
   background: ${({ theme }) => theme.colors.bgSidebar};
   width: 300px !important;
@@ -54,6 +54,10 @@ const ProfileSidebarContent = styled.div`
       translate: 0;
     }
   }
+
+  @media (max-width: 370px) {
+    width: 250px !important;
+  }
 `;
 
 const StatusSection = styled.div`
@@ -66,7 +70,7 @@ const StatusSection = styled.div`
   padding-left: 2rem;
 
   @media (max-height: 550px) {
-    display:none; /* Reduce el tamaño del texto en móviles */
+    display:none;
   }
 
   .status-item {
@@ -161,6 +165,10 @@ const ModalCloseButton = styled.button`
     to {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 370px) {
+    left: 280px;
   }
 `;
 
@@ -263,8 +271,8 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   }, 3000);
 
   return (
-    <ProfileSidebarContainer>
-      <ProfileSidebarContent>
+    <OnlineSidebarContainer>
+      <OnlineSidebarContent>
         <ModalCloseButton onClick={onClose}>x</ModalCloseButton>
         {userData && userMetrics && (
           <>
@@ -320,8 +328,8 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
         <BoxLogout>
           <LogoutButton icon={<FaSignOutAlt />} />
         </BoxLogout>
-      </ProfileSidebarContent>
-    </ProfileSidebarContainer>
+      </OnlineSidebarContent>
+    </OnlineSidebarContainer>
   );
 };
 

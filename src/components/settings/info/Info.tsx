@@ -113,11 +113,11 @@ width: 100%;
 display: flex;
 justify-content: space-around;
 align-items: center;
-`
+`;
 
 const ButtonDesactivate = styled.button`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
-  color: #000;
+  color: ${({ theme }) => theme.colors.textSecondary};
   padding: 10px 20px;
   border: 2px solid ${({ theme }) => theme.colors.bgButton};
   border-radius: 8px;
@@ -142,8 +142,6 @@ const UserInfo = () => {
   const [accountState, setAccountState] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  
 
   // Obtener el estado actual de la cuenta
   useEffect(() => {
