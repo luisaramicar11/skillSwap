@@ -225,7 +225,7 @@ const UserInfo = () => {
 
     if (!idNumber) return;
 
-    const newAction = accountState === 'Activo' ? 'deshabilitar' : 'habilitar';
+    const newAction = accountState === 'activo' ? 'deshabilitar' : 'habilitar';
 
     try {
       const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByAction?id=${idNumber}&action=${newAction}`, {
@@ -277,11 +277,11 @@ const UserInfo = () => {
                 <DivDeactivateAccount>
                   <ButtonDeactivate
                     onClick={toggleAccountState}
-                    disabled={accountState === 'Suspendido'} // Deshabilita el botón si está suspendido
+                    disabled={accountState === 'suspendido'} // Deshabilita el botón si está suspendido
                   >
-                    {accountState === 'Activo' ? 'Deshabilitar Cuenta' : 'Habilitar Cuenta'}
+                    {accountState === 'activo' ? 'Deshabilitar Cuenta' : 'Habilitar Cuenta'}
                   </ButtonDeactivate>
-                  {accountState === 'Suspendido' && (
+                  {accountState === 'suspendido' && (
                     <p>Tu cuenta ha sido suspendida por un administrador. No puedes cambiar el estado hasta que el administrador lo restaure.</p>
                   )}
                   <div>
