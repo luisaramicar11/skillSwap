@@ -58,6 +58,7 @@ const Disclaimer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-size: 0.7rem;
   margin-bottom: 10px;
   padding: 2rem;
@@ -83,51 +84,14 @@ const OfflineProfile = styled.div`
   }
 `;
 
-const SidebarCloseButton = styled.button`
-  z-index: 1;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.colors.bgSidebar};
-  color: ${({ theme }) => theme.colors.textDark};
-  border: none;
-  margin: 0;
-  text-align: center;
-  cursor: pointer;
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 330px;
-
-  & p{
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 370px) {
-    left: 280px;
-  }
-`;
-
 const ProfileHeader = styled.div`
   width: 100%;
   display: flex;
   gap: 1rem;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
   padding-bottom: 20px;
-  padding-left: 0.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -145,7 +109,10 @@ const ProfileName = styled.div`
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: ${({ theme }) => theme.colors.textDark};
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
 `;
 
 const Skills = styled.div`
@@ -158,27 +125,32 @@ const Skills = styled.div`
 `;
 
 const Button = styled.button`
+display: flex;
+  justify-content: center;
+  width: 100px;
   background: transparent;
   border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px 40px;
+  padding: 15px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.5s ease-in-out;
   margin: 30px 0;
   border-radius: 10px;
+  opacity: 0.7;
 
   & a{
+    padding: 0;
     color: ${({ theme }) => theme.colors.textOrange};
   }
 
   &:hover {
+    opacity: 0.7;
     background: ${({ theme }) => theme.colors.gradientPrimary};
-    border: none;
     transition: 0.5s ease-in-out;
 
     & a{
-      color: ${({ theme }) => theme.colors.textPrimary};
+      color: ${({ theme }) => theme.colors.textWhite};
   }
   }
 `;
@@ -208,7 +180,6 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ isOpen, onClose }) => {
   return (
     <OfflineSidebarContainer isOpen={isOpen}>
       <OfflineSidebarContent ref={sidebarRef}>
-        <SidebarCloseButton onClick={onClose}>x</SidebarCloseButton>
         <Disclaimer>
           <OfflineProfile>
             <ProfileHeader>

@@ -28,14 +28,13 @@ import ProfileSidebarAdmin from "../sidebars/SidebarFloatingAdmin";
 // Styled components
 
 const NavbarContainer = styled.div`
-
+    z-index: 10;
     position: fixed;
 
     width: 100%;
 
     top: 0;
 
-    z-index:10000;
 
     background-color: ${({ theme }) => theme.colors.bgNavbar};
 
@@ -84,6 +83,7 @@ const SidebarLink = styled.p`
     gap: 10px;
 
     color: ${({ theme }) => theme.colors.textWhite};
+    cursor: pointer;
 
 
 
@@ -91,6 +91,7 @@ const SidebarLink = styled.p`
     & small {
 
         margin: 0;
+        cursor: pointer;
 
         padding: 0;
 
@@ -100,12 +101,8 @@ const SidebarLink = styled.p`
 
 
     &:hover {
-
+        transform: scale(0.95);
         transition: 0.4s;
-
-        font-weight: 600;
-
-        border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
 
     }
 
@@ -167,8 +164,6 @@ const IconsContainer = styled.div`
 `;
 
 
-
-
 const NavList = styled.ul<{ isOpen: boolean }>`
 
     list-style: none;
@@ -178,7 +173,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
     display: flex;
 
     gap: 50px;
-
+    padding: 0;
 
 
 
@@ -256,7 +251,7 @@ const NavItem = styled.li`
 
     display: inline-block;
 
-    font-size: 16px;
+    font-size: 15px;
 
     cursor: pointer;
 
@@ -297,7 +292,7 @@ export const NavbarAdmin: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    
+
 
     const closeSidebarSettings = () => setIsSidebarSettingsOpen(false);
 
@@ -320,9 +315,9 @@ export const NavbarAdmin: React.FC = () => {
     return (
         <NavbarContainer>
 
-            <ProfileSidebarAdmin isOpen={isModalOpen} onClose={closeModal}/>
+            <ProfileSidebarAdmin isOpen={isModalOpen} onClose={closeModal} />
 
-            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
+            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings} />
 
             <SidebarLinkContainer>
 
@@ -362,8 +357,6 @@ export const NavbarAdmin: React.FC = () => {
 
 
             <IconsContainer>
-
-                {/* <StyledIconNavLink href="/user/settings" label="SOCIAL" icon={<SettingsIcon />} /> */}
 
                 <StyledIconNavLink href="/admin/legal" label="LEGAL" icon={<InfoIcon />} />
 

@@ -2,11 +2,15 @@
 import styled from "styled-components";
 import Carousel from "../../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
-import { Footer } from "../../components/footer/Footer";
+import { FooterUser } from "@/src/components/footer/FooterUser";
+import Image from "next/image";
+import hands_swap from "../../../public/img/hand/hands-swap.png";
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
-  padding: 54px 0;
+  padding: 0;
+  padding-top: 74px;
+  padding-bottom: 54px;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   flex-direction: column;
@@ -31,35 +35,11 @@ const Logo = styled.h1`
   }
 `;
 
-const Button = styled.button`
-  background: transparent;
-  color: ${({ theme }) => theme.colors.textOrange};
-  border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px 70px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-  margin-bottom: 50px;
-  border-radius: 10px;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.gradientPrimary};
-    color: ${({ theme }) => theme.colors.textPrimary};
-    border: none;
-    transition: 0.5s ease-in-out;
-  }
-
-  @media (max-width: 768px) {
-    padding: 10px 35px;
-    font-size: 10px;
-  }
-`;
 // Estilos para el texto principal
 const MainText = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 10vw;
+  margin-top: 15vw;
   background: transparent;
   align-items: end;
   padding: 50px;
@@ -419,20 +399,6 @@ const SubText = styled.p`
   font-style: italic;
 `;
 
-const DiscoverButton = styled(Button)`
-  color: ${({ theme }) => theme.colors.textYellow};
-  border: ${({ theme }) => theme.colors.textYellow} 1px solid;
-  display:flex;
-  justify-content:center;
-  align-items: center;
-  margin-bottom: 10px;
-  width: 20%;
-
-  @media (max-width: 768px) {
-    margin-top: 100px;
-  }
-`;
-
 const RightTextLine1 = styled.div`
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
@@ -453,6 +419,15 @@ const RightTextLine3 = styled.div`
   font-weight: 800;
 `;
 
+const Imagenes = styled(Image)`
+  height: 100vw;
+  width: 100vw;
+  position: absolute;
+  bottom: -300px;
+  transform: rotate(-90deg);
+  filter: grayscale();
+`;
+
 //--------------------- Componente principal de la página de inicio ---------------------
 
 const Home = () => {
@@ -462,6 +437,7 @@ const Home = () => {
   }
   return (
     <HomeContainer>
+      <Imagenes src={hands_swap} alt='none'></Imagenes>
       <Logo>
         SkillSwap
       </Logo>
@@ -520,7 +496,6 @@ const Home = () => {
             <SwapText>Swap.</SwapText>
             <SubText>simple. dinámico. libre.</SubText>
           </div>
-          <DiscoverButton>DESCUBRE</DiscoverButton>
         </LeftSection>
         {/* Right Section */}
         <RightSection>
@@ -532,7 +507,7 @@ const Home = () => {
           <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
-      <Footer />
+      <FooterUser />
     </HomeContainer>
   );
 };

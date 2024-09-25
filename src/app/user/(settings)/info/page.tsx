@@ -12,7 +12,6 @@ import WidgetContainer from '../../../../components/containers/WidgetContainer/W
 //Container for the whole page.tsx
 
 const PageContainer = styled.section`
-
   width: 100%;
 
   height: 100%;

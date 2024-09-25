@@ -59,7 +59,7 @@ export const GlobalTheme: IGlobalTheme = {
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
-        bgNavbar:'rgba(255, 255, 255, 0.025)',
+        bgNavbar:'#222222',
         bgBanner: 'rgba(0, 0, 0, 0.1)',
         bgMainOpacity:'#0000007f',
         bgSidebar: 'rgba(255, 255, 255)',
