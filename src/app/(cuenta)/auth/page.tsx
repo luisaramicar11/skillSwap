@@ -6,6 +6,7 @@ import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
+import { FooterMain } from "@/src/components/footer/FooterMain";
 // Texto de cambio
 
 const TextWrapper = styled.div`
@@ -287,6 +288,7 @@ export default function AuthPage() {
           </Div>
         </OverlayPanel>
       </OverlayContainer>
+      <FooterMain></FooterMain>
     </Container>
   );
 }

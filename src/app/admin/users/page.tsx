@@ -109,7 +109,7 @@ const Users: React.FC = () => {
       />
       <Table 
         data={users}
-        setDataToEdit={setEditedUser}
+        setDataToEdit={setEditedUser} 
         deleteData={handleDeleteUser} 
       />
     </Div>
