@@ -6,6 +6,7 @@ import { LineTitles, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/containers/AllUsersContainer/AllUsers";
 import { IUserCardProps } from "../../../models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import { FooterMain } from "@/src/components/footer/FooterMain";
 
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores
@@ -82,6 +83,8 @@ const Discover = () => {
   }
 
   return (
+    <main>
+  
     <DivContainer>
       {/* Componente de búsqueda */}
       <Search label="⌕" onSearch={handleSearch} />
@@ -98,7 +101,12 @@ const Discover = () => {
         {/* Se pasa el estado filteredUsers que puede ser todos o los filtrados */}
         <AllUsers users={filteredUsers} />
       </article>
+      <FooterMain>
+      </FooterMain>
     </DivContainer>
+        
+    </main>
+
   );
 };
 
