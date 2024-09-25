@@ -2,11 +2,16 @@
 import styled from "styled-components";
 import Carousel from "../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
-import { Footer } from "../components/footer/Footer";
+import { FooterOffline } from "../components/footer/FooterOffline";
+import hands_swap from "../../public/img/hand/hands-swap.png";
+import Image from "next/image";
+import { handlePageChange } from "../lib/utils/handlePageTheme";
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
-  padding: 54px 0;
+  padding: 0;
+  padding-top: 74px;
+  padding-bottom: 54px;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   flex-direction: column;
@@ -32,22 +37,31 @@ const Logo = styled.h1`
 `;
 
 const Button = styled.button`
+display: flex;
+  justify-content: center;
+  width: 100px;
   background: transparent;
-  color: ${({ theme }) => theme.colors.textOrange};
   border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px 70px;
+  padding: 15px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.5s ease-in-out;
-  margin-bottom: 50px;
+  margin: 30px 0;
   border-radius: 10px;
+
+  & a{
+    padding: 0;
+    color: ${({ theme }) => theme.colors.textOrange};
+  }
 
   &:hover {
     background: ${({ theme }) => theme.colors.gradientPrimary};
-    color: ${({ theme }) => theme.colors.textPrimary};
-    border: none;
     transition: 0.5s ease-in-out;
+
+    & a{
+      color: ${({ theme }) => theme.colors.textWhite};
+  }
   }
 
   @media (max-width: 768px) {
@@ -60,7 +74,7 @@ const Button = styled.button`
 const MainText = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 10vw;
+  margin-top: 15vw;
   background: transparent;
   align-items: end;
   padding: 50px;
@@ -420,7 +434,7 @@ const SubText = styled.p`
   font-style: italic;
 `;
 
-const DiscoverButton = styled(Button)`
+const AuthButton = styled(Button)`
   color: ${({ theme }) => theme.colors.textYellow};
   border: ${({ theme }) => theme.colors.textYellow} 1px solid;
   display:flex;
@@ -454,6 +468,15 @@ const RightTextLine3 = styled.div`
   font-weight: 800;
 `;
 
+const Imagenes = styled(Image)`
+  height: 100vw;
+  width: 100vw;
+  position: absolute;
+  bottom: -300px;
+  transform: rotate(-90deg);
+  filter: grayscale();
+`;
+
 //--------------------- Componente principal de la página de inicio ---------------------
 
 const Home = () => {
@@ -463,10 +486,10 @@ const Home = () => {
   }
   return (
     <HomeContainer>
+      <Imagenes src={hands_swap} alt='none'></Imagenes>
       <Logo>
         SkillSwap
       </Logo>
-      <Button onClick={handleClick}>COMENZAR</Button>
       <MainText>
         <Text>
           <h2>LOOKING FOR <br></br>SKILL</h2>
@@ -525,7 +548,7 @@ const Home = () => {
             <SwapText>Swap.</SwapText>
             <SubText>simple. dinámico. libre.</SubText>
           </div>
-          <DiscoverButton>DESCUBRE</DiscoverButton>
+          <AuthButton onClick={handleClick}>AUTENTICARSE</AuthButton>
         </LeftSection>
         {/* Right Section */}
         <RightSection>
@@ -537,7 +560,7 @@ const Home = () => {
           <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
-      <Footer />
+      <FooterOffline />
     </HomeContainer>
   );
 };

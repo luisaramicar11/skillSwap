@@ -8,7 +8,6 @@ import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const OnlineSidebarContainer = styled.div`
-    z-index: -1;
     top: 0;
     left: 0;
     position: fixed;
@@ -34,7 +33,7 @@ const OnlineSidebarContent = styled.div`
     z-index: 1;
     background: ${({ theme }) => theme.colors.bgSidebar};
     width: 300px !important;
-    height: 75%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     padding: 0.5rem 1rem;
@@ -57,6 +56,10 @@ const OnlineSidebarContent = styled.div`
     @media (max-width: 370px) {
         width: 250px !important;
     }
+
+    @media (max-height: 500px) {
+      height: 60% !important;
+    }
 `;
 
 const StatusSection = styled.div`
@@ -68,7 +71,7 @@ const StatusSection = styled.div`
   gap: 1rem;
   padding-left: 2rem;
 
-  @media (max-height: 550px) {
+  @media (max-height: 500px) {
     display:none;
   }
 
@@ -87,6 +90,10 @@ const StatusSection = styled.div`
   }
 
   .rejected {
+    @media (max-height: 600px) {
+    display:none;
+  }
+
     opacity: 0.5;
     color: ${({ theme }) => theme.colors.textRed};
 
@@ -107,6 +114,9 @@ const StatusSection = styled.div`
   }
 
   .sent {
+    @media (max-height: 600px) {
+    display:none;
+  }
     opacity: 0.5;
     color: ${({ theme }) => theme.colors.textSecondary};
 
@@ -117,6 +127,8 @@ const StatusSection = styled.div`
   }
 
   .inbox {
+    
+
     opacity: 0.5;
     color: ${({ theme }) => theme.colors.textOrange};
 
@@ -135,47 +147,11 @@ const H2StatusSection = styled.h2`
   font-size: 0.9rem;
 `;
 
-const SidebarCloseButton = styled.button`
-  z-index: 1;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.colors.bgSidebar};
-  color: ${({ theme }) => theme.colors.textDark};
-  border: none;
-  margin: 0;
-  text-align: center;
-  cursor: pointer;
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 330px;
-
-  & p{
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  @keyframes appear {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @media (max-width: 370px) {
-    left: 280px;
-  }
-`;
-
 const BoxLogout = styled.h2`
   position: fixed;
   display: flex;
   align-items: end !important;
-  height: 75%;
+  height: 70%;
   left: 20px;
   animation: appearBottom 2s ease-in-out;
 
@@ -187,6 +163,14 @@ const BoxLogout = styled.h2`
       translate: 0 0;
     }
   }
+
+  @media (max-height: 600px) {
+      height: 66% !important;
+    }
+
+    @media (max-height: 500px) {
+      height: 55% !important;
+    }
 `;
 interface ProfileSidebarProps {
   isOpen: boolean;

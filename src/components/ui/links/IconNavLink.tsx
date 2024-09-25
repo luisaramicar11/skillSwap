@@ -13,6 +13,7 @@ const IconNavLinkComponent = styled(Link)`
   transition: 0.4s;
   align-items: center; 
   justify-content: center;
+  cursor: pointer;
 
   & svg {
     display: flex;
@@ -30,18 +31,19 @@ const IconNavLinkComponent = styled(Link)`
   }
 `;
 
-const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ href, label, onClick, icon }) => {
-    return (
-        <IconNavLinkComponent
-            href={href}
-            onClick={() => {
-                handlePageChange(label ?? 'default-label');
-                if (onClick) onClick(label ?? 'default-label');
-            }}
-        >
-            {icon}
-        </IconNavLinkComponent>
-    );
+const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ href, label, onClick, icon, target }) => {
+  return (
+    <IconNavLinkComponent
+      href={href}
+      target={target}
+      onClick={() => {
+        handlePageChange(label ?? 'default-label');
+        if (onClick) onClick(label ?? 'default-label');
+      }}
+    >
+      {icon}
+    </IconNavLinkComponent>
+  );
 };
 
 export default StyledIconNavLink;

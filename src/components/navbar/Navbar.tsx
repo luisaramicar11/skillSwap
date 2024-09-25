@@ -9,10 +9,10 @@ import OfflineProfileSidebar from "../sidebars/SidebarFloatingOffline";
 
 // Styled components
 const NavbarContainer = styled.div<{ isOpen: boolean }>`
+    z-index: 10;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index:10000;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};
     display: flex;
@@ -44,8 +44,6 @@ const AuthLink = styled.p`
 
     &:hover {
         transition: 0.4s;
-        font-weight: 600;
-        border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
     }
 `;
 
@@ -58,16 +56,17 @@ const SidebarLink = styled.p`
     width: max-content;
     transition: 0.4s;
     gap: 10px;
+    cursor: pointer;
 
     & small {
         margin: 0;
         padding: 0;
+        cursor: pointer;
     }
 
     &:hover {
         transition: 0.4s;
-        font-weight: 600;
-        border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
+        transform: scale(0.95);
     }
 `;
 
@@ -114,7 +113,7 @@ export const Navbar: React.FC = () => {
             </SidebarLinkContainer>
             <IconsContainer>
                 <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
-                <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
     );
