@@ -113,8 +113,6 @@ export const Navbar: React.FC = () => {
                 <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
                 <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
-            {/* Ejemplo de botón para probar el toggle de isOpen */}
-            <button onClick={toggleNavbar}>Toggle Navbar</button>
         </NavbarContainer>
     );
 };
