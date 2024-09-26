@@ -208,6 +208,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                   setUserData(userData.data.response);
                   const matchedUser = metricsData.find((user: any) => user.id === idNumber);
                   setUserMetrics(matchedUser ? matchedUser : null);
+                  console.log(userData)
               } else {
                   setError('Error al cargar los datos');
               }
