@@ -80,10 +80,10 @@ Facilitate continuous learning and collaborative teaching, creating a vibrant co
     - [https://msgamesje.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNTFhZDYxYjI1NTU0NGZjMmFlMjVkMWRjNTM5ODk3YzkiLCJwIjoiaiJ9](https://msgamesje.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNTFhZDYxYjI1NTU0NGZjMmFlMjVkMWRjNTM5ODk3YzkiLCJwIjoiaiJ9)
 
 3. In this link, you can view the MockUp and Figma Design of our project on Figma:
-    - [https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&t=nLtB2dIrePCKwWu2-1](https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&t=nLtB2dIrePCKwWu2-1)
+    - [https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?node-id=0-1&t=mbwWpVTL1rtoLHnZ-1](https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?node-id=0-1&t=mbwWpVTL1rtoLHnZ-1)
 
 4. In this link, you can view our project deployed on Vercel:
-    - [https://skill-swap-app-pink.vercel.app/](https://skill-swap-app-pink.vercel.app/)
+    - [https://skill-swap-ten.vercel.app/](https://skill-swap-ten.vercel.app/)
 
 ## Equipo Frontend
 
@@ -107,7 +107,7 @@ Facilitate continuous learning and collaborative teaching, creating a vibrant co
 - David Steven Medina Urrego
     - medi77na
 
-## Instalation
+## Installation
 
 1. Clone the repository:
 
@@ -124,7 +124,7 @@ npm run dev
 3. Create a file named __".env.local"__ in the root of the project:
 
 - This file should contain a GITHUB token that allows you to view a preview of users' GitHub profiles.
-- However, due to the **".gitignore"**, you may not have this file when cloning this project, or it may be deleted during transfer.
+- However, due to the **".gitignore"**, you may not have this file when cloning this project, or it may be automatically deleted during transfer.
 - It is recommended to create it manually, but don’t worry; this will not affect your experience.
 - You will need to generate your own GITHUB token, which you can obtain by following the instructions on GitHub or just go to the end of this document, where we will explain it for you. 
 
