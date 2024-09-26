@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { IUserCarouselProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import DivLink from "../ui/links/CardUserLink";
+import { getAllUsersSorted } from "../../lib/api/users"; 
 
 const CustomSwiper = styled(Swiper)`
   width: 80%;
@@ -46,22 +47,8 @@ const Carousel = () => {
   useEffect(() => {
     const fetchAllUsersData = async () => {
       try {
-        const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserSortedCreated",
-          {
-            method: "GET",
-            headers: {
-              accept: "*/*",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Error al obtener datos de los usuarios.");
-        }
-
-        const responseData: IUserCarouselProps[] = await response.json();
-
+        const responseData = await getAllUsersSorted();
+        console.log(responseData)
         // Guarda todos los usuarios en el estado
         setAllUsersData(responseData);
         setLoading(false);

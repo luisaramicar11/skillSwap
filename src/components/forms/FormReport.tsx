@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { toast } from "react-toastify";
+import { createReport } from '../../lib/api/reports'; // Asegúrate de ajustar la ruta según tu estructura de carpetas
+import {  getAllUsers } from '../../lib/api/users'; 
 
 export const FormContainer = styled.form`
   display: flex;
@@ -76,9 +78,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersAll');
-        const data = await response.json();
-        setUsers(data.data.response);
+        const usersData = await getAllUsers(); // Usa la nueva función
+        setUsers(usersData);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
@@ -96,7 +97,6 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
     }
 
     const reportData = {
-      id: 0,
       titleReport: title,
       description: description,
       dateReport: new Date().toISOString().split('T')[0],
@@ -107,31 +107,17 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
     };
 
     try {
-      const response = await fetch('https://skillswapriwi.azurewebsites.net/api/ReportsPost/PostReportCreate', {
-        method: 'POST',
-        headers: {
-          'accept': '*/*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reportData),
-      });
-
-      if (response.ok) {
-        toast.success('Reporte enviado con éxito', { autoClose: 3000 }); // Muestra un solicitud de éxito al enviar el reporte
-        console.log('Reporte enviado con éxito');
-        closeModal(); // Llama a la función closeModal después de enviar el reporte
-      } else {
-        toast.error('Error al enviar el reporte', { autoClose: 3000 }); // Muestra un solicitud de error al enviar el reporte
-        console.error('Error al enviar el reporte');
-      }
+      const response = await createReport(reportData); // Llama a la función para crear el reporte
+      toast.success('Reporte enviado con éxito', { autoClose: 3000 });
+      closeModal();
     } catch (error) {
+      toast.error('Error al enviar el reporte', { autoClose: 3000 });
       console.error('Error al enviar el reporte:', error);
     }
   };
 
   return (
     <FormContainer onSubmit={handleSubmit}>
-      
       <Input
         type="text"
         placeholder="Título del reporte"
@@ -161,3 +147,4 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
 };
 
 export default ReportForm;
+

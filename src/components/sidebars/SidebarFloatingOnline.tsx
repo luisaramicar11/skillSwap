@@ -6,6 +6,8 @@ import LogoutButton from "../ui/buttons/ButtonLogout";
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import {getRequestById} from "../../lib/api/requests";
+import {getUsersForImages} from "../../lib/api/users"
 
 const OnlineSidebarContainer = styled.div`
     top: 0;
@@ -199,31 +201,12 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
           }
 
           try {
-              const userResponse = await fetch(
-                  `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${idNumber}`,
-                  {
-                      method: "GET",
-                      headers: {
-                          "accept": "*/*"
-                      },
-                  }
-              );
-              const userData = await userResponse.json();
+              const userData = await getRequestById(idNumber);
+              const metricsData = await getUsersForImages();
 
-              const metricsResponse = await fetch(
-                  'https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages',
-                  {
-                      method: "GET",
-                      headers: {
-                          "accept": "*/*",
-                      },
-                  }
-              );
-              const metricsData = await metricsResponse.json();
-
-              if (userResponse.ok && metricsResponse.ok) {
+              if (userData && metricsData) {
                   setUserData(userData.data.response);
-                  const matchedUser = metricsData.data.response.find((user: any) => user.id === idNumber);
+                  const matchedUser = metricsData.find((user: any) => user.id === idNumber);
                   setUserMetrics(matchedUser ? matchedUser : null);
               } else {
                   setError('Error al cargar los datos');

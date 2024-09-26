@@ -7,6 +7,7 @@ import AllUsers from "../../../components/containers/AllUsersContainer/AllUsers"
 import { IUserCardProps } from "../../../models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { FooterMain } from "@/src/components/footer/FooterMain";
+import { getUsersForImages } from '../../../lib/api/users';  // Importamos la función de users.ts
 
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores
@@ -29,9 +30,7 @@ const Discover = () => {
 
     // Filtra por fullName y abilities
     const filtered: IUserCardProps[] = allUsersData.filter((user) =>
-      // Verifica si el nombre completo incluye el query
       user.fullName.toLowerCase().includes(lowercasedQuery) ||
-      // Verifica si alguna de las habilidades incluye el query
       user.abilities.toLowerCase().includes(lowercasedQuery)
     );
 
@@ -43,27 +42,13 @@ const Discover = () => {
   useEffect(() => {
     const fetchAllUsersData = async () => {
       try {
-        const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
-          {
-            method: "GET",
-            headers: {
-              "accept" : "*/*",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Error al obtener datos de los usuarios.");
-        }
-
-        const responseData = await response.json();
+        const responseData = await getUsersForImages();  // Usamos la función de users.ts
 
         // Guarda todos los usuarios en el estado
-        setAllUsersData(responseData.data.response);
+        setAllUsersData(responseData);
 
         // Por defecto, todos los usuarios son los "filtrados" hasta que se realice una búsqueda
-        setFilteredUsers(responseData.data.response);
+        setFilteredUsers(responseData);
         setLoading(false);
       } catch (error: any) {
         setError(error.message);
