@@ -6,7 +6,7 @@ import { FormContainer, FormWrapper, Title, Input, SubmitButton } from "./Recove
 function RecoverPassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [token, setToken] = useState(""); // Estado para el token
+  const [token, setToken] = useState<string | null>(null); // Estado para el token
   const router = useRouter();
 
   useEffect(() => {
@@ -14,37 +14,59 @@ function RecoverPassword() {
     const tokenFromURL = params.get("token"); // Obtener el token de la URL
     if (tokenFromURL) {
       setToken(tokenFromURL); // Guardar el token en el estado
+    } else {
+      alert("Token inválido o ausente.");
+      router.push("/auth"); // Redirige si no hay token
     }
-  }, []);
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!password || !confirmPassword) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("La contraseña debe tener al menos 8 caracteres.");
+      return;
+    }
+
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      alert("Las contraseñas no coinciden.");
+      return;
+    }
+
+    if (!token) {
+      alert("Token inválido.");
       return;
     }
 
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/Auth/ResetPassword", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token: token, // Incluimos el token que recibimos por la URL
-          newPassword: password, // La nueva contraseña
-        }),
-      });
+      const response = await fetch(
+        "https://skillswapriwi.azurewebsites.net/api/Auth/ResetPassword",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: token, // Incluimos el token que recibimos por la URL
+            newPassword: password, // La nueva contraseña
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Error al actualizar la contraseña");
+        const errorText = await response.text();
+        throw new Error(`Error al actualizar la contraseña: ${errorText}`);
       }
 
-      alert("Contraseña actualizada con éxito");
+      alert("Contraseña actualizada con éxito.");
       router.push("/auth"); // Redirige al login
     } catch (error: any) {
-      alert(error.message || "Ocurrió un error");
+      alert(error.message || "Ocurrió un error.");
     }
   };
 

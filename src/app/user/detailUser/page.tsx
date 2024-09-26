@@ -17,6 +17,7 @@ const DetailAboutUser = () => {
   const [userData, setUserData] = useState<IUserCardProps[]>([]);
   const [checkConnection, setConnectionInfo] = useState<boolean | null>(null); // Ahora será booleano
   const [userMetrics, setUserMetrics] = useState<IRequestCardProps | null>(null);
+
   // Función para obtener el ID del usuario del localStorage
   const getCurrentIdUser = (): number | null => {
     const idString = localStorage.getItem("userId");

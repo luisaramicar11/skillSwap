@@ -139,10 +139,16 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatc
           <article>
             <div>{rating}</div>
             <RatingStars>
-              {[...Array(5)].map((_, index) => (
-                <span key={index}>{index < rating ? "★" : "☆"}</span>
-              ))}
+              {[...Array(5)].map((_, index) => {
+                const ratingStars = Math.floor(rating); // Redondea hacia abajo
+                return (
+                  <span key={index}>
+                    {index < ratingStars ? "★" : "☆"}
+                  </span>
+                );
+              })}
             </RatingStars>
+
           </article>
         </RatingSection>
 

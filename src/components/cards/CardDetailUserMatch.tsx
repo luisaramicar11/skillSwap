@@ -303,13 +303,17 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData, 
                 <DivRating>
                   <div>{userData.qualification}</div>
                   <RatingStars>
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index}>
-                        {index < 4.5 ? "★" : "☆"}{" "}
-                        {/* Muestra estrellas llenas o vacías */}
-                      </Star>
-                    ))}
+                    {[...Array(5)].map((_, index) => {
+                      const rating = Math.floor(userData?.qualification); // Redondea hacia abajo
+                      return (
+                        <Star key={index}>
+                          {index < rating ? "★" : "☆"}{" "}
+                          {/* Muestra estrellas llenas o vacías */}
+                        </Star>
+                      );
+                    })}
                   </RatingStars>
+
                 </DivRating>
               </RatingSection>
             </ConnectionsRating>
@@ -340,7 +344,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData, 
         <RequestContainer>
           <MediaContainer>
             <SectionTitle>
-              <h3>Enlaces Externos</h3> 
+              <h3>Enlaces Externos</h3>
             </SectionTitle>
 
             <SocialButtons>

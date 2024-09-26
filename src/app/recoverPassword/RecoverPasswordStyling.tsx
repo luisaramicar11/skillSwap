@@ -13,7 +13,7 @@ export const FormWrapper = styled.div`
   padding: 2rem;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 100%;
   max-width: 400px;

@@ -215,16 +215,17 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
                 <DivRating>
                   <div>{userToRequest.qualification}</div>
                   <RatingStars>
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index}>
-                        {userToRequest.qualification >= index + 1
-                          ? "★"
-                          : userToRequest.qualification >= index + 0.5
-                          ? "☆"
-                          : "☆"}
-                      </Star>
-                    ))}
+                    {[...Array(5)].map((_, index) => {
+                      const rating = Math.floor(userToRequest?.qualification); // Redondea hacia abajo
+                      return (
+                        <Star key={index}>
+                          {index < rating ? "★" : "☆"}
+                        </Star>
+                      );
+                    })}
                   </RatingStars>
+
+
                 </DivRating>
               </RatingSection>
             </DivConnections>

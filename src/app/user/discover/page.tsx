@@ -6,6 +6,7 @@ import { LineTitles, DivContainer } from "./DiscoverStyling";
 import AllUsers from "../../../components/containers/AllUsersContainer/AllUsers";
 import { IUserCardProps } from "../../../models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import { FooterMain } from "@/src/components/footer/FooterMain";
 import { getUsersForImages } from '../../../lib/api/users';  // Importamos la función de users.ts
 
 const Discover = () => {
@@ -67,6 +68,8 @@ const Discover = () => {
   }
 
   return (
+    <main>
+  
     <DivContainer>
       {/* Componente de búsqueda */}
       <Search label="⌕" onSearch={handleSearch} />
@@ -83,7 +86,12 @@ const Discover = () => {
         {/* Se pasa el estado filteredUsers que puede ser todos o los filtrados */}
         <AllUsers users={filteredUsers} />
       </article>
+      <FooterMain>
+      </FooterMain>
     </DivContainer>
+        
+    </main>
+
   );
 };
 
