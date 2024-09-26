@@ -5,6 +5,7 @@ import SkillTag from "../../../../components/ui/skillTag/skillTag";
 import { useState, useEffect } from "react";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { IUser } from "@/src/models/user.model";
+import { getUserById } from '../../../../lib/api/users'; // Importa la función getUserById
 
 //Container for the whole page.tsx
 const PageContainer = styled.section`
@@ -124,24 +125,15 @@ const UserSkills: React.FC = () => {
   // Fetch para obtener datos de usuario
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!idNumber) {
+        setError('ID de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const response = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumber}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "*/*",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Error al obtener datos del usuario");
-        }
-
-        const data = await response.json();
-        setUserData(data.data.response);
-
+        const data = await getUserById(idNumber);  // Llama a la función getUserById
+        setUserData(data);
         setLoading(false);
       } catch (err: any) {
         setError(err.message);

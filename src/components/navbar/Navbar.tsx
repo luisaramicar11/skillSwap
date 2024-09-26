@@ -113,7 +113,7 @@ export const Navbar: React.FC = () => {
             </SidebarLinkContainer>
             <IconsContainer>
                 <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
-                <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
     );

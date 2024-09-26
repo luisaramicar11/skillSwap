@@ -21,7 +21,7 @@ export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
-        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgBanner: 'rgba(0, 0, 0, 0.0)',
         bgMainOpacity:'#0000007f',
         bgSidebar: '#ffffff',
         bgPink: '#FFF4F4',

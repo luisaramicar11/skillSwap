@@ -6,6 +6,8 @@ import { DivMatch } from "./MatchStyling";
 import ProfileCard from "@/src/components/cards/CardMatchProfile";
 import { IUserCardProps, IRequestCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import {getRequestById} from "../../../lib/api/requests";
+import {getUsersForImages} from "../../../lib/api/users"
 
 const Match = () => {
   const [userData, setUserData] =  useState<IUserCardProps[]>([]);
@@ -33,32 +35,11 @@ const Match = () => {
       const idNumber = getIdUser();
 
       try {
-        const response = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
-          {
-            method: "GET",
-            headers: {
-              "accept" : "*/*",
-            },
-          }
-        );
-
-        const dataUser = await response.json();
-        setUserData(dataUser.data.response);
-
-        const metricsResponse = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${idNumber}`,
-          {
-            method: "GET",
-            headers: {
-              "accept" : "*/*",
-            },
-          }
-        );
-
-        const metricsData = await metricsResponse.json();
-        setUserMetrics(metricsData.data.response);
-
+        const dataUser = await getUsersForImages();
+        setUserData(dataUser);
+        const metricsResponse = await getRequestById(idNumber);
+        console.log(metricsResponse)
+        setUserMetrics(metricsResponse.data.response );
         setLoading(false);
       } catch (error) {
         setError("Error al cargar los datos");

@@ -1,6 +1,7 @@
 "use client"
 import React from 'react';
 import styled from 'styled-components';
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 const Container = styled.div`
   padding: 20px;
@@ -39,18 +40,10 @@ const Strong = styled.strong`
 
 const Legal = () => {
   return (
+    <main>
+
     <Container>
       <Title>Información Legal - Skillswap</Title>
-
-      <Section>
-        <SectionTitle>Nombre del Proyecto</SectionTitle>
-        <Paragraph><Strong>Skillswap</Strong></Paragraph>
-      </Section>
-
-      <Section>
-        <SectionTitle>Correo de Contacto</SectionTitle>
-        <Paragraph><Strong>Email:</Strong> skillswap4@gmail.com</Paragraph>
-      </Section>
 
       <Section>
         <SectionTitle>Política de Privacidad</SectionTitle>
@@ -107,7 +100,9 @@ const Legal = () => {
           Skillswap está diseñada para todos en el entorno digital, desde creativos hasta desarrolladores, estudiantes y profesionales que buscan nuevas competencias. Al unirte a nuestra comunidad, disfrutas de un entorno fresco y estimulante que facilita la enseñanza y el aprendizaje colaborativo de una manera moderna y eficiente.
         </Paragraph>
       </Section>
+      <FooterMain></FooterMain>
     </Container>
+    </main>
   );
 };
 

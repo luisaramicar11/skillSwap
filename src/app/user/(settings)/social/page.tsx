@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import Modal from "../../../../components/modals/ModalReport"
+import Modal from "../../../../components/modals/ModalReport";
+import {updateRequestById} from "../../../../lib/api/requests";
+import {getRequestsMessagesById} from "../../../../lib/api/requests"
 
 // Estilos
 const PageContainer = styled.section`
@@ -189,23 +191,7 @@ const ReportButton = styled.button`
 // Función para enviar la actualización del estado de la solicitud
 const updateRequestState = async (idRequest: number, idStateRequest: number) => {
   try {
-    const response = await fetch(
-      `https://skillswapriwi.azurewebsites.net/api/RequestsPatch/PatchRequestState/${idRequest}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ idStateRequest }),
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Error al actualizar el estado de la solicitud');
-    }
-
-    const data = await response.json();
-    console.log('Estado de la solicitud actualizado:', data);
+    const data = await updateRequestById(idRequest, idStateRequest )
     return data;
   } catch (error) {
     console.error('Error al hacer el PATCH:', error);
@@ -213,45 +199,36 @@ const updateRequestState = async (idRequest: number, idStateRequest: number) => 
   }
 };
 
-// Componente principal de la página de solicitudes
 const UserRequests = () => {
   const [requests, setRequests] = useState<any[]>([]);
   const userId = localStorage.getItem("userId");
   const [loading, setLoading] = useState<boolean>(true);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    // Fetch para obtener las solicitudes desde la API
     const fetchRequests = async () => {
+      if (!userId) return;
+
+      const userIdNumber = Number(userId);
+      if (isNaN(userIdNumber)) {
+        console.error("userId no es un número válido.");
+        return;
+      }
+
       try {
-        const userIdNumber = Number(userId);
-        if (isNaN(userIdNumber)) {
-          console.error("userId no es un número válido.");
-          return;
-        }
-
-        const response = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestMessagesById/${userIdNumber}`
-        );
-        const data = await response.json();
-
-        if (data?.message === "Success") {
-          setRequests(data.data.response); // Guardar las solicitudes en el estado
-          setLoading(false);
-        }
+        const fetchedRequests = await getRequestsMessagesById(userIdNumber); // Usa la función del archivo request.ts
+        setRequests(fetchedRequests); // Guardar las solicitudes en el estado
+        setLoading(false);
       } catch (error) {
-        console.error("Error obteniendo solicitudes:", error);
+        console.error("Error al obtener solicitudes:", error);
         setLoading(false);
       }
     };
 
-    if (userId) {
-      fetchRequests();
-    }
+    fetchRequests();
   }, [userId]);
 
   const handleAccept = async (id: number) => {
@@ -272,7 +249,6 @@ const UserRequests = () => {
     }
   };
 
-  // Muestra loading, error o los datos del usuario
   if (loading) {
     return <OurAlertsText>Cargando...</OurAlertsText>;
   }

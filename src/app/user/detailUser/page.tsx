@@ -4,16 +4,19 @@ import ProfileCard from "@/src/components/cards/CardMatchProfile";
 import UserProfileNoDetail from "@/src/components/cards/CardDetailUserNoMatch";
 import UserProfileDetail from "@/src/components/cards/CardDetailUserMatch";
 import { Div, DivProfile } from "./DetailStyling";
-import { IUserProfileProps } from "@/src/models/userCards.model";
+import { IUserProfileProps, IRequestCardProps, IUserCardProps } from "@/src/models/userCards.model";
 import { IUser } from "@/src/models/user.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
+import {getUserById, getUsersForImages} from "../../../lib/api/users"
+import {getRequestById, checkUserConnection} from "../../../lib/api/requests";
 
 const DetailAboutUser = () => {
   const [userDetail, setUserDetail] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [userData, setUserData] = useState<IUserProfileProps[]>([]);
-  const [checkConnection, setConnectionInfo] = useState<boolean | null>(null);
+  const [userData, setUserData] = useState<IUserCardProps[]>([]);
+  const [checkConnection, setConnectionInfo] = useState<boolean | null>(null); // Ahora será booleano
+  const [userMetrics, setUserMetrics] = useState<IRequestCardProps | null>(null);
 
   // Función para obtener el ID del usuario del localStorage
   const getCurrentIdUser = (): number | null => {
@@ -44,45 +47,20 @@ const DetailAboutUser = () => {
 
       try {
         // Petición para obtener detalles del usuario
-        const responseDetail = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUserById/${idNumberCurrentUser}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "*/*",
-            },
-          }
-        );
+        const detailUser = await getUserById(idNumberCurrentUser)
+        setUserDetail(detailUser);
 
-        const detailUser = await responseDetail.json();
-        setUserDetail(detailUser.data.response);
+        const metricsResponse = await getRequestById(idNumberCurrentUser);
+        console.log(metricsResponse.data.response)
+        setUserMetrics(metricsResponse.data.response );
 
         // Petición para verificar la conexión
-        const responseCheckConnection = await fetch(
-          `https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestViewDetails?currectId=${idNumberCurrentUser}&requestId=${idNumberClickedUser}`,
-          {
-            method: "GET",
-            headers: {
-              accept: "*/*",
-            },
-          }
-        );
-
-        const checkConnectionData = await responseCheckConnection.json();
-        setConnectionInfo(checkConnectionData.data.response); // Ahora devuelve true o false
+        const isConnected = await checkUserConnection(idNumberCurrentUser, idNumberClickedUser);
+        setConnectionInfo(isConnected);
 
         // Petición para obtener métricas de otros usuarios
-        const userDataResponse = await fetch(
-          "https://skillswapriwi.azurewebsites.net/api/UsersGet/GetUsersForImages",
-          {
-            method: "GET",
-            headers: {
-              accept: "*/*",
-            },
-          }
-        );
-        const dataUser = await userDataResponse.json();
-        setUserData(dataUser.data.response);
+        const userDataResponse = await getUsersForImages();
+        setUserData(userDataResponse);
 
         setLoading(false);
       } catch (error) {
@@ -117,15 +95,15 @@ const DetailAboutUser = () => {
         <ProfileCard
           fullName={userData[userCurrentIndex].fullName}
           userMetrics={userData[userCurrentIndex]}
-          ultimaAceptada={userData[userCurrentIndex].ultimaAceptada}
-          ultimaPendiente={userData[userCurrentIndex].ultimaPendiente}
-          ultimaCancelada={userData[userCurrentIndex].ultimaCancelada}
-          ultimoEnviado={userData[userCurrentIndex].ultimoEnviado}
-          conteoAceptadas={userData[userCurrentIndex].conteoAceptadas}
-          conteoConexiones={userData[userCurrentIndex].conteoConexiones}
-          conteoPendientes={userData[userCurrentIndex].conteoPendientes}
-          conteoCanceladas={userData[userCurrentIndex].conteoCanceladas}
-          conteoEnviadas={userData[userCurrentIndex].conteoEnviadas}
+          ultimaAceptada={userMetrics!.solicitudes?.ultimaAceptada}
+          ultimaPendiente={userMetrics!.solicitudes?.ultimaPendiente}
+          ultimaCancelada={userMetrics!.solicitudes?.ultimaCancelada}
+          ultimoEnviado={userMetrics!.solicitudes?.ultimoEnviado}
+          conteoConexiones={userMetrics!.solicitudes?.conteoConexiones}
+          conteoPendientes={userMetrics!.solicitudes?.conteoPendientes}
+          conteoCanceladas={userMetrics!.solicitudes?.conteoCanceladas}
+          conteoEnviadas={userMetrics!.solicitudes?.conteoEnviadas}
+          conteoAceptadas={userMetrics!.solicitudes?.conteoAceptadas}
         />
         </DivProfile>
         <UserProfileDetail userData={userData[userClickedIndex]} userDetail={userDetail!} />
@@ -138,15 +116,15 @@ const DetailAboutUser = () => {
         <ProfileCard
           fullName={userData[userCurrentIndex].fullName}
           userMetrics={userData[userCurrentIndex]}
-          ultimaAceptada={userData[userCurrentIndex].ultimaAceptada}
-          ultimaPendiente={userData[userCurrentIndex].ultimaPendiente}
-          ultimaCancelada={userData[userCurrentIndex].ultimaCancelada}
-          ultimoEnviado={userData[userCurrentIndex].ultimoEnviado}
-          conteoAceptadas={userData[userCurrentIndex].conteoAceptadas}
-          conteoConexiones={userData[userCurrentIndex].conteoConexiones}
-          conteoPendientes={userData[userCurrentIndex].conteoPendientes}
-          conteoCanceladas={userData[userCurrentIndex].conteoCanceladas}
-          conteoEnviadas={userData[userCurrentIndex].conteoEnviadas}
+          ultimaAceptada={userMetrics!.solicitudes?.ultimaAceptada}
+          ultimaPendiente={userMetrics!.solicitudes?.ultimaPendiente}
+          ultimaCancelada={userMetrics!.solicitudes?.ultimaCancelada}
+          ultimoEnviado={userMetrics!.solicitudes?.ultimoEnviado}
+          conteoConexiones={userMetrics!.solicitudes?.conteoConexiones}
+          conteoPendientes={userMetrics!.solicitudes?.conteoPendientes}
+          conteoCanceladas={userMetrics!.solicitudes?.conteoCanceladas}
+          conteoEnviadas={userMetrics!.solicitudes?.conteoEnviadas}
+          conteoAceptadas={userMetrics!.solicitudes?.conteoAceptadas}
         />
         </DivProfile>
         <UserProfileNoDetail userData={userData[userClickedIndex]} />
