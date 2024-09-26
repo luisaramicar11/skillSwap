@@ -98,7 +98,6 @@ const IconsContainer = styled.div`
 export const Navbar: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const toggleNavbar = () => setIsOpen(!isOpen);  // Ejemplo de cómo usar setIsOpen
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
