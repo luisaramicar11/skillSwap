@@ -4,12 +4,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from "../../../../components/modals/ModalSafety";
 import {getRequestById} from "../../../../lib/api/requests"
-
-const MetricsContainer = styled.div`
-  margin: 54px 0;
-`;
-
-
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+// Registramos los elementos de ChartJS para Bar Chart
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const PageContainer = styled.section`
   width: 100%;
@@ -37,9 +35,9 @@ const PageContainer = styled.section`
       font-size: 40px;
       border-bottom: 2px solid  ${({ theme }) => theme.colors.textYellow};
       background: ${({ theme }) => theme.colors.gradientSecondary};
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
   & h3 {
@@ -65,16 +63,6 @@ const PageContainer = styled.section`
   }
 `;
 
-//Container for page.tsx content
-const PageContentContainer = styled.article`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-`;
-
-//Containers for banner
 const Banner = styled.article`
   top: 0;
   padding: 20px;
@@ -90,9 +78,16 @@ const BannerBody = styled.div`
     width: 1000px !important;
     display: flex;
     justify-content: space-between;
-`
+`;
 
-//Container for INFO content
+const PageContentContainer = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
+
 const InfoPageContainer = styled.div`
   padding-top: 200px;
   width: 100%;
@@ -117,7 +112,6 @@ const PageBody = styled.div`
   padding: 2rem;
 `;
 
-//Containers for Widgets and Aside
 const WidgetBody = styled.div`
   padding: 20px 30px;
   width: 100%;
@@ -126,27 +120,11 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
-const DivDeactivateAccount = styled.div`
-width: 100%;
-display: flex;
-justify-content: end;
-align-items: end;
-padding: 2rem; 
-gap: 2rem;
-
-& div{
-  max-width: 400px;
-
-  & p {
-    font-size: 15px;
-  }
-}
-`;
-
 const SecurityButton = styled.button`
   width: 100%;
   padding: 15px;
   font-size: 14px;
+  margin-top: 50px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
@@ -154,9 +132,9 @@ const SecurityButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.textSecondary};
   color: ${({ theme }) => theme.colors.textSecondary};
 
-  & :hover {
-    transform: scale(1.05)
-    }
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const Security = styled.div`
@@ -201,11 +179,11 @@ const Metrics: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    const userIdString = localStorage.getItem('userId');
-    const userId = userIdString ? Number(userIdString) : null; // Convertir a número
+    const userIdString = localStorage.getItem("userId");
+    const userId = userIdString ? Number(userIdString) : null;
 
     if (userId === null) {
-      setError('ID de usuario no encontrado');
+      setError("ID de usuario no encontrado");
       setLoading(false);
       return;
     }
@@ -226,6 +204,35 @@ const Metrics: React.FC = () => {
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  // Datos para el gráfico de barras (Bar Chart)
+  const barData = {
+    labels: ["Aceptadas", "Pendientes", "Canceladas", "Enviadas"],
+    datasets: [
+      {
+        label: "Conteo de Solicitudes",
+        data: [
+          requestData?.data.response.solicitudes.conteoAceptadas,
+          requestData?.data.response.solicitudes.conteoPendientes,
+          requestData?.data.response.solicitudes.conteoCanceladas,
+          requestData?.data.response.solicitudes.conteoEnviadas,
+        ],
+        backgroundColor: [
+          "rgba(15, 200, 49, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 99, 132, 0.5)",
+        ],
+        borderColor: [
+          "rgba(15, 200, 49, 0.5)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 99, 132, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <PageContainer>
