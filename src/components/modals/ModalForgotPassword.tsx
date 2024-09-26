@@ -15,9 +15,10 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 1000; 
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 `;
+
 const ModalContent = styled.div`
   position: fixed;
   top: 50%;
@@ -26,9 +27,14 @@ const ModalContent = styled.div`
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   z-index: 1001;
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+    width: 95%;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -81,11 +87,12 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
       });
 
       if (!response.ok) {
-        throw new Error('Error del servidor');
+        const errorText = await response.text();
+        throw new Error(`Error del servidor: ${errorText}`);
       }
 
-      const data = await response.json();
-      console.log('Correo enviado:', data);
+      const jsonResponse = await response.json();
+      console.log('Correo enviado:', jsonResponse);
       alert('Correo enviado correctamente');
     } catch (error: unknown) {
       let errorMessage = 'Ocurrió un error desconocido';
@@ -97,7 +104,6 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
       alert(`Error al enviar el correo: ${errorMessage}`);
     }
   };
-
 
   return (
     <ModalOverlay isOpen={isOpen}>
