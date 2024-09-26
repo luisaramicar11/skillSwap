@@ -19,11 +19,19 @@ const TableStyle = styled.table`
   min-width: 1000px; /* Opcional: define un ancho mínimo para forzar el scroll horizontal si hay muchas columnas */
 `;
 
-const Title = styled.h3`
+const Title = styled.h2`
+text-align: center;
+  margin-top: 0 !important;
   text-align: center;
-  color: #333;
-  font-weight: bold;
   margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 40px;
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  color: transparent;
+  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
 `;
 
 const Td = styled.td`

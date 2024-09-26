@@ -16,7 +16,7 @@ const FormWrapper = styled.div`
   background: ${({ theme }) => theme.colors.gradientPrimary};
   border-radius: 15px;
   padding: 40px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   width: 300px;
   text-align: center;
 `;

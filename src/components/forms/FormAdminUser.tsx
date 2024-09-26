@@ -4,14 +4,13 @@ import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
 const Form = styled.form`
-  padding: 15px;
+  padding: 30px;
   border-radius: 20px;
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
-`;
+  gap: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);`;
 
 const Input = styled.input`
   border-radius: 10px;
@@ -47,13 +46,13 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const Title = styled.h2`
+const Title = styled.p`
   margin-top: 15px;
   text-align: center;
   margin-bottom: 20px;
   color: black;
-  font-weight: bold;
-  font-size: 15pt;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
 interface EditUserFormProps {

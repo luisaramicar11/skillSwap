@@ -24,7 +24,7 @@ const ModalContainer = styled.div`
   width: 50%;
   height: 50%;
   padding: 1rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   display: flex;
   flex-direction: column;
