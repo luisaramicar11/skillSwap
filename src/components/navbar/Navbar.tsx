@@ -6,7 +6,7 @@ import InfoIcon from "@/public/svg/InfoIcon";
 import OfflineProfileSidebar from "../sidebars/SidebarFloatingOffline";
 
 // Styled components
-const NavbarContainer = styled.div<{ isOpen: boolean }>`
+const NavbarContainer = styled.div`
     z-index: 10;
     position: fixed;
     width: 100%;
@@ -96,15 +96,13 @@ const IconsContainer = styled.div`
 
 // Navbar component
 export const Navbar: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const toggleNavbar = () => setIsOpen(!isOpen);  // Ejemplo de cómo usar setIsOpen
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
     return (
-        <NavbarContainer isOpen={isOpen}>
+        <NavbarContainer>
             <OfflineProfileSidebar isOpen={isModalOpen} onClose={closeModal} />
             <SidebarLinkContainer>
                 <SidebarLink onClick={openModal}>+ <small>SkillSwap</small></SidebarLink>
@@ -113,8 +111,6 @@ export const Navbar: React.FC = () => {
                 <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
                 <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
-            {/* Ejemplo de botón para probar el toggle de isOpen */}
-            <button onClick={toggleNavbar}>Toggle Navbar</button>
         </NavbarContainer>
     );
 };
