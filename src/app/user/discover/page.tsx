@@ -50,8 +50,8 @@ const Discover = () => {
         // Por defecto, todos los usuarios son los "filtrados" hasta que se realice una búsqueda
         setFilteredUsers(responseData);
         setLoading(false);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
+        setError(error as string);
         setLoading(false);
       }
     };

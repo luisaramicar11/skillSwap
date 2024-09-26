@@ -56,7 +56,7 @@ const Tr = styled.tr`
 const TableReports: React.FC<TableDataReports> = ({ data, setDataToEdit, deleteData }) => {
   return (
     <TableContainer>
-      <Title>Tabla de reportes</Title>
+      <Title>Tabla de Reportes</Title>
       <TableStyle>
 
         <TableHeader />

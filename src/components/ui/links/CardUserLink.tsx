@@ -18,7 +18,7 @@ const DivLinkComponent = styled(Link)`
     }
 `;
 
-const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, clickedUserId, id, children }) => {
+const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) => {
     return (
         <DivLinkComponent
             href={href}

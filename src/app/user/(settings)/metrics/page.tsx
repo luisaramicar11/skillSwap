@@ -1,5 +1,4 @@
 "use client"
-import WidgetContainer from '@/src/components/containers/WidgetContainer/WidgetContainer';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from "../../../../components/modals/ModalSafety";
@@ -137,11 +136,6 @@ const SecurityButton = styled.button`
   }
 `;
 
-const Security = styled.div`
-  width: 50%;
-  height: 100%;
-`;
-
 const DivSec = styled.div`
 margin-top: 1.5rem;
 `
@@ -196,8 +190,8 @@ const Metrics: React.FC = () => {
       try {
         const data = await getRequestById(Number(userId));
         setRequestData(data);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err) {
+        setError(err as string);
       } finally {
         setLoading(false);
       }

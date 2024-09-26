@@ -58,6 +58,7 @@ const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceiv
       onClose();
 
     } catch (err) {
+      console.log(err)
       toast.error("Error al enviar la solicitud");
       setError("Error al enviar la solicitud");
     } finally {

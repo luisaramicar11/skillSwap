@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+
 import styled from "styled-components";
 
 interface ModalPasswordRecoveryProps {
@@ -72,7 +72,7 @@ const SubmitButton = styled.button`
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
-  const router = useRouter();
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

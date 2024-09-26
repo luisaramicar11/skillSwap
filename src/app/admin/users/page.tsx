@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, deleteUser, updateUser } from "../../redux/slices/usersSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { IUser, IUserUpdateAdmin } from "../../../models/user.model"; 
+import {  IUserUpdateAdmin } from "../../../models/user.model"; 
 import FormUsers from "../../../components/forms/FormAdminUser"; 
 import Table from "../../../components/tables/TableUsers";
 import styled from "styled-components";
@@ -36,21 +36,12 @@ const Users: React.FC = () => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  // Función para obtener el token
-  const getToken = () => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      toast.error("Token no disponible. Inicia sesión.");
-      throw new Error("Token no disponible");
-    }
-    return token;
-  };
+
 
   // Actualizar usuario
   const handleUpdateUser = async (updatedToUser: IUserUpdateAdmin) => {
     try {
       console.log("Datos que se están enviando:", updatedToUser); // Añade esto para depurar
-      const token = getToken();
       const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersPut/PutUserByUserAdmin?id=${updatedToUser.id}`, {
         method: "PUT",
         headers: {
@@ -79,7 +70,6 @@ const Users: React.FC = () => {
   // Eliminar usuario
   const handleDeleteUser = async (userId: number) => {
     try {
-      const token = getToken(); // Obtener token
       const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/UsersDelete/DeleteUserById?id=${userId}`, {
         method: "DELETE",
         headers: {

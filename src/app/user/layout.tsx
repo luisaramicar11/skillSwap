@@ -10,6 +10,8 @@ const LayoutContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
+    padding: 0; 
+    margin: 0;
 `;
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {

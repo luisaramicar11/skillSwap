@@ -1,6 +1,3 @@
-import { IGlobalTheme } from "../../models/globalTheme.model";
-import { GlobalDarkTheme, GlobalTheme } from '../../app/GlobalStyling';
-
 // Define the labels that should set the dark theme
 export const darkThemeLabels = ['REGISTRO', 'ADMIN/POSTS']; //Aqui deben ir las vistas del Admin, 
                                                             //igual como esten escritas en la NavLink

@@ -5,7 +5,6 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 // Texto de cambio
 
 const TextWrapper = styled.div`
@@ -194,15 +193,6 @@ const SwitchButton = styled.button`
   }
 `;
 
-const P = styled.p`
-  color: ${({ theme }) => theme.colors.textTertiary};
-  font-weight: bold;
-  font-size: 1rem;
-
-  @media (max-width: 1070px) {
-    font-size: 0.9rem; /* Ajuste del tamaño de la fuente en pantallas pequeñas */
-  }
-`;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);

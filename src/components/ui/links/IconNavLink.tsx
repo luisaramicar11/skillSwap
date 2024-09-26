@@ -2,18 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { ILinkProps } from '@/src/models/link.model';
-import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
+import { handlePageChange } from '../../../lib/utils/handlePageTheme';
 
 const IconNavLinkComponent = styled(Link)`
   text-decoration: none;
   padding: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: ${({ theme }) => theme.colors.textWhite};
   display: flex;
   transition: 0.4s;
   align-items: center; 
   justify-content: center;
-  cursor: pointer;
 
   & svg {
     display: flex;
@@ -26,24 +25,23 @@ const IconNavLinkComponent = styled(Link)`
 
   &:hover {
     transition: 0.4s;
-    transform: scale(0.95);
+    transform: scale(0.9);
     font-weight: 700; 
   }
 `;
 
-const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ href, label, onClick, icon, target }) => {
-  return (
-    <IconNavLinkComponent
-      href={href}
-      target={target}
-      onClick={() => {
-        handlePageChange(label ?? 'default-label');
-        if (onClick) onClick(label ?? 'default-label');
-      }}
-    >
-      {icon}
-    </IconNavLinkComponent>
-  );
+const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ href, label, onClick, icon }) => {
+    return (
+        <IconNavLinkComponent
+            href={href}
+            onClick={() => {
+                handlePageChange(label ?? 'default-label');
+                if (onClick) onClick(label ?? 'default-label');
+            }}
+        >
+            {icon}
+        </IconNavLinkComponent>
+    );
 };
 
 export default StyledIconNavLink;

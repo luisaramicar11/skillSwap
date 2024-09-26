@@ -17,7 +17,7 @@ const baskervville = Baskervville({
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 
-// Setting our Global Theme
+// Configuramos nuestro Global Theme
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
@@ -95,11 +95,9 @@ export const GlobalDarkTheme: IGlobalTheme = {
     }
 };
 
-
-// Global styling for essential HTML elements
+// Global styling para elementos HTML importantes
 export const GlobalStyle = createGlobalStyle`
 
-/* styles/globals.css */
 html {
 
     background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -135,9 +133,9 @@ p {
     line-height: 1.5;
     font-weight: 300;
     margin: 0;
-    hyphens: auto; /* Activa la inserción automática de guiones */
-    word-wrap: break-word; /* Asegura que las palabras largas se dividan */
-    overflow-wrap: break-word; /* Para compatibilidad adicional */
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 } */
 
 .gradient-bg-primary {

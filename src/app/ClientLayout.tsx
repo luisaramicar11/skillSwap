@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyling";
 import { Navbar } from "../components/navbar/Navbar";
 import { useTheme } from "../hooks/useTheme";
@@ -23,7 +23,7 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
             clearStorage();
         }
     }, []); // Solo se ejecuta una vez al montar el componente
-
+    console.log(token)
     // Verificamos si estamos en la ruta /auth
     const isAuthPage = pathname === '/auth';
 

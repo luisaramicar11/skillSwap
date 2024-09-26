@@ -14,9 +14,7 @@ import InfoIcon from "@/public/svg/InfoIcon";
 
 import ListIcon from "@/public/svg/ListIcon";
 
-import SettingsIcon from "@/public/svg/SettingsIcon";
 
-import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
 
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 

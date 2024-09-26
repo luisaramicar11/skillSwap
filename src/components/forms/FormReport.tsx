@@ -46,7 +46,7 @@ export const SubmitButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.bgPink};
+    background-color: ${({ theme }) => theme.colors.bgGreen};
   }
 `;
 
@@ -97,6 +97,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
     }
 
     const reportData = {
+      id: 0,
       titleReport: title,
       description: description,
       dateReport: new Date().toISOString().split('T')[0],
@@ -107,7 +108,8 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
     };
 
     try {
-      const response = await createReport(reportData); // Llama a la función para crear el reporte
+      const response = await createReport(reportData);
+      console.log(response) // Llama a la función para crear el reporte
       toast.success('Reporte enviado con éxito', { autoClose: 3000 });
       closeModal();
     } catch (error) {

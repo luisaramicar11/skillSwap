@@ -280,6 +280,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData, 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  console.log(openModal())
   const abilitiesArray = typeof userData.abilities === 'string'
     ? userData.abilities.split(',').map((ability: string) => ability.trim())
     : [];

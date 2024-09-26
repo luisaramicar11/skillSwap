@@ -57,16 +57,6 @@ const SidebarLink = styled.p`
     }
 `;
 
-const SidebarLinkContainer = styled.li`
-    width: 100px;
-    cursor: pointer;
-    list-style: none;
-
-    @media (max-width: 790px) {
-        display: none;
-    }
-`;
-
 const IconsContainer = styled.div`
     display: flex;
     align-items: center;

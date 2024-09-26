@@ -4,12 +4,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from "../../../../components/modals/ModalSafety"
 
-const MetricsContainer = styled.div`
-  margin: 54px 0;
-`;
-
-
-
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
@@ -125,23 +119,6 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
-const DivDeactivateAccount = styled.div`
-width: 100%;
-display: flex;
-justify-content: end;
-align-items: end;
-padding: 2rem; 
-gap: 2rem;
-
-& div{
-  max-width: 400px;
-
-  & p {
-    font-size: 15px;
-  }
-}
-`;
-
 const SecurityButton = styled.button`
   width: 100%;
   padding: 15px;
@@ -163,8 +140,26 @@ const Security = styled.div`
   height: 100%;
 `;
 
+interface IUser {
+  idUsuario: number;
+  nombreUsuario: string;
+  solicitudes: Request;
+}
+
+interface Request {
+  ultimaAceptada: string;
+  ultimaPendiente: string;
+  ultimaCancelada: string;
+  ultimoEnviado: string;
+  conteoConexiones: number;
+  conteoAceptadas: number;
+  conteoPendientes: number;
+  conteoCanceladas: number;
+  conteoEnviadas: number;
+}
+
 const Metrics: React.FC = () => {
-  const [requestData, setRequestData] = useState<any>(null);
+  const [requestData, setRequestData] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -196,8 +191,8 @@ const Metrics: React.FC = () => {
 
         const data = await response.json();
         setRequestData(data.data.response);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err) {
+        setError(err as string);
       } finally {
         setLoading(false);
       }
@@ -220,28 +215,26 @@ const Metrics: React.FC = () => {
         <InfoPageContainer>
           <PageContent>
             <PageBody>
-            <h2>{requestData.nombreUsuario}</h2>
+            <h2>{requestData?.nombreUsuario}</h2>
             <WidgetContainer>
               <WidgetBody>
-          
-                 
-                  <h4>Ultima Aceptada</h4>{requestData.solicitudes.ultimaAceptada} <br />
+                  <h4>Ultima Aceptada</h4>{requestData?.solicitudes.ultimaAceptada} <br />
                   <br />
-                  <h4>Ultima Pendeinete</h4>{requestData.solicitudes.ultimaPendiente} <br />
+                  <h4>Ultima Pendeinete</h4>{requestData?.solicitudes.ultimaPendiente} <br />
                   <br />
-                  <h4>Última Cancelada: </h4>{requestData.solicitudes.ultimaCancelada || 'N/A'} <br />
+                  <h4>Última Cancelada: </h4>{requestData?.solicitudes.ultimaCancelada || 'N/A'} <br />
                   <br />
-                  <h4>Último Enviado: </h4>{requestData.solicitudes.ultimoEnviado || 'N/A'} <br />
+                  <h4>Último Enviado: </h4>{requestData?.solicitudes.ultimoEnviado || 'N/A'} <br />
                   <br />
-                  <h4>Conteo de Conexiones: </h4> {requestData.solicitudes.conteoConexiones} <br />
+                  <h4>Conteo de Conexiones: </h4> {requestData?.solicitudes.conteoConexiones} <br />
                   <br />
-                  <h4>Conteo Aceptadas:</h4>{requestData.solicitudes.conteoAceptadas} <br />
+                  <h4>Conteo Aceptadas:</h4>{requestData?.solicitudes.conteoAceptadas} <br />
                   <br />
-                  <h4>Conteo Pendientes: </h4> {requestData.solicitudes.conteoPendientes} <br />
+                  <h4>Conteo Pendientes: </h4> {requestData?.solicitudes.conteoPendientes} <br />
                   <br />
-                  <h4>Conteo Canceladas: </h4> {requestData.solicitudes.conteoCanceladas} <br />
+                  <h4>Conteo Canceladas: </h4> {requestData?.solicitudes.conteoCanceladas} <br />
                   <br />
-                  <h4>Conteo Enviadas:</h4> {requestData.solicitudes.conteoEnviadas} <br />
+                  <h4>Conteo Enviadas:</h4> {requestData?.solicitudes.conteoEnviadas} <br />
                   
       
               </WidgetBody>

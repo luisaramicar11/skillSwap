@@ -10,8 +10,8 @@ export const getRequestById = async (userId: number) => {
         });
 
         return response; // Asegúrate de que esta ruta es correcta
-    } catch (err: any) {
-        throw new Error(err.message || 'Error desconocido');
+    } catch (err) {
+        console.log(err);
     }
 };
 
@@ -52,7 +52,7 @@ export const getRequestsMessagesById = async (userId: number) => {
       }
     } catch (error) {
       console.error("Error obteniendo solicitudes:", error);
-      throw error; // Lanza el error para que pueda ser manejado en el componente
+         throw error;
     }
   };
   
@@ -68,9 +68,9 @@ export const getRequestsMessagesById = async (userId: number) => {
         }
       );
       return response.data.response; // Retorna el estado de la conexión
-    } catch (err: any) {
-      console.error("Error al verificar conexión:", err.message || 'Error desconocido');
-      throw new Error(err.message || 'Error desconocido');
+    } catch (err) {
+      console.error("Error al verificar conexión:");
+         throw err;
     }
   };
 
@@ -95,7 +95,7 @@ export const getRequestsMessagesById = async (userId: number) => {
       });
   
       return response;
-    } catch (err: any) {
-      throw new Error(err.message || 'Error al enviar la solicitud');
+    } catch (err) {
+         throw err;
     }
   };

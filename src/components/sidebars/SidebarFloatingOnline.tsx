@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
-import CardProfileLink from "../cards/CardProfileLink";
+import CardProfileLink from "../../components/cards/CardProfileLink";
 import LogoutButton from "../ui/buttons/ButtonLogout";
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IUserCardProps } from "@/src/models/userCards.model";
@@ -179,13 +179,31 @@ interface ProfileSidebarProps {
   onClose: () => void;
 }
 
+interface IUserSolicitudes {
+    conteoCanceladas: number;
+    ultimaCancelada: string | null;
+    conteoAceptadas: number;
+    ultimaAceptada: string | null;
+    conteoEnviadas: number;
+    ultimoEnviado: string | null;
+    conteoPendientes: number;
+    ultimaPendiente: string | null;
+  }
+  
+  interface IUserData {
+    id: number;
+    nombreUsuario: string;
+    solicitudes: IUserSolicitudes;
+  }
+  
+ 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const [userData, setUserData] = useState<any>(null);
-  const [userMetrics, setUserMetrics] = useState<IUserCardProps | null>(null);
+  const [userData, setUserData] = useState<IUserData | null>(null);
+   const [userMetrics, setUserMetrics] = useState<IUserCardProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -206,7 +224,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
               if (userData && metricsData) {
                   setUserData(userData.data.response);
-                  const matchedUser = metricsData.find((user: any) => user.id === idNumber);
+                  const matchedUser = metricsData.find((user) => user.id === idNumber);
                   setUserMetrics(matchedUser ? matchedUser : null);
                   console.log(userData)
               } else {
@@ -214,6 +232,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
               }
           } catch (err) {
               setError('Hubo un problema con la solicitud');
+              console.log(err)
           } finally {
               setLoading(false);
           }
@@ -221,6 +240,8 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
 
       fetchUserData();
   }, []);
+
+  console.log(error)
 
   useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {

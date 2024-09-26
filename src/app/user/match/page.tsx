@@ -42,6 +42,7 @@ const Match = () => {
         setUserMetrics(metricsResponse.data.response );
         setLoading(false);
       } catch (error) {
+        console.log(error)
         setError("Error al cargar los datos");
         setLoading(false);
       }

@@ -191,7 +191,7 @@ const ReportButton = styled.button`
 // Función para enviar la actualización del estado de la solicitud
 const updateRequestState = async (idRequest: number, idStateRequest: number) => {
   try {
-    const data = await updateRequestById(idRequest, idStateRequest )
+    const data = await updateRequestById(idRequest, idStateRequest);
     return data;
   } catch (error) {
     console.error('Error al hacer el PATCH:', error);
@@ -199,9 +199,28 @@ const updateRequestState = async (idRequest: number, idStateRequest: number) => 
   }
 };
 
+interface ResponseItem {
+  id: number;
+  description: string;
+  idRequestingUser: number;
+  idReceivingUser: number;
+  userNameReceiving: string;
+  userNameRequesting: string;
+}
+
+interface ApiResponse {
+  message: string;
+  details: {
+    text: string;
+  };
+  data: {
+    response: ResponseItem[];
+  };
+}
+
 const UserRequests = () => {
-  const [requests, setRequests] = useState<any[]>([]);
-  const userId = localStorage.getItem("userId");
+  const [requests, setRequests] = useState<ResponseItem[]>([]);
+  const [userId, setUserId] = useState<number | null>(null); // Guardar el userId de manera segura
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -209,18 +228,27 @@ const UserRequests = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
+    // Asegurarnos de que estamos en el cliente antes de acceder a localStorage
+    if (typeof window !== "undefined") {
+      const storedUserId = localStorage.getItem("userId");
+      if (storedUserId) {
+        const userIdNumber = Number(storedUserId);
+        if (!isNaN(userIdNumber)) {
+          setUserId(userIdNumber);
+        } else {
+          console.error("userId no es un número válido.");
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchRequests = async () => {
       if (!userId) return;
 
-      const userIdNumber = Number(userId);
-      if (isNaN(userIdNumber)) {
-        console.error("userId no es un número válido.");
-        return;
-      }
-
       try {
-        const fetchedRequests = await getRequestsMessagesById(userIdNumber); // Usa la función del archivo request.ts
-        setRequests(fetchedRequests); // Guardar las solicitudes en el estado
+        const response: ApiResponse = await getRequestsMessagesById(userId);
+        setRequests(response.data.response);
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener solicitudes:", error);

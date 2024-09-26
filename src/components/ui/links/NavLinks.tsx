@@ -2,16 +2,15 @@ import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
+import { handlePageChange } from '../../../lib/utils/handlePageTheme';
 
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
   padding: 15px;
   margin: 0;
   color: ${({ theme }) => theme.colors.textWhite};
-  font-weight: 500;
+  font-weight: 400;
   transition: 0.4s;
-  cursor: pointer;
 
   &:hover {
     font-weight: 700;
@@ -19,11 +18,10 @@ const NavLinkComponent = styled(Link)`
   }
 `;
 
-const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children, target }) => {
+const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children }) => {
   return (
     <NavLinkComponent
       href={href}
-      target={target}
       onClick={() => {
         if (label) {
           handlePageChange(label);
@@ -31,9 +29,10 @@ const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children, t
         }
       }}
     >
-      {children || label}
+      {children || label} {/* Si `children` existe, lo renderiza, de lo contrario usa `label` */}
     </NavLinkComponent>
   );
 };
 
 export default StyledNavLink;
+

@@ -6,13 +6,6 @@ const PageWrapper = styled.div`
    margin-top: 150px;
 `;
 
-const ContentWrapper = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 const FooterContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.bgPrimary};
     color: ${({ theme }) => theme.colors.bgSecondary};
@@ -23,17 +16,6 @@ const FooterContainer = styled.div`
 
     @media (max-width: 768px) {
         padding: 8px 0;
-    }
-`;
-
-const DividerLine = styled.div`
-    margin: 10 50px;
-    border-top: 1px solid ${({ theme }) => theme.colors.bgSecondary};
-    margin-bottom: 10px;
-
-
-    @media (max-width: 768px) {
-        margin-bottom: 8px;
     }
 `;
 

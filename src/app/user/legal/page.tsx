@@ -34,10 +34,6 @@ const Paragraph = styled.p`
   line-height: 1.6;
 `;
 
-const Strong = styled.strong`
-  color: #000;
-`;
-
 const Legal = () => {
   return (
     <main>

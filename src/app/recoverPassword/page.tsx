@@ -65,8 +65,8 @@ function RecoverPassword() {
 
       alert("Contraseña actualizada con éxito.");
       router.push("/auth"); // Redirige al login
-    } catch (error: any) {
-      alert(error.message || "Ocurrió un error.");
+    } catch (error) {
+      alert(error || "Ocurrió un error.");
     }
   };
 

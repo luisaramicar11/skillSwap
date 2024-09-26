@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface ILinkProps {
     id?: string;
@@ -10,4 +10,3 @@ export interface ILinkProps {
     onClick?: ((label: string) => string) | (() => void);
     children?: ReactNode;
 }
-

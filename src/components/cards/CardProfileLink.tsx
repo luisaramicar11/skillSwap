@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import LinkProfile from "../ui/links/NavLinks";
 import {
-  IUserCardProps,
   IProfileCardProps,
 } from "@/src/models/userCards.model";
 

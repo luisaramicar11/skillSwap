@@ -1,11 +1,10 @@
 'use client';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch, RootState } from '../../../app/redux/store';
-import InputAuth from "../../../components/ui/inputs/InputAuth"
+import InputAuth from "../../ui/inputs/InputAuth"
 import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
@@ -19,7 +18,6 @@ import { Title, BackLink, Arrow, FormWrapper, Container, DivButtonLogin } from '
 
 export default function RegisterPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter();
   const { loading, error } = useSelector((state: RootState) => state.auth);
 
   const [form, setForm] = useState({
@@ -107,9 +105,9 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
       toast.success('Registro exitoso!');
       window.location.reload(); 
       
-    } catch (errorSubmit: any) {
-      if (errorSubmit?.message) {
-        toast.error(`Registro fallido: ${errorSubmit.message}`);
+    } catch (errorSubmit) {
+      if (errorSubmit) {
+        toast.error(`Registro fallido: ${errorSubmit}`);
       } else {
         toast.error('Registro fallido. Inténtalo de nuevo.');
       }

@@ -1,5 +1,5 @@
 import React from "react";
-import { IUser, IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
+import { IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
 import styled from "styled-components";
 
 const Td = styled.td`

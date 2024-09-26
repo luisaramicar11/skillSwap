@@ -1,6 +1,5 @@
 "use client";
 import styled from "styled-components";
-import WidgetContainer from '../../../../components/containers/WidgetContainer/WidgetContainer';
 import SkillTag from "../../../../components/ui/skillTag/skillTag";
 import { useState, useEffect } from "react";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
@@ -112,15 +111,21 @@ const PageBody = styled.div`
   gap: 20px;
 `;
 
-// Componente principal de la página de inicio
 const UserSkills: React.FC = () => {
   // Estado para almacenar los datos del usuario
   const [userData, setUserData] = useState<IUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [idNumber, setIdNumber] = useState<number | null>(null);
 
-  const idString = localStorage.getItem('userId');
-  const idNumber = idString ? parseInt(idString, 10) : null;
+  // Verificar el id en localStorage solo en el cliente
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const idString = localStorage.getItem('userId');
+      const id = idString ? parseInt(idString, 10) : null;
+      setIdNumber(id);
+    }
+  }, []);
 
   // Fetch para obtener datos de usuario
   useEffect(() => {
@@ -135,13 +140,15 @@ const UserSkills: React.FC = () => {
         const data = await getUserById(idNumber);  // Llama a la función getUserById
         setUserData(data);
         setLoading(false);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err) {
+        setError(err as string);
         setLoading(false);
       }
     };
 
-    fetchUserData();
+    if (idNumber !== null) {
+      fetchUserData();
+    }
   }, [idNumber]);
 
   // Muestra loading, error o los datos del usuario

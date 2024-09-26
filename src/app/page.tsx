@@ -3,9 +3,8 @@ import styled from "styled-components";
 import Carousel from "../components/ui/carousel/Carousel";
 import { useRouter } from "next/navigation";
 import { FooterOffline } from "../components/footer/FooterOffline";
-import hands_swap from "../../public/img/hand/hands-swap.png";
+import hands_swap from "../../public/img/hands-swap.png";
 import Image from "next/image";
-import { handlePageChange } from "../lib/utils/handlePageTheme";
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
@@ -472,9 +471,45 @@ const Imagenes = styled(Image)`
   height: 100vw;
   width: 100vw;
   position: absolute;
-  bottom: -300px;
+  top: -31.5vw;
   transform: rotate(-90deg);
   filter: grayscale();
+
+  @media (max-width: 1024px) {
+    top: -29.5vw;
+  }
+
+  @media (max-width: 900px) {
+    top: -28.5vw;
+  }
+
+  @media (max-width: 800px) {
+    top: -27.5vw;
+  }
+
+  @media (max-width: 769px) {
+    top: -23.5vw;
+  }
+
+  @media (max-width: 669px) {
+    top: -21.5vw;
+  }
+
+  @media (max-width: 569px) {
+    top: -18.5vw;
+  }
+
+  @media (max-width: 469px) {
+    top: -15vw;
+  }
+
+  @media (max-width: 369px) {
+    top: -9.5vw;
+  }
+
+  @media (max-width: 320px) {
+    top: -5.5vw;
+  }
 `;
 
 //--------------------- Componente principal de la página de inicio ---------------------
@@ -486,7 +521,7 @@ const Home = () => {
   }
   return (
     <HomeContainer>
-      <Imagenes src={hands_swap} alt='none'></Imagenes>
+      <Imagenes src={hands_swap} alt='swap-hands'></Imagenes>
       <Logo>
         SkillSwap
       </Logo>

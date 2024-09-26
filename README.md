@@ -1,23 +1,24 @@
 ![Logotype](./public/img/skillswap-logotype.png)
 
-__SkillSwap__ es una plataforma moderna diseñada para facilitar el intercambio de habilidades, conectando a personas del entorno digital que deseen aprender con aquellas dispuestas a compartir sus conocimientos. 
+__SkillSwap__ is a modern platform designed to facilitate skill exchange, connecting people in the digital environment who want to learn with those willing to share their knowledge.
 
-## ¿Por qué SkillSwap?
+## Why SkillSwap?
 
-En un entorno digital en constante evolución, actualizar y fortalecer habilidades es crucial. SkillSwap aborda los desafíos del aprendizaje colaborativo, ofreciendo una experiencia digital fluida y efectiva para el intercambio de conocimientos.
+In a constantly evolving digital environment, updating and strengthening skills is crucial. SkillSwap addresses the challenges of collaborative learning, offering a smooth and effective digital experience for knowledge exchange.
 
-## Objetivo
+## Objective
 
-Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comunidad vibrante donde los usuarios puedan explorar sus intereses y dirigir su desarrollo personal y profesional.
+Facilitate continuous learning and collaborative teaching, creating a vibrant community where users can explore their interests and direct their personal and professional development.
 
-## Tecnologías Utilizadas
+## Technologies Used
 
 - *Frontend*:
-   -    Next.js, TypeScript, Redux Toolkit, Styled Components
-- *Backend*:
-   -    C#, .NET, Swagger
+   - Next.js, TypeScript, Redux Toolkit, Styled Components, Bootstrap Icons
 
-## Estrutura del Proyecto
+- *Backend*:
+   - C#, .NET, Swagger, Azure
+
+## Project Structure
 
 ```bash
 ├── public
@@ -25,7 +26,7 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 │   └── svg
 ├── src
 │   ├── app
-│   │   ├── (cuenta)
+│   │   ├── (account)
 │   │   │   └── auth
 │   │   ├── admin
 │   │   │   ├── legal
@@ -67,19 +68,22 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 │   │   └── utils
 │   ├── models
 │   └─── middleware.ts
-└─── .env.local (OPCIONAL)
+└─── .env.local (OPTIONAL)
 ```
 
-## Recursos
+## Resources
 
-1. En este link podrás ver la Documentación de nuestro proyecto: 
-    - https://plum-pig-ed5.notion.site/SKILLSWAP-8fa0afeb7d144278894d643549d1e669
+1. In this link, you can view the Documentation of our project on Notion:
+    - [https://plum-pig-ed5.notion.site/SKILLSWAP-8fa0afeb7d144278894d643549d1e669](https://plum-pig-ed5.notion.site/SKILLSWAP-8fa0afeb7d144278894d643549d1e669)
 
-2. En este link podrás ver la Gestión de Tareas y Sprints de nuestro proyecto: 
-    -   https://msgamesje.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNTFhZDYxYjI1NTU0NGZjMmFlMjVkMWRjNTM5ODk3YzkiLCJwIjoiaiJ9
+2. In this link, you can view the Task Management and Sprints of our project on Jira:
+    - [https://msgamesje.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNTFhZDYxYjI1NTU0NGZjMmFlMjVkMWRjNTM5ODk3YzkiLCJwIjoiaiJ9](https://msgamesje.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNTFhZDYxYjI1NTU0NGZjMmFlMjVkMWRjNTM5ODk3YzkiLCJwIjoiaiJ9)
 
-3. En este link podrás ver la realización del MockUp y Diseño de nuestro proyectos: 
-    - https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&t=nLtB2dIrePCKwWu2-1
+3. In this link, you can view the MockUp and Figma Design of our project on Figma:
+    - [https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?node-id=0-1&t=mbwWpVTL1rtoLHnZ-1](https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?node-id=0-1&t=mbwWpVTL1rtoLHnZ-1)
+
+4. In this link, you can view our project deployed on Vercel:
+    - [https://skill-swap-ten.vercel.app/](https://skill-swap-ten.vercel.app/)
 
 ## Equipo Frontend
 
@@ -103,46 +107,88 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 - David Steven Medina Urrego
     - medi77na
 
-## Instalación
+## Installation
 
-1. Clona el repositorio:
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/luisaramicar11/skillSwap.git
 ```
 
-2. Correr el proyecto:
+2. Run the project in terminal:
 
 ```bash
 npm run dev
 ```
 
-3. Crea archivo con el nombre __".env.local"__ en la raíz del proyecto:
+3. Create a file named __".env.local"__ in the root of the project:
 
-   -    Este archivo contiene un token de GITHUB que te permite observar una preview del perfil del GitHub de nuestros usuarios.
-   -    No obstante, debido al __".gitignore"__, es posible que no tengas este archivo al clonar este proyecto o que se borre al intentar transferirlo.
-   -    Se recomienda crearlo manualmente, pero no te preocupes, esto no afectará tu experiencia.
-  
+- This file should contain a GITHUB token that allows you to view a preview of users' GitHub profiles.
+- However, due to the **".gitignore"**, you may not have this file when cloning this project, or it may be automatically deleted during transfer.
+- It is recommended to create it manually, but don’t worry; this will not affect your experience.
+- You will need to generate your own GITHUB token, which you can obtain by following the instructions on GitHub or just go to the end of this document, where we will explain it for you. 
+
 ```bash
 .env.local
 ```
 
-4. Escribe el siguiente código en el archivo previamente creado, para mantener el token en tu proyecto:
+4. Write the following code in the previously created file to keep the token in your project:
 
 ```bash
-GITHUB_TOKEN=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
+GITHUB_TOKEN=your_generated_token_here
 ```
 
-5. Abre [http://localhost:3000](http://localhost:3000) con tu navegador y podrás ver nuestro proyecto.
+5. Open [http://localhost:3000](http://localhost:3000) on your browser and enjoy our project.
 
 <br>
 
 --------------------------------------------------------------------------------------------------------
 
 <br>
+
+### How to Generate a GitHub Personal Access Token
+
+1. **Log in to GitHub**:
+   - Go to [GitHub](https://github.com) and log in to your account.
+
+2. **Navigate to Settings**:
+   - Click on your profile picture in the top right corner.
+   - Select **Settings** from the dropdown menu.
+
+3. **Access Developer Settings**:
+   - In the left sidebar, scroll down and click on **Developer settings**.
+
+4. **Personal Access Tokens**:
+   - Click on **Personal access tokens** in the left sidebar.
+   - Select **Tokens (classic)**.
+
+5. **Generate New Token**:
+   - Click on the **Generate new token** button.
+
+6. **Set Token Scopes**:
+   - Give your token a descriptive **note**.
+   - Set the **expiration** for the token as needed.
+   - Select the scopes for the token:
+     - **repo**: Full control of private repositories.
+     - **user**: Read and write access to profile data.
+
+7. **Generate and Copy the Token**:
+   - Click on **Generate token**.
+   - **Copy** the generated token. You won’t be able to see it again!
+
+8. **Store Your Token**:
+   - Save your token securely, such as in a `.env.local` file, and use it in your project as needed.
+
+### Important:
+Make sure to keep your token private. If you believe it has been compromised, revoke it immediately and generate a new one.
+
+
+--------------------------------------------------------------------------------------------------------
+
+<br>
 <div align="center">
-     <em>Muchas Gracias por aventurarte a visualizar nuestro proyecto.</strong></em><br>
-        <em>Un saludo de todo el <strong>Equipo SkillSwap.</strong></em>
+     <em>We thank you very much for visiting our loved project.</strong></em><br>
+        <em>Greetings from <strong>SkillSwap Team.</strong></em>
 </div>
 <br>
 
@@ -157,6 +203,6 @@ GITHUB_TOKEN=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
 <div align="center">
     <em>
       <strong>2024 SkillSwap, Inc. Looking for Skill.</strong><br>
-      © Todos los derechos reservados.
+      © All rights reserved.
        </em>
 </div>

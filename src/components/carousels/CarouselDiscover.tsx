@@ -52,8 +52,8 @@ const Carousel = () => {
         // Guarda todos los usuarios en el estado
         setAllUsersData(responseData);
         setLoading(false);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
+        setError(error as string);
         setLoading(false);
       }
     };

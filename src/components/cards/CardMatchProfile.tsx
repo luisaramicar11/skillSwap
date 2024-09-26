@@ -106,7 +106,6 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
   ultimaPendiente,
   ultimaCancelada,
   ultimoEnviado,
-  conteoConexiones,
   conteoPendientes,
   conteoCanceladas,
   conteoEnviadas,

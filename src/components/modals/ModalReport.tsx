@@ -27,7 +27,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
+  background-color: ${({ theme }) => theme.colors.bgGreen};
   background-color: white;
   width: 50%;
   height: 75%;
@@ -44,7 +44,7 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   font-size: 2rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  background: ${({ theme }) => theme.colors.backgroundGreen};
   color: #fff;
   padding: 1rem;
   padding-left: 2rem;
@@ -54,7 +54,7 @@ const ModalHeader = styled.div`
   justify-content: space-between;
 
   span {
-    color: ${({ theme }) => theme.colors.textPink};
+    color: ${({ theme }) => theme.colors.textGreen};
   }
 `;
 

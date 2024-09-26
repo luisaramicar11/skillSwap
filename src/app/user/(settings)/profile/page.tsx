@@ -157,9 +157,16 @@ const UserProfile = () => {
   const [userData, setUserData] = useState<IUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [idNumber, setIdNumber] = useState<number | null>(null);
 
-  const idString = localStorage.getItem('userId');
-  const idNumber = idString ? parseInt(idString, 10) : null;
+  // Comprobamos si estamos en el cliente
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const idString = localStorage.getItem('userId');
+      const idNumber = idString ? parseInt(idString, 10) : null;
+      setIdNumber(idNumber); // Establecemos el id en el estado
+    }
+  }, []);
 
   // Fetch para obtener datos de usuario
   useEffect(() => {
@@ -170,13 +177,15 @@ const UserProfile = () => {
         const data = await getUserById(idNumber); // Usamos la función de users.ts
         setUserData(data); // Guardamos los datos del usuario
         setLoading(false);
-      } catch (err: any) {
-        setError(err.message); // Manejo de errores
+      } catch (err) {
+        setError(err as string); // Manejo de errores
         setLoading(false);
       }
     };
 
-    fetchUserData();
+    if (idNumber) {
+      fetchUserData();
+    }
   }, [idNumber]);
 
   // Muestra loading, error o los datos del usuario

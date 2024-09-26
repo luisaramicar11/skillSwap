@@ -287,8 +287,8 @@ const UserInfo = () => {
       try {
         const data = await getUserById(idNumber);
         setAccountState(data.nameStateUser ?? "Estado desconocido"); // Ajusta según la estructura de la respuesta
-      } catch (err: any) {
-        setError(err.message || "Error desconocido");
+      } catch (err) {
+        setError(err as string);
       } finally {
         setLoading(false);
       }
@@ -308,8 +308,8 @@ const UserInfo = () => {
     try {
       const data = await toggleUserAccountState(idNumber, newAction);
       setAccountState(data); // Actualiza el estado con el nuevo valor
-    } catch (err: any) {
-      setError(err.message || "Error al cambiar el estado de la cuenta");
+    } catch (err) {
+      setError(err as string);
     }
   };
 

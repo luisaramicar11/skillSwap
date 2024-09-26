@@ -4,7 +4,7 @@ import ProfileCard from "@/src/components/cards/CardMatchProfile";
 import UserProfileNoDetail from "@/src/components/cards/CardDetailUserNoMatch";
 import UserProfileDetail from "@/src/components/cards/CardDetailUserMatch";
 import { Div, DivProfile } from "./DetailStyling";
-import { IUserProfileProps, IRequestCardProps, IUserCardProps } from "@/src/models/userCards.model";
+import { IRequestCardProps, IUserCardProps } from "@/src/models/userCards.model";
 import { IUser } from "@/src/models/user.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import {getUserById, getUsersForImages} from "../../../lib/api/users"
@@ -64,6 +64,7 @@ const DetailAboutUser = () => {
 
         setLoading(false);
       } catch (error) {
+        console.log(error)
         setError("Error al cargar los datos");
         setLoading(false);
       }

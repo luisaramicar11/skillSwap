@@ -95,7 +95,6 @@ const Reports: React.FC = () => {
   const handleUpdateReport = async (reportToUpdate: IReport) => {
     // Cambia el nombre aquí
     try {
-      const token = getToken();
       const response = await fetch(
         `https://skillswapriwi.azurewebsites.net/api/ReportPut/PutReportByAction`,
         {
@@ -129,7 +128,6 @@ const Reports: React.FC = () => {
   const handleDeleteReport = async (reportId: number) => {
     console.log(reportId);
     try {
-      const token = getToken(); // Obtener token
       const response = await fetch(
         `https://skillswapriwi.azurewebsites.net/api/ReportDelete/DeleteReportById/${reportId}`,
         {

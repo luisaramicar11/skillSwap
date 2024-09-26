@@ -35,8 +35,8 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
       const data = await response.json();
       console.log(data);
       return data;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "An error occurred");
+    } catch (error) {
+      return rejectWithValue(error || "An error occurred");
     }
   }
 );
@@ -71,8 +71,8 @@ export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
       await dispatch(loginUser(loginCredentials)); // Ejecutar loginUser después de registrar
 
       return data;
-    } catch (error: any) {
-      return rejectWithValue(error.message || "An error occurred");
+    } catch (error) {
+      return rejectWithValue(error || "An error occurred");
     }
   }
 );
@@ -117,7 +117,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthenticated = true;
       })
-      .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

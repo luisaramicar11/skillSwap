@@ -5,19 +5,24 @@ import styled from "styled-components";
 
 const Form = styled.form`
   padding: 30px;
-  width: 50%;
+  width: 100%; /* Cambiado a 100% para ser más responsivo */
+  max-width: 600px; /* Añadido un ancho máximo */
   display: flex;
   flex-direction: column;
   gap: 10px;
-  `
-  
+`;
+
 const Input = styled.input`
-  width: 50%;
+  width: 100%; /* Cambiado a 100% para ser responsivo */
   border-radius: 10px;
   border: 1px #ccc solid;
   padding: 7px;
   font-size: small;
   color: black;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem; /* Ajuste del tamaño de fuente en pantallas más pequeñas */
+  }
 `;
 
 const Button = styled.button`
@@ -26,20 +31,20 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px black solid;
+  border: 1px grey solid;
   color: black;
   cursor: pointer;
   background: none;
   padding: 5px 10px;
 
   &:hover {
-    background-color: green;
+    background-color: orange;
     color: white;
   }
 `;
 
 const Div = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,12 +63,12 @@ const Title = styled.p`
 const DivInfo = styled.div`
   font-size: 0.8rem;
   text-align: center;
-`
+`;
 
 const DivButtton = styled.div`
-display: flex;
-justify-content: center;
-`
+  display: flex;
+  justify-content: center;
+`;
 
 interface EditUserFormProps {
   updateData: (user: IUserUpdateAdmin) => void;
@@ -106,6 +111,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
     };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
+      console.log(id);
       setForm({
         ...userWithoutId,
         suspensionDate: userWithoutId.suspensionDate || null,
@@ -124,45 +130,35 @@ const FormUsers: React.FC<EditUserFormProps> = ({
     }));
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (dataToEdit) {
-        // Crea el objeto a actualizar filtrando las propiedades innecesarias
-        // Función para formatear la fecha
-        const formatDate = (date: Date | null): string | null => {
-          if (!date) return null;
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0'); // Asegura que el mes tenga dos dígitos
-          const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
-          return `${year}-${month}-${day}`;
+      const userToUpdate = {
+        id: dataToEdit.id, // Mantén el ID existente
+        name: form.name,
+        lastName: form.lastName,
+        urlImage: form.urlImage,
+        jobTitle: form.jobTitle,
+        description: form.description,
+        birthdate: form.birthdate, // Mantener el formato de string
+        email: form.email,
+        phoneNumber: form.phoneNumber,
+        category: form.category,
+        abilities: form.abilities,
+        urlLinkedin: form.urlLinkedin,
+        urlGithub: form.urlGithub,
+        urlBehance: form.urlBehance,
+        idStateUser: form.idStateUser,
+        idRoleUser: form.idRoleUser,
+        suspensionDate: form.suspensionDate,
+        reactivationDate: form.reactivationDate,
       };
 
-        const userToUpdate = {
-            id: dataToEdit.id, // Mantén el ID existente
-            name: form.name,
-            lastName: form.lastName,
-            urlImage: form.urlImage,
-            jobTitle: form.jobTitle,
-            description: form.description,
-            birthdate: form.birthdate, // Mantener el formato de string
-            email: form.email,
-            phoneNumber: form.phoneNumber,
-            category: form.category,
-            abilities: form.abilities,
-            urlLinkedin: form.urlLinkedin,
-            urlGithub: form.urlGithub,
-            urlBehance: form.urlBehance,
-            idStateUser: form.idStateUser,
-            idRoleUser: form.idRoleUser,
-            suspensionDate: form.suspensionDate,
-            reactivationDate: form.reactivationDate,
-        };
-
-        // Envía solo las propiedades necesarias
-        updateData(userToUpdate);
-        handleReset();
+      // Envía solo las propiedades necesarias
+      updateData(userToUpdate);
+      handleReset();
     }
-};
+  };
 
   const handleReset = () => {
     setForm(initialFormState);
@@ -174,7 +170,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       <Title>Editar Usuario</Title>
       <DivInfo>Los códigos de los estados de los usuarios son: 1. Activo, 2. Inactivo, 3. Suspendido </DivInfo>
       <Div>
-      <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Div>
             <label htmlFor="name">Nombre del usuario</label>
             <Input
@@ -280,6 +276,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 };
 
 export default FormUsers;
+
 
 
 

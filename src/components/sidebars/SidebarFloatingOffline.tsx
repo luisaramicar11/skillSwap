@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
+import { handlePageChange } from "../../lib/utils/handlePageTheme";
 import StyledNavLink from "../ui/links/NavLinks";
 
 const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`

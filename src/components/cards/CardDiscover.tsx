@@ -87,7 +87,6 @@ const Skills = styled.div`
 `;
 
 const Card: React.FC<IDiscoverCardProps> = ({
-  id,
   fullName,
   jobTitle,
   qualification,

@@ -20,7 +20,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
+  background-color: ${({ theme }) => theme.colors.bgGreen};
   width: 50%;
   height: 50%;
   padding: 1rem;
@@ -37,7 +37,7 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   font-size: 1.5rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  background: ${({ theme }) => theme.colors.backgroundGreen};
   color: #fff;
   padding: 0.5rem;
   display: flex;
@@ -109,13 +109,6 @@ const AlertText = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
-`;
-
-const PoliceInfo = styled.div`
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: #000;
-  padding: 1rem;
 `;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
