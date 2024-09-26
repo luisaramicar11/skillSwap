@@ -58,7 +58,7 @@ const TableReports: React.FC<TableDataReports> = ({ data, setDataToEdit, deleteD
     <TableContainer>
       <Title>Tabla de reportes</Title>
       <TableStyle>
-        <caption>Listado de reportes generados por los usuarios</caption>
+
         <TableHeader />
         <tbody>
           {data.length > 0 ? (
