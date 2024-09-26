@@ -1,18 +1,6 @@
-# SkillSwap
-
-SkillSwap es una plataforma moderna diseñada para facilitar el intercambio de habilidades, conectando a personas que desean aprender con aquellas dispuestas a compartir sus conocimientos. 
-
-## ¿Por qué SkillSwap?
-
-En un entorno digital en constante evolución, actualizar y fortalecer habilidades es crucial. SkillSwap aborda los desafíos del aprendizaje colaborativo, ofreciendo una experiencia digital fluida y efectiva para el intercambio de conocimientos.
-
-## Objetivo
-
-Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comunidad vibrante donde los usuarios puedan explorar sus intereses y dirigir su desarrollo personal y profesional.
-
 ![Logotype](./public/img/skillswap-logotype.png)
 
-_SkillSwap_ es una plataforma moderna diseñada para facilitar el intercambio de habilidades, conectando a personas que desean aprender con aquellas dispuestas a compartir sus conocimientos. 
+__SkillSwap__ es una plataforma moderna diseñada para facilitar el intercambio de habilidades, conectando a personas del entorno digital que deseen aprender con aquellas dispuestas a compartir sus conocimientos. 
 
 ## ¿Por qué SkillSwap?
 
@@ -24,11 +12,14 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 
 ## Tecnologías Utilizadas
 
-- Frontend: Next.js, TypeScript, Redux Toolkit, Styled Components
-- Backend: C# y .Net
+- *Frontend*:
+   -    Next.js, TypeScript, Redux Toolkit, Styled Components
+- *Backend*:
+   -    C#, .NET, Swagger
 
 ## Estrutura del Proyecto
 
+```bash
 ├── public
 │   ├── img
 │   └── svg
@@ -41,28 +32,32 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 │   │   │   ├── posts
 │   │   │   ├── reports
 │   │   │   ├── users
-│   │   │   └── page
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
 │   │   ├── api
+│   │   │   └── github-profile
 │   │   ├── legal
 │   │   ├── recoverPassword
 │   │   ├── redux
+│   │   │   ├── slices
+│   │   │   └── store.ts
 │   │   ├── user
 │   │   │   ├── detailUser
 │   │   │   ├── discover
 │   │   │   ├── legal
 │   │   │   ├── match
-│   │   │   ├── layout
-│   │   │   ├── page
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── (settings)
 │   │   │       ├── info
 │   │   │       ├── profile
 │   │   │       ├── metrics
 │   │   │       ├── skills
 │   │   │       └── social
-│   │   ├── layout.ts
-│   │   ├── providers.ts
-│   │   ├── rootHandler.ts
-│   │   └── globalStyling.ts
+│   │   ├── layout.tsx
+│   │   ├── providers.tsx
+│   │   ├── rootHandler.tsx
+│   │   └── globalStyling.tsx
 │   ├── components
 │   │   └── ui
 │   ├── hooks
@@ -71,10 +66,9 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 │   │   ├── services
 │   │   └── utils
 │   ├── models
-│   ├── middleware.ts
-│   └── redux
-│       ├── slices
-│       └── store.ts
+│   └─── middleware.ts
+└─── .env.local (OPCIONAL)
+```
 
 ## Recursos
 
@@ -89,10 +83,10 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 
 ## Equipo Frontend
 
-- David Francisco Blandon Mena
+- David Francisco Blandón Mena
     - franccoina
 
-- Luisa Fernanda Ramirez Cardona
+- Luisa Fernanda Ramírez Cardona
     - luisaramicar11
 
 - Joan Sebastian Zapata Caro
@@ -113,19 +107,56 @@ Facilitar el aprendizaje continuo y la enseñanza colaborativa, creando una comu
 
 1. Clona el repositorio:
 
-bash
+```bash
 git clone https://github.com/luisaramicar11/skillSwap.git
+```
 
 2. Correr el proyecto:
 
-bash
+```bash
 npm run dev
+```
 
+3. Crea archivo con el nombre __".env.local"__ en la raíz del proyecto:
 
-3. Abre [http://localhost:3000](http://localhost:3000) con tu navegador y podrás ver nuestro proyecto.
+   -    Este archivo contiene un token de GITHUB que te permite observar una preview del perfil del GitHub de nuestros usuarios.
+   -    No obstante, debido al __".gitignore"__, es posible que no tengas este archivo al clonar este proyecto o que se borre al intentar transferirlo.
+   -    Se recomienda crearlo manualmente, pero no te preocupes, esto no afectará tu experiencia.
+  
+```bash
+.env.local
+```
 
-_SkillSwap, Inc. Looking for Skill._
-© Todos los derechos reservados.
+4. Escribe el siguiente código en el archivo previamente creado, para mantener el token en tu proyecto:
 
+```bash
+GITHUB_TOKEN=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
+```
 
-![Isotype](./public/img/skillswap-isotype.png)
+5. Abre [http://localhost:3000](http://localhost:3000) con tu navegador y podrás ver nuestro proyecto.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------
+
+<br>
+<div align="center">
+     <em>Muchas Gracias por aventurarte a visualizar nuestro proyecto.</strong></em><br>
+        <em>Un saludo de todo el <strong>Equipo SkillSwap.</strong></em>
+</div>
+<br>
+
+--------------------------------------------------------------------------------------------------------
+
+<br>
+
+<div align="center">
+  <img src="./public/img/skillswap-isotype.png" alt="Skillswap-Isotype" width="300" />
+</div>
+
+<div align="center">
+    <em>
+      <strong>2024 SkillSwap, Inc. Looking for Skill.</strong><br>
+      © Todos los derechos reservados.
+       </em>
+</div>
