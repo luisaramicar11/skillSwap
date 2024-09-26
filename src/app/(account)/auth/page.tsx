@@ -147,6 +147,7 @@ const H1 = styled.h1`
   p {
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.textSecondary};
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   @media (max-width: 1070px) {
@@ -163,6 +164,7 @@ const SwitchButton = styled.button`
   background-color: transparent;
   font-size: 12px;
   font-weight: 500;
+  font-weight: 500;
   transition: background-color 0.6s ease;
   display: flex;
   align-items: center;
@@ -173,6 +175,7 @@ const SwitchButton = styled.button`
     height: 100% !important;
     color: ${({ theme }) => theme.colors.textOrange};
     border: 0;
+    padding: 10px;
     padding: 10px;
     
   }
@@ -187,6 +190,8 @@ const SwitchButton = styled.button`
   }
 
   @media (max-width: 1070px) {
+    width: inherit; 
+    padding: 0 20px !important;
     width: inherit; 
     padding: 0 20px !important;
     font-size: 10px;

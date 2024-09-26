@@ -7,6 +7,7 @@ import { useTheme } from "../hooks/useTheme";
 import { Logobar } from "../components/logobar/Logobar";
 import { usePathname } from 'next/navigation';
 import { clearStorage } from "../lib/services/storageService";
+import { clearStorage } from "../lib/services/storageService";
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const pathname = usePathname(); // Obtenemos la ruta actual

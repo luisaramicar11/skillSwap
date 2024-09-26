@@ -10,6 +10,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  gap: 10px;
 `;
 
 const Input = styled.input`
@@ -55,13 +56,17 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  gap: 0.5rem;
 `;
 
+const Title = styled.p`
 const Title = styled.p`
   margin-top: 15px;
   text-align: center;
   margin-bottom: 20px;
   color: black;
+  font-size: 16px;
+  font-weight: 500;
   font-size: 16px;
   font-weight: 500;
 `;

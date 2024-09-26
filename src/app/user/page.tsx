@@ -11,6 +11,9 @@ const HomeContainer = styled.div`
   padding: 0;
   padding-top: 74px;
   padding-bottom: 54px;
+  padding: 0;
+  padding-top: 74px;
+  padding-bottom: 54px;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   flex-direction: column;
@@ -39,6 +42,7 @@ const Logo = styled.h1`
 const MainText = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-top: 15vw;
   margin-top: 15vw;
   background: transparent;
   align-items: end;
@@ -100,6 +104,7 @@ const Text2 = styled.div`
   background: transparent;
   font-size: 27px;
   width: 50%;
+  border: 4px solid ${({ theme }) => theme.colors.textDark};
   border: 4px solid ${({ theme }) => theme.colors.textDark};
   text-align: end;
 
@@ -239,6 +244,7 @@ const Title = styled.h1`
 const ProfileBox = styled.div`
   display: flex;
   flex-direction: column;
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
   border: 1px solid ${({ theme }) => theme.colors.textDark};
   padding: 30px 100px 30px 50px;
   border-radius: 10px;
@@ -539,6 +545,7 @@ const Home = () => {
           <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
+      <FooterUser />
       <FooterUser />
     </HomeContainer>
   );
