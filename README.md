@@ -120,7 +120,7 @@ npm run dev
 3. Crea archivo con el nombre __".env.local"__ en la raíz del proyecto:
 
    -    Este archivo contiene un token de GITHUB que te permite observar una preview del perfil del GitHub de nuestros usuarios.
-   -    No obstante, debido al __".gitignore"__, es posible que no tengas este archivo al clonar este proyecto.
+   -    No obstante, debido al __".gitignore"__, es posible que no tengas este archivo al clonar este proyecto o que se borre al intentar transferirlo.
    -    Se recomienda crearlo manualmente, pero no te preocupes, esto no afectará tu experiencia.
   
 ```bash
