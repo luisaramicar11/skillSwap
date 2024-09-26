@@ -1,20 +1,17 @@
 import styled from "styled-components";
 
-export const H2 = styled.h2`
-  display: inline;
-  font-size: 3rem;
-  padding-left: 1rem;
-  padding-right: 10rem;
-  margin-left: 0;
-  padding-bottom: 0.5rem;
+export const LineTitles = styled.div`
+  font-size: clamp(1rem,2vw,3rem);
+  margin: 0;
+  padding: 0;
   color: ${({ theme }) => theme.colors.textOrange};
-  border-bottom: 3px solid ${({ theme }) => theme.colors.textOrange};
+  border-bottom: 4px solid ${({ theme }) => theme.colors.textOrange};
   font-weight: bold;
-
-  @media (min-width: 760px) {
-    padding-left: 5rem;
-  }
+  opacity: 0.3;
+  width: 100vw !important;
+  text-align: center;
 `;
+
 export const DivRecentUsers = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +21,25 @@ export const DivRecentUsers = styled.div`
 export const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   margin: 54px 0;
+
+  & div{
+    padding: 1rem 0;
+
+    & hr{
+      padding:0;
+      margin: 0 400px !important;
+      translate: 0 15px;
+      border: none;
+      height: 4px;
+      opacity: 0.1;
+      border-radius: 500px;
+      background-color: ${({ theme }) => theme.colors.textOrange};
+    }
+  }
+
+  & article {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
 `;

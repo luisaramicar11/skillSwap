@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import cookie from 'cookie';
-
+function isValidToken(token: string) {
+  const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del JWT
+  return payload.exp > Date.now() / 1000; // Verifica si no ha expirado
+}
 export function middleware(req: NextRequest) {
-  // Extraemos las cookies del request
-  const cookies = cookie.parse(req.headers.get('cookie') || '');
-  const token = cookies.authToken;
+  console.log('Middleware ejecutado en:', req.url);
+  console.log('Headers:', req.headers.get('cookie'));
 
+  const token = req.cookies.get('authToken')?.value;
+  console.log(token, "token next")
   // Si no hay token, redirigimos al login
-  if (!token) {
+  if (!token || token.trim() === "" || !isValidToken(token)) {
     return NextResponse.redirect(new URL('/auth', req.url));
   }
 
@@ -16,7 +19,10 @@ export function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-// Definimos en qué rutas se aplicará el middleware (puedes personalizarlo)
+// Definimos en qué rutas se aplicará el middleware
 export const config = {
-  matcher: ['/discover/:path*', '/profile/:path*', '/RecoverPassword/:path*'], // Protege rutas como /dashboard, /profile, etc.
+  matcher: [
+    '/user/:path*',   // Protege todas las rutas bajo /user/
+    '/admin/:path*',  // Protege todas las rutas bajo /admin/
+  ],
 };

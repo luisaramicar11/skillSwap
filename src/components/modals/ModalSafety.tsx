@@ -17,34 +17,32 @@ const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  margin: 0;
-  padding: 0;
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
-  width: 60%;
-  padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  background-color: ${({ theme }) => theme.colors.bgGreen};
+  width: 50%;
+  height: 50%;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    height: 70%;
+  }
 `;
 
 const ModalHeader = styled.div`
-  font-size: 2rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  font-size: 1.5rem;
+  background: ${({ theme }) => theme.colors.backgroundGreen};
   color: #fff;
-  padding: 1rem;
-  padding-left: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-between;
-
-  span{
-    color: ${({ theme }) => theme.colors.textPink};
-  }
+  align-items: center;
 `;
 
 const ModalCloseButton = styled.button`
@@ -52,105 +50,65 @@ const ModalCloseButton = styled.button`
   font-weight: bold;
   color: #000;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
-`;
-
-const DivRoute = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  background-color:#fff;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  margin: 0.8rem;
-  font-weight: bold;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const ModalContent = styled.div`
   display: flex;
-  margin: 1rem;
-  margin-top:2rem;
+  flex: 1;
+  margin-top: 1rem;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  overflow: auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftSection = styled.div`
   flex: 2;
-  display: flex;
-  flex-direction: column;
+  padding: 1rem;
   background-color: #fff;
-  gap: 15px;
-  padding: 3rem;
-  width: 60%;
+  gap: 10px;
 `;
 
 const RightSection = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  padding: 1rem;
   background-color: #fff;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
+
+  @media (max-width: 768px) {
+    border-left: none;
+    border-top: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  }
 `;
 
 const TipItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 `;
 
 const Icon = styled.img`
-  padding-right: 0.5rem;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 `;
 
 const TipText = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #000;
-  font-weight: 300;
 `;
 
 const AlertText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 300;
   color: #000;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
-
-  span{
-    padding-right: 0.5rem;
-    font-size: 1rem;
-  }
-`;
-
-const PoliceInfo = styled.div`
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: #000;
-  padding: 1rem;
-`;
-
-const DivAlertText = styled.div`
- display: flex;
- flex-direction: column;
- border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
-`;
-
-const DivColor = styled.div`
-  background: ${({ theme }) => theme.colors.backgroundGreen};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  margin: 0;
-  padding:0;
-  width: 100%;
-  height: 2rem;
-`;
-
-const DivTexts = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
 `;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
@@ -160,49 +118,29 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     <ModalOverlay>
       <ModalContainer>
         <ModalHeader>
-          <div>SkillSwap <span>Safety</span></div>
+          <div>SkillSwap Safety</div>
           <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
         </ModalHeader>
-        <DivRoute>C:\ User\ Documents\ SafetyTyps</DivRoute>
         <ModalContent>
-          {/* Left section with the tips */}
           <LeftSection>
             <TipItem>
               <Icon src="/folder.svg" alt="Verify profile" />
-              <TipText>Verificar tu perfil aumenta la confianza entre usuarios y garantiza un ambiente seguro para el intercambio de habilidades.</TipText>
+              <TipText>Verificar tu perfil aumenta la confianza entre usuarios y garantiza un ambiente seguro.</TipText>
             </TipItem>
             <TipItem>
               <Icon src="/folder.svg" alt="No sensitive data" />
-              <TipText>No compartas datos sensibles. Mantén tus interacciones en entornos virtuales controlados de forma segura y consciente.</TipText>
+              <TipText>No compartas datos sensibles.</TipText>
             </TipItem>
             <TipItem>
               <Icon src="/folder.svg" alt="Report misconduct" />
-              <TipText>Respeta a los demás y reporta cualquier comportamiento sospechoso o inadecuado para mantener la seguridad de todos.</TipText>
+              <TipText>Reporta cualquier comportamiento sospechoso o inadecuado.</TipText>
             </TipItem>
           </LeftSection>
 
-          {/* Right section with warnings */}
           <RightSection>
-            <DivAlertText>
-            <DivColor /> 
-            <DivTexts>
-            <AlertText>
-              <span>⚠️</span> No dudes en reportar. La seguridad mutua es primera.
-            </AlertText>
-            <AlertText>
-              <span>🔵</span> En el panel de Ayuda del User puedes ver más sobre Reportes y Seguridad.
-            </AlertText>
-            <AlertText>
-              <span>⛔</span> Cualquier tipo de abuso o actividad ilegal nos interpela a tomar medidas.
-            </AlertText>
-            </DivTexts>  
-            </DivAlertText>
-        
-            <PoliceInfo>
-              Policía Nacional - CAI Virtual <br />
-              Línea Nacional: 0 8000 91 1190 <br />
-              Página web: cai.virtual.policia.gov.co
-            </PoliceInfo>
+            <AlertText>⚠️ No dudes en reportar.</AlertText>
+            <AlertText>🔵 En el panel de Ayuda puedes ver más sobre Reportes.</AlertText>
+            <AlertText>⛔ Cualquier tipo de abuso será sancionado.</AlertText>
           </RightSection>
         </ModalContent>
       </ModalContainer>

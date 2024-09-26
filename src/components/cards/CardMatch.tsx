@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SkillTag from "../ui/skillTag/skillTag";
-import { IUserCardProps } from "@/src/models/userCards.model";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
@@ -10,7 +9,7 @@ const CardContainer = styled.div`
   align-items: center;
   height: max-content;
   padding: 1rem 0;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 1rem 1rem 2rem 1rem;
@@ -47,6 +46,13 @@ const Connections = styled.div`
 
   div {
     font-size: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+
+    & p{ 
+      color: ${({ theme }) => theme.colors.textSecondary};
+    }
   }
 `;
 
@@ -67,12 +73,18 @@ const RatingSection = styled.div`
 
   div {
     font-size: 1rem;
+    display: flex;
+    gap: 0.3rem;
   }
 `;
 
 const RatingStars = styled.div`
   color: ${({ theme }) => theme.colors.textYellow};
   font-size: 1.2rem;
+
+  & span {
+      font-style: normal;
+    }
 `;
 
 const Description = styled.div`
@@ -118,7 +130,7 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatc
       <DivCardContent>
         <Connections>
           <div>Conexiones</div>
-          <div>🔗 {countMatches}</div>
+          <div><p>↺</p>{countMatches}</div>
         </Connections>
 
         <RatingSection>
@@ -126,10 +138,16 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatc
           <article>
             <div>{rating}</div>
             <RatingStars>
-              {[...Array(5)].map((_, index) => (
-                <span key={index}>{index < rating ? "★" : "☆"}</span>
-              ))}
+              {[...Array(5)].map((_, index) => {
+                const ratingStars = Math.floor(rating); // Redondea hacia abajo
+                return (
+                  <span key={index}>
+                    {index < ratingStars ? "★" : "☆"}
+                  </span>
+                );
+              })}
             </RatingStars>
+
           </article>
         </RatingSection>
 

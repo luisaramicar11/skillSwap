@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import SkillTag from "../ui/skillTag/skillTag";
-
+import SkillTagTiny from "../ui/skillTag/skillTagTiny";
 
 // Interfaz para los props de la Card
-interface CardProps {
+interface IDiscoverCardProps {
   id: number;
   fullName: string;
   jobTitle: string;
@@ -17,23 +16,18 @@ interface CardProps {
 const CardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 13rem;
+  min-height: 16rem;
+  max-height: 19rem;
   max-width: 500px;
   overflow: hidden;
+  gap: 1rem;
 `;
 
 // Estilo para la columna de la imagen
 const ImageColumn = styled.div`
   width: 40%;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-  }
+  min-height: 16rem;
+  max-height: 19rem;
 `;
 
 // Estilo para la columna de la información
@@ -46,6 +40,22 @@ const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  p {
+    color: ${({ theme }) => theme.colors.textSecondary};
+  }
+`;
+
+
+// Estilo para el nombre
+const ImageCard = styled.div<{ urlImage?: string }>`
+  background-image: url(${(props) => props.urlImage || 'https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg'});
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: solid 1px ${({ theme }) => theme.colors.bgBanner};
 `;
 
 // Estilo para el nombre
@@ -62,9 +72,10 @@ const StarsContainer = styled.div`
 `;
 
 const Star = styled.span`
-  color: gold;
-  font-size: 20px;
+  color: ${({ theme }) => theme.colors.textYellow};;
+  font-size: 16px;
   margin: 0 2px;
+  font-style: normal;
 `;
 
 const Skills = styled.div`
@@ -75,8 +86,7 @@ const Skills = styled.div`
   padding-bottom: 0rem;
 `;
 
-const Card: React.FC<CardProps> = ({ 
-  id, 
+const Card: React.FC<IDiscoverCardProps> = ({
   fullName,
   jobTitle,
   qualification,
@@ -87,21 +97,25 @@ const Card: React.FC<CardProps> = ({
   return (
     <CardContainer>
       <ImageColumn>
-        <img src={urlImage} alt={fullName} />
+        <ImageCard urlImage={urlImage} />
       </ImageColumn>
       <InfoColumn>
         <Name>{fullName}</Name>
         <p>{jobTitle}</p>
         <StarsContainer>
-          {[...Array(5)].map((_, index) => (
-            <Star key={index}>
-              {index < qualification ? "★" : "☆"}{" "}
-              {/* Muestra estrellas llenas o vacías */}
-            </Star>
-          ))}
+          {[...Array(5)].map((_, index) => {
+            const rating = Math.floor(qualification); // Redondea hacia abajo
+            return (
+              <Star key={index}>
+                {index < rating ? "★" : "☆"}{" "}
+                {/* Muestra estrellas llenas o vacías */}
+              </Star>
+            );
+          })}
         </StarsContainer>
+
         <Skills>
-          <SkillTag skillsArray={abilities} />
+          <SkillTagTiny skillsArray={abilities} />
         </Skills>
       </InfoColumn>
     </CardContainer>

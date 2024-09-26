@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import LinkProfile from "../ui/links/NavLinks";
-import { IUserCardProps, IProfileCardProps } from "@/src/models/userCards.model";
+import {
+  IProfileCardProps,
+} from "@/src/models/userCards.model";
 
 const ProfileHeader = styled.div`
   display: flex;
@@ -15,6 +17,7 @@ const ProfileHeader = styled.div`
 `;
 
 const Avatar = styled.div<{ urlImage: string }>`
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
@@ -45,41 +48,55 @@ const RatingSection = styled.div`
   text-align: center;
   margin: 20px 0;
 
-  h1 {
+  & h1 {
     font-size: 2.2rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
     font-weight: bold;
   }
 
-  p {
-    opacity: 0.5;
+  & p {
+    opacity: 0.7;
     text-align: start;
-    font-size: 0.9rem;
+    font-size: 1rem !important;
     font-weight: bold;
     margin: 0;
-    color: ${({ theme }) => theme.colors.textOrange};
+    color: ${({ theme }) => theme.colors.textYellow};
   }
-`;
-
-const Stars = styled.div`
-  color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 0.9rem;
-  margin: 0;
 `;
 
 const DivRate = styled.div`
   display: flex;
   flex-direction: column;
+
+  & p {
+    font-size: 0.7rem;
+  }
+`;
+const RatingStars = styled.div`
+  color: ${({ theme }) => theme.colors.textYellow};
+  opacity: 0.7;
 `;
 
-const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics }) => {
-  const abilitiesArray = userMetrics?.abilities?.split(',').map((ability: string) => ability.trim()) || [];
+const Star = styled.span`
+  color: ${({ theme }) => theme.colors.textYellow};
+  font-size: 16px;
+  margin: 0 2px;
+  font-style: normal;
+`;
+const CardProfileLink: React.FC<IProfileCardProps> = ({
+  fullName,
+  userMetrics,
+}) => {
+  const abilitiesArray =
+    userMetrics?.abilities
+      ?.split(",")
+      .map((ability: string) => ability.trim()) || [];
 
   return (
-    <LinkProfile href="/user/settings" label="CONFIGURACION">
+    <LinkProfile href="/user/settings" label="CONFIGURA">
       <ProfileHeader>
-        <Avatar urlImage={userMetrics.urlImage}/>
+        <Avatar urlImage={userMetrics.urlImage} />
         <div>
           <ProfileName>{fullName}</ProfileName>
           {abilitiesArray.length > 0 ? (
@@ -96,11 +113,21 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({ fullName, userMetrics })
       <RatingSection>
         <h1>{userMetrics?.qualification}</h1>
         <DivRate>
-          <p>Your Rate</p>
-          <Stars>★★★★☆</Stars>
+          <p>Calificación</p>
+          <RatingStars>
+            {[...Array(5)].map((_, index) => {
+              const rating = Math.floor(userMetrics?.qualification); // Redondea hacia abajo
+              return (
+                <Star key={index}>
+                  {index < rating ? "★" : "☆"}
+                </Star>
+              );
+            })}
+          </RatingStars>
+
         </DivRate>
       </RatingSection>
     </LinkProfile>
   );
 };
-export default CardProfileLink
+export default CardProfileLink;

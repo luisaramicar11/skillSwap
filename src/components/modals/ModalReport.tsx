@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ReportForm from "../forms/FormReport"
+import ReportForm from "../forms/FormReport";
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,21 +20,31 @@ const ModalOverlay = styled.div`
   z-index: 1000;
   margin: 0;
   padding: 0;
+
+  > * {
+    font-size: 14px !important ;
+  }
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
-  width: 60%;
+  background-color: ${({ theme }) => theme.colors.bgGreen};
+  background-color: white;
+  width: 50%;
+  height: 75%;
   padding: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   position: relative;
   margin: 0;
+  border-radius: 10px;
   padding: 0;
+
+  & h2{
+    margin: 0;
+  }
 `;
 
 const ModalHeader = styled.div`
   font-size: 2rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  background: ${({ theme }) => theme.colors.backgroundGreen};
   color: #fff;
   padding: 1rem;
   padding-left: 2rem;
@@ -43,8 +53,8 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
 
-  span{
-    color: ${({ theme }) => theme.colors.textPink};
+  span {
+    color: ${({ theme }) => theme.colors.textGreen};
   }
 `;
 
@@ -60,10 +70,11 @@ const ModalCloseButton = styled.button`
 const DivRoute = styled.div`
   display: flex;
   justify-content: flex-start;
-  background-color:#fff;
+  background-color: #fff;
   padding: 0.5rem;
   padding-left: 1rem;
   margin: 0.8rem;
+  margin-bottom: 0 ;
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -71,7 +82,8 @@ const DivRoute = styled.div`
 const ModalContent = styled.div`
   display: flex;
   margin: 1rem;
-  margin-top:2rem;
+  margin-top: 2rem;
+  max-height: 400px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
@@ -83,6 +95,11 @@ const LeftSection = styled.div`
   gap: 15px;
   padding: 1rem;
   width: 60%;
+
+  & textarea {
+    max-height: 100px;
+    border-radius: 10px;
+  }
 `;
 
 const RightSection = styled.div`
@@ -101,8 +118,9 @@ const AlertText = styled.p`
   display: flex;
   align-items: center;
   gap: 10px;
+  width: auto !important;
 
-  span{
+  span {
     padding-right: 0.5rem;
     font-size: 1rem;
   }
@@ -116,16 +134,17 @@ const PoliceInfo = styled.div`
 `;
 
 const DivAlertText = styled.div`
- display: flex;
- flex-direction: column;
- border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const DivColor = styled.div`
   background: ${({ theme }) => theme.colors.backgroundGreen};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
   margin: 0;
-  padding:0;
+  padding: 0;
   width: 100%;
   height: 2rem;
 `;
@@ -134,6 +153,7 @@ const DivTexts = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  width: 100%;
 `;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
@@ -143,33 +163,36 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     <ModalOverlay>
       <ModalContainer>
         <ModalHeader>
-          <div>SkillSwap <span>Safety</span></div>
+          <div>
+            SkillSwap Safety
+          </div>
           <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
         </ModalHeader>
-        <DivRoute>C:\ User\ Documents\ SafetyTyps</DivRoute>
+        <DivRoute>C:\ User\ Documents\ SafetyTips</DivRoute>
         <ModalContent>
-          {/* Left section with the tips */}
+          {/* Left section with the report form */}
           <LeftSection>
-            <ReportForm/>
+            {/* Pasar la función onClose como prop */}
+            <ReportForm closeModal={onClose} />
           </LeftSection>
 
           {/* Right section with warnings */}
           <RightSection>
             <DivAlertText>
-            <DivColor /> 
-            <DivTexts>
-            <AlertText>
-              <span>⚠️</span> No dudes en reportar. La seguridad mutua es primera.
-            </AlertText>
-            <AlertText>
-              <span>🔵</span> En el panel de Ayuda del User puedes ver más sobre Reportes y Seguridad.
-            </AlertText>
-            <AlertText>
-              <span>⛔</span> Cualquier tipo de abuso o actividad ilegal nos interpela a tomar medidas.
-            </AlertText>
-            </DivTexts>  
+              <DivColor />
+              <DivTexts>
+                <AlertText>
+                  <span>⚠️</span> No dudes en reportar.
+                </AlertText>
+                <AlertText>
+                  <span>🔵</span> La seguridad es lo primero.
+                </AlertText>
+                <AlertText>
+                  <span>⛔</span> Reprobamos cualquier tipo de abuso o ilegalidad.
+                </AlertText>
+              </DivTexts>
             </DivAlertText>
-        
+
             <PoliceInfo>
               Policía Nacional - CAI Virtual <br />
               Línea Nacional: 0 8000 91 1190 <br />

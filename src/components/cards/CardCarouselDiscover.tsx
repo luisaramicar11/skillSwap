@@ -1,69 +1,66 @@
+"use client"
 import React from "react";
 import styled from "styled-components";
 
 // Interfaz para los props de la Card
-interface CardProps {
-  title: string;
+interface ICardCarouselProps {
+  name: string;
   urlImage: string;
-  rating: number; // Añadido para las estrellas
+  category: string;
 }
 
 // Estilos para el Card
 const CardContainer = styled.div`
-  margin-top: 2rem;
-  padding: 10px;
+  padding-bottom: 10px;
   border-radius: 10px;
   text-align: center;
-  background: #fff; /* Fondo blanco para la tarjeta */
+  max-width: 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
 `;
 
 const CardImage = styled.img`
-  width: 10rem; /* Tamaño fijo para una imagen circular */
-  height: 10rem; /* Debe ser igual al ancho para mantener la forma circular */
-  object-fit: cover; /* Asegura que la imagen cubra el área del contenedor */
-  border-radius: 50%; /* Redondea la imagen en forma de círculo */
-  display: block; /* Asegura que la imagen se comporte como un bloque */
-  margin: 0 auto; /* Centra la imagen dentro del contenedor */
+  border: 1px solid ${({ theme }) => theme.colors.bgBanner};
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
 `;
 
 const CardContent = styled.div`
-  padding: 15px;
-  text-align: center; /* Centra el texto */
+  padding: 10px;
+  text-align: center;
   flex-grow: 1;
 `;
 
 const CardTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  color: #000;
-  margin: 0 auto;
+  width: max-content;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin: 0;
+  padding: 0;
 `;
 
-const StarsContainer = styled.div`
+const CategoryContainer = styled.p`
   display: flex;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const Star = styled.span`
-  color: gold;
-  font-size: 20px;
-  margin: 0 2px;
-`;
-
-const Card: React.FC<CardProps> = ({ title, urlImage, rating }) => {
+const Card: React.FC<ICardCarouselProps> = ({ name, urlImage, category }) => {
   return (
     <CardContainer>
-      <CardImage src={urlImage} alt={title} />
+      <CardImage src={urlImage} alt={name} />
       <CardContent>
-        <CardTitle>{title}</CardTitle>
-        <StarsContainer>
-          {[...Array(5)].map((_, index) => (
-            <Star key={index}>
-              {index < rating ? "★" : "☆"}{" "}
-              {/* Muestra estrellas llenas o vacías */}
-            </Star>
-          ))}
-        </StarsContainer>
+        <CardTitle>{name}</CardTitle>
+        <CategoryContainer>
+          {category}
+        </CategoryContainer>
       </CardContent>
     </CardContainer>
   );

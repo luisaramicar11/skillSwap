@@ -1,17 +1,18 @@
-// pages/login/LoginPage.tsx
 "use client";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/src/app/redux/slices/authSlice";
+import {IUserLoginResponse } from "../../../models/login.model"
 import { toast } from "react-toastify";
 import { AppDispatch } from "@/src/app/redux/store";
-import InputSingUp from "../../../components/ui/inputs/InputAuth";
+import InputSingUp from "../../ui/inputs/InputAuth";
 import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
 import Label from "../../ui/labels/LabelAuth";
-import { handlePageChange } from "@/src/utils/handlePageTheme";
+import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
 import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
+import { RootState } from '../../../app/redux/store';
 
 // Styled components
 import {
@@ -27,7 +28,7 @@ import {
 export default function LoginPage() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const { loading } = useSelector((state: any) => state.auth);
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   const [form, setForm] = useState({
     email: "",
@@ -58,29 +59,37 @@ export default function LoginPage() {
     const resultAction = await dispatch(loginUser({ email, password }));
 
     if (loginUser.fulfilled.match(resultAction)) {
-      const token = resultAction.payload?.data.token;
-      const role = resultAction.payload?.data.role;
-      const idUser = resultAction.payload?.data.id;
-
-      if (token) {
-        toast.success("Login exitoso!");
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("userId", idUser.toString());
-        document.cookie = `authToken=${token}; path=/;`;
-        console.log(localStorage.getItem("authToken"));
-
-        if (role === 1) {
-          router.push("/admin");
-        } else if (role === 2) {
-          router.push("/user");
-        } else {
-          toast.error("Rol no reconocido.");
-        }
-      }
+      handleLoginSuccess(resultAction.payload);
     } else {
       toast.error("Error al intentar iniciar sesión.");
     }
   }
+
+  const handleLoginSuccess = (payload: IUserLoginResponse ) => {
+    const token = payload?.data.response.token;
+    const role = payload?.data.response.role;
+    const idUser = payload?.data.response.id;
+
+    if (token) {
+      toast.success("Login exitoso!", {
+        style: {
+          marginTop: '10px', // Cambia el padding
+        },
+      });
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("userId", idUser.toString());
+      document.cookie = `authToken=${token}; path=/;`;
+      console.log(localStorage.getItem("authToken"));
+
+      if (role === 1) {
+        router.push("/admin");
+      } else if (role === 2) {
+        router.push("/user");
+      } else {
+        toast.error("Rol no reconocido.");
+      }
+    }
+  };
 
   return (
     <Container>

@@ -3,7 +3,10 @@ import { createGlobalStyle } from "styled-components";
 import { Urbanist, Baskervville } from "next/font/google";
 import { IGlobalTheme } from "../models/globalTheme.model";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 const baskervville = Baskervville({
     weight: '400',
@@ -14,11 +17,11 @@ const baskervville = Baskervville({
 // Define los labels que deberían establecer el tema en oscuro
 export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
 
-// Setting our Global Theme
+// Configuramos nuestro Global Theme
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
-        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgBanner: 'rgba(0, 0, 0, 0.0)',
         bgMainOpacity:'#0000007f',
         bgSidebar: '#ffffff',
         bgPink: '#FFF4F4',
@@ -48,6 +51,7 @@ export const GlobalTheme: IGlobalTheme = {
         borderAuthRight: '#F0AC27',  
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientSecondary: 'linear-gradient(270deg, #F0AC2799 20%,  #da731e99 80%, #ea242499 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
@@ -55,7 +59,7 @@ export const GlobalTheme: IGlobalTheme = {
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
-        bgNavbar:'rgba(255, 255, 255, 0.025)',
+        bgNavbar:'#222222',
         bgBanner: 'rgba(0, 0, 0, 0.1)',
         bgMainOpacity:'#0000007f',
         bgSidebar: 'rgba(255, 255, 255)',
@@ -85,16 +89,15 @@ export const GlobalDarkTheme: IGlobalTheme = {
         borderAuthRight: '#FFFFFF',     
         gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        gradientSecondary: 'linear-gradient(270deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 
-
-// Global styling for essential HTML elements
+// Global styling para elementos HTML importantes
 export const GlobalStyle = createGlobalStyle`
 
-/* styles/globals.css */
 html {
 
     background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -130,6 +133,9 @@ p {
     line-height: 1.5;
     font-weight: 300;
     margin: 0;
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 } */
 
 .gradient-bg-primary {

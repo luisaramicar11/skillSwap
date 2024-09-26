@@ -1,24 +1,28 @@
 "use client";
-import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
-import { IUser } from "../../models/admin.users.model";
+import React, { useEffect, useState } from "react";
+import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
 const Form = styled.form`
-  padding: 15px;
-  border-radius: 20px;
-  width: 50%;
+  padding: 30px;
+  width: 100%; /* Cambiado a 100% para ser más responsivo */
+  max-width: 600px; /* Añadido un ancho máximo */
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
+  gap: 10px;
 `;
 
 const Input = styled.input`
+  width: 100%; /* Cambiado a 100% para ser responsivo */
   border-radius: 10px;
   border: 1px #ccc solid;
   padding: 7px;
   font-size: small;
   color: black;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem; /* Ajuste del tamaño de fuente en pantallas más pequeñas */
+  }
 `;
 
 const Button = styled.button`
@@ -27,249 +31,255 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px green solid;
-  color: green;
+  border: 1px grey solid;
+  color: black;
   cursor: pointer;
   background: none;
   padding: 5px 10px;
 
   &:hover {
-    background-color: green;
+    background-color: orange;
     color: white;
   }
 `;
 
 const Div = styled.div`
-  margin: 15px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 0.5rem;
 `;
 
-const Title = styled.h2`
+const Title = styled.p`
   margin-top: 15px;
   text-align: center;
   margin-bottom: 20px;
   color: black;
-  font-weight: bold;
-  font-size: 15pt;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
-interface CreateUserFormProps {
-  createData: (user: Omit<IUser, "id">) => void; // Cambia a Omit<IUser, 'id'>
-  updateData: (user: IUser) => void;
-  dataToEdit: IUser | null;
-  setDataToEdit: (data: IUser | null) => void;
+const DivInfo = styled.div`
+  font-size: 0.8rem;
+  text-align: center;
+`;
+
+const DivButtton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+interface EditUserFormProps {
+  updateData: (user: IUserUpdateAdmin) => void;
+  dataToEdit: IUserUpdateAdmin | null;
+  setDataToEdit: (data: IUserUpdateAdmin | null) => void;
 }
 
-const initialForm: Omit<IUser, "id"> = {
-  name: "",
-  lastName: "",
-  jobTitle: "",
-  description: "",
-  dateBirthday: new Date(),
-  urlImage: "",
-  email: "",
-  category: "",
-  skills: [],
-  phoneNumber: "",
-  urlLinkedin: "",
-  urlBehance: "",
-  urlGithub: "",
-  role: "",
-  idState: 0,
-};
-
-const CreateUserForm: React.FC<CreateUserFormProps> = ({
-  createData,
+const FormUsers: React.FC<EditUserFormProps> = ({
   updateData,
   dataToEdit,
   setDataToEdit,
 }) => {
-  const [form, setForm] = useState<Omit<IUser, "id">>(initialForm);
+  const initialFormState: IUserUpdateAdmin = {
+    name: "",
+    lastName: "",
+    abilities: "",
+    category: "",
+    idStateUser: 0,
+    idRoleUser: 0,
+    suspensionDate: null,
+    reactivationDate: null,
+    urlImage: "",
+    birthdate: "",
+  };
+
+  const [form, setForm] = useState<IUserUpdateAdmin>(initialFormState);
 
   useEffect(() => {
+    const initialFormState: IUserUpdateAdmin = {
+      name: "",
+      lastName: "",
+      abilities: "",
+      category: "",
+      idStateUser: 0,
+      idRoleUser: 0,
+      suspensionDate: null,
+      reactivationDate: null,
+      urlImage: "",
+      birthdate: "",
+    };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
-      setForm(userWithoutId);
+      console.log(id);
+      setForm({
+        ...userWithoutId,
+        suspensionDate: userWithoutId.suspensionDate || null,
+        reactivationDate: userWithoutId.reactivationDate || null,
+      });
     } else {
-      setForm(initialForm);
+      setForm(initialFormState);
     }
   }, [dataToEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]:
-        name === "skills"
-          ? value.split(",").map((skill) => skill.trim())
-          : value,
-    });
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === "suspensionDate" || name === "reactivationDate" ? (value ? value : null) : value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (dataToEdit) {
+      const userToUpdate = {
+        id: dataToEdit.id, // Mantén el ID existente
+        name: form.name,
+        lastName: form.lastName,
+        urlImage: form.urlImage,
+        jobTitle: form.jobTitle,
+        description: form.description,
+        birthdate: form.birthdate, // Mantener el formato de string
+        email: form.email,
+        phoneNumber: form.phoneNumber,
+        category: form.category,
+        abilities: form.abilities,
+        urlLinkedin: form.urlLinkedin,
+        urlGithub: form.urlGithub,
+        urlBehance: form.urlBehance,
+        idStateUser: form.idStateUser,
+        idRoleUser: form.idRoleUser,
+        suspensionDate: form.suspensionDate,
+        reactivationDate: form.reactivationDate,
+      };
 
-    if (!dataToEdit) {
-      createData(form); // Crear nuevo usuario
-    } else {
-      updateData({ ...form, id: dataToEdit.id }); // Actualizar usuario existente
+      // Envía solo las propiedades necesarias
+      updateData(userToUpdate);
+      handleReset();
     }
-    handleReset(e);
   };
 
-  const handleReset = (
-    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    setForm(initialForm);
+  const handleReset = () => {
+    setForm(initialFormState);
     setDataToEdit(null);
-  };
-
-  // Convierte una fecha a formato YYYY-MM-DD
-  const formatDate = (date: Date | string) => {
-    if (typeof date === 'string') {
-      return date; // Suponiendo que ya está en formato correcto
-    }
-    return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
   };
 
   return (
     <main>
-      <Title>{dataToEdit ? "Editar Usuario" : "Agregar Usuario"}</Title>
+      <Title>Editar Usuario</Title>
+      <DivInfo>Los códigos de los estados de los usuarios son: 1. Activo, 2. Inactivo, 3. Suspendido </DivInfo>
       <Div>
         <Form onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Nombre del usuario"
-            onChange={handleChange}
-            value={form.name}
-            required
-          />
-          <Input
-            type="text"
-            name="lastName"
-            placeholder="Apellidos del usuario"
-            onChange={handleChange}
-            value={form.lastName}
-            required
-          />
-          <Input
-            type="text"
-            name="jobTitle"
-            placeholder="Cargo/profesión"
-            onChange={handleChange}
-            value={form.jobTitle}
-            required
-          />
-          <Input
-            type="text"
-            name="description"
-            placeholder="Descripción"
-            onChange={handleChange}
-            value={form.description}
-            required
-          />
-          <Input
-            type="date"
-            name="dateBirthday"
-            placeholder="Fecha de nacimiento"
-            onChange={handleChange}
-            value={formatDate(form.dateBirthday)}
-            required
-          />
-          <Input
-            type="text"
-            name="urlImage"
-            placeholder="Imagen"
-            onChange={handleChange}
-            value={form.urlImage}
-            required
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            value={form.email}
-            required
-          />
-          <Input
-            type="text"
-            name="category"
-            placeholder="Escribe la categoría"
-            onChange={handleChange}
-            value={form.category}
-            required
-          />
-          <Input
-            type="text"
-            name="skills"
-            placeholder="Escribe las habilidades (separadas por comas)"
-            onChange={handleChange}
-            value={form.skills.join(", ")} // Mostrar como cadena
-            required
-          />
-          <Input
-            type="text"
-            name="phoneNumber"
-            placeholder="Escribe el teléfono"
-            onChange={handleChange}
-            value={form.phoneNumber}
-            required
-          />
-          <Input
-            type="text"
-            name="urlLinkedin"
-            placeholder="Escribe la url del Linkedin"
-            onChange={handleChange}
-            value={form.urlLinkedin}
-            required
-          />
-          <Input
-            type="text"
-            name="urlBehance"
-            placeholder="Escribe la url del Behance"
-            onChange={handleChange}
-            value={form.urlBehance}
-            required
-          />
-          <Input
-            type="text"
-            name="urlGithub"
-            placeholder="Escribe la url del Github"
-            onChange={handleChange}
-            value={form.urlGithub}
-            required
-          />
-          <Input
-            type="text"
-            name="role"
-            placeholder="Rol del usuario"
-            onChange={handleChange}
-            value={form.role}
-            required
-          />
-          <Input
-            type="text"
-            name="idState"
-            placeholder="Id del estado"
-            onChange={handleChange}
-            value={form.idState}
-            required
-          />
           <Div>
-            <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={handleReset}>Limpiar</Button>
+            <label htmlFor="name">Nombre del usuario</label>
+            <Input
+              type="text"
+              name="name"
+              id="name"  // Añadido para asociar con el label
+              placeholder="Nombre del usuario"
+              onChange={handleChange}
+              value={form.name}
+              required
+            />
           </Div>
+          <Div>
+            <label htmlFor="lastName">Apellidos del usuario</label>
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"  // Añadido para asociar con el label
+              placeholder="Apellidos del usuario"
+              onChange={handleChange}
+              value={form.lastName}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="abilities">Habilidades</label>
+            <Input
+              type="text"
+              name="abilities"
+              id="abilities"  // Añadido para asociar con el label
+              placeholder="Habilidades"
+              onChange={handleChange}
+              value={form.abilities}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="category">Categoría</label>
+            <Input
+              type="text"
+              name="category"
+              id="category"  // Añadido para asociar con el label
+              placeholder="Categoría"
+              onChange={handleChange}
+              value={form.category}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="idStateUser">ID del Estado de Usuario</label>
+            <Input
+              type="number"
+              name="idStateUser"
+              id="idStateUser"  // Añadido para asociar con el label
+              placeholder="idStateUser"
+              onChange={handleChange}
+              value={form.idStateUser}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="idRoleUser">ID del Rol de Usuario</label>
+            <Input
+              type="number"
+              name="idRoleUser"
+              id="idRoleUser"  // Añadido para asociar con el label
+              placeholder="idRoleUser"
+              onChange={handleChange}
+              value={form.idRoleUser}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="suspensionDate">Fecha de Suspensión</label>
+            <Input
+              type="date"
+              name="suspensionDate"
+              id="suspensionDate"  // Añadido para asociar con el label
+              onChange={handleChange}
+              value={form.suspensionDate || ""}
+            />
+          </Div>
+          <Div>
+            <label htmlFor="reactivationDate">Fecha de Reactivación</label>
+            <Input
+              type="date"
+              name="reactivationDate"
+              id="reactivationDate"  // Añadido para asociar con el label
+              onChange={handleChange}
+              value={form.reactivationDate || ""}
+            />
+          </Div>
+          <DivButtton>
+            <Button type="submit">Actualizar</Button>
+            <Button type="button" onClick={handleReset}>
+              Limpiar
+            </Button>
+          </DivButtton>
         </Form>
       </Div>
     </main>
   );
 };
 
-export default CreateUserForm;
+export default FormUsers;
+
+
+
+
+
+
 

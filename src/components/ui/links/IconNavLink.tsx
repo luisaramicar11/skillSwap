@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { ILinkProps } from '@/src/models/link.model';
-import { handlePageChange } from '@/src/utils/handlePageTheme';
+import { handlePageChange } from '../../../lib/utils/handlePageTheme';
 
 const IconNavLinkComponent = styled(Link)`
   text-decoration: none;

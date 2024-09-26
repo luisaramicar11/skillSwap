@@ -1,5 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useState } from "react";
+
 import styled from "styled-components";
 
 interface ModalPasswordRecoveryProps {
@@ -14,8 +15,8 @@ const ModalOverlay = styled.div<{ isOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); // Fondo oscuro
-  z-index: 1000; // Asegura que el modal esté enfrente de todo
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 `;
 
 const ModalContent = styled.div`
@@ -26,9 +27,14 @@ const ModalContent = styled.div`
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   z-index: 1001;
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+    width: 95%;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -65,15 +71,38 @@ const SubmitButton = styled.button`
 `;
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
-  const router = useRouter(); // Uso del hook useRouter
+  const [email, setEmail] = useState("");
 
-  // Maneja el submit del formulario
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Previene el comportamiento por defecto del formulario
-    // Aquí puedes agregar lógica para manejar el envío del correo electrónico
 
-    // Redirigir a la página de recuperación de contraseña
-    router.push('/recoverPassword'); // Cambia '/reset-password' por la ruta a la que quieras redirigir
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('https://skillswapriwi.azurewebsites.net/api/Auth/RequestEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error del servidor: ${errorText}`);
+      }
+
+      const jsonResponse = await response.json();
+      console.log('Correo enviado:', jsonResponse);
+      alert('Correo enviado correctamente');
+    } catch (error: unknown) {
+      let errorMessage = 'Ocurrió un error desconocido';
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      alert(`Error al enviar el correo: ${errorMessage}`);
+    }
   };
 
   return (
@@ -87,6 +116,8 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
             type="email"
             id="email-recovery"
             placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <SubmitButton type="submit">

@@ -16,30 +16,27 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://skillswapriwi.azurewebsites.net/api/Auth/login",
+        "https://skillswapriwi.azurewebsites.net/api/Auth/PostAuthLogin",
         {
           method: "POST",
           headers: {
             "accept": "*/*",
             "Content-Type": "application/json",
-            // Agregar token aquí si es necesario para la autenticación
-             "Authorization": `Bearer ${localStorage.getItem('authToken')}`
           },
           body: JSON.stringify(credentials),
         }
       );
 
       if (!response.ok) {
-        // Si la respuesta no es correcta (4xx o 5xx)
         const errorData = await response.json();
         return rejectWithValue(errorData.error.message || "An error occurred");
       }
 
       const data = await response.json();
+      console.log(data);
       return data;
-    } catch (error: any) {
-      // Si hay un error de red u otro problema
-      return rejectWithValue(error.message || "An error occurred");
+    } catch (error) {
+      return rejectWithValue(error || "An error occurred");
     }
   }
 );
@@ -47,9 +44,9 @@ export const loginUser = createAsyncThunk<IUserLoginResponse, IUserLoginRequest>
 // Acción asíncrona para registro
 export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
   "auth/registerUser",
-  async (newUser, { rejectWithValue }) => {
+  async (newUser, { dispatch, rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost", {
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/api/UsersPost/PostUserCreate", {
         method: "POST",
         headers: {
           "accept": "*/*",
@@ -59,16 +56,23 @@ export const registerUser = createAsyncThunk<IUserLoginResponse, IUserRegister>(
       });
 
       if (!response.ok) {
-        // Si la respuesta no es exitosa (4xx o 5xx)
         const errorData = await response.json();
         return rejectWithValue(errorData.message || "An error occurred");
       }
 
       const data = await response.json();
+      
+      // Inicia sesión automáticamente después de registrar el usuario
+      const loginCredentials: IUserLoginRequest = {
+        email: newUser.email,
+        password: newUser.password,
+      };
+
+      await dispatch(loginUser(loginCredentials)); // Ejecutar loginUser después de registrar
+
       return data;
-    } catch (error: any) {
-      // Si hay un error de red u otro problema
-      return rejectWithValue(error.message || "An error occurred");
+    } catch (error) {
+      return rejectWithValue(error || "An error occurred");
     }
   }
 );
@@ -97,8 +101,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        localStorage.setItem("authToken", action.payload.data.token);
-        localStorage.setItem("userId", action.payload.data.id.toString()); 
+        localStorage.setItem("authToken", action.payload.data.response.token);
+        localStorage.setItem("userId", action.payload.data.response.id.toString());
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -113,7 +117,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuthenticated = true;
       })
-      .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
       });

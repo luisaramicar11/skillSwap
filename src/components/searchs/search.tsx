@@ -9,46 +9,34 @@ interface SearchProps {
 
 const Container = styled.div`
   display: flex;
-  gap: 2rem;
-  justify-content: center;
   align-items: center;
-  width: 90%;
-  margin: 4rem auto;
-
-  @media (max-width: 480px) {
-    width: 50%;
-    margin: 2rem auto;
-  }
-
-  @media (max-width: 768px) {
-    width: 50%;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  @media (min-width: 1024px) {
-    width: 50%;
-    margin: 2rem auto;
-  }
+  justify-content: center !important;
+  gap: 1rem;
+  width: 100%;
+  height: 2rem;
+  margin-top: 2.5rem;
 `;
 
 const Label = styled.label`
-  margin-bottom: 5px;
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #000;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  opacity: 0.25;
+  display: flex;
+  align-items: center;
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
+  width: 70%;
+  max-width: 1000px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 5px;
-  margin-bottom: 20px;
+  margin: 5px 0;
 
   &:focus {
-    border-color: #0070f3;
+    border-color: ${({ theme }) => theme.colors.textSecondary};
     outline: none;
   }
 `;
@@ -64,10 +52,10 @@ const Search: React.FC<SearchProps> = ({ label, onSearch }) => {
   };
 
   return (
-    <div>
-      <label>{label}</label>
-      <Input type="text" value={query} onChange={handleChange} placeholder="Buscar..." />
-    </div>
+    <Container>
+      <Label>{label}</Label>
+      <Input type="text" value={query} onChange={handleChange} placeholder="¿Qué quieres aprender hoy...?" />
+    </Container>
   );
 };
 

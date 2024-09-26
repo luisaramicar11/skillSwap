@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaCheck, FaTimes, FaClock } from "react-icons/fa";
+import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
 import { IProfileFixedCardProps } from "@/src/models/userCards.model";
 
@@ -16,7 +16,7 @@ const ProfileCardContainer = styled.div`
   padding-top: 0;
   overflow: hidden;
   border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
 
   @media (max-width: 768px) {
     display: none !important;
@@ -31,7 +31,7 @@ const StatusSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   margin-bottom: 10px;
   gap: 1.5rem;
   padding-left: 1.5rem;
@@ -51,7 +51,7 @@ const StatusSection = styled.div`
   }
 
   .rejected {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textRed};
 
     & p {
@@ -61,7 +61,7 @@ const StatusSection = styled.div`
   }
 
   .accepted {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textBlueDark};
 
     & p {
@@ -71,7 +71,7 @@ const StatusSection = styled.div`
   }
 
   .sent {
-    opacity: 0.7;
+    opacity: 0.5;
     color: ${({ theme }) => theme.colors.textSecondary};
 
     & p {
@@ -81,12 +81,12 @@ const StatusSection = styled.div`
   }
 
   .inbox {
-    opacity: 0.7;
-    color: ${({ theme }) => theme.colors.textYellow};
+    opacity: 0.5;
+    color: ${({ theme }) => theme.colors.textOrange};
 
     & p {
       font-weight: 500;
-      color: ${({ theme }) => theme.colors.textYellow};
+      color: ${({ theme }) => theme.colors.textOrange};
     }
   }
 `;
@@ -106,7 +106,6 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
   ultimaPendiente,
   ultimaCancelada,
   ultimoEnviado,
-  conteoConexiones,
   conteoPendientes,
   conteoCanceladas,
   conteoEnviadas,
@@ -140,7 +139,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
         <div className="status-item sent">
           <H2StatusSection>Enviadas</H2StatusSection>
           <div className="status-content">
-            <FaClock className="icon" />
+            <FaArrowUp className="icon" />
             <p>
               {conteoEnviadas}: {ultimoEnviado}
             </p>

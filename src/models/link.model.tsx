@@ -1,10 +1,12 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 export interface ILinkProps {
+    id?: string;
+    clickedUserId?: (id: string) => void;
     href: string;
-    label?: string;  // Mantén esto opcional en caso de usar solo children
-    target?: string;
+    label?: string; 
+    target?: '_blank' | '_self'; // Agregado para especificar el tipo de target
     icon?: ReactNode;
-    onClick?: (label: string) => string;
-    children?: ReactNode;  // Nuevo, para aceptar children
+    onClick?: ((label: string) => string) | (() => void);
+    children?: ReactNode;
 }

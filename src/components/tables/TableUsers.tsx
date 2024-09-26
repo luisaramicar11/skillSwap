@@ -1,8 +1,8 @@
 import React from "react";
-import TableRow from "./TableRowUsers";
-import { TableDataUsers } from "../../models/admin.users.model";
+import TableRowUser from "./TableRowUsers"; // Asegúrate de que la ruta sea correcta
+import { IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
 import styled from "styled-components";
-import TableHeader from "./TableHeadUsers";
+import TableHeaderUser from "./TableHeadUsers"; // Asegúrate de que la ruta sea correcta
 
 const TableContainer = styled.div`
   padding: 20px;
@@ -19,12 +19,19 @@ const TableStyle = styled.table`
   min-width: 1000px; /* Opcional: define un ancho mínimo para forzar el scroll horizontal si hay muchas columnas */
 `;
 
-
-const Title = styled.h3`
+const Title = styled.h2`
+text-align: center;
+  margin-top: 0 !important;
   text-align: center;
-  color: #333;
-  font-weight: bold;
   margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 40px;
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  color: transparent;
+  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
 `;
 
 const Td = styled.td`
@@ -42,20 +49,26 @@ const Tr = styled.tr`
   }
 `;
 
-const TableUser: React.FC<TableDataUsers> = ({
+interface TableUserProps {
+  data: IUserUpdateAdmin[];
+  setDataToEdit: (user: IUserUpdateAdmin) => void;
+  deleteData: (userId: number) => void;
+}
+
+const TableUser: React.FC<TableUserProps> = ({
   data,
   setDataToEdit,
   deleteData,
 }) => {
   return (
     <TableContainer>
-      <Title>Tabla de usuarios</Title>
+      <Title>Tabla de Usuarios</Title>
       <TableStyle>
-        <TableHeader />
+        <TableHeaderUser />
         <tbody>
           {data.length ? (
             data.map((user) => (
-              <TableRow
+              <TableRowUser
                 key={user.id}
                 user={user}
                 setDataToEdit={setDataToEdit}
@@ -64,7 +77,7 @@ const TableUser: React.FC<TableDataUsers> = ({
             ))
           ) : (
             <Tr>
-              <Td colSpan={17}>Sin datos</Td>
+              <Td colSpan={8}>Sin datos</Td> {/* Cambia el valor de colSpan según el número de columnas en tu tabla */}
             </Tr>
           )}
         </tbody>
@@ -74,3 +87,5 @@ const TableUser: React.FC<TableDataUsers> = ({
 };
 
 export default TableUser;
+
+

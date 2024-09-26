@@ -9,7 +9,7 @@ export interface IUserRegister {
     urlLinkedin: string | null;  
     urlGithub: string | null;  
     urlBehance?: string | null; 
-    urlImage: string | null;   
+    urlImage: string;   
     phoneNumber: string | null;    
     category: string ;  
     abilities: string ;         
@@ -21,4 +21,3 @@ export interface IUserRegisterResponse {
       "text": string;
     }
 }
-  

@@ -5,7 +5,7 @@ export interface IResponseUsers {
 }
 
 export interface Data {
-    obj: IUser[];
+    response: IUser[];
 }
 
 export interface IUser {
@@ -15,17 +15,43 @@ export interface IUser {
     urlImage:        string;
     jobTitle?:        string;
     description?:     string;
-    birthdate?:       Date;
+    birthdate?:       string;
     email?:           string;
     phoneNumber?:     string;
     category?:        string;
-    abilities?:       string[];
-    abilityCategory?: string;
+    abilities?:       string;
     urlLinkedin?:     URL;
     urlGithub?:       URL;
     urlBehance?:      URL;
+    idStateUser?:      number;
+    idRoleUser?:       number;
+    suspensionDate?:   string | null,
+    reactivationDate?: string | null,
+    nameStateUser?:    string,
     roleName?:        RoleName;
 }
+
+export interface IUserUpdateAdmin {
+    id?:              number;
+    name?:            string;
+    lastName?:        string;
+    urlImage:        string;
+    jobTitle?:        string;
+    description?:     string;
+    birthdate?:       string;
+    email?:           string;
+    phoneNumber?:     string;
+    category?:        string;
+    abilities?:       string;
+    urlLinkedin?:     URL;
+    urlGithub?:       URL;
+    urlBehance?:      URL;
+    idStateUser?:      number;
+    idRoleUser?:       number;
+    suspensionDate?:   string | null,
+    reactivationDate?: string | null,
+}
+
 
 export enum RoleName {
     Administrador = "Administrador",

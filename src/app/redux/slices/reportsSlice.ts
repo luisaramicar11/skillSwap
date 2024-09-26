@@ -19,7 +19,7 @@ export const fetchReports = createAsyncThunk<IReportGet[], void, { rejectValue: 
   "reports/fetchReports",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("https://skillswapriwi.azurewebsites.net/ReportGet/Reports");
+      const response = await fetch("https://skillswapriwi.azurewebsites.net/ReportGet/GetReportsAll");
       if (!response.ok) {
         const errorData = await response.json();
         console.log(errorData)
@@ -30,8 +30,8 @@ export const fetchReports = createAsyncThunk<IReportGet[], void, { rejectValue: 
       const reports = data.data.response; // Accedes a 'obj' correctamente
 
       return reports as IReportGet[]; // Devuelves el array de reportes con el tipo adecuado
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error) {
+      return rejectWithValue(error as string);
     }
   }
 );
@@ -79,9 +79,9 @@ const usersSlice = createSlice({
         state.loading = false;
         state.reports = action.payload;
       })
-      .addCase(fetchReports.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchReports.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   }  
 });

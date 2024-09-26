@@ -1,5 +1,8 @@
+"use client";
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { toast } from "react-toastify";
+import { createConnectionRequest } from '../../lib/api/requests';  // Importa la función centralizada
 
 export const FormContainer = styled.form`
   display: flex;
@@ -31,25 +34,53 @@ const SendButton = styled.button`
   font-weight: 800;
 `;
 
-const ConnectionRequestForm: React.FC = () => {
-  const [message, setMessage] = useState('');
+interface IConnectionRequestFormProps {
+  idReceivingUser: number;
+  onClose: () => void;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
+const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceivingUser, onClose }) => {
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica para enviar la solicitud de conexión
-    console.log({ message });
+    setLoading(true);
+    setError(null);
+
+    try {
+      await createConnectionRequest(idReceivingUser, message);  // Llamamos a la función centralizada
+      setMessage('');
+      toast.success("Solicitud enviada con éxito");
+
+      // Cierra el modal después de enviar con éxito
+      onClose();
+
+    } catch (err) {
+      console.log(err)
+      toast.error("Error al enviar la solicitud");
+      setError("Error al enviar la solicitud");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <FormContainer onSubmit={handleSubmit}>
+      {error && <p>{error}</p>}
       <TextArea 
         placeholder="Type here the content for your connection request..." 
         value={message} 
         onChange={(e) => setMessage(e.target.value)} 
+        disabled={loading}
       />
-      <SendButton type="submit">ENVIAR</SendButton>
+      <SendButton type="submit" disabled={loading}>
+        {loading ? "Enviando..." : "ENVIAR"}
+      </SendButton>
     </FormContainer>
   );
 };
 
 export default ConnectionRequestForm;
+
