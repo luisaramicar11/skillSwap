@@ -10,19 +10,32 @@ const TableContainer = styled.div`
   background-color: white;
   max-height: 400px;
   overflow-y: auto;
+  margin-bottom: 54px;
 `;
 
-const Title = styled.h3`
+const Title = styled.h2`
   text-align: center;
-  color: #333;
-  font-weight: bold;
+  margin-top: 0 !important;
+  text-align: center;
   margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 40px;
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  color: transparent;
+  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
 `;
 
 const TableStyle = styled.table`
-  box-shadow: 1px 2px 4px 3px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   border-collapse: collapse;
+
+  & caption{
+    margin-bottom: 20px;
+  }
 `;
 
 const Td = styled.td`
@@ -45,7 +58,7 @@ const TableReports: React.FC<TableDataReports> = ({ data, setDataToEdit, deleteD
     <TableContainer>
       <Title>Tabla de reportes</Title>
       <TableStyle>
-        <caption>Listado de reportes generados por los usuarios</caption>
+
         <TableHeader />
         <tbody>
           {data.length > 0 ? (

@@ -1,7 +1,8 @@
-"use client"
+"use client";
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { toast } from "react-toastify";
+import { createConnectionRequest } from '../../lib/api/requests';  // Importa la función centralizada
 
 export const FormContainer = styled.form`
   display: flex;
@@ -35,7 +36,7 @@ const SendButton = styled.button`
 
 interface IConnectionRequestFormProps {
   idReceivingUser: number;
-  onClose: () => void;  // Añadimos onClose como prop
+  onClose: () => void;
 }
 
 const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceivingUser, onClose }) => {
@@ -48,29 +49,8 @@ const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceiv
     setLoading(true);
     setError(null);
 
-    const idRequestingUser = parseInt(localStorage.getItem("userId") as string, 10);
-
-    const requestBody = {
-      disponibilitySchedule: "string",
-      description: message,
-      idReceivingUser,
-      idRequestingUser,
-    };
-
     try {
-      const response = await fetch('https://skillswapriwi.azurewebsites.net/api/RequestsPost/PostRequestCreate', {
-        method: 'POST',
-        headers: {
-          'accept': '*/*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al enviar la solicitud");
-      }
-
+      await createConnectionRequest(idReceivingUser, message);  // Llamamos a la función centralizada
       setMessage('');
       toast.success("Solicitud enviada con éxito");
 
@@ -102,3 +82,4 @@ const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceiv
 };
 
 export default ConnectionRequestForm;
+

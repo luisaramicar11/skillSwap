@@ -86,8 +86,8 @@ const Skills = styled.div`
   padding-bottom: 0rem;
 `;
 
-const Card: React.FC<IDiscoverCardProps> = ({ 
-  id, 
+const Card: React.FC<IDiscoverCardProps> = ({
+  id,
   fullName,
   jobTitle,
   qualification,
@@ -104,13 +104,17 @@ const Card: React.FC<IDiscoverCardProps> = ({
         <Name>{fullName}</Name>
         <p>{jobTitle}</p>
         <StarsContainer>
-          {[...Array(5)].map((_, index) => (
-            <Star key={index}>
-              {index < qualification ? "★" : "☆"}{" "}
-              {/* Muestra estrellas llenas o vacías */}
-            </Star>
-          ))}
+          {[...Array(5)].map((_, index) => {
+            const rating = Math.floor(qualification); // Redondea hacia abajo
+            return (
+              <Star key={index}>
+                {index < rating ? "★" : "☆"}{" "}
+                {/* Muestra estrellas llenas o vacías */}
+              </Star>
+            );
+          })}
         </StarsContainer>
+
         <Skills>
           <SkillTagTiny skillsArray={abilities} />
         </Skills>

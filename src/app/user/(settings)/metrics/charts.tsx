@@ -2,12 +2,13 @@
 import WidgetContainer from '@/src/components/containers/WidgetContainer/WidgetContainer';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Modal from "../../../../components/modals/ModalSafety";
-import {getRequestById} from "../../../../lib/api/requests"
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
-// Registramos los elementos de ChartJS para Bar Chart
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import Modal from "../../../../components/modals/ModalSafety"
+
+const MetricsContainer = styled.div`
+  margin: 54px 0;
+`;
+
+
 
 const PageContainer = styled.section`
   width: 100%;
@@ -35,9 +36,9 @@ const PageContainer = styled.section`
       font-size: 40px;
       border-bottom: 2px solid  ${({ theme }) => theme.colors.textYellow};
       background: ${({ theme }) => theme.colors.gradientSecondary};
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
   & h3 {
@@ -63,6 +64,16 @@ const PageContainer = styled.section`
   }
 `;
 
+//Container for page.tsx content
+const PageContentContainer = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
+
+//Containers for banner
 const Banner = styled.article`
   top: 0;
   padding: 20px;
@@ -78,16 +89,9 @@ const BannerBody = styled.div`
     width: 1000px !important;
     display: flex;
     justify-content: space-between;
-`;
+`
 
-const PageContentContainer = styled.article`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-`;
-
+//Container for INFO content
 const InfoPageContainer = styled.div`
   padding-top: 200px;
   width: 100%;
@@ -112,6 +116,7 @@ const PageBody = styled.div`
   padding: 2rem;
 `;
 
+//Containers for Widgets and Aside
 const WidgetBody = styled.div`
   padding: 20px 30px;
   width: 100%;
@@ -120,11 +125,27 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
+const DivDeactivateAccount = styled.div`
+width: 100%;
+display: flex;
+justify-content: end;
+align-items: end;
+padding: 2rem; 
+gap: 2rem;
+
+& div{
+  max-width: 400px;
+
+  & p {
+    font-size: 15px;
+  }
+}
+`;
+
 const SecurityButton = styled.button`
-  width: 25%;
-  padding: 10px;
+  width: 100%;
+  padding: 15px;
   font-size: 14px;
-  margin-top: 50px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
@@ -132,9 +153,9 @@ const SecurityButton = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.textSecondary};
   color: ${({ theme }) => theme.colors.textSecondary};
 
-  &:hover {
-    transform: scale(1.05);
-  }
+  & :hover {
+    transform: scale(1.05)
+    }
 `;
 
 const Security = styled.div`
@@ -142,40 +163,8 @@ const Security = styled.div`
   height: 100%;
 `;
 
-const DivSec = styled.div`
-margin-top: 1.5rem;
-`
-
-interface IRequestData {
-  message: string;
-  details: {
-      text: string;
-  };
-  data: {
-      response: IUserResponse;
-  };
-}
-
-interface IUserResponse {
-  idUsuario: number;
-  nombreUsuario: string;
-  solicitudes: ISolicitudes;
-}
-
-interface ISolicitudes {
-  ultimaAceptada: string;
-  ultimaPendiente: string;
-  ultimaCancelada: string;
-  ultimoEnviado: string;
-  conteoConexiones: number;
-  conteoAceptadas: number;
-  conteoPendientes: number;
-  conteoCanceladas: number;
-  conteoEnviadas: number;
-}
-
 const Metrics: React.FC = () => {
-  const [requestData, setRequestData] = useState<IRequestData | null>(null);
+  const [requestData, setRequestData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -183,19 +172,30 @@ const Metrics: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    const userIdString = localStorage.getItem("userId");
-    const userId = userIdString ? Number(userIdString) : null;
+    const userIdString = localStorage.getItem('userId');
+    const userId = userIdString ? Number(userIdString) : null; // Convertir a número
 
     if (userId === null) {
-      setError("ID de usuario no encontrado");
+      setError('ID de usuario no encontrado');
       setLoading(false);
       return;
     }
 
     const fetchRequestData = async () => {
       try {
-        const data = await getRequestById(Number(userId));
-        setRequestData(data);
+        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${userId}`, {
+          method: 'GET',
+          headers: {
+            'accept': '*/*',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos');
+        }
+
+        const data = await response.json();
+        setRequestData(data.data.response);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -209,67 +209,56 @@ const Metrics: React.FC = () => {
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // Datos para el gráfico de barras (Bar Chart)
-  const barData = {
-    labels: ["Aceptadas", "Pendientes", "Canceladas", "Enviadas"],
-    datasets: [
-      {
-        label: "Conteo de Solicitudes",
-        data: [
-          requestData?.data.response.solicitudes.conteoAceptadas,
-          requestData?.data.response.solicitudes.conteoPendientes,
-          requestData?.data.response.solicitudes.conteoCanceladas,
-          requestData?.data.response.solicitudes.conteoEnviadas,
-        ],
-        backgroundColor: [
-          "rgba(15, 200, 49, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 99, 132, 0.5)",
-        ],
-        borderColor: [
-          "rgba(15, 200, 49, 0.5)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 99, 132, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
   return (
     <PageContainer>
       <Banner>
         <BannerBody>
-          <h1>Métricas</h1>
+          <h1>Metricas</h1>
         </BannerBody>
       </Banner>
       <PageContentContainer>
         <InfoPageContainer>
           <PageContent>
             <PageBody>
+            <h2>{requestData.nombreUsuario}</h2>
+            <WidgetContainer>
               <WidgetBody>
-                <h2>Conteo de Solicitudes</h2>
-
-                {/* Gráfico de Barras (Bar Chart) */}
-                <Bar data={barData} options={{ responsive: true }} />
-
-                {/* Botón de seguridad */}
-                <DivSec>
-                <h2>Seguridad</h2>
-                </DivSec>
-                <SecurityButton onClick={openModal}>Acerca de tu seguridad</SecurityButton>
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
+          
+                 
+                  <h4>Ultima Aceptada</h4>{requestData.solicitudes.ultimaAceptada} <br />
+                  <br />
+                  <h4>Ultima Pendeinete</h4>{requestData.solicitudes.ultimaPendiente} <br />
+                  <br />
+                  <h4>Última Cancelada: </h4>{requestData.solicitudes.ultimaCancelada || 'N/A'} <br />
+                  <br />
+                  <h4>Último Enviado: </h4>{requestData.solicitudes.ultimoEnviado || 'N/A'} <br />
+                  <br />
+                  <h4>Conteo de Conexiones: </h4> {requestData.solicitudes.conteoConexiones} <br />
+                  <br />
+                  <h4>Conteo Aceptadas:</h4>{requestData.solicitudes.conteoAceptadas} <br />
+                  <br />
+                  <h4>Conteo Pendientes: </h4> {requestData.solicitudes.conteoPendientes} <br />
+                  <br />
+                  <h4>Conteo Canceladas: </h4> {requestData.solicitudes.conteoCanceladas} <br />
+                  <br />
+                  <h4>Conteo Enviadas:</h4> {requestData.solicitudes.conteoEnviadas} <br />
+                  
+      
               </WidgetBody>
+             
+           </WidgetContainer>
+           <Security>
+              <WidgetContainer>
+                <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
+              </WidgetContainer>
+            </Security>
             </PageBody>
           </PageContent>
         </InfoPageContainer>
       </PageContentContainer>
     </PageContainer>
   );
-
-
 };
 
 export default Metrics;

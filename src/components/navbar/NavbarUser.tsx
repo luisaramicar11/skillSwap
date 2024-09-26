@@ -13,9 +13,9 @@ import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 // Styled components
 const NavbarContainer = styled.div`
     position: fixed;
+    z-index: 10;
     width: 100%;
     top: 0;
-    z-index:10000;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};
     display: flex;
@@ -37,17 +37,19 @@ const SidebarLink = styled.p`
     font-size: 14px;
     width: max-content;
     transition: 0.4s;
+    cursor: pointer;
     gap: 10px;
 
     & small {
         margin: 0;
         padding: 0;
+        cursor: pointer;
     }
 
     &:hover {
+        transform: scale(0.95);
         transition: 0.4s;
-        font-weight: 600;
-        border-bottom: 1px solid ${({ theme }) => theme.colors.textWhite};
+
     }
 
     @media (max-width: 790px) {
@@ -81,6 +83,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
     text-align: center;
     display: flex;
     gap: 50px;
+    padding: 0;
 
     @media (max-width: 790px) {
         display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
@@ -95,7 +98,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
         transition: 1s ease-in-out;
         background-color: ${({ theme }) => theme.colors.bgPrimary};
         border: 1px solid ${({ theme }) => theme.colors.textBlack};
-        padding: 20px;
+        padding: 0 !important;
         gap: 20px;
         animation: move 1s ease-in-out;
         z-index: 100;
@@ -118,7 +121,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
 
 const NavItem = styled.li`
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
 `;
 

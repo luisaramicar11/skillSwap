@@ -220,15 +220,15 @@ const Arrow = styled.span`
   margin-left: 10px;
 `;
 
-const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData })  => {
+const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const abilitiesArray = typeof userData.abilities === 'string'
-            ? userData.abilities.split(',').map((ability: string) => ability.trim())
-            : [];
+    ? userData.abilities.split(',').map((ability: string) => ability.trim())
+    : [];
   return (
     <>
       <ProfileContainer>
@@ -249,29 +249,33 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps>= ({ userData 
                 <DivRating>
                   <div>{userData.qualification}</div>
                   <RatingStars>
-                    {[...Array(5)].map((_, index) => (
-                      <Star key={index}>
-                        {index < 4.5 ? "★" : "☆"}{" "}
-                        {/* Muestra estrellas llenas o vacías */}
-                      </Star>
-                    ))}
+                    {[...Array(5)].map((_, index) => {
+                      const rating = Math.floor(userData?.qualification); // Redondea hacia abajo
+                      return (
+                        <Star key={index}>
+                          {index < rating ? "★" : "☆"}{" "}
+                          {/* Muestra estrellas llenas o vacías */}
+                        </Star>
+                      );
+                    })}
                   </RatingStars>
+
                 </DivRating>
               </RatingSection>
             </ConnectionsRating>
           </UserInfo>
-          <ProfileImage urlImage={userData.urlImage}/>
+          <ProfileImage urlImage={userData.urlImage} />
         </Header>
 
         <Skills>
           <SkillTag skillsArray={abilitiesArray} />
         </Skills>
         <DivUserDescription>
-        <SendButton>
-          <ButtonText>ENVIAR SOLICITUD</ButtonText>
-          <Arrow onClick={openModal}>→</Arrow>
-        </SendButton>
-        <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal}/>
+          <SendButton>
+            <ButtonText>ENVIAR SOLICITUD</ButtonText>
+            <Arrow onClick={openModal}>→</Arrow>
+          </SendButton>
+          <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal} />
           <UserDescription>
             <H3>Descripción</H3>
             <P>{userData.description}</P>

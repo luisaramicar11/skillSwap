@@ -10,6 +10,7 @@ const DivLinkComponent = styled(Link)`
     text-decoration: none;
     transition: 0.4s ease-in-out;
     color: ${({ theme }) => theme.colors.textSecondary};
+    cursor: pointer;
 
     &:hover {
         transform: scale(1.05);

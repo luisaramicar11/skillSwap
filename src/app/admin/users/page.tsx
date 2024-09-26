@@ -10,16 +10,20 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 
 const Title = styled.h2`
-  margin-top: 15px;
   text-align: center;
-  margin-bottom: 5px;
-  color: black;
+  margin-top: 0 !important;
+  margin-bottom: 20px;
   font-weight: bold;
-  font-size: 15pt;
+  font-size: 40px;
+  background: ${({ theme }) => theme.colors.gradientText};
+  -webkit-background-clip: text;
+  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  color: transparent;
 `;
 
 const Div = styled.div`
-  margin: 54px 0;
 `;
 
 const Users: React.FC = () => {
@@ -109,7 +113,7 @@ const Users: React.FC = () => {
       />
       <Table 
         data={users}
-        setDataToEdit={setEditedUser}
+        setDataToEdit={setEditedUser} 
         deleteData={handleDeleteUser} 
       />
     </Div>

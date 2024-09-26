@@ -32,13 +32,14 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
     top: 74px;
     right: 20px;
     border-radius: 10px;
-    background-color: ${({ theme }) => theme.colors.bgPrimary};
+    background-color: ${({ theme }) => theme.colors.textWhite};
     color: ${({ theme }) => theme.colors.textSecondary};
     border: 1px solid ${({ theme }) => theme.colors.textBlack};
     display: flex;
     align-items: start;
     justify-content: end;
     padding: 40px 20px;
+    transition: 0.5s ease-in-out;
 `;
 
 interface SettingsSidebarProps {
