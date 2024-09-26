@@ -13,7 +13,7 @@ const DetailAboutUser = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [userData, setUserData] = useState<IUserProfileProps[]>([]);
-  const [checkConnection, setConnectionInfo] = useState<boolean | null>(null); // Ahora será booleano
+  const [checkConnection, setConnectionInfo] = useState<boolean | null>(null);
 
   // Función para obtener el ID del usuario del localStorage
   const getCurrentIdUser = (): number | null => {

@@ -15,7 +15,7 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 
 const Title = styled.h2`
-  margin-top: 15px;
+  margin-top: 0 !important;
   text-align: center;
   margin-bottom: 20px;
   font-weight: bold;
@@ -23,7 +23,9 @@ const Title = styled.h2`
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; 
+  color: transparent;
+  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
 `;
 
 const Reports: React.FC = () => {

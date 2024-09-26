@@ -116,16 +116,16 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
         <DivRate>
           <p>Calificación</p>
           <RatingStars>
-            {[...Array(5)].map((_, index) => (
-              <Star key={index}>
-                {userMetrics?.qualification >= index + 1
-                  ? "★"
-                  : userMetrics?.qualification >= index + 0.5
-                  ? "☆"
-                  : "☆"}
-              </Star>
-            ))}
+            {[...Array(5)].map((_, index) => {
+              const rating = Math.floor(userMetrics?.qualification); // Redondea hacia abajo
+              return (
+                <Star key={index}>
+                  {index < rating ? "★" : "☆"}
+                </Star>
+              );
+            })}
           </RatingStars>
+
         </DivRate>
       </RatingSection>
     </LinkProfile>

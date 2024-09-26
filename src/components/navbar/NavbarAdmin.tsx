@@ -351,6 +351,10 @@ export const NavbarAdmin: React.FC = () => {
 
                 </NavItem>
 
+                <NavItem onClick={() => handlePageChange('ADMIN/POSTS')}>
+                    <StyledNavLink href="/admin/posts" label="POSTS" />
+                </NavItem>
+
             </NavList>
 
 

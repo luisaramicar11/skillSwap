@@ -85,6 +85,9 @@ export const FooterAdmin: React.FC = () => {
         <FooterNavItem onClick={() => handlePageChange('USUARIOS')}>
           <StyledNavLink href="/admin/users" label="USUARIOS" />
         </FooterNavItem>
+        <FooterNavItem onClick={() => handlePageChange('ADMIN/POSTS')}>
+          <StyledNavLink href="/admin/posts" label="POSTS" />
+        </FooterNavItem>
         <FooterNavItem onClick={() => handlePageChange('LEGAL')}>
           <StyledNavLink href="/admin/legal" label="LEGAL" />
         </FooterNavItem>

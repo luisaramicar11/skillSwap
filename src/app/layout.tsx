@@ -49,6 +49,7 @@ export default function RootLayout({
         <meta name="robots" content="index,follow" />
         <meta name="googlebot" content="index,follow" />
         <meta name="revisit-after" content="15days" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={urbanist.className}>
         <Providers>
