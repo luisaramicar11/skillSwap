@@ -10,7 +10,6 @@ import InputSingUp from "../../ui/inputs/InputAuth";
 import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
 import Label from "../../ui/labels/LabelAuth";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
 import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
 import { RootState } from '../../../app/redux/store';
@@ -81,26 +80,7 @@ export default function LoginPage() {
       localStorage.setItem("userId", idUser.toString());
       document.cookie = `authToken=${token}; path=/;`;
       console.log(localStorage.getItem("authToken"));
-    if (token) {
-      toast.success("Login exitoso!", {
-        style: {
-          marginTop: '10px', // Cambia el padding
-        },
-      });
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userId", idUser.toString());
-      document.cookie = `authToken=${token}; path=/;`;
-      console.log(localStorage.getItem("authToken"));
 
-      if (role === 1) {
-        router.push("/admin");
-      } else if (role === 2) {
-        router.push("/user");
-      } else {
-        toast.error("Rol no reconocido.");
-      }
-    }
-  };
       if (role === 1) {
         router.push("/admin");
       } else if (role === 2) {
@@ -159,4 +139,3 @@ export default function LoginPage() {
     </Container>
   );
 }
-

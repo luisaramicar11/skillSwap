@@ -11,9 +11,6 @@ const HomeContainer = styled.div`
   padding: 0;
   padding-top: 74px;
   padding-bottom: 54px;
-  padding: 0;
-  padding-top: 74px;
-  padding-bottom: 54px;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   flex-direction: column;
@@ -42,25 +39,15 @@ const Button = styled.button`
 display: flex;
   justify-content: center;
   width: 100px;
-display: flex;
-  justify-content: center;
-  width: 100px;
   background: transparent;
   border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px;
   padding: 15px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.5s ease-in-out;
   margin: 30px 0;
-  margin: 30px 0;
   border-radius: 10px;
-
-  & a{
-    padding: 0;
-    color: ${({ theme }) => theme.colors.textOrange};
-  }
 
   & a{
     padding: 0;
@@ -74,10 +61,6 @@ display: flex;
     & a{
       color: ${({ theme }) => theme.colors.textWhite};
   }
-
-    & a{
-      color: ${({ theme }) => theme.colors.textWhite};
-  }
   }
 
   @media (max-width: 768px) {
@@ -86,12 +69,10 @@ display: flex;
   }
 `;
 
-
 // Estilos para el texto principal
 const MainText = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 15vw;
   margin-top: 15vw;
   background: transparent;
   align-items: end;
@@ -293,7 +274,6 @@ const ProfileBox = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.textDark};
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
   padding: 30px 100px 30px 50px;
   border-radius: 10px;
   text-align: start;
@@ -454,7 +434,6 @@ const SubText = styled.p`
 `;
 
 const AuthButton = styled(Button)`
-const AuthButton = styled(Button)`
   color: ${({ theme }) => theme.colors.textYellow};
   border: ${({ theme }) => theme.colors.textYellow} 1px solid;
   display:flex;
@@ -605,7 +584,6 @@ const Home = () => {
             <SubText>simple. dinámico. libre.</SubText>
           </div>
           <AuthButton onClick={handleClick}>AUTENTICARSE</AuthButton>
-          <AuthButton onClick={handleClick}>AUTENTICARSE</AuthButton>
         </LeftSection>
         {/* Right Section */}
         <RightSection>
@@ -617,7 +595,6 @@ const Home = () => {
           <RightTextLine3>MENTE</RightTextLine3>
         </RightSection>
       </ContainerDiscover>
-      <FooterOffline />
       <FooterOffline />
     </HomeContainer>
   );

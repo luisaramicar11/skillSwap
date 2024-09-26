@@ -10,4 +10,3 @@ export interface ILinkProps {
     onClick?: ((label: string) => string) | (() => void);
     children?: ReactNode;
 }
-

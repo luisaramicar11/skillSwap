@@ -79,10 +79,11 @@ const CardsContainer = styled.div`
 
 
 const Card = styled.div<CardProps>`
+  
   background-color: #c4c4c4;
   margin: 5px;
   border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   background-image: url(${props => props.imgsrc});
   background-size: cover;
   background-position: center;

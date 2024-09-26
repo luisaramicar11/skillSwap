@@ -40,7 +40,7 @@ export default function RootLayout({
           Arlex, Zapata, Stiven, David, Molina, Mesa, Medina, Joan, Sebastián, Caro, David, Francisco, Blandón, 
           Mena, Destreza, Conocimiento, Knowledge, franccoina"
         />
-        <meta name="sitedomain" content="https://skill-swap-ten.vercel.app/" />
+        <meta name="sitedomain" content="https://skill-swap-app-pink.vercel.app/" />
         <meta name="organization" content="skillswap, frn!, riwi" />
         <meta name="author" content=" David Francisco Blandón Mena, Luisa Fernanda Ramírez Cardona, Jonathan Escobar Molina, 
           David Stiven Medina Mesa, Arlex Mauricio Zapata Mesa, Joan Sebastián Zapata Caro" />

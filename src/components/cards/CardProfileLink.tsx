@@ -18,7 +18,6 @@ const ProfileHeader = styled.div`
 
 const Avatar = styled.div<{ urlImage: string }>`
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
-  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   background-image: url(${(props) => props.urlImage}); 
   background-size: cover;
   background-position: center;
@@ -50,7 +49,6 @@ const RatingSection = styled.div`
   margin: 20px 0;
 
   & h1 {
-  & h1 {
     font-size: 2.2rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
@@ -59,15 +57,10 @@ const RatingSection = styled.div`
 
   & p {
     opacity: 0.7;
-  & p {
-    opacity: 0.7;
     text-align: start;
-    font-size: 1rem !important;
     font-size: 1rem !important;
     font-weight: bold;
     margin: 0;
-    color: ${({ theme }) => theme.colors.textYellow};
-  }
     color: ${({ theme }) => theme.colors.textYellow};
   }
 `;
@@ -100,35 +93,9 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
       ?.split(",")
       .map((ability: string) => ability.trim()) || [];
 
-  & p {
-    font-size: 0.7rem;
-  }
-`;
-const RatingStars = styled.div`
-  color: ${({ theme }) => theme.colors.textYellow};
-  opacity: 0.7;
-`;
-
-const Star = styled.span`
-  color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 16px;
-  margin: 0 2px;
-  font-style: normal;
-`;
-const CardProfileLink: React.FC<IProfileCardProps> = ({
-  fullName,
-  userMetrics,
-}) => {
-  const abilitiesArray =
-    userMetrics?.abilities
-      ?.split(",")
-      .map((ability: string) => ability.trim()) || [];
-
   return (
     <LinkProfile href="/user/settings" label="CONFIGURA">
-    <LinkProfile href="/user/settings" label="CONFIGURA">
       <ProfileHeader>
-        <Avatar urlImage={userMetrics.urlImage} />
         <Avatar urlImage={userMetrics.urlImage} />
         <div>
           <ProfileName>{fullName}</ProfileName>
@@ -146,18 +113,6 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
       <RatingSection>
         <h1>{userMetrics?.qualification}</h1>
         <DivRate>
-          <p>Calificación</p>
-          <RatingStars>
-            {[...Array(5)].map((_, index) => {
-              const rating = Math.floor(userMetrics?.qualification); // Redondea hacia abajo
-              return (
-                <Star key={index}>
-                  {index < rating ? "★" : "☆"}
-                </Star>
-              );
-            })}
-          </RatingStars>
-
           <p>Calificación</p>
           <RatingStars>
             {[...Array(5)].map((_, index) => {
