@@ -121,8 +121,8 @@ const WidgetBody = styled.div`
 `;
 
 const SecurityButton = styled.button`
-  width: 100%;
-  padding: 15px;
+  width: 25%;
+  padding: 10px;
   font-size: 14px;
   margin-top: 50px;
   cursor: pointer;
@@ -141,6 +141,10 @@ const Security = styled.div`
   width: 50%;
   height: 100%;
 `;
+
+const DivSec = styled.div`
+margin-top: 1.5rem;
+`
 
 interface IRequestData {
   message: string;
@@ -245,40 +249,27 @@ const Metrics: React.FC = () => {
         <InfoPageContainer>
           <PageContent>
             <PageBody>
-              <h2>{requestData?.data.response.nombreUsuario || 'N/A'}</h2>
-              <WidgetContainer>
-                <WidgetBody>
-                  <h4>Última Aceptada</h4> {requestData?.data.response.solicitudes.ultimaAceptada || 'N/A'} <br />
-                  <br />
-                  <h4>Última Pendiente</h4> {requestData?.data.response.solicitudes.ultimaPendiente || 'N/A'} <br />
-                  <br />
-                  <h4>Última Cancelada: </h4> {requestData?.data.response.solicitudes.ultimaCancelada || 'N/A'} <br />
-                  <br />
-                  <h4>Último Enviado: </h4> {requestData?.data.response.solicitudes.ultimoEnviado || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo de Conexiones: </h4> {requestData?.data.response.solicitudes.conteoConexiones || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo Aceptadas:</h4> {requestData?.data.response.solicitudes.conteoAceptadas || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo Pendientes: </h4> {requestData?.data.response.solicitudes.conteoPendientes || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo Canceladas: </h4> {requestData?.data.response.solicitudes.conteoCanceladas || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo Enviadas:</h4> {requestData?.data.response.solicitudes.conteoEnviadas || 'N/A'} <br />
-                </WidgetBody>
-              </WidgetContainer>
-              <Security>
-                <WidgetContainer>
-                  <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
-                  <Modal isOpen={isModalOpen} onClose={closeModal} />
-                </WidgetContainer>
-              </Security>
+              <WidgetBody>
+                <h2>Conteo de Solicitudes</h2>
+
+                {/* Gráfico de Barras (Bar Chart) */}
+                <Bar data={barData} options={{ responsive: true }} />
+
+                {/* Botón de seguridad */}
+                <DivSec>
+                <h2>Seguridad</h2>
+                </DivSec>
+                <SecurityButton onClick={openModal}>Acerca de tu seguridad</SecurityButton>
+                <Modal isOpen={isModalOpen} onClose={closeModal} />
+              </WidgetBody>
             </PageBody>
           </PageContent>
         </InfoPageContainer>
       </PageContentContainer>
     </PageContainer>
   );
+
+
 };
 
 export default Metrics;
