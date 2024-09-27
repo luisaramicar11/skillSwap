@@ -17,6 +17,14 @@ Facilitate continuous learning and collaborative teaching, creating a vibrant co
 
 - *Backend*:
    - C#, .NET, Swagger, Azure
+ 
+## Admin Credentials
+To access the admin panel, use the following credentials:
+
+- *Email*: arlex.z96@gmail.com
+- *Password*: @A12345
+
+These credentials should be used only for administrative purposes.
 
 ## Project Structure
 
