@@ -123,19 +123,19 @@ npm run dev
 
 3. Create a file named __".env.local"__ in the root of the project:
 
-- This file should contain a GITHUB token that allows you to view a preview of users' GitHub profiles.
+- This file should contain a GITHUB token allowing you to preview users' GitHub profiles.
 - However, due to the **".gitignore"**, you may not have this file when cloning this project, or it may be automatically deleted during transfer.
-- It is recommended to create it manually, but don’t worry; this will not affect your experience.
-- You will need to generate your own GITHUB token, which you can obtain by following the instructions on GitHub or just go to the end of this document, where we will explain it for you. 
+- It is recommended that you create it manually, but don’t worry; this will not affect your experience.
+- You will need to generate your own GITHUB token, which you can obtain by following the instructions on GitHub or just go to the end of this document, where we will explain it to you. 
 
 ```bash
 .env.local
 ```
 
-4. Write the following code in the previously created file to keep the token in your project:
+4. Write the following code in the previously created file to keep the token in your project. You must name the variable this way, otherwise, it will not work:
 
 ```bash
-GITHUB_TOKEN=your_generated_token_here
+NEXT_PUBLIC_GITHUB_TOKEN=your_generated_token_here
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) on your browser and enjoy our project.
