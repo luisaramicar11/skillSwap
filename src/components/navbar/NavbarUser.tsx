@@ -15,13 +15,14 @@ const NavbarContainer = styled.div`
     position: fixed;
     z-index: 10;
     width: 100%;
+    border-bottom: 1px solid  ${({ theme }) => theme.colors.borderNavs};
     top: 0;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 1rem;
     gap: 50px;
 
     @media (max-width: 790px) {
@@ -38,6 +39,7 @@ const SidebarLink = styled.p`
     width: max-content;
     transition: 0.4s;
     cursor: pointer;
+    padding: 15px;
     gap: 10px;
 
     & small {
@@ -88,7 +90,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
         transition: 1s ease-in-out;
         background-color: ${({ theme }) => theme.colors.bgPrimary};
         border: 1px solid ${({ theme }) => theme.colors.textBlack};
-        padding: 0 !important;
+        padding: 1rem !important;
         gap: 20px;
         animation: move 1s ease-in-out;
         z-index: 100;
@@ -144,7 +146,7 @@ export const NavbarUser: React.FC = () => {
         <NavbarContainer>
             <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile}/>
             <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
-            <SidebarLink onClick={openSidebarProfile}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
+            <SidebarLink onClick={openSidebarProfile}>+ <small>Notificaciones</small></SidebarLink>
             <HamburgerMenu onClick={toggleMenu}>
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
             </HamburgerMenu>
@@ -162,7 +164,7 @@ export const NavbarUser: React.FC = () => {
 
             <IconsContainer>
                 <StyledIconNavLink onClick={openSidebarSettings} href="#" icon={<SettingsIcon />} />
-                <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/user/legal" label="USER/LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
     );

@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../../app/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import { AppDispatch, RootState } from '../../../app/redux/store';
-import InputAuth from "../../ui/inputs/InputAuth"
+import InputAuth from "../../ui/inputs/InputAuth";
 import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
 import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
 import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
 import StyledNavLink from '../../ui/links/NavLinks';
+import ProgressBar from '../../progressBar/ProgressBar';
 
-//Syled
-import { DivUserData, DivUserInput, DivUserTitle, DivButtonSingUp, Form } from "./RegisterStyling"
+// Styled
+import { DivUserData, DivUserInput, DivUserTitle, DivButtonSingUp, Form } from "./RegisterStyling";
 import { Title, BackLink, Arrow, FormWrapper, Container, DivButtonLogin } from '../login/LoginStyling';
 
 export default function RegisterPage() {
@@ -21,45 +22,46 @@ export default function RegisterPage() {
   const { loading, error } = useSelector((state: RootState) => state.auth);
 
   const [form, setForm] = useState({
-    email: "", 
-    password: "",  
-    name: "",            
-    lastName: "", 
-    birthdate: null, 
-    description: "",  
-    jobTitle: "",    
-    urlLinkedin: "",  
-    urlGithub: "",  
-    urlBehance: "",  
-    urlImage: "",   
-    phoneNumber: "",    
-    category: "",  
-    abilities: "", 
+    email: "",
+    password: "",
+    name: "",
+    lastName: "",
+    birthdate: null,
+    description: "",
+    jobTitle: "",
+    urlLinkedin: "",
+    urlGithub: "",
+    urlBehance: "",
+    urlImage: "",
+    phoneNumber: "",
+    category: "",
+    abilities: "",
   });
 
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [skills, setSkills] = useState<string>("");
-  const [currentStep, setCurrentStep] = useState(0); // Controla la vista actual del carrusel
+  const [currentStep, setCurrentStep] = useState(0);
+  const [hasError, setHasError] = useState(false);
 
-// Manejar el select
-const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  const { name, value } = event.target;
-  setSelectedOption(value);
-  setForm({
-    ...form,
-    [name]: value,
-  });
-};
+  // Manejar el select
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setSelectedOption(value);
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
-// Manejar el textarea
-const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  const { name, value } = event.target;
-  setSkills(value);
-  setForm({
-    ...form,
-    [name]: value,
-  });
-};
+  // Manejar el textarea
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setSkills(value);
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
   // Manejar cambios en los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,98 +69,55 @@ const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => 
       ...form,
       [e.target.name]: e.target.value,
     });
+    setHasError(false);
   };
 
-  // Manejar el envío del formulario
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (currentStep < 6) {
-      // Solo procesa el envío si estás en el último paso
-      return;
+  // Convierte una fecha a formato YYYY-MM-DD
+  const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') {
+      return date;
     }
-
-    //Foreach con console.log de cada campo del form
-    console.log('Email:', form.email);
-    console.log('Contraseña:', form.password);
-    console.log('Nombre:', form.name);
-    console.log('Apellido:', form.lastName);
-    console.log('Descripción:', form.description);
-    console.log('Puesto:', form.jobTitle);
-    console.log('Comunidad:', form.category);
-    console.log('Habilidades:', form.abilities);
-    console.log('Fecha de nacimiento:', form.birthdate);
-    console.log('URL LinkedIn:', form.urlLinkedin);
-    console.log('URL Github:', form.urlGithub);
-    console.log('URL Behance:', form.urlBehance);
-    console.log('URL Imagen:', form.urlImage);
-    console.log('Número de teléfono:', form.phoneNumber);
-
-    // Validación básica de campos
-    if (!form.email || !form.name || !form.urlImage || !form.password || !form.lastName || !form.description || !form.jobTitle || !form.category || !form.abilities){
-      toast.error('Por favor, completa todos los campos.');
-      return;
-    }
-
-    try {
-      await dispatch(registerUser(form)).unwrap();
-      toast.success('Registro exitoso!');
-      window.location.reload(); 
-      
-    } catch (errorSubmit) {
-      if (errorSubmit) {
-        toast.error(`Registro fallido: ${errorSubmit}`);
-      } else {
-        toast.error('Registro fallido. Inténtalo de nuevo.');
-      }
-    }
+    return date.toISOString().split('T')[0];
   };
-
-    // Convierte una fecha a formato YYYY-MM-DD
-const formatDate = (date: Date | string) => {
-  if (typeof date === 'string') {
-    return date; // Suponiendo que ya está en formato correcto
-  }
-  return date.toISOString().split('T')[0]; // Extrae solo la parte de la fecha
-};
 
   // Renderizar el input actual basado en la vista
   const renderStep = () => {
     switch (currentStep) {
       case 0:
         return (
-            <div>
-              <BackLink onClick={() => handlePageChange('INICIO')}>
-                <Arrow>&lt;</Arrow> VOLVER A <StyledNavLink href="/" label="INICIO"></StyledNavLink>
-              </BackLink>
-              <Title>Registro</Title>
-              <Label text="Email" htmlFor='email' />
-              <InputAuth
-                type="email"
-                id="email" 
-                name="email"
-                placeholder="Escribe tu email..."
-                value={form.email}
-                onChange={handleChange}
-                required
-                autoComplete="email"
-              />
-              <Label text="Contraseña" htmlFor='password' />
-              <InputAuth
-                type="password"
-                id="password" 
-                name="password"
-                placeholder="Escribe tu contraseña..."
-                value={form.password}
-                onChange={handleChange}
-                required
-                autoComplete="new-password"
-              />
-            </div>
+          <div>
+            <BackLink onClick={() => handlePageChange('INICIO')}>
+              <Arrow>&lt;</Arrow> VOLVER A <StyledNavLink href="/" label="INICIO"></StyledNavLink>
+            </BackLink>
+            <Title>Registro</Title>
+            <Label text="Email" htmlFor='email' />
+            <InputAuth
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Escribe tu email..."
+              value={form.email}
+              onChange={handleChange}
+              required
+              autoComplete="email"
+            />
+            <Label text="Contraseña" htmlFor='password' />
+            <InputAuth
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Escribe tu contraseña..."
+              value={form.password}
+              onChange={handleChange}
+              required
+              autoComplete="new-password"
+            />
+          </div>
         );
       case 1:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
               <Title>Tus datos</Title>
             </DivUserTitle>
@@ -166,7 +125,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="name" text="Nombre *" />
               <InputAuth
                 type="text"
-                id="name" 
+                id="name"
                 name="name"
                 placeholder="Escribe tu nombre..."
                 value={form.name}
@@ -179,7 +138,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="lastName" text="Apellidos *" />
               <InputAuth
                 type="text"
-                id="lastName" 
+                id="lastName"
                 name="lastName"
                 placeholder="Escribe tus apellidos..."
                 value={form.lastName}
@@ -193,27 +152,28 @@ const formatDate = (date: Date | string) => {
       case 2:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
-              <Title>Tus datos</Title>
+              <Title>Datos</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="birthdate" text="Fecha de nacimiento *" />
               <InputAuth
                 type="date"
-                id="birthdate" 
+                id="birthdate"
                 name="birthdate"
                 placeholder="Escribe tu fecha de nacimiento..."
                 value={form.birthdate ? formatDate(form.birthdate) : ""}
                 onChange={handleChange}
                 required
-                autoComplete="birthdate" 
+                autoComplete="birthdate"
               />
             </DivUserInput>
             <DivUserInput>
               <Label htmlFor="urlImage" text="Foto de Perfil *" />
               <InputAuth
                 type="text"
-                id="urlImage" 
+                id="urlImage"
                 name="urlImage"
                 placeholder="Escribe la URL de tu Imagen..."
                 value={form.urlImage}
@@ -227,14 +187,15 @@ const formatDate = (date: Date | string) => {
       case 3:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
-              <Title>Tus habilidades</Title>
+              <Title>Habilidades</Title>
             </DivUserTitle>
             <DivUserInput>
-              <Label htmlFor="category" text="Selecciona una Comunidad *" />
+              <Label htmlFor="category" text="Comunidad *" />
               <Select
-                id="category" 
-                value={selectedOption} 
+                id="category"
+                value={selectedOption}
                 onChange={handleSelectChange}
                 ariaLabel="Select area"
                 name="category"
@@ -255,15 +216,16 @@ const formatDate = (date: Date | string) => {
                 maxLength={200}
                 autoComplete="abilities"
               />
-              <sub>{skills.length} / 200 caracteres</sub> {/* Mostrar contador de caracteres */}
+              <sub>{skills.length} / 200 caracteres</sub>
             </DivUserInput>
           </DivUserData>
         );
       case 4:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
-              <Title>Sobre tu experiencia</Title>
+              <Title>Experiencia</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="jobTitle" text="Trabajo/título *" />
@@ -282,13 +244,13 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="description" text="Descripción *" />
               <InputAuth
                 type="text"
-                id="description" 
+                id="description"
                 name="description"
                 placeholder="Describe tu experiencia..."
                 value={form.description}
                 onChange={handleChange}
                 required
-                autoComplete="description" 
+                autoComplete="description"
               />
             </DivUserInput>
           </DivUserData>
@@ -296,6 +258,7 @@ const formatDate = (date: Date | string) => {
       case 5:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
               <Title>Contacto</Title>
             </DivUserTitle>
@@ -303,7 +266,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="phoneNumber" text="Número de Teléfono" />
               <InputAuth
                 type="text"
-                id="phoneNumber" 
+                id="phoneNumber"
                 name="phoneNumber"
                 placeholder="Escribe tu número de teléfono..."
                 value={form.phoneNumber}
@@ -315,7 +278,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="urlLinkedin" text="LinkedIn" />
               <InputAuth
                 type="text"
-                id="urlLinkedin" 
+                id="urlLinkedin"
                 name="urlLinkedin"
                 placeholder="URL de tu Perfil de LinkedIn..."
                 value={form.urlLinkedin}
@@ -325,9 +288,10 @@ const formatDate = (date: Date | string) => {
             </DivUserInput>
           </DivUserData>
         );
-        case 6:
+      case 6:
         return (
           <DivUserData>
+            <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
               <Title>Contacto</Title>
             </DivUserTitle>
@@ -335,7 +299,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="urlBehance" text="Behance" />
               <InputAuth
                 type="text"
-                id="urlBehance" 
+                id="urlBehance"
                 name="urlBehance"
                 placeholder="URL de tu Perfil de Behance..."
                 value={form.urlBehance}
@@ -347,7 +311,7 @@ const formatDate = (date: Date | string) => {
               <Label htmlFor="urlGithub" text="GitHub" />
               <InputAuth
                 type="text"
-                id="urlGithub" 
+                id="urlGithub"
                 name="urlGithub"
                 placeholder="URL de tu Perfil de GitHub..."
                 value={form.urlGithub}
@@ -361,7 +325,39 @@ const formatDate = (date: Date | string) => {
         return null;
     }
   };
-  
+
+  // Manejar el envío del formulario
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<boolean> => {
+    e.preventDefault();
+
+    if (currentStep < 7) {
+      return false;
+    }
+
+    // Validación básica de campos
+    if (!form.email || !form.name || !form.urlImage || !form.password || !form.lastName || !form.description || !form.jobTitle || !form.category || !form.abilities) {
+      toast.error('Por favor, completa todos los campos.');
+      setCurrentStep(0);
+      setHasError(true);
+      return false;
+    }
+
+    try {
+      await dispatch(registerUser(form)).unwrap();
+      toast.success('¡Registro exitoso!');
+      window.location.reload();
+      return true;
+
+    } catch (errorSubmit) {
+      if (errorSubmit) {
+        toast.error('Registro fallido. Inténtalo de nuevo.');
+      }
+      setCurrentStep(7);
+      setHasError(true);
+      return false;
+    }
+  };
+
   return (
     <Container>
       <FormWrapper>
@@ -369,23 +365,33 @@ const formatDate = (date: Date | string) => {
           {renderStep()}
           <DivButtonLogin />
           <DivButtonSingUp>
-            {currentStep > 0 && (
-              <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep - 1)}>
+            {currentStep > 0 && currentStep < 7 && (
+              <ButtonSingUp className="backBtn" type="button" onClick={() => setCurrentStep(currentStep - 1)}>
                 ATRÁS
               </ButtonSingUp>
             )}
-            {currentStep <= 6 ? (
+            {currentStep < 6 ? (
               <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
                 SIGUIENTE
               </ButtonSingUp>
             ) : (
-              <ButtonSingUp type="submit" disabled={loading}>
-                {loading ? 'Registrando...' : 'ENVIAR'}
-              </ButtonSingUp>
+              loading ? (
+                <ButtonSingUp type="submit" disabled={loading}>
+                  Registrando...
+                </ButtonSingUp>
+              ) : hasError ? (
+                <ButtonSingUp type="button" onClick={() => setCurrentStep(0)}>
+                  REGRESAR
+                </ButtonSingUp>
+              ) : (
+                <ButtonSingUp type="submit" onClick={() => setCurrentStep(currentStep + 1)}>
+                  ENVIAR
+                </ButtonSingUp>
+              )
             )}
           </DivButtonSingUp>
         </Form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {hasError && currentStep == 7 && <p style={{ color: '#222222' }}>{error}</p>}
       </FormWrapper>
     </Container>
   );

@@ -5,13 +5,14 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
-// Texto de cambio
+import ScrollContainer from "@/src/components/scroll/Scroll";
 
+// Texto de cambio
 const TextWrapper = styled.div`
   width: max-content;
   position: absolute;
   right: 15vw;
-  bottom: 55%;
+  top: -75px;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -27,7 +28,7 @@ const TextWrapper = styled.div`
 `;
 
 const SkillSwapText = styled(motion.h1)`
-  font-size: clamp(2.8rem,4.2vw,6rem);
+  font-size: 4rem;
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -37,8 +38,8 @@ const SkillSwapText = styled(motion.h1)`
   line-height: 1.2;
   text-transform: uppercase;
 
-  @media (max-width: 1070px) {
-    font-size: 3rem;
+  & span{
+    font-style: normal;
   }
 `;
 
@@ -47,15 +48,18 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
+  overflow-x: hidden;
   width: 100%;
+  height: auto;
   min-height: 450px;
+  margin-top: 100px;
 
   @media (max-width: 1070px) {
-    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    flex-direction: column; 
     align-items: flex-start;
     border-radius: none;
-    /* Alinea el contenido al inicio */
+    height: 700px;
   }
 
   @media (max-width: 1024px) {
@@ -69,8 +73,7 @@ const MotionDiv = styled(motion.div)`
   justify-content: center;
 
   @media (max-width: 1070px) {
-    display: flex
-    ;
+    display: flex;
     flex-direction: column;
     width: 90%;
     justify-content: center;
@@ -81,6 +84,7 @@ const MotionDiv = styled(motion.div)`
 // Contenedor de la capa superpuesta
 const OverlayContainer = styled.div`
   position: absolute;
+  border: none;
   left: 50%;
   width: 50%;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -129,7 +133,7 @@ const Div = styled.div`
   @media (max-width: 1070px) {
     padding: 2rem;
     height: auto;
-    border:0;  /* Ajuste automático del alto */
+    border:0; 
   }
 `;
 
@@ -159,7 +163,7 @@ const SwitchButton = styled.button`
   padding: 0 !important;
   border-radius: 20px;
   width: 150px;
-  border: 1px solid ${({ theme }) => theme.colors.textOrange};
+  border: 1px solid ${({ theme }) => theme.colors.textYellow};
   background-color: transparent;
   font-size: 12px;
   font-weight: 500;
@@ -171,10 +175,9 @@ const SwitchButton = styled.button`
   & a {
     width: 100% !important;
     height: 100% !important;
-    color: ${({ theme }) => theme.colors.textOrange};
+    color: ${({ theme }) => theme.colors.textYellow};
     border: 0;
     padding: 10px;
-    
   }
 
   &:hover {
@@ -198,6 +201,7 @@ export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
+    <ScrollContainer overflowY="auto"  overflowX='hidden' marginY='30px' style={{ height: '100%' }}>
     <Container>
       {/* Framer Motion wrapper for form animations */}
       <motion.div
@@ -245,7 +249,7 @@ export default function AuthPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            ← SWAP
+            <span>➜</span> SWAP
           </SkillSwapText>
           <SkillSwapText
             initial={{ opacity: 0, y: -100 }}
@@ -278,5 +282,6 @@ export default function AuthPage() {
         </OverlayPanel>
       </OverlayContainer>
     </Container>
+    </ScrollContainer>
   );
 }

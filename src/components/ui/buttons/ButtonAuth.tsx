@@ -2,7 +2,7 @@
 import React from 'react';
 import { MouseEventHandler } from "react";
 
-export interface ButtonProps {
+interface AuthButtonProps {
   type: "submit" | "button" | "reset";
   label: string;      
   onClick: MouseEventHandler<HTMLButtonElement>; 
@@ -10,7 +10,7 @@ export interface ButtonProps {
   disabled?: boolean; 
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, className, type, disabled }) => {
+const Button: React.FC<AuthButtonProps> = ({ label, onClick, className, type, disabled }) => {
   return (
     <button type={type} onClick={onClick} className={className} disabled={disabled}>
       {label}

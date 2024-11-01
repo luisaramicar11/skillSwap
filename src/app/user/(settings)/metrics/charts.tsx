@@ -215,9 +215,9 @@ const Metrics: React.FC = () => {
         <InfoPageContainer>
           <PageContent>
             <PageBody>
-            <h2>{requestData?.nombreUsuario}</h2>
-            <WidgetContainer>
-              <WidgetBody>
+              <h2>{requestData?.nombreUsuario}</h2>
+              <WidgetContainer>
+                <WidgetBody>
                   <h4>Ultima Aceptada</h4>{requestData?.solicitudes.ultimaAceptada} <br />
                   <br />
                   <h4>Ultima Pendeinete</h4>{requestData?.solicitudes.ultimaPendiente} <br />
@@ -235,17 +235,14 @@ const Metrics: React.FC = () => {
                   <h4>Conteo Canceladas: </h4> {requestData?.solicitudes.conteoCanceladas} <br />
                   <br />
                   <h4>Conteo Enviadas:</h4> {requestData?.solicitudes.conteoEnviadas} <br />
-                  
-      
-              </WidgetBody>
-             
-           </WidgetContainer>
-           <Security>
-              <WidgetContainer>
-                <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
+                </WidgetBody>
               </WidgetContainer>
-            </Security>
+              <Security>
+                <WidgetContainer>
+                  <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
+                  <Modal isOpen={isModalOpen} onClose={closeModal} />
+                </WidgetContainer>
+              </Security>
             </PageBody>
           </PageContent>
         </InfoPageContainer>

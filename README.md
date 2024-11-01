@@ -1,4 +1,4 @@
-![Logotype](./public/img/skillswap-logotype.png)
+![Logotype](./public/img/skillswap-logotype.webp)
 
 __SkillSwap__ is a modern platform designed to facilitate skill exchange, connecting people in the digital environment who want to learn with those willing to share their knowledge.
 
@@ -202,10 +202,8 @@ Make sure to keep your token private. If you believe it has been compromised, re
 
 --------------------------------------------------------------------------------------------------------
 
-<br>
-
 <div align="center">
-  <img src="./public/img/skillswap-isotype.png" alt="Skillswap-Isotype" width="300" />
+  <img src="./public/img/skillswap-isotype.webp" alt="Skillswap-Isotype" width="400" />
 </div>
 
 <div align="center">

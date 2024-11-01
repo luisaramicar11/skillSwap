@@ -4,12 +4,18 @@ import SkillTag from "../../../../components/ui/skillTag/skillTag";
 import { useState, useEffect } from "react";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { IUser } from "@/src/models/user.model";
-import { getUserById } from '../../../../lib/api/users'; // Importa la función getUserById
+import { getUserById } from '../../../api/users'; // Importa la función getUserById
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
-//Container for the whole page.tsx
+//Containers for the whole page.tsx
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
+`
+
 const PageContainer = styled.section`
   width: 100%;
-  margin: 54px 0;
   height: 100%;
   display: flex;
   position: relative;
@@ -17,18 +23,17 @@ const PageContainer = styled.section`
   background-color: ${({ theme }) => theme.colors.bgPrimary};
 
   & h1 {
-    padding-left: 1.7rem;
     margin: 0;
+
     height: min-content;
+
     translate: 0 30px;
+
     font-size: 100px;
-    width: 30vw;
-    min-width: 300px !important;
-    border-bottom: solid 5px ${({ theme }) => theme.colors.textYellow};
-    background: ${({ theme }) => theme.colors.gradientSecondary};
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+
+    opacity: 0.15;
+
+    padding-left: 1.7rem;
   }
 
   & h2 {
@@ -77,6 +82,7 @@ const Banner = styled.article`
   height: 200px;
   display: flex;
   justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgBanner};
 `;
 
 const BannerBody = styled.div`
@@ -108,7 +114,18 @@ const PageBody = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: end; 
   gap: 20px;
+
+  & div {
+    width: 100%;
+    display: flex;
+    align-items: end; 
+  }
+
+  & p {
+    color: ${({ theme }) => theme.colors.textOrange};
+  }
 `;
 
 const UserSkills: React.FC = () => {
@@ -137,7 +154,7 @@ const UserSkills: React.FC = () => {
       }
 
       try {
-        const data = await getUserById(idNumber);  // Llama a la función getUserById
+        const data = await getUserById(idNumber); 
         setUserData(data);
         setLoading(false);
       } catch (err) {
@@ -151,7 +168,6 @@ const UserSkills: React.FC = () => {
     }
   }, [idNumber]);
 
-  // Muestra loading, error o los datos del usuario
   if (loading) {
     return <OurAlertsText>Cargando...</OurAlertsText>;
   }
@@ -165,7 +181,8 @@ const UserSkills: React.FC = () => {
     : [];
 
   return (
-    <PageContainer>
+    <Container>
+<PageContainer>
       <Banner>
         <BannerBody>
           <h1>Skills</h1>
@@ -181,6 +198,9 @@ const UserSkills: React.FC = () => {
         </SkillsPageContainer>
       </PageContentContainer>
     </PageContainer>
+    <FooterMain />
+    </Container>
+    
   );
 };
 

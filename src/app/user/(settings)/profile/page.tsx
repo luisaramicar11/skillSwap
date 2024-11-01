@@ -4,14 +4,14 @@ import WidgetContainer from '../../../../components/containers/WidgetContainer/W
 import React, { useEffect, useState } from "react";
 import { IUser } from "../../../../models/user.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import { getUserById } from "../../../../lib/api/users"; // Importamos la función desde users.ts
+import { getUserById } from "../../../api/users";
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 // Container for the whole page.tsx
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
   display: flex;
-  margin: 54px 0;
   position: relative;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -67,7 +67,7 @@ const PageContentContainer = styled.article`
   height: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px;
+  margin: 20px !important;
 `;
 
 // Containers for banner
@@ -80,12 +80,24 @@ const Banner = styled.article`
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
+
+  @media (max-width: 1050px) {
+      padding: 0;
+    }
 `;
 
 const BannerBody = styled.div`
     width: 1000px !important;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 1050px) {
+      justify-content: center;
+
+      & h1{
+        display: none;
+      }
+    }
 `;
 
 const BannerImageDiv = styled.div<{ urlImage: string }>`
@@ -97,6 +109,11 @@ const BannerImageDiv = styled.div<{ urlImage: string }>`
   translate: 0 30px;
   border-radius: 10px;
   border: solid 1px ${({ theme }) => theme.colors.textBlack};
+
+  @media (max-width: 1050px) {
+    translate: 0;
+    border-radius: 100%;
+  }
 `;
 
 // Container for INFO content
@@ -115,6 +132,11 @@ const PageContent = styled.div`
   flex-direction: row-reverse;
   justify-content: space-between;
   gap: 20px;
+
+  @media (max-width: 1050px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    }
 `;
 
 const PageBody = styled.div`
@@ -131,6 +153,10 @@ const WidgetContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media (max-width: 1050px) {
+      width: 100%;
+    }
 `;
 
 const WidgetBody = styled.div`
@@ -148,8 +174,23 @@ const PageAside = styled.aside`
   margin-top: 50px;
 
   & div {
-    width: 200px !important;
+    width: 200px;
   }
+
+  @media (max-width: 1050px) {
+    margin: 0;
+    width: 100%;
+
+      & div {
+        width: 100%;
+      }
+    }
+`;
+
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
 `;
 
 const UserProfile = () => {
@@ -172,7 +213,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!idNumber) return;
-      
+
       try {
         const data = await getUserById(idNumber); // Usamos la función de users.ts
         setUserData(data); // Guardamos los datos del usuario
@@ -198,61 +239,70 @@ const UserProfile = () => {
   }
 
   return (
-    <PageContainer>
-      <Banner>
-        <BannerBody>
-          <h1>Perfil</h1>
-          <BannerImageDiv urlImage={userData!.urlImage}></BannerImageDiv>
-        </BannerBody>
-      </Banner>
-      <PageContentContainer>
-        <ProfilePageContainer>
-          <PageContent>
-            <PageAside>
-              <WidgetContainer>
-                <h3>User Data</h3>
-                <WidgetBody>
-                  <p><strong> Rol:</strong> {userData?.roleName}</p>
-                  <p><strong>Email: </strong>{userData?.email}</p>
-                  <p><strong>Teléfono: </strong> {userData?.phoneNumber}</p>
-                </WidgetBody>
-              </WidgetContainer>
-            </PageAside>
-            <PageBody>
-              <WidgetContainer>
-                <WidgetBody>
-                  <h2>{userData?.name} {userData?.lastName}</h2>
-                  <p>{userData?.jobTitle}</p>
-                </WidgetBody>
-              </WidgetContainer>
-              <WidgetContainer>
-                <WidgetBody>
-                  <h4>Descripción</h4>
-                  <p>{userData?.description}</p>
-                </WidgetBody>
-              </WidgetContainer>
-              <WidgetContainer>
-                <h3>Enlaces Externos</h3>
-                <WidgetContent>
-                  <WidgetContainer>
-                    <WidgetBody>
-                      <h4>LinkedIn</h4>
-                      <p>{userData?.urlLinkedin}</p>
-                    </WidgetBody>
-                  </WidgetContainer>
-                  <WidgetContainer>
-                    <WidgetBody>
-                      <h4>GitHub</h4>
-                      <p>{userData?.urlGithub}</p>
-                    </WidgetBody>
-                  </WidgetContainer>
-                </WidgetContent>
-              </WidgetContainer>
-            </PageBody>
-          </PageContent>
-        </ProfilePageContainer>
-      </PageContentContainer>
-    </PageContainer>
+    <Container>
+      <PageContainer>
+        <Banner>
+          <BannerBody>
+            <h1>Perfil</h1>
+            <BannerImageDiv urlImage={userData!.urlImage}></BannerImageDiv>
+          </BannerBody>
+        </Banner>
+        <PageContentContainer>
+          <ProfilePageContainer>
+            <PageContent>
+              <PageAside>
+                <WidgetContainer>
+                  <h3>User Data</h3>
+                  <WidgetBody>
+                    <p><strong> Rol:</strong> {userData?.roleName}</p>
+                    <p><strong>Email: </strong>{userData?.email}</p>
+                    <p><strong>Teléfono: </strong> {userData?.phoneNumber}</p>
+                  </WidgetBody>
+                </WidgetContainer>
+              </PageAside>
+              <PageBody>
+                <WidgetContainer>
+                  <WidgetBody>
+                    <h2>{userData?.name} {userData?.lastName}</h2>
+                    <p>{userData?.jobTitle}</p>
+                  </WidgetBody>
+                </WidgetContainer>
+                <WidgetContainer>
+                  <WidgetBody>
+                    <h4>Descripción</h4>
+                    <p>{userData?.description}</p>
+                  </WidgetBody>
+                </WidgetContainer>
+                <WidgetContainer>
+                  <h3>Enlaces Externos</h3>
+                  <WidgetContent>
+                    <WidgetContainer>
+                      <WidgetBody>
+                        <h4>LinkedIn</h4>
+                        <p>{userData?.urlLinkedin}</p>
+                      </WidgetBody>
+                    </WidgetContainer>
+                    <WidgetContainer>
+                      <WidgetBody>
+                        <h4>GitHub</h4>
+                        <p>{userData?.urlGithub}</p>
+                      </WidgetBody>
+                    </WidgetContainer>
+                    <WidgetContainer>
+                      <WidgetBody>
+                        <h4>Behance</h4>
+                        <p>{userData?.urlBehance}</p>
+                      </WidgetBody>
+                    </WidgetContainer>
+                  </WidgetContent>
+                </WidgetContainer>
+              </PageBody>
+            </PageContent>
+          </ProfilePageContainer>
+        </PageContentContainer>
+      </PageContainer>
+      <FooterMain />
+    </Container >
   );
 };
 

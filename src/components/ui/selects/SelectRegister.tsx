@@ -66,11 +66,11 @@ const Select: React.FC<SelectProps> = ({
       <Option value="" disabled>
         -- Selecciona una opción --
       </Option>
-      <Option value="development">Desarrollo</Option>
-      <Option value="marketing">Marketing</Option>
-      <Option value="communication">Comunicación</Option>
-      <Option value="design">Diseño</Option>
-      <Option value="entertainment">Entretenimiento</Option>
+      <Option value="Desarrollo">Desarrollo</Option>
+      <Option value="Marketing">Marketing</Option>
+      <Option value="Comunicación">Comunicación</Option>
+      <Option value="Diseño">Diseño</Option>
+      <Option value="Entretenimiento">Entretenimiento</Option>
     </SelectStyled>
   );
 };

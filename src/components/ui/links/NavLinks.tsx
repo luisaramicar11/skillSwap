@@ -6,7 +6,7 @@ import { handlePageChange } from '../../../lib/utils/handlePageTheme';
 
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
-  padding: 15px;
+  padding: 1rem;
   margin: 0;
   color: ${({ theme }) => theme.colors.textWhite};
   font-weight: 400;

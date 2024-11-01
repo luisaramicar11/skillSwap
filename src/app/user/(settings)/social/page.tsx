@@ -3,13 +3,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import Modal from "../../../../components/modals/ModalReport";
-import {updateRequestById} from "../../../../lib/api/requests";
-import {getRequestsMessagesById} from "../../../../lib/api/requests"
+import { updateRequestById, getRequestsMessagesById } from "../../../api/requests";
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 // Estilos
 const PageContainer = styled.section`
   width: 100%;
-  margin: 54px 0;
   height: 100%;
   display: flex;
   position: relative;
@@ -19,6 +18,20 @@ const PageContainer = styled.section`
   p {
     width: 50%;
     color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  & h1 {
+    margin: 0;
+
+    height: min-content;
+
+    translate: 0 30px;
+
+    font-size: 100px;
+
+    opacity: 0.15;
+
+    padding-left: 1.7rem;
   }
 `;
 
@@ -35,30 +48,16 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height:200px;
+  height: 200px;
   display: flex;
   justify-content: center;
+  background-color: ${({ theme }) => theme.colors.bgBanner};
 `;
 
 const BannerBody = styled.div`
-    width: 1000px !important;
-    display: flex;
-    justify-content: space-between;
-    
-  & h1{
-    padding-left: 1.7rem;
-      margin: 0;
-      height: min-content;
-      translate: 0 30px;
-      font-size: 100px;
-      width: 30vw;
-      min-width: 300px !important;
-      border-bottom: solid 5px  ${({ theme }) => theme.colors.textYellow};
-      background: ${({ theme }) => theme.colors.gradientSecondary};
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-  }
+  width: 1000px !important;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PagesContent = styled.div`
@@ -154,9 +153,10 @@ const RequestButton = styled.button`
 
 const ReportsText = styled.div`
   display: flex;
-flex-direction: column;
-width: 100%;
-align-items: start;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+
   & p {
     text-align: start;
   }
@@ -167,6 +167,7 @@ display: flex;
 flex-direction: column;
 width: 100%;
 align-items: end;
+
   & p {
     text-align: end;
   }
@@ -180,12 +181,26 @@ const ReportButton = styled.button`
   border-radius: 5px;
   font-weight: bold;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
-  color: ${({ theme }) => theme.colors.textSecondary};
+  border: 1px solid ${({ theme }) => theme.colors.textOrange};
+  color: ${({ theme }) => theme.colors.textOrange};
 
   & :hover {
     transform: scale(1.05)
     }
+`;
+
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
+`
+
+const P = styled.p`
+  opacity: 0.6;
+  padding-left: 1rem;
+  border-left: 2px solid ${({ theme }) => theme.colors.textYellow};
+  color: ${({ theme }) => theme.colors.textYellow} !important;
+  font-weight: 500;
 `;
 
 // Función para enviar la actualización del estado de la solicitud
@@ -233,6 +248,7 @@ const UserRequests = () => {
       const storedUserId = localStorage.getItem("userId");
       if (storedUserId) {
         const userIdNumber = Number(storedUserId);
+        console.log(userIdNumber);
         if (!isNaN(userIdNumber)) {
           setUserId(userIdNumber);
         } else {
@@ -282,53 +298,56 @@ const UserRequests = () => {
   }
 
   return (
-    <PageContainer>
-      <Banner>
-        <BannerBody>
-          <h1>Social</h1>
-        </BannerBody>
-      </Banner>
-      <PageContentContainer>
-        <RequestPageContainer>
-          <PagesContent>
-            <RequestsText>
-              <h2>Solicitudes</h2>
-              <p>Revisa tus peticiones de conexión y decide con quién intercambiar conocimientos y experiencia.</p>
-            </RequestsText>
-            <PageBody>
-              {requests.length > 0 ? (
-                requests.map((request) => (
-                  <WidgetContainer key={request.id}>
-                    <RequestBody>
-                      <h3>{request.userNameRequesting}</h3>
-                      <p>{request.description}</p>
-                    </RequestBody>
-                    <ButtonsContainer>
-                      <RequestButton onClick={() => handleAccept(request.id)}>ACEPTAR</RequestButton>
-                      <RequestButton onClick={() => handleReject(request.id)}>RECHAZAR</RequestButton>
-                    </ButtonsContainer>
-                  </WidgetContainer>
-                ))
-              ) : (
-                <p>No hay solicitudes disponibles.</p>
-              )}
-            </PageBody>
-          </PagesContent>
-          <PagesContent>
-            <ReportsText>
-              <h2>Reportes</h2>
-              <p>En este espacio podrás realizar reportes a usuarios con conductas inadecuadas.</p>
-            </ReportsText>
-            <Reports>
-              <WidgetContainer>
-                <ReportButton onClick={openModal}>REPORTAR USUARIO </ReportButton>
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
-              </WidgetContainer>
-            </Reports>
-          </PagesContent>
-        </RequestPageContainer>
-      </PageContentContainer>
-    </PageContainer>
+    <Container>
+      <PageContainer>
+        <Banner>
+          <BannerBody>
+            <h1>Social</h1>
+          </BannerBody>
+        </Banner>
+        <PageContentContainer>
+          <RequestPageContainer>
+            <PagesContent>
+              <RequestsText>
+                <h2>Solicitudes</h2>
+                <p>Revisa tus peticiones de conexión y decide con quién intercambiar conocimientos y experiencia.</p>
+              </RequestsText>
+              <PageBody>
+                {requests.length > 0 ? (
+                  requests.map((request) => (
+                    <WidgetContainer key={request.id}>
+                      <RequestBody>
+                        <h3>{request.userNameRequesting}</h3>
+                        <p>{request.description}</p>
+                      </RequestBody>
+                      <ButtonsContainer>
+                        <RequestButton onClick={() => handleAccept(request.id)}>ACEPTAR</RequestButton>
+                        <RequestButton onClick={() => handleReject(request.id)}>RECHAZAR</RequestButton>
+                      </ButtonsContainer>
+                    </WidgetContainer>
+                  ))
+                ) : (
+                  <P>◕ No hay solicitudes por responder.</P>
+                )}
+              </PageBody>
+            </PagesContent>
+            <PagesContent>
+              <ReportsText>
+                <h2>Reportes</h2>
+                <p>En este espacio podrás realizar reportes a usuarios con conductas inadecuadas.</p>
+              </ReportsText>
+              <Reports>
+                <WidgetContainer>
+                  <ReportButton onClick={openModal}>⚠︎ REPORTAR USUARIO </ReportButton>
+                  <Modal isOpen={isModalOpen} onClose={closeModal} />
+                </WidgetContainer>
+              </Reports>
+            </PagesContent>
+          </RequestPageContainer>
+        </PageContentContainer>
+      </PageContainer>
+      <FooterMain />
+    </Container >
   );
 };
 

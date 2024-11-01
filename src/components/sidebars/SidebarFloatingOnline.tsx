@@ -6,8 +6,8 @@ import LogoutButton from "../ui/buttons/ButtonLogout";
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import {getRequestById} from "../../lib/api/requests";
-import {getUsersForImages} from "../../lib/api/users"
+import {getRequestById} from "../../app/api/requests";
+import {getUsersForImages} from "../../app/api/users"
 
 const OnlineSidebarContainer = styled.div`
     top: 0;
@@ -18,7 +18,6 @@ const OnlineSidebarContainer = styled.div`
     background: ${({ theme }) => theme.colors.bgMainOpacity};
     width: 100%;
     height: 100%;
-    transition: 1s ease-in-out;
     animation: appear 1s ease-in-out;
     
     @keyframes appear {
@@ -129,8 +128,6 @@ const StatusSection = styled.div`
   }
 
   .inbox {
-    
-
     opacity: 0.5;
     color: ${({ theme }) => theme.colors.textOrange};
 
@@ -196,14 +193,14 @@ interface IUserSolicitudes {
     solicitudes: IUserSolicitudes;
   }
   
- 
+
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   isOpen,
   onClose,
 }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const [userData, setUserData] = useState<IUserData | null>(null);
-   const [userMetrics, setUserMetrics] = useState<IUserCardProps | null>(null);
+  const [userMetrics, setUserMetrics] = useState<IUserCardProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -223,7 +220,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
               const metricsData = await getUsersForImages();
 
               if (userData && metricsData) {
-                  setUserData(userData.data.response);
+                  setUserData(userData);
                   const matchedUser = metricsData.find((user) => user.id === idNumber);
                   setUserMetrics(matchedUser ? matchedUser : null);
                   console.log(userData)
@@ -267,8 +264,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
               {userData && userMetrics && (
                   <>
                   <CardProfileLink
-                    fullName={userData.nombreUsuario}
-                    userMetrics={userMetrics}
+                    userData={userMetrics}
                   />
                   <StatusSection>
                     <div className="status-item rejected">

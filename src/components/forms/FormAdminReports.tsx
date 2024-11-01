@@ -3,37 +3,38 @@ import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
 import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
+//Formulario
 const Form = styled.form`
-  padding: 30px;
-  width: 100%;
-  max-width: 600px; /* Máxima anchura para el formulario */
+  padding: 50px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+
+  & article{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Input = styled.input`
-  width: 100%; /* Ocupa todo el ancho disponible */
+  width: 100%; 
   border-radius: 10px;
   border: 1px #ccc solid;
   padding: 7px;
   font-size: small;
   color: black;
-`;
 
-const DivInfo = styled.div`
-  font-size: 0.8rem;
-  text-align: center;
-`;
-
-const DivButton = styled.div`
-  display: flex;
-  justify-content: center;
+  @media (max-width: 768px) {
+    font-size: 0.9rem; 
+  }
 `;
 
 const Button = styled.button`
   margin-top: 5px;
-  margin-right: 10px;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
@@ -44,8 +45,9 @@ const Button = styled.button`
   padding: 5px 10px;
 
   &:hover {
-    background-color: orange;
+    background-color: grey;
     color: white;
+    border: none
   }
 `;
 
@@ -55,15 +57,92 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+
+  & label{
+    align-self: start;
+    display: flex;
+    align-items: center;
+
+    & p{
+      margin-right: 5px;
+      font-style: normal;
+      color: rgb(0, 0, 0, 0.2)
+    }
+  }
 `;
 
 const Title = styled.p`
-  margin-top: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: black;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: orange;
+  font-size: 20px;
   font-weight: 500;
+`;
+
+const DivInfo = styled.div`
+  font-size: 0.8rem;
+`;
+
+const DivButton = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+`;
+
+//Contenedor global
+const DivContent = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content : center;
+  gap: 50px;
+`;
+
+//Card para el Formulario
+const Card = styled.div`
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 540px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+`;
+
+const UserImage = styled.div<{ urlImage: string }>`
+  width: 100%;
+  height: 450px;
+  background-image: url(${(props) => props.urlImage});
+  background-size: cover;
+  background-position: center;
+`;
+
+const UserInfo = styled.div`
+  padding: 20px;
+`;
+
+const ReportTitle = styled.h2`
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+`;
+
+const ReportDate = styled.h4`
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #777;
+`;
+
+const Description = styled.p`
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.4;
 `;
 
 interface CreateReportFormProps {
@@ -134,18 +213,21 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
   };
 
   return (
-    <main>
-      <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
-      <DivInfo>La acción tomada debe ser cualquiera de las siguientes: suspender, habilitar o deshabilitar </DivInfo>
-      <DivInfo>Los códigos de los estados de los usuarios son: 1. Activo, 2. Inactivo, 3. Suspendido </DivInfo>
-      <Div>
+    <>
+      <DivContent>
         <Form onSubmit={handleSubmit}>
+          <article>
+            <Title>★ EDITAR REPORTE</Title>
+            <DivInfo>Aquí podrás resolver y tomar acción de los reportes realizados por usuarios de la plataforma.</DivInfo>
+            <DivInfo>La acción tomada debe ser cualquiera de las siguientes: <strong>suspender, habilitar</strong> o <strong>deshabilitar</strong>.</DivInfo>
+            <DivInfo>Los códigos de los estados de los usuarios son: <strong> 1. Activo, 2. Inactivo, 3. Suspendido</strong>.</DivInfo>
+          </article>
           <Div>
-            <label htmlFor="title">Nombre del reporte</label>
+            <label htmlFor="title"><p>★</p>Nombre del reporte</label>
             <Input
               type="text"
               name="title"
-              id="title"  // Añadido para asociar con el label
+              id="title"  
               placeholder="Nombre del reporte"
               onBlur={handleChange}
               onChange={handleChange}
@@ -154,11 +236,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="description">Descripción del reporte</label>
+            <label htmlFor="description"><p>★</p>Descripción del reporte</label>
             <Input
               type="text"
               name="description"
-              id="description"  // Añadido para asociar con el label
+              id="description" 
               placeholder="Descripción del reporte"
               onBlur={handleChange}
               onChange={handleChange}
@@ -167,11 +249,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="dateReport">Fecha del reporte</label>
+            <label htmlFor="dateReport"><p>★</p>Fecha del reporte</label>
             <Input
               type="date"
               name="dateReport"
-              id="dateReport"  // Añadido para asociar con el label
+              id="dateReport"  
               onBlur={handleChange}
               onChange={handleChange}
               value={form.dateReport ? formatDate(form.dateReport) : ""}
@@ -179,11 +261,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="actionTaken">Acción tomada</label>
+            <label htmlFor="actionTaken"><p>★</p>Acción tomada</label>
             <Input
               type="text"
               name="actionTaken"
-              id="actionTaken"  // Añadido para asociar con el label
+              id="actionTaken" 
               placeholder="Acción tomada"
               onBlur={handleChange}
               onChange={handleChange}
@@ -192,11 +274,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="idState">ID del Estado</label>
+            <label htmlFor="idState"><p>★</p>ID del Estado</label>
             <Input
               type="number"
               name="idState"
-              id="idState"  // Añadido para asociar con el label
+              id="idState"  
               placeholder="Id del Estado"
               onBlur={handleChange}
               onChange={handleChange}
@@ -205,11 +287,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="idUser">ID del Usuario</label>
+            <label htmlFor="idUser"><p>★</p>ID del Usuario</label>
             <Input
               type="number"
               name="idUser"
-              id="idUser"  // Añadido para asociar con el label
+              id="idUser"  
               placeholder="Id del User"
               onBlur={handleChange}
               onChange={handleChange}
@@ -218,11 +300,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="idReportedUser">ID del usuario reportado</label>
+            <label htmlFor="idReportedUser"><p>★</p>ID del usuario reportado</label>
             <Input
               type="number"
               name="idReportedUser"
-              id="idReportedUser"  // Añadido para asociar con el label
+              id="idReportedUser"  
               placeholder="Id del usuario reportado"
               onBlur={handleChange}
               onChange={handleChange}
@@ -231,11 +313,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="state">Estado</label>
+            <label htmlFor="state"><p>★</p>Estado</label>
             <Input
               type="text"
               name="state"
-              id="state"  // Añadido para asociar con el label
+              id="state" 
               placeholder="Estado"
               onBlur={handleChange}
               onChange={handleChange}
@@ -244,11 +326,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="user">Usuario quien reporta</label>
+            <label htmlFor="user"><p>★</p>Usuario quien reporta</label>
             <Input
               type="text"
               name="user"
-              id="user"  // Añadido para asociar con el label
+              id="user"  
               placeholder="Usuario quien reporta"
               onBlur={handleChange}
               onChange={handleChange}
@@ -257,11 +339,11 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             />
           </Div>
           <Div>
-            <label htmlFor="reportedUser">Usuario reportado</label>
+            <label htmlFor="reportedUser"><p>★</p>Usuario reportado</label>
             <Input
               type="text"
               name="reportedUser"
-              id="reportedUser"  // Añadido para asociar con el label
+              id="reportedUser" 
               placeholder="Usuario reportado"
               onBlur={handleChange}
               onChange={handleChange}
@@ -274,8 +356,18 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
             <Button type="button" onClick={handleReset}>Limpiar</Button>
           </DivButton>
         </Form>
-      </Div>
-    </main>
+        <Card>
+      <UserImage urlImage="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg" />
+      <UserInfo>
+        <ReportTitle>{form.titleReport}</ReportTitle>
+        <ReportDate>{form.dateReport ? formatDate(form.dateReport) : ""}</ReportDate>
+        <Description>
+          {form.description}
+        </Description>
+      </UserInfo>
+    </Card>
+      </DivContent>
+    </>
   );
 };
 

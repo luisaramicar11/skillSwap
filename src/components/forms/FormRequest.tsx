@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { toast } from "react-toastify";
-import { createConnectionRequest } from '../../lib/api/requests';  // Importa la función centralizada
+import { createConnectionRequest } from '../../app/api/requests';  // Importa la función centralizada
 
 export const FormContainer = styled.form`
   display: flex;

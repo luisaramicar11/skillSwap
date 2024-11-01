@@ -1,3 +1,5 @@
+import { IUser } from "./user.model";
+
 export interface IUserCardProps {
     id: number;
     fullName: string;
@@ -17,51 +19,39 @@ export interface IUserCarouselProps {
     createdAt: string;
 }
 
-export interface IProfileFixedCardProps extends IProfileCardProps {
-    ultimaAceptada: string
-    ultimaPendiente: string
-    ultimaCancelada: string
-    ultimoEnviado: string
-    conteoEnviadas: number
-    conteoAceptadas: number
-    conteoPendientes: number
-    conteoCanceladas: number
-    conteoConexiones: number
-}
-
-export interface IUserProfileProps extends IUserCardProps {
-    ultimaAceptada: string
-    ultimaPendiente: string
-    ultimaCancelada: string
-    ultimoEnviado: string
-    conteoEnviadas: number
-    conteoAceptadas: number
-    conteoPendientes: number
-    conteoCanceladas: number
-    conteoConexiones: number
+export interface IUserProfileProps extends IUserCardProps, IUserSolicitudes {
 }
 
 export interface IAllUsersCardsProps {
 users: IUserCardProps[]
 }
 
+export interface ITopUsersCardsProps {
+    users: IUserCarouselProps[]
+    }
+
 export interface IProfileCardProps {
-    fullName: string;
-    userMetrics: IUserCardProps;
+    userData: IUserCardProps;
+}
+
+export interface IShortProfileCardProps {
+    userData: IUser;
 }
 
 export interface IRequestCardProps {
     idUsuario: number
     nombreUsuario: string
-    solicitudes: {
-        ultimaAceptada: string
-        ultimaPendiente: string
-        ultimaCancelada: string
-        ultimoEnviado: string
-        conteoEnviadas: number
-        conteoAceptadas: number
-        conteoPendientes: number
-        conteoCanceladas: number
-        conteoConexiones: number
-    }
+    solicitudes: IUserSolicitudes
+}
+
+export interface IUserSolicitudes {
+    conteoCanceladas: number;
+    ultimaCancelada: string | null;
+    conteoAceptadas: number;
+    ultimaAceptada: string | null;
+    conteoEnviadas: number;
+    ultimoEnviado: string | null;
+    conteoPendientes: number;
+    ultimaPendiente: string | null;
+    conteoConexiones: string;
 }

@@ -3,7 +3,7 @@ import { IReportGet, IReport } from "../../../models/admin.reports.model"; // Us
 
 // Estado inicial
 interface UsersState {
-  reports: IReportGet[];  // Cambiado a IReportGet[]
+  reports: IReportGet[]; 
   loading: boolean;
   error: string | null;
 }

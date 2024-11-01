@@ -43,65 +43,70 @@ const Skills = styled.div`
 
 const RatingSection = styled.div`
   display: flex;
-  justify-content: space-around;
-  gap: 1rem;
+  justify-content: end;
+  gap: 2rem;
   text-align: center;
-  margin: 20px 0;
+  margin-top: 20px;
 
   & h1 {
-    font-size: 2.2rem;
+    font-size: 3rem;
     margin: 0;
     color: ${({ theme }) => theme.colors.textTertiary};
     font-weight: bold;
   }
 
   & p {
-    opacity: 0.7;
-    text-align: start;
+    text-align: center;
+    width: 100%;
     font-size: 1rem !important;
-    font-weight: bold;
+    font-weight: 500;
     margin: 0;
-    color: ${({ theme }) => theme.colors.textYellow};
+    color: ${({ theme }) => theme.colors.textTertiary};
   }
 `;
 
 const DivRate = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   & p {
+    text-align: center;
+    width: 100%;
     font-size: 0.7rem;
   }
 `;
+
 const RatingStars = styled.div`
-  color: ${({ theme }) => theme.colors.textYellow};
   opacity: 0.7;
+  gap: 5px;
+  display: flex;
 `;
 
 const Star = styled.span`
   color: ${({ theme }) => theme.colors.textYellow};
   font-size: 16px;
-  margin: 0 2px;
   font-style: normal;
 `;
+
 const CardProfileLink: React.FC<IProfileCardProps> = ({
-  fullName,
-  userMetrics,
+  userData,
 }) => {
   const abilitiesArray =
-    userMetrics?.abilities
+  userData?.abilities
       ?.split(",")
       .map((ability: string) => ability.trim()) || [];
 
   return (
     <LinkProfile href="/user/settings" label="CONFIGURA">
       <ProfileHeader>
-        <Avatar urlImage={userMetrics.urlImage} />
+        <Avatar urlImage={userData?.urlImage} />
         <div>
-          <ProfileName>{fullName}</ProfileName>
+          <ProfileName>{userData?.fullName}</ProfileName>
           {abilitiesArray.length > 0 ? (
             <Skills>
-              {abilitiesArray.map((ability, index) => (
+              {abilitiesArray.slice(0, 3).map((ability, index) => (
                 <li key={index}>{ability}</li>
               ))}
             </Skills>
@@ -111,12 +116,12 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
         </div>
       </ProfileHeader>
       <RatingSection>
-        <h1>{userMetrics?.qualification}</h1>
+        <h1>{userData?.qualification}</h1>
         <DivRate>
           <p>Calificación</p>
           <RatingStars>
             {[...Array(5)].map((_, index) => {
-              const rating = Math.floor(userMetrics?.qualification); // Redondea hacia abajo
+              const rating = Math.floor(userData?.qualification);
               return (
                 <Star key={index}>
                   {index < rating ? "★" : "☆"}
@@ -124,7 +129,6 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
               );
             })}
           </RatingStars>
-
         </DivRate>
       </RatingSection>
     </LinkProfile>

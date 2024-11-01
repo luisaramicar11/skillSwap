@@ -13,12 +13,15 @@ const SkillTagTinyContainer = styled.div`
 const SkillTagTiny = styled.p`
     display: inline-block;
     min-width: 60px;
-    width: auto;
+    max-width: 12rem;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
     text-align: center;
-    padding: 3px !important;
+    padding: 2px 8px !important;
     border-radius: 20px;
-    color: ${({ theme }) => theme.colors.textPurple} !important;
-    border: 1px solid ${({ theme }) => theme.colors.textPurple};
+    color: ${({ theme }) => theme.colors.textOrange} !important;
+    border: 1px solid ${({ theme }) => theme.colors.textOrange};
     font-size: 12px;
 `;
 

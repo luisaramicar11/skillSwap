@@ -7,18 +7,19 @@ import DivLink from "../../ui/links/CardUserLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 
 const CardListContainer = styled.div`
-  display: grid;
+  display: flex;
   justify-items: center;
-  width: 80%;
+  flex-direction: column;
+  width: 100%;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 `;
 
 // Estilos para los botones de paginación
 const PaginationContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 20px;
+  gap: 10px;
 `;
 
 const PaginationButton = styled.button`
@@ -26,7 +27,6 @@ const PaginationButton = styled.button`
   color: ${({ theme }) => theme.colors.textSecondary};
   border: ${({ theme }) => theme.colors.textDark} 1px solid;
   padding: 10px 20px;
-  margin: 0 10px;
   cursor: pointer;
   transition: 0.4s;
   border-radius: 5px;
@@ -40,6 +40,7 @@ const PaginationButton = styled.button`
   &:disabled {
     transition: 0.4s;
     transform: scale(0.9);
+    translate: -5px;
     opacity: 0.4;
     cursor: not-allowed;
   }
