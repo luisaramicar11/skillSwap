@@ -229,7 +229,7 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
                       {[...Array(5)].map((_, index) => {
                         const rating = Math.floor(userToRequest?.qualification);
                         return (
-                          <Star key={index}>
+                          <Star key={0}>
                             {index < rating ? "★" : "☆"}
                           </Star>
                         );
