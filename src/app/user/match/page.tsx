@@ -2,20 +2,18 @@
 import React, { useState, useEffect } from "react";
 import SliderCard from "../../../components/sliders/slide";
 import MatchCard from "../../../components/cards/CardMatch";
-import { DivMatch } from "./MatchStyling";
+import { DivMatch, Container } from "./MatchStyling";
 import ProfileCard from "@/src/components/cards/CardMatchProfile";
-import { IUserCardProps, IRequestCardProps } from "@/src/models/userCards.model";
+import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import {getRequestById} from "../../../lib/api/requests";
-import {getUsersForImages} from "../../../lib/api/users"
+import { getUsersForImages } from "../../api/users"
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 const Match = () => {
-  const [userData, setUserData] =  useState<IUserCardProps[]>([]);
+  const [userData, setUserData] = useState<IUserCardProps[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const [userMetrics, setUserMetrics] = useState<IRequestCardProps | null>(null);
 
   const getIdUser = (): number => {
     const idString = localStorage.getItem("userId");
@@ -32,14 +30,9 @@ const Match = () => {
 
   useEffect(() => {
     const fetchPeople = async () => {
-      const idNumber = getIdUser();
-
       try {
         const dataUser = await getUsersForImages();
         setUserData(dataUser);
-        const metricsResponse = await getRequestById(idNumber);
-        console.log(metricsResponse)
-        setUserMetrics(metricsResponse.data.response );
         setLoading(false);
       } catch (error) {
         console.log(error)
@@ -74,37 +67,28 @@ const Match = () => {
   console.log(userData);
   console.log(idCurrentUser);
 
-  
+
 
   return (
-    <DivMatch>
-      {userIndex !== -1 && (
-        <ProfileCard
-          fullName={userData[userIndex]?.fullName}
-          userMetrics={userData[userIndex]}
-          ultimaAceptada={userMetrics!.solicitudes?.ultimaAceptada}
-          ultimaPendiente={userMetrics!.solicitudes?.ultimaPendiente}
-          ultimaCancelada={userMetrics!.solicitudes?.ultimaCancelada}
-          ultimoEnviado={userMetrics!.solicitudes?.ultimoEnviado}
-          conteoConexiones={userMetrics!.solicitudes?.conteoConexiones}
-          conteoPendientes={userMetrics!.solicitudes?.conteoPendientes}
-          conteoCanceladas={userMetrics!.solicitudes?.conteoCanceladas}
-          conteoEnviadas={userMetrics!.solicitudes?.conteoEnviadas}
-          conteoAceptadas={userMetrics!.solicitudes?.conteoAceptadas}
+    <Container>
+      <DivMatch>
+        {userIndex !== -1 && (
+          <ProfileCard/>
+        )}
+        <SliderCard user={userData[currentIndex]} onPass={handlePass} />
+        <MatchCard
+          description={userData[currentIndex]?.description}
+          skills={
+            userData[currentIndex]?.abilities
+              ? userData[currentIndex].abilities.split(',').map((ability: string) => ability.trim())
+              : []
+          }
+          rating={userData[currentIndex]?.qualification}
+          countMatches={userData[currentIndex]?.countMatches}
         />
-      )}
-      <SliderCard user={userData[currentIndex]} onPass={handlePass} />
-      <MatchCard
-        description={userData[currentIndex]?.description}
-        skills={
-          userData[currentIndex]?.abilities
-            ? userData[currentIndex].abilities.split(',').map((ability: string) => ability.trim())
-            : []
-        }
-        rating={userData[currentIndex]?.qualification}
-        countMatches={userData[currentIndex]?.countMatches}
-      />
-    </DivMatch>
+      </DivMatch>
+      <FooterMain />
+    </Container>
   );
 };
 

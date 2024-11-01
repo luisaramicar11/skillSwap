@@ -13,7 +13,7 @@ export const getUsersForImages = async (): Promise<IUserCardProps[]> => {
             },
         });
 
-        return response.data.response;  // Asegúrate de devolver los datos correctos
+        return response.data.response;  
     } catch (error) {
         throw error;
     }
@@ -76,7 +76,7 @@ export const getRequestById = async (userId: number) => {
             },
         });
 
-        return response; // Asegúrate de que esta ruta es correcta
+        return response.data.response; 
     } catch (error) {
         throw error;
     }

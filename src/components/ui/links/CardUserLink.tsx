@@ -13,7 +13,7 @@ const DivLinkComponent = styled(Link)`
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
         transition: 0.4s ease-in-out;
     }
 `;
@@ -35,7 +35,7 @@ const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) =
                 }
             }}
         >
-            {children || label} {/* Si `children` existe, lo renderiza, de lo contrario usa `label` */}
+            {children || label} 
         </DivLinkComponent>
     );
 };

@@ -5,9 +5,7 @@ import { ISliderCardProps } from "@/src/models/match.model";
 
 const CardContainer = styled.div`
   width: 50%;
-  height: 95%;
-  min-height: 450px !important;
-  margin: 1rem 0 1rem 1rem;
+  height: 27rem !important;
   border-radius: 0.5rem;
   position: relative;
   color: white;
@@ -115,7 +113,7 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
           <Image urlImage={user.urlImage} alt= {user.fullName}/>
           <Title>{user.fullName}</Title>
           <Subtitle>{user.jobTitle}</Subtitle>
-          <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
+          <StarButton onClick={handleStarClick}>⚜</StarButton> {/* Aquí está la estrellita */}
         </CardContainer>
   
         {modalOpen && <Modal userToRequest={user}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}

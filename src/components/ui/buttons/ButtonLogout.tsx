@@ -6,7 +6,7 @@ import { logoutUser } from "../../../app/redux/slices/authSlice";
 
 // Definimos los tipos de props para el componente
 interface LogoutButtonProps {
-  icon?: React.ReactNode; // El icono es opcional y puede ser cualquier nodo de React
+  icon?: React.ReactNode;
 }
 
 const Button = styled.button`
@@ -15,7 +15,6 @@ const Button = styled.button`
   align-items: center;
   color: ${({ theme }) => theme.colors.textWhite};
   border: none;
-  border-top: 1px solid ${({ theme }) => theme.colors.textWhite};
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;
@@ -43,12 +42,19 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ icon }) => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
     localStorage.removeItem("clickedUserId");
+
+    localStorage.setItem("currentPage", "AUTH");
+    localStorage.setItem('theme', 'light');
+
+    window.dispatchEvent(new Event('storage'));
+
     router.push("/auth");
+    router.refresh();
   };
 
   return (
     <Button onClick={handleLogout}>
-      {icon && icon} Cerrar sesión
+      {icon} Cerrar sesión
     </Button>
   );
 };

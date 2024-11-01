@@ -15,15 +15,7 @@ import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
 import { RootState } from '../../../app/redux/store';
 
 // Styled components
-import {
-  FormWrapper,
-  Container,
-  Title,
-  DivButtonLogin,
-  BackLink,
-  Arrow,
-  ForgotPasswordButton
-} from "./LoginStyling";
+import {FormWrapper,Container,Title,DivButtonLogin,BackLink,Arrow,ForgotPasswordButton} from "./LoginStyling";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -71,9 +63,9 @@ export default function LoginPage() {
     const idUser = payload?.data.response.id;
 
     if (token) {
-      toast.success("Login exitoso!", {
+      toast.success("¡Login exitoso!", {
         style: {
-          marginTop: '10px', // Cambia el padding
+          marginTop: '10px', 
         },
       });
       localStorage.setItem("authToken", token);
@@ -122,7 +114,7 @@ export default function LoginPage() {
             autoComplete="current-password"
           />
           <DivButtonLogin>
-            <ButtonSingUp type="submit" disabled={loading}>
+            <ButtonSingUp type="submit" disabled={loading} onClick={() => handlePageChange('INICIO')}>
               {loading ? "Cargando..." : "ENTRAR"}
             </ButtonSingUp>
           </DivButtonLogin>

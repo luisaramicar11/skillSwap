@@ -6,7 +6,7 @@ import { handlePageChange } from '../../../lib/utils/handlePageTheme';
 
 const IconNavLinkComponent = styled(Link)`
   text-decoration: none;
-  padding: 15px;
+  padding: 1rem;
   font-weight: 400;
   color: ${({ theme }) => theme.colors.textWhite};
   display: flex;
@@ -18,8 +18,8 @@ const IconNavLinkComponent = styled(Link)`
     display: flex;
     align-items: center; 
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     fill: ${({ theme }) => theme.colors.textWhite}; 
   }
 
@@ -35,8 +35,8 @@ const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ h
         <IconNavLinkComponent
             href={href}
             onClick={() => {
-                handlePageChange(label ?? 'default-label');
-                if (onClick) onClick(label ?? 'default-label');
+                handlePageChange(label ?? 'DEFAULT_LABEL');
+                if (onClick) onClick(label ?? 'DEFAULT_LABEL');
             }}
         >
             {icon}

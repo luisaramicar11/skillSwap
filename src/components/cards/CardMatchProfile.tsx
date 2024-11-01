@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
-import { IProfileFixedCardProps } from "@/src/models/userCards.model";
+import { IRequestCardProps, IUserCardProps } from "@/src/models/userCards.model";
+import { getRequestById, getUsersForImages } from "@/src/app/api/users";
+import { useEffect, useState } from "react";
+import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const ProfileCardContainer = styled.div`
   background: ${({ theme }) => theme.colors.bgSidebar};
   width: 100%;
-  height: 95%;
-  min-height: 450px !important;
+  height: 27rem !important;
   display: flex;
-  margin: 1rem 0rem 2rem 1rem;
   flex-direction: column;
   padding: 1rem;
   padding-top: 0;
@@ -18,12 +19,8 @@ const ProfileCardContainer = styled.div`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
 
-  @media (max-width: 768px) {
+  @media (max-width: 950px) {
     display: none !important;
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    margin-top: 2.5rem !important;
   }
 `;
 
@@ -99,31 +96,71 @@ const H2StatusSection = styled.h2`
   font-size: 0.9rem;
 `;
 
-const ProfileCard: React.FC<IProfileFixedCardProps> = ({
-  fullName,
-  userMetrics,
-  ultimaAceptada,
-  ultimaPendiente,
-  ultimaCancelada,
-  ultimoEnviado,
-  conteoPendientes,
-  conteoCanceladas,
-  conteoEnviadas,
-  conteoAceptadas
-}) => {
+const ProfileCard: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [userData, setUserData] = useState<IUserCardProps | null>(null);
+  const [userMetrics, setUserMetrics] = useState<IRequestCardProps>();
+
+  // Función para obtener el ID del usuario del localStorage
+  const getCurrentIdUser = (): number => {
+    const idString = localStorage.getItem("userId");
+    return parseInt(idString!, 10);
+  };
+
+  const idNumberCurrentUser = getCurrentIdUser();
+
+  useEffect(() => {
+    const fetchPeople = async () => {
+      if (!idNumberCurrentUser) {
+        setError("No se pudo obtener el ID del usuario.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const metricsResponse = await getRequestById(idNumberCurrentUser);
+        const userDataResponse = await getUsersForImages();
+
+        if (metricsResponse && userDataResponse) {
+          setUserMetrics(metricsResponse);
+          const matchedUser = userDataResponse.find((user) => user.id === idNumberCurrentUser);
+          setUserData(matchedUser!);
+        } else {
+          setError('Error al cargar los datos');
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError("Error al cargar los datos");
+        setLoading(false);
+      }
+    };
+
+    fetchPeople();
+  }, [idNumberCurrentUser]);
+
+  if (loading) {
+    return <OurAlertsText>Cargando...</OurAlertsText>;
+  }
+
+  if (error) {
+    return <OurAlertsText>Error: {error}</OurAlertsText>;
+  }
+
   return (
     <ProfileCardContainer>
       <CardProfileLink
-          fullName={fullName}
-          userMetrics={userMetrics}
-        />
+        userData={userData!}
+      />
       <StatusSection>
         <div className="status-item rejected">
           <H2StatusSection>Rechazadas</H2StatusSection>
           <div className="status-content">
             <FaTimes className="icon" />
             <p>
-              {conteoCanceladas}: {ultimaCancelada}
+              {userMetrics!.solicitudes.conteoCanceladas}: {userMetrics!.solicitudes.ultimaCancelada}
             </p>
           </div>
         </div>
@@ -132,7 +169,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
           <div className="status-content">
             <FaCheck className="icon" />
             <p>
-              {conteoAceptadas}: {ultimaAceptada}
+              {userMetrics!.solicitudes.conteoAceptadas}: {userMetrics!.solicitudes.ultimaAceptada}
             </p>
           </div>
         </div>
@@ -141,7 +178,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
           <div className="status-content">
             <FaArrowUp className="icon" />
             <p>
-              {conteoEnviadas}: {ultimoEnviado}
+              {userMetrics!.solicitudes.conteoEnviadas}: {userMetrics!.solicitudes.ultimoEnviado}
             </p>
           </div>
         </div>
@@ -150,7 +187,7 @@ const ProfileCard: React.FC<IProfileFixedCardProps> = ({
           <div className="status-content">
             <FaClock className="icon" />
             <p>
-              {conteoPendientes}: {ultimaPendiente}
+              {userMetrics!.solicitudes.conteoPendientes}: {userMetrics!.solicitudes.ultimaPendiente}
             </p>
           </div>
         </div>

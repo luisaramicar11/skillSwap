@@ -10,14 +10,14 @@ interface IDiscoverCardProps {
   qualification: number;
   abilities: string[];
   urlImage: string;
+  createdAt?: string;
 }
 
 // Contenedor de la tarjeta
 const CardContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 16rem;
-  max-height: 19rem;
+  height: 19rem;
   max-width: 500px;
   overflow: hidden;
   gap: 1rem;
@@ -40,16 +40,12 @@ const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  p {
-    color: ${({ theme }) => theme.colors.textSecondary};
-  }
 `;
 
 
 // Estilo para el nombre
 const ImageCard = styled.div<{ urlImage?: string }>`
-  background-image: url(${(props) => props.urlImage || 'https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg'});
+  background-image: url(${(props) => props.urlImage || 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'});
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -65,10 +61,14 @@ const Name = styled.h3`
   margin-bottom: 4px;
 `;
 
+const JobTitle = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 // Estilo para el contenedor de estrellas
 const StarsContainer = styled.div`
   display: flex;
-  margin-bottom: 8px;
 `;
 
 const Star = styled.span`
@@ -83,7 +83,7 @@ const Skills = styled.div`
   flex-wrap: wrap;
   width: 60%;
   gap: 3px;
-  padding-bottom: 0rem;
+  padding-bottom: 0 !important;
 `;
 
 const Card: React.FC<IDiscoverCardProps> = ({
@@ -91,7 +91,8 @@ const Card: React.FC<IDiscoverCardProps> = ({
   jobTitle,
   qualification,
   abilities,
-  urlImage
+  urlImage,
+  createdAt
 }) => {
   // Función para renderizar las estrellas según la calificación
   return (
@@ -101,10 +102,10 @@ const Card: React.FC<IDiscoverCardProps> = ({
       </ImageColumn>
       <InfoColumn>
         <Name>{fullName}</Name>
-        <p>{jobTitle}</p>
+        <JobTitle>{createdAt ? `${createdAt} · ${jobTitle}` : jobTitle}</JobTitle>
         <StarsContainer>
           {[...Array(5)].map((_, index) => {
-            const rating = Math.floor(qualification); // Redondea hacia abajo
+            const rating = Math.floor(qualification); 
             return (
               <Star key={index}>
                 {index < rating ? "★" : "☆"}{" "}

@@ -3,28 +3,36 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, deleteUser, updateUser } from "../../redux/slices/usersSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import {  IUserUpdateAdmin } from "../../../models/user.model"; 
-import FormUsers from "../../../components/forms/FormAdminUser"; 
+import { IUserUpdateAdmin } from "../../../models/user.model";
+import FormUsers from "../../../components/forms/FormAdminUser";
 import Table from "../../../components/tables/TableUsers";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 const Title = styled.h2`
   text-align: center;
-  margin-top: 0 !important;
-  margin-bottom: 20px;
-  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px !important;
+  font-weight: 500;
   font-size: 40px;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
-  background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  color: transparent;
+  width: 50%;
+  border-bottom: solid 2px ${({ theme }) => theme.colors.textBlack};
+  color: ${({ theme }) => theme.colors.textBlack};
 `;
 
 const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
+
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
+`
 
 const Users: React.FC = () => {
   const users = useSelector((state: RootState) => state.users.users);
@@ -35,8 +43,6 @@ const Users: React.FC = () => {
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
-
-
 
   // Actualizar usuario
   const handleUpdateUser = async (updatedToUser: IUserUpdateAdmin) => {
@@ -60,7 +66,7 @@ const Users: React.FC = () => {
 
       dispatch(updateUser(updatedToUser));
       setEditedUser(null);
-      toast.success("Usuario actualizado exitosamente!");
+      toast.success("¡Usuario actualizado exitosamente!");
     } catch (error) {
       console.error("Error updating user:", error);
       toast.error("Error al actualizar el usuario.");
@@ -85,7 +91,7 @@ const Users: React.FC = () => {
       }
 
       dispatch(deleteUser(userId));
-      toast.success("Usuario eliminado exitosamente!");
+      toast.success("¡Usuario eliminado exitosamente!");
     } catch (error) {
       console.error("Error deleting user:", error);
       toast.error("Error al eliminar el usuario.");
@@ -93,20 +99,23 @@ const Users: React.FC = () => {
   };
 
   return (
-    <Div>
-      <Title>Formulario de Usuarios</Title>
-
-      <FormUsers
-        updateData={handleUpdateUser}
-        dataToEdit={editedUser}
-        setDataToEdit={setEditedUser}
-      />
-      <Table 
-        data={users}
-        setDataToEdit={setEditedUser} 
-        deleteData={handleDeleteUser} 
-      />
-    </Div>
+    <Container>
+      <Div>
+        <Title>Formulario de <span>usuarios</span></Title>
+        <FormUsers
+          updateData={handleUpdateUser}
+          dataToEdit={editedUser}
+          setDataToEdit={setEditedUser}
+        />
+        <Title>Tabla de <span>usuarios</span></Title>
+            <Table
+              data={users}
+              setDataToEdit={setEditedUser}
+              deleteData={handleDeleteUser}
+            />
+      </Div>
+      <FooterMain />
+    </Container>
   );
 };
 

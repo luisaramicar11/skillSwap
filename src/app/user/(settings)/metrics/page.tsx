@@ -2,16 +2,23 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from "../../../../components/modals/ModalSafety";
-import {getRequestById} from "../../../../lib/api/requests"
+import { getRequestById } from "../../../api/requests"
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { FooterMain } from '@/src/components/footer/FooterMain';
+
 // Registramos los elementos de ChartJS para Bar Chart
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
+`
 
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
-  margin: 54px 0;
   display: flex;
   position: relative;
   justify-content: center;
@@ -32,7 +39,6 @@ const PageContainer = styled.section`
       margin-bottom: 20px;
       width: 70%;
       font-size: 40px;
-      border-bottom: 2px solid  ${({ theme }) => theme.colors.textYellow};
       background: ${({ theme }) => theme.colors.gradientSecondary};
       -webkit-background-clip: text;
       background-clip: text;
@@ -67,16 +73,16 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height:200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
 `;
 
 const BannerBody = styled.div`
-    width: 1000px !important;
-    display: flex;
-    justify-content: space-between;
+  width: 1000px !important;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PageContentContainer = styled.article`
@@ -108,7 +114,6 @@ const PageBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 2rem;
 `;
 
 const WidgetBody = styled.div`
@@ -120,35 +125,27 @@ const WidgetBody = styled.div`
 `;
 
 const SecurityButton = styled.button`
-  width: 25%;
+  width: 20%;
   padding: 10px;
   font-size: 14px;
   margin-top: 50px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: bold;
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
-  border: 1px solid ${({ theme }) => theme.colors.textSecondary};
-  color: ${({ theme }) => theme.colors.textSecondary};
+  background: ${({ theme }) => theme.colors.gradientSecondary};
+  border: none;
+  color: ${({ theme }) => theme.colors.textWhite};
+  transition: 0.6s ease-in-out;
 
   &:hover {
+    transition: 0.6s ease-in-out;
     transform: scale(1.05);
   }
 `;
 
 const DivSec = styled.div`
-margin-top: 1.5rem;
+  margin-top: 1.5rem;
 `
-
-interface IRequestData {
-  message: string;
-  details: {
-      text: string;
-  };
-  data: {
-      response: IUserResponse;
-  };
-}
 
 interface IUserResponse {
   idUsuario: number;
@@ -169,7 +166,7 @@ interface ISolicitudes {
 }
 
 const Metrics: React.FC = () => {
-  const [requestData, setRequestData] = useState<IRequestData | null>(null);
+  const [requestData, setRequestData] = useState<IUserResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -188,7 +185,7 @@ const Metrics: React.FC = () => {
 
     const fetchRequestData = async () => {
       try {
-        const data = await getRequestById(Number(userId));
+        const data = await getRequestById(userId);
         setRequestData(data);
       } catch (err) {
         setError(err as string);
@@ -210,22 +207,22 @@ const Metrics: React.FC = () => {
       {
         label: "Conteo de Solicitudes",
         data: [
-          requestData?.data.response.solicitudes.conteoAceptadas,
-          requestData?.data.response.solicitudes.conteoPendientes,
-          requestData?.data.response.solicitudes.conteoCanceladas,
-          requestData?.data.response.solicitudes.conteoEnviadas,
+          requestData?.solicitudes.conteoAceptadas,
+          requestData?.solicitudes.conteoPendientes,
+          requestData?.solicitudes.conteoCanceladas,
+          requestData?.solicitudes.conteoEnviadas,
         ],
         backgroundColor: [
-          "rgba(15, 200, 49, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 99, 132, 0.5)",
+          "rgba(237, 226, 176, 0.5)",
+          "rgba(214, 192, 49, 0.5)",
+          "rgba(228, 138, 81, 0.5)",
+          "rgba(200, 15, 15, 0.5)",
         ],
         borderColor: [
-          "rgba(15, 200, 49, 0.5)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 99, 132, 1)",
+          "rgb(237, 226, 176)",
+          "rgb(214, 192, 49)",
+          "rgb(228, 138, 81)",
+          "rgb(200, 15, 15)",
         ],
         borderWidth: 1,
       },
@@ -233,34 +230,38 @@ const Metrics: React.FC = () => {
   };
 
   return (
-    <PageContainer>
-      <Banner>
-        <BannerBody>
-          <h1>Métricas</h1>
-        </BannerBody>
-      </Banner>
-      <PageContentContainer>
-        <InfoPageContainer>
-          <PageContent>
-            <PageBody>
-              <WidgetBody>
-                <h2>Conteo de Solicitudes</h2>
+    <Container>
+      <PageContainer>
+        <Banner>
+          <BannerBody>
+            <h1>Métricas</h1>
+          </BannerBody>
+        </Banner>
+        <PageContentContainer>
+          <InfoPageContainer>
+            <PageContent>
+              <PageBody>
+                <WidgetBody>
+                  <h2>Conteo de Solicitudes</h2>
 
-                {/* Gráfico de Barras (Bar Chart) */}
-                <Bar data={barData} options={{ responsive: true }} />
+                  {/* Gráfico de Barras (Bar Chart) */}
+                  <Bar data={barData} options={{ responsive: true }} />
 
-                {/* Botón de seguridad */}
-                <DivSec>
-                <h2>Seguridad</h2>
-                </DivSec>
-                <SecurityButton onClick={openModal}>Acerca de tu seguridad</SecurityButton>
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
-              </WidgetBody>
-            </PageBody>
-          </PageContent>
-        </InfoPageContainer>
-      </PageContentContainer>
-    </PageContainer>
+                  {/* Botón de seguridad */}
+                  <DivSec>
+                    <h2>Seguridad</h2>
+                  </DivSec>
+                  <p>Aquí podrás ver información para mayor seguridad y protección a la hora de interactuar con otros usuarios.</p>
+                  <SecurityButton onClick={openModal}> ★ Tips de Seguridad</SecurityButton>
+                  <Modal isOpen={isModalOpen} onClose={closeModal} />
+                </WidgetBody>
+              </PageBody>
+            </PageContent>
+          </InfoPageContainer>
+        </PageContentContainer>
+      </PageContainer>
+      <FooterMain />
+    </Container >
   );
 
 

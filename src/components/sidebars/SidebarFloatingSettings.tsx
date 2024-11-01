@@ -29,7 +29,7 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
     position: fixed;
     height: 300px;
     width: min-content;
-    top: 74px;
+    top: 70px;
     right: 20px;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.textWhite};

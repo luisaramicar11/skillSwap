@@ -15,9 +15,18 @@ interface IPostPreview {
   user: IUser;
 }
 
+const P = styled.p`
+color: #e2e2e2;  
+font-style: italic;
+padding: 20px;
+
+small {
+  color: #d6d6d6;
+}
+`;
+
 const PreviewContainer = styled.div`
-  background-color: #333;
-  border: 2px solid #2c2f33;
+  background-color: #2C2C2C;
   border-radius: 8px;
   margin-bottom: 16px;
   padding: 16px;
@@ -39,17 +48,17 @@ const UserInfo = styled.div`
 const UserName = styled.h2`
   font-size: 16px;
   margin: 0;
-  color: #e9afaf; /* Ajusta el color según desees */
+  color: #dedede;
 `;
 
 const UserStats = styled.p`
   font-size: 14px;
   margin: 5px 0;
-  color: #e9afaf; /* Ajusta el color según desees */
+  color: #e4e4e4;
 `;
 
 const ProfileLink = styled.a`
-  color: #da7272;
+  color: #cfcfcf;
   text-decoration: none !important;
 
   &:hover {
@@ -94,8 +103,8 @@ const PostPreview: React.FC<IPostPreview> = ({ user }) => {
         const data = await response.json();
         setUserData(data);
       } catch (error) {
-        console.error('Error fetching GitHub profile:', error);
-        setError('Error fetching GitHub profile');
+        console.error('Error al obtener el perfil de GitHub:', error);
+        setError(`Error al obtener el perfil de GitHub :(`);
       } finally {
         setLoading(false);
       }
@@ -105,15 +114,15 @@ const PostPreview: React.FC<IPostPreview> = ({ user }) => {
   }, [user.id]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <P>Loading...</P>;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <P>{error} <br/><small> ⌦ Para intentar de nuevo recarga la página.</small></P>;
   }
 
   if (!userData) {
-    return <p>No se encontraron datos del perfil de GitHub</p>;
+    return <P>No se encontraron datos del perfil de GitHub</P>;
   }
 
   return (

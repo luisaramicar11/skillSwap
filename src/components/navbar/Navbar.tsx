@@ -16,8 +16,9 @@ const NavbarContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 1rem;
     gap: 50px;
+    border-bottom: 1px solid  ${({ theme }) => theme.colors.borderNavs};
 
     @media (max-width: 768px) {
         padding: 0 20px;
@@ -38,6 +39,7 @@ const AuthLink = styled.p`
     & small {
         margin: 0;
         padding: 0;
+        color: ${({ theme }) => theme.colors.textWhite};
     }
 
     &:hover {
@@ -53,12 +55,14 @@ const SidebarLink = styled.p`
     font-size: 15px;
     width: max-content;
     transition: 0.4s;
+    padding: 15px;
     gap: 10px;
     cursor: pointer;
 
     & small {
         margin: 0;
         padding: 0;
+        color: ${({ theme }) => theme.colors.textWhite};
         cursor: pointer;
     }
 
@@ -108,7 +112,9 @@ export const Navbar: React.FC = () => {
                 <SidebarLink onClick={openModal}>+ <small>SkillSwap</small></SidebarLink>
             </SidebarLinkContainer>
             <IconsContainer>
-                <StyledIconNavLink href="/auth" label="AUTH" icon={<AuthLink><small>Iniciar sesión</small></AuthLink>} />
+                <StyledIconNavLink href="/auth" label="AUTH" icon={
+                    <AuthLink><small>Iniciar sesión</small></AuthLink>
+                    } />
                 <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
