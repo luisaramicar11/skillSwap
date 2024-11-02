@@ -26,7 +26,7 @@ export const GlobalTheme: IGlobalTheme = {
         textPrimary: '#FFFFFF',
         textDark: '#555555',             
         bgSecondary: '#222222', 
-        bgGray: '#222222', 
+        bgGray: '#777777', 
         bgTertiary: '#F5F5F5',            
         textSecondary: '#222222', 
         textBlack: '#00000025',  

@@ -24,7 +24,7 @@ const FooterText = styled.p`
     margin: 0;
     padding: 20px 0;
     width: 50%;
-    border-top: 1px solid ${({ theme }) => theme.colors.textBlack};
+    border-top: 1px solid ${({ theme }) => theme.colors.bgGray};
     color: ${({ theme }) => theme.colors.bgGray};
 
     @media (max-width: 768px) {
