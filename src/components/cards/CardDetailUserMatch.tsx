@@ -380,6 +380,10 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
             <H3>Descripción</H3>
             <P>{userDetail.description}</P>
             <ContactInfo>
+              <h3>Comunidad</h3>
+              <span>{userDetail.category}</span>
+            </ContactInfo>
+            <ContactInfo>
               <h3>Email</h3>
               <span>{userDetail.email}</span>
             </ContactInfo>
