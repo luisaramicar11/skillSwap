@@ -46,10 +46,7 @@ const Header = styled.div`
   position: relative;
   border-radius: 10px;
   width: 100%;
-
-  @media (max-width: 600px) {
-      padding-top: 1rem;
-    }
+  padding-top: 1rem;
 `;
 
 const UserInfo = styled.div`
@@ -57,12 +54,21 @@ const UserInfo = styled.div`
   flex-direction: column;
 `;
 
+const MainInfo = styled.div`
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+
+  @media (max-width: 900px) {
+      flex-wrap: wrap;
+    }
+`;
+
 const UserName = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.textDark};
-  margin-bottom: 0rem;
-  margin-top: 1rem;
+  margin: 0;
 `;
 
 const UserTitle = styled.h2`
@@ -74,6 +80,11 @@ const UserTitle = styled.h2`
   font-style: italic;
   font-weight: 400;
   margin-top: 0;
+  
+  @media (max-width: 400px) {
+      flex-direction: column;
+      align-items: start;
+    }
 `;
 
 const ProfileImage = styled.div<{ urlImage: string }>`
@@ -88,11 +99,11 @@ const ProfileImage = styled.div<{ urlImage: string }>`
 
 const ConnectionsRating = styled.div`
   display: flex;
-  gap: 5rem;
+  gap: 6rem;
   margin: 0;
   padding-bottom: 0;
 
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
       flex-wrap: wrap;
       gap: 1rem;
     }
@@ -175,7 +186,8 @@ const P = styled.p`
 `;
 
 const RatingSection = styled.div`
-  padding: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
   margin-bottom: 0.5rem;
   font-size: 0.8rem;
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -285,17 +297,6 @@ const SocialButton = styled.div`
     padding: 0;
     color: ${({ theme }) => theme.colors.textDark};
   }
-`;
-
-const MainInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  @media (max-width: 600px) {
-      flex-wrap: wrap;
-      gap: 0;
-    }
 `;
 
 const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }) => {
