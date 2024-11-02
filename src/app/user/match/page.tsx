@@ -16,32 +16,35 @@ const Match = () => {
   const [error, setError] = useState<string | null>(null);
 
   const getIdUser = (): number => {
-    const idString = localStorage.getItem("userId");
-    return parseInt(idString as string, 10);
-  };
+    if (typeof window !== 'undefined') {
+      const idString = localStorage.getItem("userId");
+      return idString ? parseInt(idString, 10) : -1;
+    }
+    return -1;
+  };  
 
   const findUserIndex = (id: number): number => {
     // Verificar que userMetrics es un array antes de llamar a findIndex
     if (Array.isArray(userData)) {
       return userData.findIndex((user) => user.id == id);
     }
-    return -1; // Si no es un array o no encuentra coincidencia, retorna -1
+    return -1; 
   };
 
   useEffect(() => {
-    const fetchPeople = async () => {
-      try {
-        const dataUser = await getUsersForImages();
-        setUserData(dataUser);
-        setLoading(false);
-      } catch (error) {
-        console.log(error)
-        setError("Error al cargar los datos");
-        setLoading(false);
-      }
-    };
+      const fetchPeople = async () => {
+        try {
+          const dataUser = await getUsersForImages();
+          setUserData(dataUser);
+          setLoading(false);
+        } catch (error) {
+          console.log(error)
+          setError("Error al cargar los datos");
+          setLoading(false);
+        }
+      };
 
-    fetchPeople();
+      fetchPeople();
   }, []);
 
   if (loading) {
@@ -67,13 +70,11 @@ const Match = () => {
   console.log(userData);
   console.log(idCurrentUser);
 
-
-
   return (
     <Container>
       <DivMatch>
         {userIndex !== -1 && (
-          <ProfileCard/>
+          <ProfileCard />
         )}
         <SliderCard user={userData[currentIndex]} onPass={handlePass} />
         <MatchCard

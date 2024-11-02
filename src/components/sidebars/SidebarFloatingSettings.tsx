@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import StyledNavLink from "../ui/links/NavLinks";

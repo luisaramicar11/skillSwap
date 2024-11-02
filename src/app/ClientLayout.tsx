@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyling";
@@ -27,14 +28,12 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     const [loading, setLoading] = useState(false);
     const [themeAuth] = useThemeAuth();
     const [theme] = useTheme();
-
-    const CurrentPage = localStorage!.getItem("currentPage") ? localStorage.getItem("currentPage") : "DEFAULT_PAGE";
-    const DefinedTheme: IGlobalTheme = (CurrentPage === "INICIAR SESIÓN" || CurrentPage === "REGISTRO") ? themeAuth : theme;
+    const [definedTheme, setDefinedTheme] = useState<IGlobalTheme | null>(null);
 
     useEffect(() => {
-        const storedToken = localStorage!.getItem("authToken");
+        const storedToken = typeof window !== 'undefined' ? localStorage.getItem("authToken") : null;
         setToken(storedToken);
-        console.log(token);
+        console.log(storedToken);
 
         if (!storedToken) {
             clearStorage();
@@ -47,22 +46,27 @@ const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
         router.prefetch(pathname);
 
-        return () => {
-            handleStart();
-            handleComplete();
-        };
-    }, [pathname, router, token]);
+        handleStart();
+        handleComplete();
+    }, [pathname, router]);
 
     const isAuthPage = pathname === '/auth';
 
+    useEffect(() => {
+        const themeToUse = (pathname === '/auth') ? themeAuth : theme;
+        setDefinedTheme(themeToUse);
+    }, [themeAuth, theme, token, pathname]);
+
     if (loading) {
-        return (
-            <LoadingScreen />
-        );
+        return <LoadingScreen />;
+    }
+
+    if (!definedTheme) {
+        return null;
     }
 
     return (
-        <ThemeProvider theme={DefinedTheme}>
+        <ThemeProvider theme={definedTheme}>
             <GlobalStyle />
             <LayoutContainer>
                 {!isAuthPage && <Navbar />}

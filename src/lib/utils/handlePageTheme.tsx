@@ -1,3 +1,4 @@
+'use client';
 export const darkThemeLabels = ['REGISTRO', 'ADMIN/POSTS','ADMIN/LEGAL'];
 
 export function handlePageChange(label: string) {

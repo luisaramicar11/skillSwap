@@ -1,10 +1,10 @@
-import React from "react";
+'use client';
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "./CardProfileLink";
 import { IRequestCardProps, IUserCardProps } from "@/src/models/userCards.model";
 import { getRequestById, getUsersForImages } from "@/src/app/api/users";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 
 const ProfileCardContainer = styled.div`
@@ -102,44 +102,46 @@ const ProfileCard: React.FC = () => {
   const [userData, setUserData] = useState<IUserCardProps | null>(null);
   const [userMetrics, setUserMetrics] = useState<IRequestCardProps>();
 
-  // Función para obtener el ID del usuario del localStorage
-  const getCurrentIdUser = (): number => {
-    const idString = localStorage.getItem("userId");
-    return parseInt(idString!, 10);
-  };
-
-  const idNumberCurrentUser = getCurrentIdUser();
-
   useEffect(() => {
-    const fetchPeople = async () => {
-      if (!idNumberCurrentUser) {
-        setError("No se pudo obtener el ID del usuario.");
-        setLoading(false);
-        return;
-      }
+    if (typeof window !== 'undefined') {
+      // Función para obtener el ID del usuario del localStorage
+      const getCurrentIdUser = (): number => {
+        const idString = localStorage.getItem("userId");
+        return parseInt(idString!, 10);
+      };
 
-      try {
-        const metricsResponse = await getRequestById(idNumberCurrentUser);
-        const userDataResponse = await getUsersForImages();
+      const idNumberCurrentUser = getCurrentIdUser();
 
-        if (metricsResponse && userDataResponse) {
-          setUserMetrics(metricsResponse);
-          const matchedUser = userDataResponse.find((user) => user.id === idNumberCurrentUser);
-          setUserData(matchedUser!);
-        } else {
-          setError('Error al cargar los datos');
+      const fetchPeople = async () => {
+        if (!idNumberCurrentUser) {
+          setError("No se pudo obtener el ID del usuario.");
+          setLoading(false);
+          return;
         }
 
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-        setError("Error al cargar los datos");
-        setLoading(false);
-      }
-    };
+        try {
+          const metricsResponse = await getRequestById(idNumberCurrentUser);
+          const userDataResponse = await getUsersForImages();
 
-    fetchPeople();
-  }, [idNumberCurrentUser]);
+          if (metricsResponse && userDataResponse) {
+            setUserMetrics(metricsResponse);
+            const matchedUser = userDataResponse.find((user) => user.id === idNumberCurrentUser);
+            setUserData(matchedUser!);
+          } else {
+            setError('Error al cargar los datos');
+          }
+
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+          setError("Error al cargar los datos");
+          setLoading(false);
+        }
+      };
+
+      fetchPeople();
+    }
+  }, []);
 
   if (loading) {
     return <OurAlertsText>Cargando...</OurAlertsText>;

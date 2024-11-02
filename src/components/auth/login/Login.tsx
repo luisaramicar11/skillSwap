@@ -68,6 +68,7 @@ export default function LoginPage() {
           marginTop: '10px', 
         },
       });
+      
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", idUser.toString());
       document.cookie = `authToken=${token}; path=/;`;

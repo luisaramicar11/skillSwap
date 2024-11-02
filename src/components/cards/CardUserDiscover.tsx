@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
@@ -92,32 +93,34 @@ const CardUserDiscover: React.FC = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const idString = localStorage.getItem('userId');
-            const idNumber = idString ? parseInt(idString, 10) : null;
+            if (typeof window !== 'undefined') {
+                const idString = localStorage.getItem('userId');
+                const idNumber = idString ? parseInt(idString, 10) : null;
 
-            if (!idNumber) {
-                setError('ID de usuario no encontrado');
-                setLoading(false);
-                return;
-            }
-
-            try {
-                const userData = await getUserById(idNumber); 
-                const metricsData = await getRequestById(idNumber);
-
-                if (userData && metricsData) {
-                    setUserMetrics(metricsData);
-                    setUserData(userData);
-                } else {
-                    setError('Error al cargar los datos');
+                if (!idNumber) {
+                    setError('ID de usuario no encontrado');
+                    setLoading(false);
+                    return;
                 }
-            } catch (err) {
-                setError('Hubo un problema con la solicitud');
-                console.log(err)
-            } finally {
-                setLoading(false);
-            }
-        };
+
+                try {
+                    const userData = await getUserById(idNumber);
+                    const metricsData = await getRequestById(idNumber);
+
+                    if (userData && metricsData) {
+                        setUserMetrics(metricsData);
+                        setUserData(userData);
+                    } else {
+                        setError('Error al cargar los datos');
+                    }
+                } catch (err) {
+                    setError('Hubo un problema con la solicitud');
+                    console.log(err)
+                } finally {
+                    setLoading(false);
+                }
+            };
+        }
 
         fetchUserData();
     }, []);
@@ -163,7 +166,7 @@ const CardUserDiscover: React.FC = () => {
                     </MetricIcon>
                     <MetricDiv>
                         <MetricTitle>
-                        {(userMetrics!.solicitudes?.ultimaAceptada != " ") ? userMetrics!.solicitudes?.ultimaAceptada : Text}
+                            {(userMetrics!.solicitudes?.ultimaAceptada != " ") ? userMetrics!.solicitudes?.ultimaAceptada : Text}
                         </MetricTitle>
                         <MetricText>
                             Aceptadas · {userMetrics!.solicitudes?.conteoAceptadas}
@@ -177,7 +180,7 @@ const CardUserDiscover: React.FC = () => {
                     </MetricIcon>
                     <MetricDiv>
                         <MetricTitle>
-                        {(userMetrics!.solicitudes?.ultimoEnviado != " ") ? userMetrics!.solicitudes?.ultimoEnviado : Text}
+                            {(userMetrics!.solicitudes?.ultimoEnviado != " ") ? userMetrics!.solicitudes?.ultimoEnviado : Text}
                         </MetricTitle>
                         <MetricText>
                             Enviadas · {userMetrics!.solicitudes?.conteoEnviadas}
@@ -191,7 +194,7 @@ const CardUserDiscover: React.FC = () => {
                     </MetricIcon>
                     <MetricDiv>
                         <MetricTitle>
-                        {(userMetrics!.solicitudes?.ultimaPendiente != " ") ? userMetrics!.solicitudes?.ultimaPendiente : Text}
+                            {(userMetrics!.solicitudes?.ultimaPendiente != " ") ? userMetrics!.solicitudes?.ultimaPendiente : Text}
                         </MetricTitle>
                         <MetricText>
                             Pendientes · {userMetrics!.solicitudes?.conteoPendientes}

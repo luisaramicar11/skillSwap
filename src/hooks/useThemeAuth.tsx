@@ -1,3 +1,4 @@
+'use client';
 import { useState, useEffect } from 'react';
 import { GlobalDarkTheme, GlobalTheme } from '../app/GlobalStyling';
 import { darkThemeLabels } from '../lib/utils/handlePageTheme';
@@ -8,19 +9,21 @@ export function useThemeAuth(): [IGlobalTheme, (theme: 'dark' | 'light') => void
     const [theme, setTheme] = useState<IGlobalTheme>(GlobalTheme);
 
     useEffect(() => {
-        const handleStorageChange = () => {
-            const currentPage = localStorage.getItem('currentPage') ?? 'HOME';
-            const newTheme = darkThemeLabels.includes(currentPage) ? GlobalDarkTheme : GlobalTheme;
+        if (typeof window !== 'undefined') {
+            const handleStorageChange = () => {
+                const currentPage = localStorage.getItem('currentPage') ?? 'HOME';
+                const newTheme = darkThemeLabels.includes(currentPage) ? GlobalDarkTheme : GlobalTheme;
 
-            setTheme(newTheme);
-        };
+                setTheme(newTheme);
+            };
 
-        handleStorageChange();
-        window.addEventListener('storage', handleStorageChange);
+            handleStorageChange();
+            window.addEventListener('storage', handleStorageChange);
 
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        };
+            return () => {
+                window.removeEventListener('storage', handleStorageChange);
+            };
+        }
     }, []);
 
     const setPageTheme = (theme: 'dark' | 'light') => {

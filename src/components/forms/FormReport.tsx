@@ -1,11 +1,11 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { toast } from "react-toastify";
 import { createReport } from '../../app/api/reports';
-import {  getAllUsers } from '../../app/api/users'; 
+import { getAllUsers } from '../../app/api/users';
 
-export const FormContainer = styled.form`
+const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -17,9 +17,17 @@ export const FormContainer = styled.form`
   > * {
     font-size: 14px !important ;
   }
+
+  & select{
+    padding: 10px;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  font-size: 1rem;
+  width: 100%;
+  }
 `;
 
-export const Input = styled.input`
+const Input = styled.input`
   border-radius: 10px;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
@@ -27,7 +35,7 @@ export const Input = styled.input`
   width: 100%;
 `;
 
-export const TextArea = styled.textarea`
+const TextArea = styled.textarea`
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
   font-size: 1rem;
@@ -36,7 +44,7 @@ export const TextArea = styled.textarea`
   resize: none;
 `;
 
-export const SubmitButton = styled.button`
+const SubmitButton = styled.button`
   border-radius: 10px;
   padding: 10px;
   background-color: #fff;
@@ -50,14 +58,6 @@ export const SubmitButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.bgOrange};
   }
-`;
-
-export const Select = styled.select`
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  font-size: 1rem;
-  width: 100%;
 `;
 
 interface IUser {
@@ -112,7 +112,7 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
 
     try {
       const response = await createReport(reportData);
-      console.log(response) 
+      console.log(response)
       toast.success('Reporte enviado con éxito', { autoClose: 3000 });
       closeModal();
     } catch (error) {
@@ -130,8 +130,12 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
         onChange={(e) => setTitle(e.target.value)}
         required
         title="report"
+        id="report"
+        name="report"
+        autoComplete="off"
       />
-      <Select title="user" onChange={(e) => setReportedUserId(Number(e.target.value))} defaultValue="">
+      <label id="select-label" htmlFor="select" hidden>.</label>
+      <select aria-labelledby="select" id="select" title="select" onChange={(e) => setReportedUserId(Number(e.target.value))} defaultValue="">
         <option value="" disabled>
           -- Selecciona un usuario --
         </option>
@@ -140,13 +144,16 @@ const ReportForm: React.FC<ReportFormProps> = ({ closeModal }) => {
             {user.name} {user.lastName}
           </option>
         ))}
-      </Select>
+      </select>
       <TextArea
         placeholder="Descripción del comportamiento..."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
         title="description"
+        id="description"
+        name="description"
+        autoComplete="off"
       />
       <SubmitButton type="submit">ENVIAR</SubmitButton>
     </FormContainer>

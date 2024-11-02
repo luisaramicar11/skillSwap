@@ -189,7 +189,7 @@ const DivDeactivateAccount = styled.div`
   }
 `;
 
-const ButtonDeactivate = styled.button<({color: string})>`
+const ButtonDeactivate = styled.button<({ color: string }) >`
   min-width: 100px;
 
   width: 100px;
@@ -229,7 +229,7 @@ const ButtonDeactivate = styled.button<({color: string})>`
   }
 `;
 
-const AccountStateButton = styled.div<({color: string})>`
+const AccountStateButton = styled.div<({ color: string }) >`
   width: 100px;
 
   text-align: center;
@@ -262,53 +262,56 @@ const UserInfo = () => {
 
   useEffect(() => {
     const fetchAccountState = async () => {
-      const idString = localStorage.getItem("userId");
-      const idNumber = idString ? parseInt(idString, 10) : null;
+      if (typeof window !== 'undefined') {
+        const idString = localStorage.getItem("userId");
+        const idNumber = idString ? parseInt(idString, 10) : null;
 
-      if (!idNumber) {
-        setError("ID de usuario no encontrado");
-        setLoading(false);
-        return;
-      }
+        if (!idNumber) {
+          setError("ID de usuario no encontrado");
+          setLoading(false);
+          return;
+        }
 
-      try {
-        const data = await getUserById(idNumber);
-        setAccountState(data.nameStateUser ?? "Estado desconocido");
-      } catch (err) {
-        setError(err as string);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+        try {
+          const data = await getUserById(idNumber);
+          setAccountState(data.nameStateUser ?? "Estado desconocido");
+        } catch (err) {
+          setError(err as string);
+        } finally {
+          setLoading(false);
+        }
+      };
+    }
     fetchAccountState();
   }, []);
 
   const handleToggleAccountState = async () => {
-    const idString = localStorage.getItem("userId");
-    const idNumber = idString ? parseInt(idString, 10) : null;
+    if (typeof window !== 'undefined') {
+      const idString = localStorage.getItem("userId");
+      const idNumber = idString ? parseInt(idString, 10) : null;
 
-    if (!idNumber) return;
+      if (!idNumber) return;
 
-    const newAction = accountState === "Activo" ? "deshabilitar" : "habilitar";
+      const newAction = accountState === "Activo" ? "deshabilitar" : "habilitar";
 
-    try {
-      const data = await toggleUserAccountState(idNumber, newAction);
-      setAccountState(data);
-    } catch (err) {
-      setError(err as string);
+      try {
+        const data = await toggleUserAccountState(idNumber, newAction);
+        setAccountState(data);
+      } catch (err) {
+        setError(err as string);
+      }
     }
   };
 
-  const stateBtnColor = ()=>{
-    if(accountState === "Activo") return "#ca8e33";
-    else if(accountState === "Inactivo") return "#828282"; 
+  const stateBtnColor = () => {
+    if (accountState === "Activo") return "#ca8e33";
+    else if (accountState === "Inactivo") return "#828282";
     else return "#666666";
   }
 
-  const changeStateBtnColor = ()=>{
-    if(accountState === "Activo") return "#c34040";
-    else if(accountState === "Inactivo") return "#4072c3"; 
+  const changeStateBtnColor = () => {
+    if (accountState === "Activo") return "#c34040";
+    else if (accountState === "Inactivo") return "#4072c3";
     else return "#666666";
   }
 

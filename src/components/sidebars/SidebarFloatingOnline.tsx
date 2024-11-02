@@ -1,9 +1,9 @@
+'use client';
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
+import { FaCheck, FaSignOutAlt, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
 import CardProfileLink from "../../components/cards/CardProfileLink";
 import LogoutButton from "../ui/buttons/ButtonLogout";
-import { FaSignOutAlt } from 'react-icons/fa';
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import {getRequestById} from "../../app/api/requests";
@@ -222,7 +222,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
               if (userData && metricsData) {
                   setUserData(userData);
                   const matchedUser = metricsData.find((user) => user.id === idNumber);
-                  setUserMetrics(matchedUser ? matchedUser : null);
+                  setUserMetrics(!matchedUser ? null : matchedUser);
                   console.log(userData)
               } else {
                   setError('Error al cargar los datos');
@@ -273,7 +273,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                         <FaTimes className="icon" />
                         <p>
                           {userData.solicitudes.conteoCanceladas}:{" "}
-                          {userData.solicitudes.ultimaCancelada || "N/A"}
+                          {userData.solicitudes.ultimaCancelada ?? "N/A"}
                         </p>
                       </div>
                     </div>
@@ -283,7 +283,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                         <FaCheck className="icon" />
                         <p>
                           {userData.solicitudes.conteoAceptadas}:{" "}
-                          {userData.solicitudes.ultimaAceptada || "N/A"}
+                          {userData.solicitudes.ultimaAceptada ?? "N/A"}
                         </p>
                       </div>
                     </div>
@@ -293,7 +293,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                         <FaArrowUp className="icon" />
                         <p>
                           {userData.solicitudes.conteoEnviadas}:{" "}
-                          {userData.solicitudes.ultimoEnviado || "N/A"}
+                          {userData.solicitudes.ultimoEnviado ?? "N/A"}
       
                         </p>
                       </div>
@@ -304,7 +304,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
                         <FaClock className="icon" />
                         <p>
                           {userData.solicitudes.conteoPendientes}:{" "}
-                          {userData.solicitudes.ultimaPendiente || "N/A"}
+                          {userData.solicitudes.ultimaPendiente ?? "N/A"}
                         </p>
                       </div>
                     </div>

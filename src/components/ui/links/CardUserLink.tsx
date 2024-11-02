@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';

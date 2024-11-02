@@ -1,3 +1,4 @@
+'use client';
 import { useState, useEffect } from 'react';
 import { GlobalDarkTheme, GlobalTheme } from '../app/GlobalStyling';
 import { darkThemeLabels } from '../lib/utils/handlePageTheme';
@@ -9,13 +10,15 @@ export function useTheme(): [IGlobalTheme, (theme: 'dark' | 'light') => void] {
 
     useEffect(() => {
         const handleStorageChange = () => {
-            const currentPage = localStorage.getItem('currentPage') ?? 'HOME';
-            const newTheme = darkThemeLabels.includes(currentPage) ? GlobalDarkTheme : GlobalTheme;
-
-            // Retraso de 3 segundos para aplicar el nuevo tema
-            setTimeout(() => {
-                setTheme(newTheme);
-            }, 3000);
+            if (typeof window !== 'undefined') {
+                const currentPage = localStorage.getItem('currentPage') ?? 'HOME';
+                const newTheme = darkThemeLabels.includes(currentPage) ? GlobalDarkTheme : GlobalTheme;
+    
+                // Retraso de 3 segundos para aplicar el nuevo tema
+                setTimeout(() => {
+                    setTheme(newTheme);
+                }, 3000);
+            }
         };
 
         handleStorageChange();

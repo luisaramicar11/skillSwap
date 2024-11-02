@@ -167,38 +167,40 @@ const Metrics: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    const userIdString = localStorage.getItem('userId');
-    const userId = userIdString ? Number(userIdString) : null; // Convertir a número
+    if (typeof window !== 'undefined') {
+      const userIdString = localStorage.getItem('userId');
+      const userId = userIdString ? Number(userIdString) : null;
 
-    if (userId === null) {
-      setError('ID de usuario no encontrado');
-      setLoading(false);
-      return;
-    }
-
-    const fetchRequestData = async () => {
-      try {
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${userId}`, {
-          method: 'GET',
-          headers: {
-            'accept': '*/*',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos');
-        }
-
-        const data = await response.json();
-        setRequestData(data.data.response);
-      } catch (err) {
-        setError(err as string);
-      } finally {
+      if (userId === null) {
+        setError('ID de usuario no encontrado');
         setLoading(false);
+        return;
       }
-    };
 
-    fetchRequestData();
+      const fetchRequestData = async () => {
+        try {
+          const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${userId}`, {
+            method: 'GET',
+            headers: {
+              'accept': '*/*',
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos');
+          }
+
+          const data = await response.json();
+          setRequestData(data.data.response);
+        } catch (err) {
+          setError(err as string);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchRequestData();
+    }
   }, []);
 
   if (loading) return <div>Cargando...</div>;
@@ -222,9 +224,9 @@ const Metrics: React.FC = () => {
                   <br />
                   <h4>Ultima Pendeinete</h4>{requestData?.solicitudes.ultimaPendiente} <br />
                   <br />
-                  <h4>Última Cancelada: </h4>{requestData?.solicitudes.ultimaCancelada || 'N/A'} <br />
+                  <h4>Última Cancelada: </h4>{requestData?.solicitudes.ultimaCancelada ?? 'N/A'} <br />
                   <br />
-                  <h4>Último Enviado: </h4>{requestData?.solicitudes.ultimoEnviado || 'N/A'} <br />
+                  <h4>Último Enviado: </h4>{requestData?.solicitudes.ultimoEnviado ?? 'N/A'} <br />
                   <br />
                   <h4>Conteo de Conexiones: </h4> {requestData?.solicitudes.conteoConexiones} <br />
                   <br />

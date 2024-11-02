@@ -174,27 +174,29 @@ const Metrics: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    const userIdString = localStorage.getItem("userId");
-    const userId = userIdString ? Number(userIdString) : null;
+    if (typeof window !== 'undefined') {
+      const userIdString = localStorage.getItem("userId");
+      const userId = userIdString ? Number(userIdString) : null;
 
-    if (userId === null) {
-      setError("ID de usuario no encontrado");
-      setLoading(false);
-      return;
-    }
-
-    const fetchRequestData = async () => {
-      try {
-        const data = await getRequestById(userId);
-        setRequestData(data);
-      } catch (err) {
-        setError(err as string);
-      } finally {
+      if (userId === null) {
+        setError("ID de usuario no encontrado");
         setLoading(false);
+        return;
       }
-    };
 
-    fetchRequestData();
+      const fetchRequestData = async () => {
+        try {
+          const data = await getRequestById(userId);
+          setRequestData(data);
+        } catch (err) {
+          setError(err as string);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchRequestData();
+    }
   }, []);
 
   if (loading) return <div>Cargando...</div>;
