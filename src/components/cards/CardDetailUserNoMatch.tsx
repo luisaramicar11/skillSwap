@@ -27,7 +27,7 @@ const ProfileContainer = styled.div`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 950px) {
       width: 100%;
     }
 `;

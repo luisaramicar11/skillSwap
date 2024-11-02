@@ -11,8 +11,8 @@ import styled from "styled-components";
 import CardUserDiscover from "@/src/components/cards/CardUserDiscover";
 import Button from "@/src/components/ui/buttons/Button";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { LuArrowUpAZ } from "react-icons/lu";
-import { TbArrowBadgeUpFilled } from "react-icons/tb";
+import { FaArrowDownAZ } from "react-icons/fa6";
+import { MdOutlineAlignHorizontalLeft } from "react-icons/md";
 import { GiNewShoot } from "react-icons/gi";
 
 const DiscoverPage = styled.div`
@@ -214,10 +214,10 @@ const Discover = () => {
               <RiArrowGoBackFill />
             </Button>
             <Button type={"button"} label={"A-Z"} onClick={handleShowAlphabeticalOrder}>
-              <LuArrowUpAZ />
+              <FaArrowDownAZ />
             </Button>
             <Button type={"button"} label={"Top"} onClick={handleShowTopUsers}>
-              <TbArrowBadgeUpFilled />
+              <MdOutlineAlignHorizontalLeft />
             </Button>
             <Button type={"button"} label={"Nuevos"} onClick={handleShowNewUsers}>
               <GiNewShoot />

@@ -25,7 +25,7 @@ const CardContainer = styled.div`
 
 // Estilo para la columna de la imagen
 const ImageColumn = styled.div`
-  width: 40%;
+  width: 55%;
   min-height: 16rem;
   max-height: 19rem;
 `;

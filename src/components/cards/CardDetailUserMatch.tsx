@@ -31,7 +31,7 @@ const ProfileContainer = styled.div`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 950px) {
       width: 100%;
     }
 `;
@@ -47,7 +47,7 @@ const Header = styled.div`
   border-radius: 10px;
   width: 100%;
 
-  @media (max-width: 900px) {
+  @media (max-width: 600px) {
       padding-top: 1rem;
     }
 `;
@@ -92,7 +92,7 @@ const ConnectionsRating = styled.div`
   margin: 0;
   padding-bottom: 0;
 
-  @media (max-width: 900px) {
+  @media (max-width: 600px) {
       flex-wrap: wrap;
       gap: 1rem;
     }
@@ -142,14 +142,16 @@ const Skills = styled.div`
 `;
 
 const UserDescription = styled.div`
-  width: 12rem;
+  min-width: 12rem;
+  max-width: 12rem;
+  padding-bottom: 0.5rem;
   min-height: 14.5rem;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   gap: 1rem;
 
-  @media (max-width: 900px) {
-      width: 100%;
+  @media (max-width: 600px) {
+      max-width: 100%;
     }
 `;
 
@@ -215,7 +217,7 @@ const DivContent = styled.div`
     gap: 1rem;
     padding-top: 1rem;
 
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
       flex-wrap: wrap;
     }
 `;
@@ -290,7 +292,7 @@ const MainInfo = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media (max-width: 900px) {
+  @media (max-width: 600px) {
       flex-wrap: wrap;
       gap: 0;
     }
@@ -383,6 +385,10 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
             <ContactInfo>
               <h3>Teléfono</h3>
               <span>{userDetail.phoneNumber}</span>
+            </ContactInfo>
+            <ContactInfo>
+              <h3>Generación</h3>
+              <span>{userDetail.birthdate!.slice(0, 4)}</span>
             </ContactInfo>
           </UserDescription>
           <MediaContainer>
