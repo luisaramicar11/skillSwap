@@ -51,7 +51,7 @@ const DivContainer = styled.div`
   height: 100%;
 
   & div {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 
     & hr {
       padding: 0;
@@ -213,7 +213,7 @@ const Discover = () => {
             <Button type={"button"} label={"Restaurar"} onClick={handleFilterReset}>
               <RiArrowGoBackFill />
             </Button>
-            <Button type={"button"} label={"A-Z"} onClick={handleShowAlphabeticalOrder}>
+            <Button type={"button"} label={"Trabajos"} onClick={handleShowAlphabeticalOrder}>
               <FaArrowDownAZ />
             </Button>
             <Button type={"button"} label={"Top"} onClick={handleShowTopUsers}>

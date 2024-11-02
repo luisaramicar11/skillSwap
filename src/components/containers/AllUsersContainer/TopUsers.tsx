@@ -12,6 +12,14 @@ const CardListContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
+
+  & article {
+    height: 6rem;
+  }
+
+  & div{
+    height: 8rem;
+  }
 `;
 
 // Estilos para los botones de paginación
@@ -75,7 +83,7 @@ const TopUsers: React.FC<ITopUsersCardsProps> = ({ users }) => {
                 id={user.id}
                 fullName={user.name}
                 jobTitle={user.category}
-                qualification={0}
+                qualification={-1}
                 abilities={[]}
                 urlImage={user.urlImage}
                 createdAt={user.createdAt}

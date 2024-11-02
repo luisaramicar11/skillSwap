@@ -17,7 +17,7 @@ interface IDiscoverCardProps {
 const CardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 19rem;
+  height: 16rem;
   max-width: 500px;
   overflow: hidden;
   gap: 1rem;
@@ -25,14 +25,14 @@ const CardContainer = styled.div`
 
 // Estilo para la columna de la imagen
 const ImageColumn = styled.div`
-  width: 55%;
-  min-height: 16rem;
-  max-height: 19rem;
+  min-width: 40%;
+  min-height: 14rem;
+  max-height: 16rem;
 `;
 
 // Estilo para la columna de la información
 const InfoColumn = styled.div`
-  width: 60%;
+  width: 50%;
   height: auto;
   padding: 0;
   padding-left: 1rem;
@@ -44,7 +44,7 @@ const InfoColumn = styled.div`
 
 
 // Estilo para el nombre
-const ImageCard = styled.div<{ urlImage?: string }>`
+const ImageCard = styled.article<{ urlImage?: string }>`
   background-image: url(${(props) => props.urlImage || 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'});
   background-size: cover;
   background-position: center;
@@ -102,21 +102,23 @@ const Card: React.FC<IDiscoverCardProps> = ({
       </ImageColumn>
       <InfoColumn>
         <Name>{fullName}</Name>
-        <JobTitle>{createdAt ? `${createdAt} · ${jobTitle}` : jobTitle}</JobTitle>
+        <JobTitle>{createdAt ? `${createdAt.slice(0,7)} · ${jobTitle}` : jobTitle}</JobTitle>
         <StarsContainer>
-          {[...Array(5)].map((_, index) => {
-            const rating = Math.floor(qualification); 
-            return (
-              <Star key={index}>
-                {index < rating ? "★" : "☆"}{" "}
-                {/* Muestra estrellas llenas o vacías */}
-              </Star>
-            );
-          })}
+          {qualification !== -1 ?
+            [...Array(5)].map((_, index) => {
+              const rating = Math.floor(qualification);
+              return (
+                <Star key={index}>
+                  {index < rating ? "★" : "☆"}{" "}
+                  {/* Muestra estrellas llenas o vacías */}
+                </Star>
+              );
+            }) :
+            <></>}
         </StarsContainer>
 
         <Skills>
-          <SkillTagTiny skillsArray={abilities} />
+          <SkillTagTiny skillsArray={abilities.slice(0, 3)} />
         </Skills>
       </InfoColumn>
     </CardContainer>
