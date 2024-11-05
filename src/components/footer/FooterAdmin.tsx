@@ -11,7 +11,7 @@ import GitHubIcon from "@/public/svg/GitHubIcon";
 // Estilos para el footer
 const FooterStyled = styled.footer`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.bgGray};
+  background-color: ${({ theme }) => theme.colors.bgGrey};
   color: ${({ theme }) => theme.colors.textWhite};
   padding: 120px 40px 100px 40px;
   display: flex;
