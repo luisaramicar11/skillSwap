@@ -11,7 +11,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background:${({ theme }) => theme.colors.bgGray};
+  background:${({ theme }) => theme.colors.bgGrey};
   flex-direction: column;
   padding-top: 100px;
   padding-bottom: 150px;
