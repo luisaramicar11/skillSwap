@@ -163,7 +163,7 @@ const Legal = () => {
         <Section>
           <SectionTitle>Jurisdicción</SectionTitle>
           <Paragraph>
-            Cualquier disputa que surja en relación con el uso de Skillswap será resuelta conforme a las leyes aplicables en [jurisdicción ficticia] Ciudad Tech, Mundo Digital.
+            Cualquier disputa que surja en relación con el uso de Skillswap será resuelta conforme a las leyes de la República de Colombia, y cualquier conflicto relacionado con los mismos se someterá a los tribunales competentes del país.
           </Paragraph>
         </Section>
 
