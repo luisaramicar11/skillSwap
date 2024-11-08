@@ -14,6 +14,7 @@ const NavbarContainer = styled.div`
     z-index: 10;
     position: fixed;
     width: 100%;
+    height: 54px;
     top: 0;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};

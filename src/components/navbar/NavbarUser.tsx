@@ -15,6 +15,7 @@ const NavbarContainer = styled.div`
     position: fixed;
     z-index: 10;
     width: 100%;
+    height: 54px;
     border-bottom: 1px solid  ${({ theme }) => theme.colors.borderNavs};
     top: 0;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
