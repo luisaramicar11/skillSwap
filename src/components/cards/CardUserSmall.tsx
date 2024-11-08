@@ -45,7 +45,7 @@ const CardUserSmall: React.FC<IShortProfileCardProps> = ({
     userData
 }) => {
     return (
-        <LinkProfile href="/user/settings" label="CONFIGURA">
+        <LinkProfile href="/user/profile" label="PERFIL">
             <ProfileHeader>
                 <Avatar urlImage={userData.urlImage} />
                 <div>

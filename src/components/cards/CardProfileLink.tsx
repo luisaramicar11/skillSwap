@@ -99,7 +99,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
       .map((ability: string) => ability.trim()) || [];
 
   return (
-    <LinkProfile href="/user/settings" label="CONFIGURA">
+    <LinkProfile href="/user/profile" label="PERFIL">
       <ProfileHeader>
         <Avatar urlImage={userData?.urlImage} />
         <div>
