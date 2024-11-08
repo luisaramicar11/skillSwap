@@ -93,6 +93,7 @@ const BannerBody = styled.div`
 
     @media (max-width: 1050px) {
       justify-content: center;
+      align-items: center;
 
       & h1{
         display: none;
@@ -113,6 +114,8 @@ const BannerImageDiv = styled.div<{ urlImage: string }>`
   @media (max-width: 1050px) {
     translate: 0;
     border-radius: 100%;
+    width: 100px;
+    height: 100px;
   }
 `;
 
