@@ -5,7 +5,8 @@ import { ISliderCardProps } from "@/src/models/match.model";
 
 const CardContainer = styled.div`
   width: 50%;
-  height: 27rem !important;
+  min-height: 100% !important;
+  max-height: 75vh !important;
   border-radius: 0.5rem;
   position: relative;
   color: white;

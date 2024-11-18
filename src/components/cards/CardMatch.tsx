@@ -5,11 +5,11 @@ import ScrollContainer from "../scroll/Scroll";
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
   width: 100%;
-  height: 27rem !important;
+  min-height: 100% !important;
+  max-height: 75vh !important;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: max-content;
   padding: 0.8rem 0;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 0.5rem;

@@ -6,6 +6,7 @@ import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import ScrollContainer from "@/src/components/scroll/Scroll";
+import { FooterMain } from "@/src/components/footer/FooterMain";
 
 // Texto de cambio
 const TextWrapper = styled.div`
@@ -48,12 +49,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
   overflow-x: hidden;
   width: 100%;
   height: auto;
-  min-height: 450px;
   margin-top: 100px;
+  min-height: 70vh;
 
   @media (max-width: 1070px) {
     flex-direction: column; 
@@ -282,6 +282,7 @@ export default function AuthPage() {
         </OverlayPanel>
       </OverlayContainer>
     </Container>
+    <FooterMain/>
     </ScrollContainer>
   );
 }

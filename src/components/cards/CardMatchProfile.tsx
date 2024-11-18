@@ -10,7 +10,8 @@ import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 const ProfileCardContainer = styled.div`
   background: ${({ theme }) => theme.colors.bgSidebar};
   width: 100%;
-  height: 27rem !important;
+  min-height: 100% !important;
+  max-height: 75vh !important;
   display: flex;
   flex-direction: column;
   padding: 1rem;

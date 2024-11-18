@@ -4,14 +4,13 @@ export const Container = styled.div`
   margin: 54px 0;
   flex-direction: column;
   display: flex;
-  height: 100%;
+  min-height: 100vh;
 `;
 
 export const DivMatch = styled.div`
   display: flex;
-  align-items: start;
   justify-content: center;
-  height: 100%;
+  min-height: 70vh !important;
   width: 100%;
   flex-wrap: wrap;
   overflow: hidden;
