@@ -1,13 +1,14 @@
 'use client';
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { FaCheck, FaSignOutAlt, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
+import { FaCheck, FaTimes, FaClock, FaArrowUp } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi"
 import CardProfileLink from "../../components/cards/CardProfileLink";
 import LogoutButton from "../ui/buttons/ButtonLogout";
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import {getRequestById} from "../../app/api/requests";
-import {getUsersForImages} from "../../app/api/users"
+import { getRequestById } from "../../app/api/requests";
+import { getUsersForImages } from "../../app/api/users"
 
 const OnlineSidebarContainer = styled.div`
     top: 0;
@@ -177,22 +178,22 @@ interface ProfileSidebarProps {
 }
 
 interface IUserSolicitudes {
-    conteoCanceladas: number;
-    ultimaCancelada: string | null;
-    conteoAceptadas: number;
-    ultimaAceptada: string | null;
-    conteoEnviadas: number;
-    ultimoEnviado: string | null;
-    conteoPendientes: number;
-    ultimaPendiente: string | null;
-  }
-  
-  interface IUserData {
-    id: number;
-    nombreUsuario: string;
-    solicitudes: IUserSolicitudes;
-  }
-  
+  conteoCanceladas: number;
+  ultimaCancelada: string | null;
+  conteoAceptadas: number;
+  ultimaAceptada: string | null;
+  conteoEnviadas: number;
+  ultimoEnviado: string | null;
+  conteoPendientes: number;
+  ultimaPendiente: string | null;
+}
+
+interface IUserData {
+  id: number;
+  nombreUsuario: string;
+  solicitudes: IUserSolicitudes;
+}
+
 
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   isOpen,
@@ -205,53 +206,53 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-      const fetchUserData = async () => {
-          const idString = localStorage.getItem('userId');
-          const idNumber = idString ? parseInt(idString, 10) : null;
+    const fetchUserData = async () => {
+      const idString = localStorage.getItem('userId');
+      const idNumber = idString ? parseInt(idString, 10) : null;
 
-          if (!idNumber) {
-              setError('ID de usuario no encontrado');
-              setLoading(false);
-              return;
-          }
+      if (!idNumber) {
+        setError('ID de usuario no encontrado');
+        setLoading(false);
+        return;
+      }
 
-          try {
-              const userData = await getRequestById(idNumber);
-              const metricsData = await getUsersForImages();
+      try {
+        const userData = await getRequestById(idNumber);
+        const metricsData = await getUsersForImages();
 
-              if (userData && metricsData) {
-                  setUserData(userData);
-                  const matchedUser = metricsData.find((user) => user.id === idNumber);
-                  setUserMetrics(!matchedUser ? null : matchedUser);
-                  console.log(userData)
-              } else {
-                  setError('Error al cargar los datos');
-              }
-          } catch (err) {
-              setError('Hubo un problema con la solicitud');
-              console.log(err)
-          } finally {
-              setLoading(false);
-          }
-      };
+        if (userData && metricsData) {
+          setUserData(userData);
+          const matchedUser = metricsData.find((user) => user.id === idNumber);
+          setUserMetrics(!matchedUser ? null : matchedUser);
+          console.log(userData)
+        } else {
+          setError('Error al cargar los datos');
+        }
+      } catch (err) {
+        setError('Hubo un problema con la solicitud');
+        console.log(err)
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      fetchUserData();
+    fetchUserData();
   }, []);
 
   console.log(error)
 
   useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-          if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
-              onClose();
-          }
-      };
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
 
-      document.addEventListener("mousedown", handleClickOutside);
-      
-      return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-      };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [onClose]);
 
   if (!isOpen) return null;
@@ -259,63 +260,63 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   if (loading) return <OurAlertsText>Cargando...</OurAlertsText>;
 
   return (
-      <OnlineSidebarContainer>
-          <OnlineSidebarContent ref={sidebarRef}>
-              {userData && userMetrics && (
-                  <>
-                  <CardProfileLink
-                    userData={userMetrics}
-                  />
-                  <StatusSection>
-                    <div className="status-item rejected">
-                      <H2StatusSection>Rechazadas</H2StatusSection>
-                      <div className="status-content">
-                        <FaTimes className="icon" />
-                        <p>
-                          {userData.solicitudes.conteoCanceladas}:{" "}
-                          {userData.solicitudes.ultimaCancelada ?? "N/A"}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="status-item accepted">
-                      <H2StatusSection>Aceptadas</H2StatusSection>
-                      <div className="status-content">
-                        <FaCheck className="icon" />
-                        <p>
-                          {userData.solicitudes.conteoAceptadas}:{" "}
-                          {userData.solicitudes.ultimaAceptada ?? "N/A"}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="status-item sent">
-                      <H2StatusSection>Enviadas</H2StatusSection>
-                      <div className="status-content">
-                        <FaArrowUp className="icon" />
-                        <p>
-                          {userData.solicitudes.conteoEnviadas}:{" "}
-                          {userData.solicitudes.ultimoEnviado ?? "N/A"}
-      
-                        </p>
-                      </div>
-                    </div>
-                    <div className="status-item inbox">
-                      <H2StatusSection>Recibidas</H2StatusSection>
-                      <div className="status-content">
-                        <FaClock className="icon" />
-                        <p>
-                          {userData.solicitudes.conteoPendientes}:{" "}
-                          {userData.solicitudes.ultimaPendiente ?? "N/A"}
-                        </p>
-                      </div>
-                    </div>
-                  </StatusSection>
-                </>
-              )}
-              <BoxLogout>
-                  <LogoutButton icon={<FaSignOutAlt />} />
-              </BoxLogout>
-          </OnlineSidebarContent>
-      </OnlineSidebarContainer>
+    <OnlineSidebarContainer>
+      <OnlineSidebarContent ref={sidebarRef}>
+        {userData && userMetrics && (
+          <>
+            <CardProfileLink
+              userData={userMetrics}
+            />
+            <StatusSection>
+              <div className="status-item rejected">
+                <H2StatusSection>Rechazadas</H2StatusSection>
+                <div className="status-content">
+                  <FaTimes className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoCanceladas}:{" "}
+                    {userData.solicitudes.ultimaCancelada ?? "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item accepted">
+                <H2StatusSection>Aceptadas</H2StatusSection>
+                <div className="status-content">
+                  <FaCheck className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoAceptadas}:{" "}
+                    {userData.solicitudes.ultimaAceptada ?? "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="status-item sent">
+                <H2StatusSection>Enviadas</H2StatusSection>
+                <div className="status-content">
+                  <FaArrowUp className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoEnviadas}:{" "}
+                    {userData.solicitudes.ultimoEnviado ?? "N/A"}
+
+                  </p>
+                </div>
+              </div>
+              <div className="status-item inbox">
+                <H2StatusSection>Recibidas</H2StatusSection>
+                <div className="status-content">
+                  <FaClock className="icon" />
+                  <p>
+                    {userData.solicitudes.conteoPendientes}:{" "}
+                    {userData.solicitudes.ultimaPendiente ?? "N/A"}
+                  </p>
+                </div>
+              </div>
+            </StatusSection>
+          </>
+        )}
+        <BoxLogout>
+          <LogoutButton icon={<FiLogOut />} />
+        </BoxLogout>
+      </OnlineSidebarContent>
+    </OnlineSidebarContainer>
   );
 };
 

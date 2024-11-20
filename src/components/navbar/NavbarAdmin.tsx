@@ -8,6 +8,8 @@ import InfoIcon from "@/public/svg/InfoIcon";
 import ListIcon from "@/public/svg/ListIcon";
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 import ProfileSidebar from "../sidebars/SidebarFloatingOnline";
+import LogoutButton from "../ui/buttons/ButtonLogout";
+import { FiLogOut } from "react-icons/fi";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -148,6 +150,45 @@ const HamburgerMenu = styled.div`
     }
 `;
 
+const BoxLogout = styled.h2`
+    position: fixed;
+    bottom: 54px;
+    left: 20px;
+    width: 40%;
+    height: max-content;
+    display: none;
+    align-items: end !important;
+    animation: appears 2s ease-in-out;
+
+    & button {
+        padding: 0;
+        background: transparent;
+        justify-content: start;
+        color: ${({ theme }) => theme.colors.bgGray};
+    }
+
+    @media (max-width: 790px) {
+        display: flex;
+        align-self: end !important;
+        justify-self: end !important;
+    }
+
+    @media (max-height: 380px) {
+        & button {
+            justify-content: end;
+    }
+    }
+
+    @keyframes appears {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
+
 // Navbar component
 export const NavbarAdmin: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -185,6 +226,9 @@ export const NavbarAdmin: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('ADMIN/POSTS')}>
                     <StyledNavLink href="/admin/posts" label="POSTS" />
                 </NavItem>
+                <BoxLogout>
+                    <LogoutButton icon={<FiLogOut />} />
+                </BoxLogout>
             </NavList>
             <IconsContainer>
                 <StyledIconNavLink href="/admin/legal" label="ADMIN/LEGAL" icon={<InfoIcon />} />

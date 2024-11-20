@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import LogoutButton from "../ui/buttons/ButtonLogout";
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 
 const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
   z-index: 1000;
@@ -173,7 +173,7 @@ const ProfileSidebarAdmin: React.FC<ProfileSidebarProps> = ({ isOpen, onClose })
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -194,8 +194,8 @@ const ProfileSidebarAdmin: React.FC<ProfileSidebarProps> = ({ isOpen, onClose })
           </OfflineProfile>
         </Disclaimer>
         <BoxLogout>
-                  <LogoutButton icon={<FaSignOutAlt />} />
-              </BoxLogout>
+          <LogoutButton icon={<FiLogOut />} />
+        </BoxLogout>
       </OfflineSidebarContent>
     </OfflineSidebarContainer>
   );

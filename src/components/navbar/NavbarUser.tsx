@@ -9,6 +9,8 @@ import SettingsIcon from "@/public/svg/SettingsIcon";
 import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
+import LogoutButton from "../ui/buttons/ButtonLogout";
+import { FiLogOut } from "react-icons/fi";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -128,6 +130,45 @@ const HamburgerMenu = styled.div`
     }
 `;
 
+const BoxLogout = styled.h2`
+    position: fixed;
+    bottom: 54px;
+    left: 20px;
+    width: 40%;
+    height: max-content;
+    display: none;
+    align-items: end !important;
+    animation: appears 2s ease-in-out;
+
+    & button {
+        padding: 0;
+        background: transparent;
+        justify-content: start;
+        color: ${({ theme }) => theme.colors.bgGray};
+    }
+
+    @media (max-width: 790px) {
+        display: flex;
+        align-self: end !important;
+        justify-self: end !important;
+    }
+
+    @media (max-height: 360px) {
+        & button {
+            justify-content: end;
+    }
+    }
+
+    @keyframes appears {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
+
 // Navbar component
 export const NavbarUser: React.FC = () => {
     const [isOpenToggle, setIsOpenToggle] = useState(false);
@@ -145,8 +186,8 @@ export const NavbarUser: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile}/>
-            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
+            <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile} />
+            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings} />
             <SidebarLink onClick={openSidebarProfile}>+ <small>Notificaciones</small></SidebarLink>
             <HamburgerMenu onClick={toggleMenu}>
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
@@ -161,6 +202,9 @@ export const NavbarUser: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('MATCH')}>
                     <StyledNavLink href="/user/match" label="MATCH" />
                 </NavItem>
+                <BoxLogout>
+                    <LogoutButton icon={<FiLogOut />} />
+                </BoxLogout>
             </NavList>
 
             <IconsContainer>
