@@ -71,7 +71,6 @@ These credentials should be used only for administrative purposes.
 │   │   └── ui
 │   ├── hooks
 │   ├── lib
-│   │   ├── api
 │   │   ├── services
 │   │   └── utils
 │   ├── models
