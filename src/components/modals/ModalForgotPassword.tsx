@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-
 import styled from "styled-components";
 
 interface ModalPasswordRecoveryProps {
@@ -45,6 +44,7 @@ const CloseButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: #222;
 `;
 
 const FormLabel = styled.label`
@@ -111,7 +111,7 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
         <CloseButton onClick={onClose}>×</CloseButton>
         <h2>Recuperar contraseña</h2>
         <form onSubmit={handleSubmit}>
-          <FormLabel htmlFor="email-recovery">Ingresa tu correo electrónico</FormLabel>
+          <FormLabel htmlFor="email-recovery">Ingresa tu correo electrónico:</FormLabel>
           <Input
             type="email"
             id="email-recovery"
@@ -121,7 +121,7 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
             required
           />
           <SubmitButton type="submit">
-            Enviar
+            ENVIAR
           </SubmitButton>
         </form>
       </ModalContent>

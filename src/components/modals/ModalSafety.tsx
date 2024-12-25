@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import FolderIcon from "@/public/svg/FolderIcon";
 import ScrollContainer from "../scroll/Scroll";
 
 interface ModalProps {
@@ -124,7 +123,7 @@ const RightSection = styled.div`
     }
 
     span{
-      font-size: 30px;
+      font-size: 40px;
       font-style: normal
     }
   }
@@ -142,11 +141,11 @@ const TipItem = styled.div`
 
 const Icon = styled.div`
   filter: grayscale();
-  width: 100px;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 40px;
 `;
 
 const TipText = styled.p`
@@ -171,22 +170,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       <ModalContainer>
         <ModalHeader>
           <div>SkillSwap Safety</div>
-          <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
+          <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
         </ModalHeader>
-        <ScrollContainer overflowY="auto" overflowX='auto' marginY="5px" style={{ maxHeight: '100%' }}>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
         <ModalContent>
           <LeftSection>
             <TipItem>
-              <Icon>{<FolderIcon />}</Icon>
-              <TipText><strong>Completar tu perfil</strong> aumenta la confianza entre usuarios y garantiza un <strong>ambiente seguro.</strong></TipText>
+            <Icon>📂</Icon>
+            <TipText><strong>Completar tu perfil</strong> aumenta la confianza entre usuarios y garantiza un <strong>ambiente seguro.</strong></TipText>
             </TipItem>
             <TipItem>
-              <Icon>{<FolderIcon />}</Icon>
+              <Icon>📂</Icon>
               <TipText>No compartas <strong>datos sensibles</strong>. La seguridad mutua es primero.</TipText>
             </TipItem>
             <TipItem>
-              <Icon>{<FolderIcon />}</Icon>
-              <TipText>Reporta cualquier comportamiento <strong>sospechoso o inadecuado</strong>.</TipText>
+            <Icon>📂</Icon>
+            <TipText>Reporta cualquier comportamiento <strong>sospechoso o inadecuado</strong>.</TipText>
             </TipItem>
           </LeftSection>
           <RightSection>

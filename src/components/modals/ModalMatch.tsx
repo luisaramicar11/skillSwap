@@ -203,10 +203,10 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
   return (
     <ModalOverlay>
       <ModalContainer>
-        <ScrollContainer overflowY="auto" overflowX='auto' marginY="5px" style={{ maxHeight: '100%' }}>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
           <ModalHeader>
             Request Connection
-            <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
+            <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
           </ModalHeader>
           <DivRoute>C:\ User\ RequestConnection</DivRoute>
           <Div>
