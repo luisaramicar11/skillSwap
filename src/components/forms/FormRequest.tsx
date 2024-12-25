@@ -29,6 +29,7 @@ const SendButton = styled.button`
   border: none;
   padding: 0.3rem 0.7rem;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  color: ${({ theme }) => theme.colors.textSecondary};
   cursor: pointer;
   font-size: 0.7rem;
   font-weight: 800;

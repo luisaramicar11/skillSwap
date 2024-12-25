@@ -25,13 +25,13 @@ const PageContainer = styled.section`
 
     height: min-content;
 
-    translate: 0 30px;
+    translate: 0 1rem;
 
-    font-size: 100px;
+    font-size: 70px;
 
     opacity: 0.15;
 
-    padding-left: 1.7rem;
+    padding-left: 1rem;
   }
 `;
 
@@ -40,7 +40,6 @@ const PageContentContainer = styled.article`
   height: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px;
 `;
 
 const Banner = styled.article`
@@ -48,7 +47,7 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
@@ -69,7 +68,15 @@ const PagesContent = styled.div`
   gap: 50px;
 
   & h2{
-    font-size: 2rem;
+    font-size: 30px;
+    background: ${({ theme }) => theme.colors.gradientSecondary};
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    margin: 1rem 0;
   }
 `;
 
@@ -79,7 +86,8 @@ const Reports = styled.div`
 `;
 
 const RequestPageContainer = styled.div`
-  padding-top: 200px;
+  padding: 1rem 2rem;
+  padding-top: 166px;
   width: 100%;
   max-width: 1000px;
   height: 100%;

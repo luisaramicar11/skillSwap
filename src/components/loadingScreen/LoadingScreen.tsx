@@ -1,4 +1,10 @@
 import styled, { keyframes } from 'styled-components';
+import { Urbanist } from "next/font/google";    
+
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 // Animación de las letras que hacen una ola
 const waveAnimation = keyframes`
@@ -44,6 +50,7 @@ const Letter = styled.span<{ delay: number }>`
     display: inline-block;
     animation: ${waveAnimation} 1.2s ease-in-out infinite;
     animation-delay: ${({ delay }) => delay}s;
+    font-family: ${urbanist.style.fontFamily};
 `;
 
 const LoadingScreen = () => {

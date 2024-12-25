@@ -19,16 +19,16 @@ const PageContainer = styled.section`
   & h1 {
       margin: 0;
       height: min-content;
-      translate: 0 30px;
-      font-size: 100px;
+      translate: 0 1rem;
+      font-size: 70px;
       opacity: 0.15;
-      padding-left: 1.7rem;
+      padding-left: 1rem;
     }
 
   & h2 {
       margin: 0;
       width: 100%;
-      font-size: 40px;
+      font-size: 20px;
       background: ${({ theme }) => theme.colors.gradientSecondary};
       -webkit-background-clip: text;
       background-clip: text;
@@ -39,7 +39,7 @@ const PageContainer = styled.section`
       margin: 0;
       padding: 10px 30px;
       width: 100% !important;
-      font-size: 25px;
+      font-size: 20px;
       background: ${({ theme }) => theme.colors.gradientSecondary};
         -webkit-background-clip: text;
         background-clip: text;
@@ -50,7 +50,7 @@ const PageContainer = styled.section`
   & h4 {
       margin: 0;
       width: 100%;
-      font-size: 25px;
+      font-size: 20px;
     }
 
   & p{
@@ -68,6 +68,7 @@ const PageContentContainer = styled.article`
   display: flex;
   justify-content: center;
   margin: 20px !important;
+  padding: 20px;
 `;
 
 // Containers for banner
@@ -76,29 +77,16 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
-
-  @media (max-width: 1050px) {
-      padding: 0;
-    }
 `;
 
 const BannerBody = styled.div`
     width: 1000px !important;
     display: flex;
     justify-content: space-between;
-
-    @media (max-width: 1050px) {
-      justify-content: center;
-      align-items: center;
-
-      & h1{
-        display: none;
-      }
-    }
 `;
 
 const BannerImageDiv = styled.div<{ urlImage: string }>`
@@ -112,16 +100,13 @@ const BannerImageDiv = styled.div<{ urlImage: string }>`
   border: solid 1px ${({ theme }) => theme.colors.textBlack};
 
   @media (max-width: 1050px) {
-    translate: 0;
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    display: none;
   }
 `;
 
 // Container for INFO content
 const ProfilePageContainer = styled.div`
-  padding-top: 200px;
+  padding-top: 130px;
   width: 100%;
   max-width: 1000px;
   display: flex;
@@ -149,6 +134,21 @@ const PageBody = styled.div`
   gap: 20px;
 `;
 
+const MobilePofilePic = styled.div<{ urlImage: string }>`
+display: none;
+  background-image: url(${(props) => props.urlImage}); 
+  background-size: cover;
+  background-position: center;
+  width: 80px !important;
+  height: 80px !important;
+  border: solid 1px ${({ theme }) => theme.colors.textBlack};
+  border-radius: 10px;
+
+  @media (max-width: 1050px) {
+    display: flex;
+  }
+`;
+
 // Containers for Widgets and Aside
 const WidgetContent = styled.div`
   padding: 20px 30px;
@@ -170,11 +170,19 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
+const WidgetBodyHorizontal = styled.div`
+  padding: 20px 30px;
+  gap: 20px;
+  width: 100%;
+  min-width: 220px;
+  display: flex;
+`;
+
 const PageAside = styled.aside`
   width: max-content;
   padding: 0;
   margin: 0;
-  margin-top: 50px;
+  margin-top: 80px;
 
   & div {
     width: 200px;
@@ -265,10 +273,13 @@ const UserProfile = () => {
               </PageAside>
               <PageBody>
                 <WidgetContainer>
-                  <WidgetBody>
+                  <WidgetBodyHorizontal>
+                  <MobilePofilePic urlImage={userData!.urlImage}></MobilePofilePic>
+                    <div>
                     <h2>{userData?.name} {userData?.lastName}</h2>
                     <p>{userData?.jobTitle}</p>
-                  </WidgetBody>
+                    </div>
+                  </WidgetBodyHorizontal>
                 </WidgetContainer>
                 <WidgetContainer>
                   <WidgetBody>

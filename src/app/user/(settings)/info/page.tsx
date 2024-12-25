@@ -20,13 +20,13 @@ const PageContainer = styled.section`
 
     height: min-content;
 
-    translate: 0 30px;
+    translate: 0 1rem;
 
-    font-size: 100px;
+    font-size: 70px;
 
     opacity: 0.15;
 
-    padding-left: 1.7rem;
+    padding-left: 1rem;
   }
 
   & h2 {
@@ -34,11 +34,9 @@ const PageContainer = styled.section`
 
     padding-bottom: 10px;
 
-    margin-bottom: 20px;
+    width: 100%;
 
-    width: 70%;
-
-    font-size: 40px;
+    font-size: 30px;
 
     background: ${({ theme }) => theme.colors.gradientSecondary};
 
@@ -56,19 +54,19 @@ const PageContainer = styled.section`
 
     width: 100% !important;
 
-    font-size: 25px;
+    font-size: 20px;
 
     border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
   }
 
   & h4 {
     margin: 0;
-
     margin-bottom: 10px;
-
     width: 100%;
-
-    font-size: 25px;
+    opacity: 0.3;
+    font-weight: 400;
+    font-size: 20px;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   & p {
@@ -93,7 +91,6 @@ const PageContentContainer = styled.article`
 
   justify-content: center;
 
-  margin: 20px;
 `;
 
 //Containers for banner
@@ -103,7 +100,7 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
@@ -118,7 +115,7 @@ const BannerBody = styled.div`
 //Container for INFO content
 
 const InfoPageContainer = styled.div`
-  padding-top: 200px;
+  padding-top: 150px;
 
   width: 100%;
 
@@ -165,12 +162,21 @@ const WidgetBody = styled.div`
   display: flex;
 
   flex-direction: column;
+
+`;
+
+const PDesc = styled.p`
+    font-size: 15px !important;
+    max-width: 300px !important;
+    hyphens: unset;
 `;
 
 const DivDeactivateAccount = styled.div`
   width: 100%;
 
   display: flex;
+
+  flex-direction: column-reverse;
 
   justify-content: end;
 
@@ -185,6 +191,7 @@ const DivDeactivateAccount = styled.div`
 
     & p {
       font-size: 15px;
+      hyphens: unset;
     }
   }
 `;
@@ -192,7 +199,9 @@ const DivDeactivateAccount = styled.div`
 const ButtonDeactivate = styled.button<({ color: string }) >`
   min-width: 100px;
 
-  width: 100px;
+  width: 30vw;
+
+  max-width: 250px;
 
   text-align: center;
 
@@ -231,21 +240,13 @@ const ButtonDeactivate = styled.button<({ color: string }) >`
 
 const AccountStateButton = styled.div<({ color: string }) >`
   width: 100px;
-
   text-align: center;
-
   border-radius: 50px;
-
   margin: 10px 0;
-
   padding: 2px;
-
-  font-size: 15px;
-
-  font-weight: 500;
-
+  font-size: 12px;
+  font-weight: 400;
   color: ${(props) => props.color};
-
   border: ${(props) => props.color} 1px solid;
 `;
 
@@ -304,14 +305,14 @@ const UserInfo = () => {
   };
 
   const stateBtnColor = () => {
-    if (accountState === "Activo") return "#ca8e33";
+    if (accountState === "Activo") return "#F0AC27";
     else if (accountState === "Inactivo") return "#828282";
     else return "#666666";
   }
 
   const changeStateBtnColor = () => {
-    if (accountState === "Activo") return "#c34040";
-    else if (accountState === "Inactivo") return "#4072c3";
+    if (accountState === "Activo") return "#D13B00";
+    else if (accountState === "Inactivo") return "#4072C3";
     else return "#666666";
   }
 
@@ -328,11 +329,15 @@ const UserInfo = () => {
           <InfoPageContainer>
             <PageContent>
               <PageBody>
-                <h2>Configuración de Cuenta</h2>
+                <h2>Configuración y datos</h2>
 
                 <WidgetContainer>
                   <WidgetBody>
-                    <h4>Estado de Cuenta</h4>
+                    <h4>| Estado de cuenta</h4>
+
+                    <PDesc>
+                        Aquí podrás ver en que condición se encuentra tu cuenta actualmente.
+                      </PDesc>
 
                     {loading ? (
                       <p>Cargando...</p>
@@ -363,9 +368,9 @@ const UserInfo = () => {
                     )}
 
                     <div>
-                      <h4>Deshabilitación de cuenta</h4>
+                      <h4>| Deshabilitación de cuenta</h4>
                       <p>
-                        <strong> Atención: </strong>Al desactivar tu cuenta tu
+                        <strong> Atención: </strong>Al desactivar tu cuenta de SkillSwap, toda tu
                         información permanecerá segura y no será eliminada.
                       </p>
                     </div>

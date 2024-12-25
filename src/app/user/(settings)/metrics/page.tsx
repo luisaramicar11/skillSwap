@@ -27,10 +27,10 @@ const PageContainer = styled.section`
   & h1 {
       margin: 0;
       height: min-content;
-      translate: 0 30px;
-      font-size: 100px;
+      translate: 0 1rem;
+      font-size: 70px;
       opacity: 0.15;
-      padding-left: 1.7rem;
+      padding-left: 1rem;
     }
 
   & h2 {
@@ -38,7 +38,7 @@ const PageContainer = styled.section`
       padding-bottom: 10px;
       margin-bottom: 20px;
       width: 70%;
-      font-size: 40px;
+      font-size: 30px;
       background: ${({ theme }) => theme.colors.gradientSecondary};
       -webkit-background-clip: text;
       background-clip: text;
@@ -49,7 +49,7 @@ const PageContainer = styled.section`
       margin: 0;
       padding: 10px 30px;
       width: 100% !important;
-      font-size: 25px;
+      font-size: 20px;
       border-bottom: 1px solid  ${({ theme }) => theme.colors.textBlack};
     }
 
@@ -57,7 +57,7 @@ const PageContainer = styled.section`
       margin: 0;
       margin-bottom: 10px;
       width: 100%;
-      font-size: 25px;
+      font-size: 20px;
     }
 
   & p{
@@ -73,7 +73,7 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
@@ -90,11 +90,10 @@ const PageContentContainer = styled.article`
   height: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px;
 `;
 
 const InfoPageContainer = styled.div`
-  padding-top: 200px;
+  padding-top: 150px;
   width: 100%;
   max-width: 1000px;
   display: flex;
@@ -117,11 +116,22 @@ const PageBody = styled.div`
 `;
 
 const WidgetBody = styled.div`
-  padding: 20px 30px;
+  padding: 2rem;
   width: 100%;
   min-width: 220px;
   display: flex;
   flex-direction: column;
+
+  & hr{
+    height: 2px;
+    background: ${({ theme }) => theme.colors.gradientText};
+    border: none;
+    margin: 5px;
+    opacity: 0.1;
+    border-radius: 50%;
+    margin-top: 50px;  
+    margin-bottom: 20px;      
+  }
 `;
 
 const SecurityButton = styled.button`
@@ -250,6 +260,7 @@ const Metrics: React.FC = () => {
                   <Bar data={barData} options={{ responsive: true }} />
 
                   {/* Botón de seguridad */}
+                  <hr></hr>
                   <DivSec>
                     <h2>Seguridad</h2>
                   </DivSec>

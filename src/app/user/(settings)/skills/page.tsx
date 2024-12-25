@@ -27,33 +27,33 @@ const PageContainer = styled.section`
 
     height: min-content;
 
-    translate: 0 30px;
+    translate: 0 1rem;
 
-    font-size: 100px;
+    font-size: 70px;
 
     opacity: 0.15;
 
-    padding-left: 1.7rem;
+    padding-left: 1rem;
   }
 
   & h2 {
     width: 100%;
     margin: 0;
-    font-size: 40px;
+    font-size: 30px;
   }
 
   & h3 {
     padding: 10px 30px;
     width: 100% !important;
     margin: 0;
-    font-size: 25px;
+    font-size: 20px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.bgSecondary};
   }
 
   & h4 {
     width: 100%;
     margin: 0;
-    font-size: 25px;
+    font-size: 20px;
   }
 
   & p {
@@ -70,7 +70,6 @@ const PageContentContainer = styled.article`
   height: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px;
 `;
 
 //Containers for banner
@@ -79,7 +78,7 @@ const Banner = styled.article`
   padding: 20px;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.bgBanner};
@@ -93,7 +92,7 @@ const BannerBody = styled.div`
 
 //Container for INFO content
 const SkillsPageContainer = styled.div`
-  padding-top: 200px;
+  padding-top: 150px;
   width: 100%;
   max-width: 1000px;
   height: 100%;
@@ -116,6 +115,7 @@ const PageBody = styled.div`
   flex-direction: column;
   align-items: end; 
   gap: 20px;
+  padding: 1rem;
 
   & div {
     width: 100%;

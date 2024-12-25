@@ -56,14 +56,11 @@ const Container = styled.div`
   min-height: 70vh;
 
   @media (max-width: 1070px) {
+    margin-top: 0 !important;
     flex-direction: column; 
     align-items: flex-start;
     border-radius: none;
     height: 700px;
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 154px !important;
   }
 `;
 
@@ -131,7 +128,7 @@ const Div = styled.div`
   margin: 0;
 
   @media (max-width: 1070px) {
-    padding: 2rem;
+    padding: 1.8rem;
     height: auto;
     border:0; 
   }
@@ -155,6 +152,8 @@ const H1 = styled.h1`
 
   @media (max-width: 1070px) {
     justify-content: center;
+    padding: 0;
+    margin: 0;
   }
 `;
 
