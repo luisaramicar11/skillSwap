@@ -4,7 +4,7 @@ __SkillSwap__ is a modern platform designed to facilitate skill exchange, connec
 
 ## Why SkillSwap?
 
-Updating and strengthening skills is crucial in a constantly evolving digital environment. SkillSwap addresses the challenges of collaborative learning, offering a smooth and effective digital experience for knowledge exchange.
+Updating and strengthening skills is crucial, especially in a constantly evolving digital environment. SkillSwap addresses the challenges of collaborative learning, offering a smooth and effective digital experience for knowledge exchange.
 
 ## Objective
 
@@ -122,7 +122,7 @@ These credentials should be used only for administrative purposes.
 git clone https://github.com/luisaramicar11/skillSwap.git
 ```
 
-2. Run the project in terminal:
+2. Run the project in the terminal:
 
 ```bash
 npm run dev

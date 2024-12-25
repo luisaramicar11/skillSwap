@@ -17,45 +17,29 @@ const PageContainer = styled.section`
 
   & h1 {
     margin: 0;
-
     height: min-content;
-
     translate: 0 1rem;
-
     font-size: 70px;
-
     opacity: 0.15;
-
     padding-left: 1rem;
   }
 
   & h2 {
     margin: 0;
-
     padding-bottom: 10px;
-
     width: 100%;
-
     font-size: 30px;
-
     background: ${({ theme }) => theme.colors.gradientSecondary};
-
     -webkit-background-clip: text;
-
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
   }
 
   & h3 {
     margin: 0;
-
     padding: 10px 30px;
-
     width: 100% !important;
-
     font-size: 20px;
-
     border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
   }
 
@@ -71,11 +55,8 @@ const PageContainer = styled.section`
 
   & p {
     margin: 0;
-
     width: 100%;
-
     font-size: 16px;
-
     color: ${({ theme }) => theme.colors.textSecondary};
   }
 `;
@@ -84,13 +65,9 @@ const PageContainer = styled.section`
 
 const PageContentContainer = styled.article`
   width: 100%;
-
   height: 100%;
-
   display: flex;
-
   justify-content: center;
-
 `;
 
 //Containers for banner
@@ -130,23 +107,16 @@ const InfoPageContainer = styled.div`
 
 const PageContent = styled.div`
   width: 100%;
-
   display: flex;
-
   justify-content: space-between;
-
   gap: 20px;
 `;
 
 const PageBody = styled.div`
   width: 100%;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 20px;
-
   padding: 2rem;
 `;
 
@@ -154,15 +124,10 @@ const PageBody = styled.div`
 
 const WidgetBody = styled.div`
   padding: 20px 30px;
-
   width: 100%;
-
   min-width: 220px;
-
   display: flex;
-
   flex-direction: column;
-
 `;
 
 const PDesc = styled.p`
@@ -173,17 +138,11 @@ const PDesc = styled.p`
 
 const DivDeactivateAccount = styled.div`
   width: 100%;
-
   display: flex;
-
   flex-direction: column-reverse;
-
   justify-content: end;
-
   align-items: end;
-
   padding: 2rem;
-
   gap: 2rem;
 
   & div {
@@ -198,29 +157,17 @@ const DivDeactivateAccount = styled.div`
 
 const ButtonDeactivate = styled.button<({ color: string }) >`
   min-width: 100px;
-
   width: 30vw;
-
   max-width: 250px;
-
   text-align: center;
-
   border-radius: 10px;
-
   margin: 10px 0;
-
   background-color: transparent;
-
   padding: 10px;
-
   font-weight: 500;
-
   color: ${(props) => props.color};
-
   border: ${(props) => props.color} 1px solid;
-
   cursor: pointer;
-
   transition: 0.3s ease-in-out;
 
   &:hover {
@@ -231,9 +178,7 @@ const ButtonDeactivate = styled.button<({ color: string }) >`
 
   &:disabled {
     background-color: ${({ theme }) => theme.colors.bgDisabled};
-
     color: ${({ theme }) => theme.colors.textDisabled};
-
     cursor: not-allowed;
   }
 `;

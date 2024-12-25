@@ -135,9 +135,9 @@ const WidgetBody = styled.div`
 `;
 
 const SecurityButton = styled.button`
-  width: 20%;
   padding: 10px;
   font-size: 14px;
+  width: 250px;
   margin-top: 50px;
   cursor: pointer;
   border-radius: 5px;
@@ -254,12 +254,13 @@ const Metrics: React.FC = () => {
             <PageContent>
               <PageBody>
                 <WidgetBody>
-                  <h2>Conteo de Solicitudes</h2>
-
+                  <h2>Registro de actividad</h2>
+                  <p>Observa aquí los detalles estadísticos de tus solicitudes y conexiones. Manténte al tanto de tu red y sigue construyendo experiencias.</p>
+                  <br />
                   {/* Gráfico de Barras (Bar Chart) */}
-                  <Bar data={barData} options={{ responsive: true }} />
+                  <Bar data={barData} options={{ responsive: true }} /> 
 
-                  {/* Botón de seguridad */}
+                  {/* Apartado de seguridad */}
                   <hr></hr>
                   <DivSec>
                     <h2>Seguridad</h2>

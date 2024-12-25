@@ -339,6 +339,7 @@ const UserRequests = () => {
                 )}
               </PageBody>
             </PagesContent>
+            <br />
             <PagesContent>
               <ReportsText>
                 <h2>Reportes</h2>

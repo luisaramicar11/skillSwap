@@ -78,6 +78,7 @@ const ModalContent = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -93,6 +94,13 @@ const LeftSection = styled.div`
   padding: 1rem;
   gap: 10px;
   width: 60%;
+
+  @media (max-width: 768px) {
+    border-bottom-left-radius: 0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
+    border-right: none;
+    width: 100%;
+  }
 `;
 
 const RightSection = styled.div`
@@ -119,6 +127,10 @@ const RightSection = styled.div`
       font-size: 30px;
       font-style: normal
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 

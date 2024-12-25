@@ -24,15 +24,10 @@ const PageContainer = styled.section`
 
   & h1 {
     margin: 0;
-
     height: min-content;
-
     translate: 0 1rem;
-
     font-size: 70px;
-
     opacity: 0.15;
-
     padding-left: 1rem;
   }
 

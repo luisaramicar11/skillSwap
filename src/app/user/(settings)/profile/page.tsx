@@ -274,10 +274,10 @@ const UserProfile = () => {
               <PageBody>
                 <WidgetContainer>
                   <WidgetBodyHorizontal>
-                  <MobilePofilePic urlImage={userData!.urlImage}></MobilePofilePic>
+                    <MobilePofilePic urlImage={userData!.urlImage}></MobilePofilePic>
                     <div>
-                    <h2>{userData?.name} {userData?.lastName}</h2>
-                    <p>{userData?.jobTitle}</p>
+                      <h2>{userData?.name} {userData?.lastName}</h2>
+                      <p>{userData?.jobTitle}</p>
                     </div>
                   </WidgetBodyHorizontal>
                 </WidgetContainer>
