@@ -54,7 +54,7 @@ const ModalCloseButton = styled.button`
   background: none;
   color: #fff;
   border: none;
-  font-size: 18px;
+  font-size: 1.5rem;
   cursor: pointer;
 `;
 

@@ -1,17 +1,6 @@
 'use client';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-// Animación para mover el texto de lado a lado de manera infinita
-const slideAnimation = keyframes`
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-`;
-
-// Estilos para la pantalla completa
 const FullScreenLoader = styled.div`
   display: flex;
   justify-content: center;
@@ -27,50 +16,43 @@ const FullScreenLoader = styled.div`
   & section{
     width: 100vw;
   }
-
-  & article{
-    background-color: ${({ theme }) => theme.colors.bgPrimary};
-  }
 `;
 
-// Contenedor del texto que se desliza
-const MovingText = styled.div`
-  white-space: nowrap;
+const NotFoundText = styled.div`
   margin: 20px;
   padding: 20px;
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   font-size: 2rem;
   font-weight: bold;
   overflow: hidden;
-  gap: 10rem;
+  gap: 3rem;
   position: relative;
-  width: 100%;
-  animation: ${slideAnimation} 20s linear infinite;
+  width: 100vw;
 
   & p{
     color: ${({ theme }) => theme.colors.textSecondary};
+    opacity: 0.5;
   }
 `;
 
-// Estilos para el mensaje adicional
 const P = styled.p`
   color: black;
   font-weight: 200;
   font-size: 1.2rem;
   text-align: center;
+  margin: 0 2rem;
   margin-top: 2rem;
 `;
 
-// Componente principal de la pantalla de "Página no encontrada"
 const NotFoundScreen = () => {
   return (
     <FullScreenLoader>
       <div>
-        <article>
-          <MovingText><p>★</p><p>HTTP 404</p><p>★</p><p>HTTP 404</p><p>★</p><p>HTTP 404</p><p>★</p><p>HTTP 404</p><p>★</p><p>HTTP 404</p><p>★</p></MovingText>
-        </article>
-
+        <NotFoundText>
+          <p>HTTP 404</p>
+        </NotFoundText>
       </div>
       <section>
         <P>¡Oops! Parece que no se pudo encontrar el recurso solicitado.</P>

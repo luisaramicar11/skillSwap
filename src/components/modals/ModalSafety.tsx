@@ -60,7 +60,7 @@ const ModalCloseButton = styled.button`
   color: #000;
   opacity: 0.6;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
 `;
 
