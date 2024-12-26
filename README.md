@@ -13,7 +13,7 @@ Facilitate continuous learning and collaborative teaching, creating a vibrant co
 ## Technologies Used
 
 - *Frontend*:
-   - Next.js, TypeScript, Redux Toolkit, Styled Components, Bootstrap Icons
+   - Next.js, TypeScript, Redux Toolkit, Styled Components, Bootstrap Icons, React-based libraries
 
 - *Backend*:
    - C#, .NET, Swagger, Azure
