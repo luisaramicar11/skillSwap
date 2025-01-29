@@ -3,67 +3,147 @@ import React, { useEffect, useState } from "react";
 import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
 
+//Formulario
 const Form = styled.form`
-  padding: 30px;
-  width: 50%;
+  padding: 50px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  `
-  
+  gap: 20px;
+
+  & article{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+`;
+
 const Input = styled.input`
-  width: 50%;
+  width: 100%; 
   border-radius: 10px;
   border: 1px #ccc solid;
   padding: 7px;
   font-size: small;
   color: black;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem; 
+  }
 `;
 
 const Button = styled.button`
   margin-top: 5px;
-  margin-right: 10px;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px black solid;
+  border: 1px grey solid;
   color: black;
   cursor: pointer;
   background: none;
   padding: 5px 10px;
 
   &:hover {
-    background-color: green;
+    background-color: grey;
     color: white;
+    border: none
   }
 `;
 
 const Div = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+
+  & label{
+    align-self: start;
+    display: flex;
+    align-items: center;
+
+    & p{
+      margin-right: 5px;
+      font-style: normal;
+      color: rgb(0, 0, 0, 0.2)
+    }
+  }
 `;
 
 const Title = styled.p`
-  margin-top: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: black;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: orange;
+  font-size: 20px;
   font-weight: 500;
 `;
 
 const DivInfo = styled.div`
   font-size: 0.8rem;
-  text-align: center;
-`
+`;
 
-const DivButtton = styled.div`
-display: flex;
-justify-content: center;
-`
+const DivButton = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+`;
+
+//Contenedor global
+const DivContent = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content : center;
+  gap: 50px;
+`;
+
+//Card para el Formulario
+const Card = styled.div`
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 540px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+`;
+
+const UserImage = styled.div<{urlImage: string}>`
+  width: 100%;
+  height: 450px;
+  background-image: url(${(props) => props.urlImage});
+  background-size: cover;
+  background-position: center;
+`;
+
+const UserInfo = styled.div`
+  padding: 20px;
+`;
+
+const UserName = styled.h2`
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+`;
+
+const JobTitle = styled.h4`
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #777;
+`;
+
+const Description = styled.p`
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.4;
+`;
 
 interface EditUserFormProps {
   updateData: (user: IUserUpdateAdmin) => void;
@@ -106,6 +186,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
     };
     if (dataToEdit) {
       const { id, ...userWithoutId } = dataToEdit; // Excluir id
+      console.log(id);
       setForm({
         ...userWithoutId,
         suspensionDate: userWithoutId.suspensionDate || null,
@@ -124,45 +205,35 @@ const FormUsers: React.FC<EditUserFormProps> = ({
     }));
   };
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (dataToEdit) {
-        // Crea el objeto a actualizar filtrando las propiedades innecesarias
-        // Función para formatear la fecha
-        const formatDate = (date: Date | null): string | null => {
-          if (!date) return null;
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, '0'); // Asegura que el mes tenga dos dígitos
-          const day = String(date.getDate()).padStart(2, '0'); // Asegura que el día tenga dos dígitos
-          return `${year}-${month}-${day}`;
+      const userToUpdate = {
+        id: dataToEdit.id, 
+        name: form.name,
+        lastName: form.lastName,
+        urlImage: form.urlImage,
+        jobTitle: form.jobTitle,
+        description: form.description,
+        birthdate: form.birthdate, 
+        email: form.email,
+        phoneNumber: form.phoneNumber,
+        category: form.category,
+        abilities: form.abilities,
+        urlLinkedin: form.urlLinkedin,
+        urlGithub: form.urlGithub,
+        urlBehance: form.urlBehance,
+        idStateUser: form.idStateUser,
+        idRoleUser: form.idRoleUser,
+        suspensionDate: form.suspensionDate,
+        reactivationDate: form.reactivationDate,
       };
 
-        const userToUpdate = {
-            id: dataToEdit.id, // Mantén el ID existente
-            name: form.name,
-            lastName: form.lastName,
-            urlImage: form.urlImage,
-            jobTitle: form.jobTitle,
-            description: form.description,
-            birthdate: form.birthdate, // Mantener el formato de string
-            email: form.email,
-            phoneNumber: form.phoneNumber,
-            category: form.category,
-            abilities: form.abilities,
-            urlLinkedin: form.urlLinkedin,
-            urlGithub: form.urlGithub,
-            urlBehance: form.urlBehance,
-            idStateUser: form.idStateUser,
-            idRoleUser: form.idRoleUser,
-            suspensionDate: form.suspensionDate,
-            reactivationDate: form.reactivationDate,
-        };
-
-        // Envía solo las propiedades necesarias
-        updateData(userToUpdate);
-        handleReset();
+      // Envía solo las propiedades necesarias
+      updateData(userToUpdate);
+      handleReset();
     }
-};
+  };
 
   const handleReset = () => {
     setForm(initialFormState);
@@ -170,116 +241,129 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   };
 
   return (
-    <main>
-      <Title>Editar Usuario</Title>
-      <DivInfo>Los códigos de los estados de los usuarios son: 1. Activo, 2. Inactivo, 3. Suspendido </DivInfo>
-      <Div>
+    <DivContent>
       <Form onSubmit={handleSubmit}>
-          <Div>
-            <label htmlFor="name">Nombre del usuario</label>
-            <Input
-              type="text"
-              name="name"
-              id="name"  // Añadido para asociar con el label
-              placeholder="Nombre del usuario"
-              onChange={handleChange}
-              value={form.name}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="lastName">Apellidos del usuario</label>
-            <Input
-              type="text"
-              name="lastName"
-              id="lastName"  // Añadido para asociar con el label
-              placeholder="Apellidos del usuario"
-              onChange={handleChange}
-              value={form.lastName}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="abilities">Habilidades</label>
-            <Input
-              type="text"
-              name="abilities"
-              id="abilities"  // Añadido para asociar con el label
-              placeholder="Habilidades"
-              onChange={handleChange}
-              value={form.abilities}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="category">Categoría</label>
-            <Input
-              type="text"
-              name="category"
-              id="category"  // Añadido para asociar con el label
-              placeholder="Categoría"
-              onChange={handleChange}
-              value={form.category}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="idStateUser">ID del Estado de Usuario</label>
-            <Input
-              type="number"
-              name="idStateUser"
-              id="idStateUser"  // Añadido para asociar con el label
-              placeholder="idStateUser"
-              onChange={handleChange}
-              value={form.idStateUser}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="idRoleUser">ID del Rol de Usuario</label>
-            <Input
-              type="number"
-              name="idRoleUser"
-              id="idRoleUser"  // Añadido para asociar con el label
-              placeholder="idRoleUser"
-              onChange={handleChange}
-              value={form.idRoleUser}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="suspensionDate">Fecha de Suspensión</label>
-            <Input
-              type="date"
-              name="suspensionDate"
-              id="suspensionDate"  // Añadido para asociar con el label
-              onChange={handleChange}
-              value={form.suspensionDate || ""}
-            />
-          </Div>
-          <Div>
-            <label htmlFor="reactivationDate">Fecha de Reactivación</label>
-            <Input
-              type="date"
-              name="reactivationDate"
-              id="reactivationDate"  // Añadido para asociar con el label
-              onChange={handleChange}
-              value={form.reactivationDate || ""}
-            />
-          </Div>
-          <DivButtton>
-            <Button type="submit">Actualizar</Button>
-            <Button type="button" onClick={handleReset}>
-              Limpiar
-            </Button>
-          </DivButtton>
-        </Form>
-      </Div>
-    </main>
+        <article>
+          <Title>★ EDITAR USUARIO</Title>
+          <DivInfo>Aquí podrás revisar la información de los usuarios de la plataforma y</DivInfo>
+          <DivInfo>realizar modificaciones en sus estados de cuenta según los T&C de <strong>SkillSwap</strong>.</DivInfo>
+          <DivInfo>Los códigos de los estados de los usuarios son: <strong>1. Activo, 2. Inactivo, 3. Suspendido</strong></DivInfo>
+        </article>
+        <Div>
+          <label htmlFor="name"><p>★</p>Nombre del usuario</label>
+          <Input
+            type="text"
+            name="name"
+            id="name" 
+            placeholder="Nombre del usuario"
+            onChange={handleChange}
+            value={form.name}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="lastName"><p>★</p>Apellidos del usuario</label>
+          <Input
+            type="text"
+            name="lastName"
+            id="lastName" 
+            placeholder="Apellidos del usuario"
+            onChange={handleChange}
+            value={form.lastName}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="abilities"><p>★</p>Habilidades</label>
+          <Input
+            type="text"
+            name="abilities"
+            id="abilities"  
+            placeholder="Habilidades"
+            onChange={handleChange}
+            value={form.abilities}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="category"><p>★</p>Categoría</label>
+          <Input
+            type="text"
+            name="category"
+            id="category" 
+            placeholder="Categoría"
+            onChange={handleChange}
+            value={form.category}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="idStateUser"><p>★</p>ID del Estado de Usuario</label>
+          <Input
+            type="number"
+            name="idStateUser"
+            id="idStateUser"  
+            placeholder="idStateUser"
+            onChange={handleChange}
+            value={form.idStateUser}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="idRoleUser"><p>★</p>ID del Rol de Usuario</label>
+          <Input
+            type="number"
+            name="idRoleUser"
+            id="idRoleUser" 
+            placeholder="idRoleUser"
+            onChange={handleChange}
+            value={form.idRoleUser}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="suspensionDate"><p>★</p>Fecha de Suspensión</label>
+          <Input
+            type="date"
+            name="suspensionDate"
+            id="suspensionDate" 
+            onChange={handleChange}
+            value={form.suspensionDate || ""}
+          />
+        </Div>
+        <Div>
+          <label htmlFor="reactivationDate"><p>★</p>Fecha de Reactivación</label>
+          <Input
+            type="date"
+            name="reactivationDate"
+            id="reactivationDate" 
+            onChange={handleChange}
+            value={form.reactivationDate || ""}
+          />
+        </Div>
+        <DivButton>
+          <Button type="submit">Actualizar</Button>
+          <Button type="button" onClick={handleReset}>
+            Limpiar
+          </Button>
+        </DivButton>
+      </Form>
+      <Card>
+      <UserImage urlImage={form.urlImage} />
+      <UserInfo>
+        <UserName>{form.name}{form.lastName}</UserName>
+        <JobTitle>{form.jobTitle}</JobTitle>
+        <Description>
+          {form.description}
+        </Description>
+      </UserInfo>
+    </Card>
+    </DivContent>
   );
 };
 
 export default FormUsers;
+
 
 
 

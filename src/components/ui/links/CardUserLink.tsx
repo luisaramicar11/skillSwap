@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
@@ -13,12 +14,12 @@ const DivLinkComponent = styled(Link)`
     cursor: pointer;
 
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
         transition: 0.4s ease-in-out;
     }
 `;
 
-const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, clickedUserId, id, children }) => {
+const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) => {
     return (
         <DivLinkComponent
             href={href}
@@ -35,7 +36,7 @@ const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, clickedUserId, id
                 }
             }}
         >
-            {children || label} {/* Si `children` existe, lo renderiza, de lo contrario usa `label` */}
+            {children || label} 
         </DivLinkComponent>
     );
 };

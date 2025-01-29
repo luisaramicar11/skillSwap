@@ -36,12 +36,11 @@ export const BackLink = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   align-items: center;
   justify-content: flex-end !important;
   margin: 0;
-  border: none;
+  border: none !important;
 
   @media (max-width: 1070px) {
     flex-direction: column;
@@ -62,8 +61,6 @@ export const FormWrapper = styled.div`
   width: 60%;
   height: 450px;
   text-align: start;
-  justify-content: center;
-  align-items: center;  
   margin: 0;
   position: relative;
 

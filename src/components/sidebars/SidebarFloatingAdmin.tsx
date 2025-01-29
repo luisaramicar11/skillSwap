@@ -1,9 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
-import StyledNavLink from "../ui/links/NavLinks";
 import LogoutButton from "../ui/buttons/ButtonLogout";
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 
 const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
   z-index: 1000;
@@ -63,15 +61,6 @@ const Disclaimer = styled.div`
   font-size: 0.7rem;
   margin-bottom: 10px;
   padding: 2rem;
-`;
-
-const H2 = styled.h2`
-  color: ${({ theme }) => theme.colors.textDark};
-  font-weight: 500;
-  margin: 0;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  text-align: center;
 `;
 
 const OfflineProfile = styled.div`
@@ -150,41 +139,6 @@ const ProfileName = styled.div`
   color: ${({ theme }) => theme.colors.textDark};
 `;
 
-const Skills = styled.div`
-  opacity: 0.5;
-  font-size: 0.6rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  display: flex;
-  flex-direction: column;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  border: ${({ theme }) => theme.colors.textOrange} 1px solid;
-  padding: 15px 40px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.5s ease-in-out;
-  margin: 30px 0;
-  border-radius: 10px;
-
-  & a{
-    color: ${({ theme }) => theme.colors.textOrange};
-  }
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.gradientPrimary};
-    border: none;
-    transition: 0.5s ease-in-out;
-
-    & a{
-      color: ${({ theme }) => theme.colors.textPrimary};
-  }
-  }
-`;
-
 const BoxLogout = styled.h2`
   position: fixed;
   display: flex;
@@ -219,7 +173,7 @@ const ProfileSidebarAdmin: React.FC<ProfileSidebarProps> = ({ isOpen, onClose })
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -240,8 +194,8 @@ const ProfileSidebarAdmin: React.FC<ProfileSidebarProps> = ({ isOpen, onClose })
           </OfflineProfile>
         </Disclaimer>
         <BoxLogout>
-                  <LogoutButton icon={<FaSignOutAlt />} />
-              </BoxLogout>
+          <LogoutButton icon={<FiLogOut />} />
+        </BoxLogout>
       </OfflineSidebarContent>
     </OfflineSidebarContainer>
   );

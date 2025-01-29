@@ -11,8 +11,8 @@ import GitHubIcon from "@/public/svg/GitHubIcon";
 // Estilos para el footer
 const FooterStyled = styled.footer`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.bgSecondary};
-  color: ${({ theme }) => theme.colors.textPrimary};
+  background-color: ${({ theme }) => theme.colors.bgGrey};
+  color: ${({ theme }) => theme.colors.textWhite};
   padding: 120px 40px 100px 40px;
   display: flex;
   flex-direction: column;
@@ -39,12 +39,12 @@ const FooterStyled = styled.footer`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.textPrimary};
+    color: ${({ theme }) => theme.colors.textWhite};
     text-decoration: none;
     font-size: 14px;
 
     &:hover {
-      color: ${({ theme }) => theme.colors.textPrimary};
+      color: ${({ theme }) => theme.colors.textWhite};
     }
   }
 
@@ -61,15 +61,29 @@ const Box = styled.article`
   justify-content: space-between;
   align-items: center;
   margin-top: 50px;
-  border-top: 1px solid ${({ theme }) => theme.colors.textPrimary};
+  border-top: 1px solid ${({ theme }) => theme.colors.textWhite};
   padding-top: 30px;
   width: 80%;
+
+  > * {
+    color: ${({ theme }) => theme.colors.textWhite};
+  }
 `;
 
 const FooterNavItem = styled.li`
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    max-height: 54px;
+    cursor: pointer;
+
+    a{
+        padding: 0 15px;
+
+        & svg{
+            width: 50px;
+            height: auto;
+        }
+    }
 `;
 
 export const FooterAdmin: React.FC = () => {
@@ -79,11 +93,11 @@ export const FooterAdmin: React.FC = () => {
         <FooterNavItem onClick={() => handlePageChange('INICIO')}>
           <StyledNavLink href="/admin" label="INICIO" />
         </FooterNavItem>
-        <FooterNavItem onClick={() => handlePageChange('REPORTES')}>
-          <StyledNavLink href="/admin/reports" label="REPORTES" />
-        </FooterNavItem>
         <FooterNavItem onClick={() => handlePageChange('USUARIOS')}>
           <StyledNavLink href="/admin/users" label="USUARIOS" />
+        </FooterNavItem>
+        <FooterNavItem onClick={() => handlePageChange('REPORTES')}>
+          <StyledNavLink href="/admin/reports" label="REPORTES" />
         </FooterNavItem>
         <FooterNavItem onClick={() => handlePageChange('ADMIN/POSTS')}>
           <StyledNavLink href="/admin/posts" label="POSTS" />
@@ -97,23 +111,23 @@ export const FooterAdmin: React.FC = () => {
           © {new Date().getFullYear()} SkillSwap, Inc. Todos los derechos reservados.
         </p>
         <div className="social-icons">
-          <StyledIconNavLink 
-            target="_blank" 
-            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&node-type=canvas&t=SONsdrpY89xVseme-0" 
-            label="Figma" 
-            icon={<FigmaIcon />} 
+          <StyledIconNavLink
+            target="_blank"
+            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&node-type=canvas&t=SONsdrpY89xVseme-0"
+            label="Figma"
+            icon={<FigmaIcon />}
           />
-          <StyledIconNavLink 
-            target="_blank" 
-            href="https://github.com/luisaramicar11/skillSwap" 
-            label="GitHub" 
-            icon={<GitHubIcon />} 
+          <StyledIconNavLink
+            target="_blank"
+            href="https://github.com/luisaramicar11/skillSwap"
+            label="GitHub"
+            icon={<GitHubIcon />}
           />
-          <StyledIconNavLink 
-            target="_blank" 
-            href="https://www.instagram.com/" 
-            label="Instagram" 
-            icon={<InstagramIcon />} 
+          <StyledIconNavLink
+            target="_blank"
+            href="https://www.instagram.com/"
+            label="Instagram"
+            icon={<InstagramIcon />}
           />
         </div>
       </Box>

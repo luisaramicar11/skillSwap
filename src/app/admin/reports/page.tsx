@@ -1,32 +1,38 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchReports,
-  createReport,
-  updateReport,
-  deleteReport,
-} from "../../redux/slices/reportsSlice";
+import { fetchReports, createReport, updateReport, deleteReport } from "../../redux/slices/reportsSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { IReport } from "../../../models/admin.reports.model";
 import CreateForm from "../../../components/forms/FormAdminReports";
 import Table from "../../../components/tables/TableReports";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 const Title = styled.h2`
-  margin-top: 0 !important;
   text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  margin-top: 50px !important;
+  font-weight: 500;
   font-size: 40px;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  color: transparent;
-  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
+  width: 50%;
+  border-bottom: solid 2px ${({ theme }) => theme.colors.textBlack};
+  color: ${({ theme }) => theme.colors.textBlack};
 `;
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  margin: 54px 0;
+  flex-direction: column;
+  display: flex;
+`
 
 const Reports: React.FC = () => {
   const reports = useSelector((state: RootState) => state.reports.reports);
@@ -85,17 +91,16 @@ const Reports: React.FC = () => {
 
       const createdReport: IReport = await response.json();
       dispatch(createReport(createdReport));
-      toast.success("Reporte creado exitosamente!");
+      toast.success("¡Reporte creado exitosamente!");
     } catch (error) {
       console.error("Error creando reporte:", error);
       toast.error("Error al crear el reporte");
     }
   };
+
   // Actualizar reporte
   const handleUpdateReport = async (reportToUpdate: IReport) => {
-    // Cambia el nombre aquí
     try {
-      const token = getToken();
       const response = await fetch(
         `https://skillswapriwi.azurewebsites.net/api/ReportPut/PutReportByAction`,
         {
@@ -103,9 +108,8 @@ const Reports: React.FC = () => {
           headers: {
             accept: "*/*",
             "Content-Type": "application/json",
-            //"Authorization": `Bearer ${token}`, // Asegúrate de descomentar esta línea
           },
-          body: JSON.stringify(reportToUpdate), // Usa la información del reporte que quieres actualizar
+          body: JSON.stringify(reportToUpdate),
         }
       );
 
@@ -118,7 +122,7 @@ const Reports: React.FC = () => {
 
       dispatch(updateReport(reportToUpdate)); // Aquí usas la acción de Redux
       setEditedReport(null);
-      toast.success("Reporte actualizado exitosamente!");
+      toast.success("¡Reporte actualizado exitosamente!");
     } catch (error) {
       console.error("Error actualizando reporte:", error);
       toast.error("Error al actualizar el reporte.");
@@ -129,7 +133,6 @@ const Reports: React.FC = () => {
   const handleDeleteReport = async (reportId: number) => {
     console.log(reportId);
     try {
-      const token = getToken(); // Obtener token
       const response = await fetch(
         `https://skillswapriwi.azurewebsites.net/api/ReportDelete/DeleteReportById/${reportId}`,
         {
@@ -149,7 +152,7 @@ const Reports: React.FC = () => {
       }
 
       dispatch(deleteReport(reportId));
-      toast.success("Reporte eliminado exitosamente!");
+      toast.success("¡Reporte eliminado exitosamente!");
     } catch (error) {
       console.error("Error eliminando reporte:", error);
       toast.error("Error al eliminar el reporte.");
@@ -157,20 +160,24 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <>
-      <Title>Formulario de Reportes</Title>
-      <CreateForm
-        createData={handleCreateReport}
-        updateData={handleUpdateReport}
-        dataToEdit={editedReport}
-        setDataToEdit={setEditedReport}
-      />
-      <Table
-        data={reports}
-        setDataToEdit={setEditedReport}
-        deleteData={handleDeleteReport}
-      />
-    </>
+    <Container>
+      <Div>
+        <Title>Formulario de <span>reportes</span></Title>
+        <CreateForm
+          createData={handleCreateReport}
+          updateData={handleUpdateReport}
+          dataToEdit={editedReport}
+          setDataToEdit={setEditedReport}
+        />
+        <Title>Tabla de <span>reportes</span></Title>
+        <Table
+          data={reports}
+          setDataToEdit={setEditedReport}
+          deleteData={handleDeleteReport}
+        />
+      </Div>
+      <FooterMain />
+    </Container>
   );
 };
 

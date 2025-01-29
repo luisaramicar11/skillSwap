@@ -1,14 +1,14 @@
 "use client";
 import styled from "styled-components";
 import Carousel from "../../components/ui/carousel/Carousel";
-import { useRouter } from "next/navigation";
 import { FooterUser } from "@/src/components/footer/FooterUser";
 import Image from "next/image";
-import hands_swap from "../../../public/img/hand/hands-swap.png";
+import hands_swap from "../../../public/img/hands-swap.webp";
 
 // ---------------------- Estilos para el contenedor principal ---------------------
 const HomeContainer = styled.div`
   padding: 0;
+  overflow: hidden !important; 
   padding-top: 74px;
   padding-bottom: 54px;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -160,6 +160,7 @@ const Section1 = styled.div`
 `;
 
 const Section2 = styled.div`
+  filter: grayscale();
   display: flex;
   align-items: center;
   justify-content: start;
@@ -168,16 +169,8 @@ const Section2 = styled.div`
   font-weight: 100;
   color: ${({ theme }) => theme.colors.textOrange2};
 
-  :nth-child(3){
-    display: none;
-  }
-
-  @media (max-width: 1070px) {
+  @media (max-width: 1200px) {
     flex-direction: column;
-
-    :nth-child(3){
-      display: block;
-    }
   }
 `;
 
@@ -194,7 +187,6 @@ const Section3 = styled.div`
   }
 `;
 
-
 const BoxTitle = styled.div`
   display: flex;
   align-items: flex-end;
@@ -203,7 +195,7 @@ const BoxTitle = styled.div`
   width: 25%;
   margin-right: 100px;
 
-  @media (max-width: 1070px) {
+  @media (max-width: 1200px) {
     width: 100%;
     margin-right: 0;
     text-align: center;
@@ -224,14 +216,6 @@ const Title = styled.h1`
   }
 
   @media (max-width: 1200px) {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
-  }
-
-  @media (max-width: 555px) {
     display: none
   }
 `;
@@ -285,6 +269,7 @@ const Name = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 10px;
   font-weight: normal;
+  color: ${({ theme }) => theme.colors.textSecondary};
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -332,10 +317,12 @@ const TagButton = styled.button`
   @media (max-width: 768px) {
     font-size: 0.8rem;
     padding: 8px 12px;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
 
   &:hover {
     transform: scale(1.1);
+    color: ${({ theme }) => theme.colors.textSecondary};
     background-color: ${({ theme }) => theme.colors.bgBanner};
     border: none;
     transition: 1s;
@@ -376,7 +363,6 @@ const RightSection = styled.div`
 
   @media (max-width: 768px) {
     text-align: end;
-    /* display: none; */
   }
 `;
 
@@ -401,11 +387,13 @@ const SubText = styled.p`
 
 const RightTextLine1 = styled.div`
   padding-right: 50px;
+  color: ${({ theme }) => theme.colors.textSecondary};
   font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 100;
 `;
 
 const RightTextLine2 = styled.div`
+  color: ${({ theme }) => theme.colors.textSecondary};
   border-right: 4px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
@@ -413,6 +401,7 @@ const RightTextLine2 = styled.div`
 `;
 
 const RightTextLine3 = styled.div`
+  color: ${({ theme }) => theme.colors.textSecondary};
   border-right: 4px solid ${({ theme }) => theme.colors.textSecondary};
   padding-right: 50px;
   font-size: clamp(2rem, 8vw, 8rem);
@@ -423,21 +412,53 @@ const Imagenes = styled(Image)`
   height: 100vw;
   width: 100vw;
   position: absolute;
-  bottom: -300px;
+  top: -31.5vw;
   transform: rotate(-90deg);
   filter: grayscale();
+
+  @media (max-width: 1024px) {
+    top: -29.5vw;
+  }
+
+  @media (max-width: 900px) {
+    top: -28.5vw;
+  }
+
+  @media (max-width: 800px) {
+    top: -27.5vw;
+  }
+
+  @media (max-width: 769px) {
+    top: -23.5vw;
+  }
+
+  @media (max-width: 669px) {
+    top: -21.5vw;
+  }
+
+  @media (max-width: 569px) {
+    top: -18.5vw;
+  }
+
+  @media (max-width: 469px) {
+    top: -15vw;
+  }
+
+  @media (max-width: 369px) {
+    top: -9.5vw;
+  }
+
+  @media (max-width: 320px) {
+    top: -5.5vw;
+  }
 `;
 
 //--------------------- Componente principal de la página de inicio ---------------------
 
 const Home = () => {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push('/auth')
-  }
   return (
     <HomeContainer>
-      <Imagenes src={hands_swap} alt='none'></Imagenes>
+      <Imagenes src={hands_swap} alt='swap-hands'></Imagenes>
       <Logo>
         SkillSwap
       </Logo>

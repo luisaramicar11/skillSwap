@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ConnectionRequestForm from "../forms/FormRequest";
 import { IUserCardProps } from "@/src/models/userCards.model";
+import ScrollContainer from "../scroll/Scroll";
 
 interface IModalProps {
   isOpen: boolean;
@@ -26,7 +27,7 @@ const ModalOverlay = styled.div`
 
 const ModalContainer = styled.div`
   background-color: white;
-  width: 50%;
+  width: 70%;
   height: 75%;
   padding: 20px;
   position: relative;
@@ -53,7 +54,7 @@ const ModalCloseButton = styled.button`
   background: none;
   color: #fff;
   border: none;
-  font-size: 18px;
+  font-size: 1.5rem;
   cursor: pointer;
 `;
 
@@ -64,6 +65,10 @@ const UserInfo = styled.div`
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
+
+  @media (max-width: 600px) {
+        display: none;
+    }
 `;
 
 const UserDetail = styled.div`
@@ -81,6 +86,7 @@ const UserName = styled.h3`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-right: 0.5rem;
 
   div {
     font-size: 1.2rem;
@@ -114,6 +120,10 @@ const DivRequest = styled.div`
   gap: 0.5rem;
   margin: 0.5rem;
   padding: 1rem;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 
   & textarea{
     max-height: 200px;
@@ -193,50 +203,50 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
   return (
     <ModalOverlay>
       <ModalContainer>
-        <ModalHeader>
-          Request Connection
-          <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
-        </ModalHeader>
-        <DivRoute>C:\ User\ RequestConnection</DivRoute>
-        <Div>
-          <DivRequest>
-            {/* Pasamos onClose al formulario */}
-            <ConnectionRequestForm idReceivingUser={userToRequest.id} onClose={onClose} />
-          </DivRequest>
-          <UserInfo>
-            <DivConnections>
-              {/* Información del usuario */}
-              <Connections>
-                <div>Connections</div>
-                <div>🔗 {userToRequest.countMatches}</div>
-              </Connections>
-              <RatingSection>
-                <div>Rating</div>
-                <DivRating>
-                  <div>{userToRequest.qualification}</div>
-                  <RatingStars>
-                    {[...Array(5)].map((_, index) => {
-                      const rating = Math.floor(userToRequest?.qualification); // Redondea hacia abajo
-                      return (
-                        <Star key={index}>
-                          {index < rating ? "★" : "☆"}
-                        </Star>
-                      );
-                    })}
-                  </RatingStars>
-
-
-                </DivRating>
-              </RatingSection>
-            </DivConnections>
-            <UserDetail>
-              <UserName>
-                <div>{userToRequest.fullName}</div>
-                <p>{userToRequest.jobTitle}</p>
-              </UserName>
-            </UserDetail>
-          </UserInfo>
-        </Div>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
+          <ModalHeader>
+            Request Connection
+            <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
+          </ModalHeader>
+          <DivRoute>C:\ User\ RequestConnection</DivRoute>
+          <Div>
+            <DivRequest>
+              {/* Pasamos onClose al formulario */}
+              <ConnectionRequestForm idReceivingUser={userToRequest.id} onClose={onClose} />
+            </DivRequest>
+            <UserInfo>
+              <DivConnections>
+                {/* Información del usuario */}
+                <Connections>
+                  <div>Connections</div>
+                  <div>🔗 {userToRequest.countMatches}</div>
+                </Connections>
+                <RatingSection>
+                  <div>Rating</div>
+                  <DivRating>
+                    <div>{userToRequest.qualification}</div>
+                    <RatingStars>
+                      {[...Array(5)].map((_, index) => {
+                        const rating = Math.floor(userToRequest?.qualification);
+                        return (
+                          <Star key={0}>
+                            {index < rating ? "★" : "☆"}
+                          </Star>
+                        );
+                      })}
+                    </RatingStars>
+                  </DivRating>
+                </RatingSection>
+              </DivConnections>
+              <UserDetail>
+                <UserName>
+                  <div>{userToRequest.fullName}</div>
+                  <p>{userToRequest.jobTitle}</p>
+                </UserName>
+              </UserDetail>
+            </UserInfo>
+          </Div>
+        </ScrollContainer>
       </ModalContainer>
     </ModalOverlay>
   );

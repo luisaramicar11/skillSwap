@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
+import { handlePageChange } from "../../lib/utils/handlePageTheme";
 import StyledNavLink from "../ui/links/NavLinks";
 
 const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
@@ -13,7 +13,6 @@ const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
   background: ${({ theme }) => theme.colors.bgMainOpacity};
   width: 100%;
   height: 100%;
-  transition: 1s ease-in-out;
   animation: ${({ isOpen }) => (isOpen ? "appear 1s ease-in-out" : "none")};
 
   @keyframes appear {
@@ -193,7 +192,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ isOpen, onClose }) => {
             </ProfileHeader>
           </OfflineProfile>
           <H2>Atrévete a hacer parte de nuestras <strong>Comunidades</strong>.</H2>
-          <Button onClick={() => handlePageChange('AUTH')}>
+          <Button onClick={() => handlePageChange('INICIAR SESIÓN')}>
             <StyledNavLink href="/auth" label="COMENZAR" />
           </Button>
         </Disclaimer>

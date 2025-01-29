@@ -2,15 +2,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0 20px; /* Añadido para asegurar margen en móviles */
+  padding: 0 20px; 
   
   @media (max-width: 768px) {
-    height: auto; /* Ajustar la altura para pantallas pequeñas */
+    height: auto; 
     padding: 20px;
     border-radius: 0; 
   }
@@ -40,8 +39,9 @@ export const DivUserTitle = styled.div`
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+
   @media (max-width: 768px) {
-    font-size: 1rem; /* Reduce el tamaño del texto en móviles */
+    font-size: 1rem;
   }
 `;
 
@@ -50,8 +50,12 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 0.5rem;
 
+  & div{
+    transition: 1s ease-in-out;
+  }
+
   @media (max-width: 768px) {
-    gap: 0.3rem; /* Reducir el espacio entre elementos en móviles */
+    gap: 0.3rem;
   }
 `;
 
@@ -60,12 +64,28 @@ export const DivButtonSingUp = styled.div`
   bottom: 50px;
   display: flex;
   gap: 20px;
+  transition: 1s ease-in-out;
+
+  & .backBtn{
+    transform: scale(0.85);
+    opacity: 0.8;
+    animation: appear 1s ease;
+
+    @keyframes appear{
+      from {
+        transform: scale(0.01)
+      }
+      to {
+        transform: scale(0.9);
+      }
+    }
+  }
 
   @media (max-width: 1200px) {
-    position: static; /* Hace que el botón no sea fijo en móviles */
+    position: static;
     display: flex;
-    justify-content: center; /* Centrar el botón */
-    gap: 10px; /* Reducir el espacio entre botones en móviles */
+    justify-content: center;
+    gap: 10px;
     margin-top: 20px;
   }
 `;

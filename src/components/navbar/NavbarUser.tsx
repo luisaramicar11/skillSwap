@@ -9,19 +9,23 @@ import SettingsIcon from "@/public/svg/SettingsIcon";
 import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
+import LogoutButton from "../ui/buttons/ButtonLogout";
+import { FiLogOut } from "react-icons/fi";
 
 // Styled components
 const NavbarContainer = styled.div`
     position: fixed;
     z-index: 10;
     width: 100%;
+    height: 54px;
+    border-bottom: 1px solid  ${({ theme }) => theme.colors.borderNavs};
     top: 0;
     background-color: ${({ theme }) => theme.colors.bgNavbar};
     color: ${({ theme }) => theme.colors.textWhite};
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 1rem;
     gap: 50px;
 
     @media (max-width: 790px) {
@@ -38,6 +42,7 @@ const SidebarLink = styled.p`
     width: max-content;
     transition: 0.4s;
     cursor: pointer;
+    padding: 15px;
     gap: 10px;
 
     & small {
@@ -51,16 +56,6 @@ const SidebarLink = styled.p`
         transition: 0.4s;
 
     }
-
-    @media (max-width: 790px) {
-        display: none;
-    }
-`;
-
-const SidebarLinkContainer = styled.li`
-    width: 100px;
-    cursor: pointer;
-    list-style: none;
 
     @media (max-width: 790px) {
         display: none;
@@ -98,7 +93,7 @@ const NavList = styled.ul<{ isOpen: boolean }>`
         transition: 1s ease-in-out;
         background-color: ${({ theme }) => theme.colors.bgPrimary};
         border: 1px solid ${({ theme }) => theme.colors.textBlack};
-        padding: 0 !important;
+        padding: 1rem !important;
         gap: 20px;
         animation: move 1s ease-in-out;
         z-index: 100;
@@ -135,6 +130,45 @@ const HamburgerMenu = styled.div`
     }
 `;
 
+const BoxLogout = styled.h2`
+    position: fixed;
+    bottom: 54px;
+    left: 20px;
+    width: 40%;
+    height: max-content;
+    display: none;
+    align-items: end !important;
+    animation: appears 2s ease-in-out;
+
+    & button {
+        padding: 0;
+        background: transparent;
+        justify-content: start;
+        color: ${({ theme }) => theme.colors.bgGray};
+    }
+
+    @media (max-width: 790px) {
+        display: flex;
+        align-self: end !important;
+        justify-self: end !important;
+    }
+
+    @media (max-height: 360px) {
+        & button {
+            justify-content: end;
+    }
+    }
+
+    @keyframes appears {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+`;
+
 // Navbar component
 export const NavbarUser: React.FC = () => {
     const [isOpenToggle, setIsOpenToggle] = useState(false);
@@ -152,9 +186,9 @@ export const NavbarUser: React.FC = () => {
 
     return (
         <NavbarContainer>
-            <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile}/>
-            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings}/>
-            <SidebarLink onClick={openSidebarProfile}>+ <small>¿Quieres ver tu información?</small></SidebarLink>
+            <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile} />
+            <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings} />
+            <SidebarLink onClick={openSidebarProfile}>+ <small>Notificaciones</small></SidebarLink>
             <HamburgerMenu onClick={toggleMenu}>
                 <StyledIconNavLink href="#" icon={<ListIcon />} />
             </HamburgerMenu>
@@ -168,11 +202,14 @@ export const NavbarUser: React.FC = () => {
                 <NavItem onClick={() => handlePageChange('MATCH')}>
                     <StyledNavLink href="/user/match" label="MATCH" />
                 </NavItem>
+                <BoxLogout>
+                    <LogoutButton icon={<FiLogOut />} />
+                </BoxLogout>
             </NavList>
 
             <IconsContainer>
                 <StyledIconNavLink onClick={openSidebarSettings} href="#" icon={<SettingsIcon />} />
-                <StyledIconNavLink href="/user/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/user/legal" label="USER/LEGAL" icon={<InfoIcon />} />
             </IconsContainer>
         </NavbarContainer>
     );

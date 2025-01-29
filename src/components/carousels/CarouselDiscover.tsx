@@ -10,9 +10,10 @@ import styled from "styled-components";
 import { IUserCarouselProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import DivLink from "../ui/links/CardUserLink";
-import { getAllUsersSorted } from "../../lib/api/users"; 
+import { getAllUsersSorted } from "../../app/api/users"; 
 
 const CustomSwiper = styled(Swiper)`
+display: inline;
   width: 80%;
   --swiper-theme-color: ${({ theme }) => theme.colors.textOrange + "66"} !important; 
 
@@ -20,7 +21,13 @@ const CustomSwiper = styled(Swiper)`
   .swiper-button-next,
   .swiper-button-prev {
     transform: scale(0.8);
-    color: ${({ theme }) => theme.colors.textBlack};
+    color: ${({ theme }) => theme.colors.textWhite} !important;
+    opacity: 0.2;
+  }
+
+  .swiper-pagination-bullet {
+    color: ${({ theme }) => theme.colors.textWhite} !important;
+    background-color: ${({ theme }) => theme.colors.textWhite};
   }
 
   .swiper-slide {
@@ -41,7 +48,7 @@ const Carousel = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Número máximo de usuarios a mostrar
-  const maxUsersToShow = 5;
+  const maxUsersToShow = 6;
 
   // Fetch de los usuarios
   useEffect(() => {
@@ -52,8 +59,8 @@ const Carousel = () => {
         // Guarda todos los usuarios en el estado
         setAllUsersData(responseData);
         setLoading(false);
-      } catch (error: any) {
-        setError(error.message);
+      } catch (error) {
+        setError(error as string);
         setLoading(false);
       }
     };
@@ -76,7 +83,7 @@ const Carousel = () => {
       modules={[Navigation, Pagination]}
       navigation
       pagination={{ clickable: true }}
-      spaceBetween={5}
+      spaceBetween={2}
       slidesPerView={5}
       loop={true}
       breakpoints={{
@@ -84,16 +91,20 @@ const Carousel = () => {
           slidesPerView: 1,
           spaceBetween: 5,
         },
-        640: {
+        540: {
           slidesPerView: 2,
           spaceBetween: 5,
         },
-        768: {
+        820: {
           slidesPerView: 3,
           spaceBetween: 5,
         },
-        1024: {
+        1000: {
           slidesPerView: 4,
+          spaceBetween: 5,
+        },
+        1200: {
+          slidesPerView: 5,
           spaceBetween: 5,
         },
       }}

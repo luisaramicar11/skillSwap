@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import SkillTag from "../ui/skillTag/skillTag";
-import { IUserCardProps } from "@/src/models/userCards.model";
+import ScrollContainer from "../scroll/Scroll";
 
 // Estilos para el contenedor general de la tarjeta
 const CardContainer = styled.div`
   width: 100%;
+  min-height: 100% !important;
+  max-height: 75vh !important;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: max-content;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 0.5rem;
   overflow: hidden;
-  margin: 1rem 1rem 2rem 1rem;
 
   > * {
     width: 100% !important;
@@ -21,6 +21,8 @@ const CardContainer = styled.div`
 `;
 
 const DivCardContent = styled.div`
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,60 +41,105 @@ const DivCardContent = styled.div`
 `;
 
 const Connections = styled.div`
-  text-align: end;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.6rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  display: flex;
+  justify-content: start;
+  gap: 2rem;
+  text-align: center;
+  padding-bottom: 1rem;
 
-  div {
-    font-size: 1rem;
-    display: flex;
-    gap: 1rem;
-    justify-content: end;
+  & h1 {
+    width: 70px;
+    filter: grayscale() brightness(0.95);
+    font-size: 3rem;
+    margin: 0;
+    font-weight: bold;
+  }
 
-    & p{ 
-      color: ${({ theme }) => theme.colors.textSecondary};
-    }
+  & p {
+    text-align: center;
+    width: 100%;
+    font-size: 1rem !important;
+    font-weight: 500;
+    margin: 0;
+    color: ${({ theme }) => theme.colors.textTertiary};
+  }
+`;
+
+const DivConnection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & p {
+    text-align: center;
+    width: 100%;
+    font-size: 0.7rem;
+  }
+
+  :last-child {
+    font-style: normal;
+    font-weight: bold;
+    text-align: start;
+    width: 100%;
+    font-size: 0.7rem;
   }
 `;
 
 const RatingSection = styled.div`
-  padding: 1rem;
-  padding-bottom: 1.5rem;
   display: flex;
-  text-align: start;
-  flex-direction: column;
-  font-size: 0.6rem !important;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  justify-content: start;
+  gap: 2rem;
+  text-align: center;
+  padding-bottom: 1rem;
 
-  article{
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  & h1 {
+    width: 70px;
+    font-size: 3rem;
+    margin: 0;
+    color: ${({ theme }) => theme.colors.textTertiary};
+    font-weight: bold;
   }
 
-  div {
-    font-size: 1rem;
-    display: flex;
-    gap: 0.3rem;
+  & p {
+    text-align: center;
+    width: 100%;
+    font-size: 1rem !important;
+    font-weight: 500;
+    margin: 0;
+    color: ${({ theme }) => theme.colors.textTertiary};
+  }
+`;
+
+const DivRate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & p {
+    text-align: center;
+    width: 100%;
+    font-size: 0.7rem;
   }
 `;
 
 const RatingStars = styled.div`
-  color: ${({ theme }) => theme.colors.textYellow};
-  font-size: 1.2rem;
+  opacity: 0.7;
+  gap: 5px;
+  display: flex;
+`;
 
-  & span {
-      font-style: normal;
-    }
+const Star = styled.span`
+  color: ${({ theme }) => theme.colors.textYellow};
+  font-size: 16px;
+  font-style: normal;
 `;
 
 const Description = styled.div`
   text-align: end;
   padding: 0;
-  margin-bottom: 0.5rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 `;
 
 const SkillsSection = styled.div`
@@ -106,6 +153,7 @@ const SubTitle = styled.h4`
   font-weight: bold;
   padding-left: 1rem;
   margin-bottom: 0.3rem;
+  margin-top: 1rem;
 `;
 
 const P = styled.p`
@@ -128,40 +176,44 @@ interface CardProps {
 const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatches }) => {
   return (
     <CardContainer>
-      <DivCardContent>
-        <Connections>
-          <div>Conexiones</div>
-          <div><p>↺</p>{countMatches}</div>
-        </Connections>
+      <ScrollContainer overflowY="auto" overflowX='auto' marginY="5px" style={{ maxHeight: '100%' }}>
+        <DivCardContent>
+          <Connections>
+            <h1>🌐</h1>
+            <DivConnection>
+              <p>Conexiones</p>
+              <p># {countMatches}</p>
+            </DivConnection>
+          </Connections>
 
-        <RatingSection>
-          <div>Calificación</div>
-          <article>
-            <div>{rating}</div>
-            <RatingStars>
-              {[...Array(5)].map((_, index) => {
-                const ratingStars = Math.floor(rating); // Redondea hacia abajo
-                return (
-                  <span key={index}>
-                    {index < ratingStars ? "★" : "☆"}
-                  </span>
-                );
-              })}
-            </RatingStars>
+          <RatingSection>
+            <h1>{rating}</h1>
+            <DivRate>
+              <p>Calificación</p>
+              <RatingStars>
+                {[...Array(5)].map((_, index) => {
+                  const stars = Math.floor(rating);
+                  return (
+                    <Star key={index}>
+                      {index < stars ? "★" : "☆"}
+                    </Star>
+                  );
+                })}
+              </RatingStars>
+            </DivRate>
+          </RatingSection>
 
-          </article>
-        </RatingSection>
+          <Description>
+            <SubTitle>Descripción</SubTitle>
+            <P>{description}</P>
+          </Description>
 
-        <Description>
-          <SubTitle>Descripción</SubTitle>
-          <P><strong>+</strong> {description}</P>
-        </Description>
-
-        <SkillsSection>
-          <SubTitle>Skills</SubTitle>
-          <SkillTag skillsArray={skills} />
-        </SkillsSection>
-      </DivCardContent>
+          <SkillsSection>
+            <SubTitle>Skills</SubTitle>
+            <SkillTag skillsArray={skills} />
+          </SkillsSection>
+        </DivCardContent>
+      </ScrollContainer>
     </CardContainer>
   );
 };

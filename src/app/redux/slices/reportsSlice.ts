@@ -3,7 +3,7 @@ import { IReportGet, IReport } from "../../../models/admin.reports.model"; // Us
 
 // Estado inicial
 interface UsersState {
-  reports: IReportGet[];  // Cambiado a IReportGet[]
+  reports: IReportGet[]; 
   loading: boolean;
   error: string | null;
 }
@@ -30,8 +30,8 @@ export const fetchReports = createAsyncThunk<IReportGet[], void, { rejectValue: 
       const reports = data.data.response; // Accedes a 'obj' correctamente
 
       return reports as IReportGet[]; // Devuelves el array de reportes con el tipo adecuado
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error) {
+      return rejectWithValue(error as string);
     }
   }
 );
@@ -79,9 +79,9 @@ const usersSlice = createSlice({
         state.loading = false;
         state.reports = action.payload;
       })
-      .addCase(fetchReports.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchReports.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   }  
 });

@@ -2,12 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 import Modal from '../modals/ModalMatch';
 import { ISliderCardProps } from "@/src/models/match.model";
+import { PiHandshake } from "react-icons/pi";
 
 const CardContainer = styled.div`
   width: 50%;
-  height: 95%;
-  min-height: 450px !important;
-  margin: 1rem 0 1rem 1rem;
+  min-height: 100% !important;
+  max-height: 75vh !important;
   border-radius: 0.5rem;
   position: relative;
   color: white;
@@ -38,11 +38,36 @@ const Image = styled.div<{ urlImage: string, alt: string }>`
 `;
 
 const Title = styled.h3`
+    width: 400px;
   font-size: 2rem;
+  text-align: start;
   position: absolute;
+  hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   bottom: 2.5rem;
   left: 1.5rem;
   z-index: 99;
+
+  @media (max-width: 1600px) {
+    width: 340px;
+  }
+
+  @media (max-width: 1400px) {
+    width: 320px;
+  }
+
+  @media (max-width: 1350px) {
+    width: 260px;
+  }
+
+  @media (max-width: 1150px) {
+    width: 150px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -58,6 +83,7 @@ const Subtitle = styled.p`
 const PassButton = styled.button`
   position: absolute;
   top: 1rem;
+  padding: 0;
   right: 1.5rem;
   background: none;
   border: none;
@@ -79,7 +105,8 @@ const PassButton = styled.button`
 
 const StarButton = styled.button`
   position: absolute;
-  bottom: 4.5rem;
+  padding: 0;
+  bottom: 4.05rem;
   right: 1.5rem;
   background: none;
   border: none;
@@ -87,13 +114,16 @@ const StarButton = styled.button`
   font-size: 2rem;
   z-index: 99;
   cursor: pointer;
+  opacity: 0.7;
 
   @media (max-width: 768px) {
-    font-size: 4rem;
+    bottom: 3.65rem;
+    font-size: 2.25rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 3rem;
+    bottom: 3.55rem;
+    font-size: 2.5rem;
   }
 `;
 
@@ -115,7 +145,7 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
           <Image urlImage={user.urlImage} alt= {user.fullName}/>
           <Title>{user.fullName}</Title>
           <Subtitle>{user.jobTitle}</Subtitle>
-          <StarButton onClick={handleStarClick}>★</StarButton> {/* Aquí está la estrellita */}
+          <StarButton onClick={handleStarClick}><PiHandshake /></StarButton> {/* Aquí va el ícono de apretón de manos */}
         </CardContainer>
   
         {modalOpen && <Modal userToRequest={user}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}

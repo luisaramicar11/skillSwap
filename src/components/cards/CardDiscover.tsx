@@ -10,14 +10,14 @@ interface IDiscoverCardProps {
   qualification: number;
   abilities: string[];
   urlImage: string;
+  createdAt?: string;
 }
 
 // Contenedor de la tarjeta
 const CardContainer = styled.div`
   display: flex;
   width: 100%;
-  min-height: 16rem;
-  max-height: 19rem;
+  height: 16rem;
   max-width: 500px;
   overflow: hidden;
   gap: 1rem;
@@ -25,14 +25,14 @@ const CardContainer = styled.div`
 
 // Estilo para la columna de la imagen
 const ImageColumn = styled.div`
-  width: 40%;
-  min-height: 16rem;
-  max-height: 19rem;
+  min-width: 40%;
+  min-height: 14rem;
+  max-height: 16rem;
 `;
 
 // Estilo para la columna de la información
 const InfoColumn = styled.div`
-  width: 60%;
+  width: 50%;
   height: auto;
   padding: 0;
   padding-left: 1rem;
@@ -40,16 +40,12 @@ const InfoColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
-  p {
-    color: ${({ theme }) => theme.colors.textSecondary};
-  }
 `;
 
 
 // Estilo para el nombre
-const ImageCard = styled.div<{ urlImage?: string }>`
-  background-image: url(${(props) => props.urlImage || 'https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg'});
+const ImageCard = styled.article<{ urlImage?: string }>`
+  background-image: url(${(props) => props.urlImage || 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'});
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -65,10 +61,14 @@ const Name = styled.h3`
   margin-bottom: 4px;
 `;
 
+const JobTitle = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+`;
+
 // Estilo para el contenedor de estrellas
 const StarsContainer = styled.div`
   display: flex;
-  margin-bottom: 8px;
 `;
 
 const Star = styled.span`
@@ -83,16 +83,16 @@ const Skills = styled.div`
   flex-wrap: wrap;
   width: 60%;
   gap: 3px;
-  padding-bottom: 0rem;
+  padding-bottom: 0 !important;
 `;
 
 const Card: React.FC<IDiscoverCardProps> = ({
-  id,
   fullName,
   jobTitle,
   qualification,
   abilities,
-  urlImage
+  urlImage,
+  createdAt
 }) => {
   // Función para renderizar las estrellas según la calificación
   return (
@@ -102,21 +102,23 @@ const Card: React.FC<IDiscoverCardProps> = ({
       </ImageColumn>
       <InfoColumn>
         <Name>{fullName}</Name>
-        <p>{jobTitle}</p>
+        <JobTitle>{createdAt ? `${createdAt.slice(0,7)} · ${jobTitle}` : jobTitle}</JobTitle>
         <StarsContainer>
-          {[...Array(5)].map((_, index) => {
-            const rating = Math.floor(qualification); // Redondea hacia abajo
-            return (
-              <Star key={index}>
-                {index < rating ? "★" : "☆"}{" "}
-                {/* Muestra estrellas llenas o vacías */}
-              </Star>
-            );
-          })}
+          {qualification !== -1 ?
+            [...Array(5)].map((_, index) => {
+              const rating = Math.floor(qualification);
+              return (
+                <Star key={index}>
+                  {index < rating ? "★" : "☆"}{" "}
+                  {/* Muestra estrellas llenas o vacías */}
+                </Star>
+              );
+            }) :
+            <></>}
         </StarsContainer>
 
         <Skills>
-          <SkillTagTiny skillsArray={abilities} />
+          <SkillTagTiny skillsArray={abilities.slice(0, 3)} />
         </Skills>
       </InfoColumn>
     </CardContainer>

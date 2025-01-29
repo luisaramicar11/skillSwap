@@ -70,14 +70,14 @@ const TableRowReport: React.FC<TableRowProps> = ({ report, setDataToEdit, delete
     <Tr>
       <Td>{titleReport}</Td>
       <Td>{description}</Td>
-      <Td>{dateReport ? formatDate(dateReport) : ""}</Td> {/* Asegúrate de manejar casos de fecha nula */}
+      <Td>{dateReport ? formatDate(dateReport) : ""}</Td> 
       <Td>{actionTaken}</Td>
-      <Td>{idState}</Td> {/* Ajustado: "idState" hace referencia al estado del reporte */}
-      <Td>{idUser}</Td> {/* Ajustado: "idUser" hace referencia al usuario que reporta */}
-      <Td>{idReportedUser}</Td> {/* Ajustado: "idReportedUser" hace referencia al usuario reportado */}
+      <Td>{idState}</Td>
+      <Td>{idUser}</Td> 
+      <Td>{idReportedUser}</Td>
       <Td>{state}</Td>
-      <Td>{user}</Td> {/* Ajustado: "user" hace referencia al usuario que reporta */}
-      <Td>{reportedUser}</Td> {/* Ajustado: "reportedUser" hace referencia al usuario reportado */}
+      <Td>{user}</Td> 
+      <Td>{reportedUser}</Td> 
       <Td>
         <EditButton onClick={() => setDataToEdit(report)}>Editar</EditButton>
         <DeleteButton onClick={() => deleteData(id)}>Eliminar</DeleteButton>

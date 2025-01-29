@@ -25,7 +25,7 @@ const CardImage = styled.img`
   width: 5rem;
   height: 5rem;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 10px;
   display: block;
   margin: 0 auto;
 `;
@@ -33,13 +33,18 @@ const CardImage = styled.img`
 const CardContent = styled.div`
   padding: 10px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   flex-grow: 1;
 `;
 
 const CardTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  width: max-content;
+  display: flex;
+  flex-wrap: wrap;
   text-align: center;
   color: ${({ theme }) => theme.colors.textSecondary};
   margin: 0;
@@ -48,6 +53,7 @@ const CardTitle = styled.h3`
 
 const CategoryContainer = styled.p`
   display: flex;
+  width: max-content !important;
   justify-content: center;
   color: ${({ theme }) => theme.colors.textSecondary};
 `;

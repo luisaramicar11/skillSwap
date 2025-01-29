@@ -10,11 +10,11 @@ interface SearchProps {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center !important;
+  justify-content: start !important;
   gap: 1rem;
   width: 100%;
-  height: 2rem;
-  margin-top: 2.5rem;
+  padding: 0 !important;
+  margin: 0;
 `;
 
 const Label = styled.label`
@@ -27,20 +27,19 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  width: 70%;
+  width: 80%;
   max-width: 1000px;
   padding: 10px 20px;
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   border-radius: 5px;
-  margin: 5px 0;
+  margin: 0;
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.textSecondary};
     outline: none;
   }
 `;
-
 
 const Search: React.FC<SearchProps> = ({ label, onSearch }) => {
   const [query, setQuery] = useState("");
@@ -53,8 +52,8 @@ const Search: React.FC<SearchProps> = ({ label, onSearch }) => {
 
   return (
     <Container>
-      <Label>{label}</Label>
       <Input type="text" value={query} onChange={handleChange} placeholder="¿Qué quieres aprender hoy...?" />
+      <Label>{label}</Label>
     </Container>
   );
 };

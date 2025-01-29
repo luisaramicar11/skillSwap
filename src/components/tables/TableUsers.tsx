@@ -1,37 +1,30 @@
 import React from "react";
-import TableRowUser from "./TableRowUsers"; // Asegúrate de que la ruta sea correcta
-import { IUser, IUserUpdateAdmin } from "../../models/user.model"; // Asegúrate de actualizar la ruta si es necesario
+import TableRowUser from "./TableRowUsers";
+import { IUserUpdateAdmin } from "../../models/user.model";
 import styled from "styled-components";
-import TableHeaderUser from "./TableHeadUsers"; // Asegúrate de que la ruta sea correcta
+import ScrollContainer from "../scroll/Scroll";
+import TableHeaderUser from "./TableHeadUsers";
 
 const TableContainer = styled.div`
-  padding: 20px;
-  border-radius: 10px;
+  margin: 20px;
+  margin-top: 2rem;
   background-color: white;
+  min-height: auto;
+  height: 100%;
   max-height: 400px;
-  overflow-y: auto;
-  overflow-x: auto !important; /* Agregamos desplazamiento en X */
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  overflow: hidden;
 `;
 
 const TableStyle = styled.table`
   width: 100%;
+  height: 100%;
+  overflow: auto;
   border-collapse: collapse;
-  min-width: 1000px; /* Opcional: define un ancho mínimo para forzar el scroll horizontal si hay muchas columnas */
-`;
-
-const Title = styled.h2`
-text-align: center;
-  margin-top: 0 !important;
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 40px;
-  background: ${({ theme }) => theme.colors.gradientText};
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  color: transparent;
-  border-bottom: solid 5px ${({ theme }) => theme.colors.textOrange};
+  min-width: 1000px; 
 `;
 
 const Td = styled.td`
@@ -62,26 +55,27 @@ const TableUser: React.FC<TableUserProps> = ({
 }) => {
   return (
     <TableContainer>
-      <Title>Tabla de usuarios</Title>
-      <TableStyle>
-        <TableHeaderUser />
-        <tbody>
-          {data.length ? (
-            data.map((user) => (
-              <TableRowUser
-                key={user.id}
-                user={user}
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
-              />
-            ))
-          ) : (
-            <Tr>
-              <Td colSpan={8}>Sin datos</Td> {/* Cambia el valor de colSpan según el número de columnas en tu tabla */}
-            </Tr>
-          )}
-        </tbody>
-      </TableStyle>
+      <ScrollContainer overflowY="auto" overflowX='auto' marginY="14px" style={{ maxHeight: '100%' }}>
+        <TableStyle>
+          <TableHeaderUser />
+          <tbody>
+            {data.length ? (
+              data.map((user) => (
+                <TableRowUser
+                  key={user.id}
+                  user={user}
+                  setDataToEdit={setDataToEdit}
+                  deleteData={deleteData}
+                />
+              ))
+            ) : (
+              <Tr>
+                <Td colSpan={8}>Sin datos</Td>
+              </Tr>
+            )}
+          </tbody>
+        </TableStyle>
+      </ScrollContainer>
     </TableContainer>
   );
 };

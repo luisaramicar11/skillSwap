@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReportForm from "../forms/FormReport";
+import ScrollContainer from "../scroll/Scroll";
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,9 +28,9 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
+  background-color: ${({ theme }) => theme.colors.bgOrange};
   background-color: white;
-  width: 50%;
+  width: 70%;
   height: 75%;
   padding: 20px;
   position: relative;
@@ -43,18 +44,19 @@ const ModalContainer = styled.div`
 `;
 
 const ModalHeader = styled.div`
-  font-size: 2rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  font-size: 1.5rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   color: #fff;
-  padding: 1rem;
-  padding-left: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  padding: 0.5rem;
+  padding-left: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
-  span {
-    color: ${({ theme }) => theme.colors.textPink};
+  & div{
+    font-weight: bold;
   }
 `;
 
@@ -62,6 +64,7 @@ const ModalCloseButton = styled.button`
   background: none;
   font-weight: bold;
   color: #000;
+  opacity: 0.6;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
@@ -69,11 +72,12 @@ const ModalCloseButton = styled.button`
 
 const DivRoute = styled.div`
   display: flex;
+  border-radius: 10px;
   justify-content: flex-start;
   background-color: #fff;
   padding: 0.5rem;
   padding-left: 1rem;
-  margin: 0.8rem;
+  margin: 1rem;
   margin-bottom: 0 ;
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
@@ -82,12 +86,14 @@ const DivRoute = styled.div`
 const ModalContent = styled.div`
   display: flex;
   margin: 1rem;
-  margin-top: 2rem;
+  border-radius: 10px;
   max-height: 400px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
 
 const LeftSection = styled.div`
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -96,6 +102,11 @@ const LeftSection = styled.div`
   padding: 1rem;
   width: 60%;
 
+  @media (max-width: 600px) {
+    width: 100%;
+    border-radius: 10px;
+  }
+
   & textarea {
     max-height: 100px;
     border-radius: 10px;
@@ -103,11 +114,17 @@ const LeftSection = styled.div`
 `;
 
 const RightSection = styled.div`
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   flex: 1;
   display: flex;
   flex-direction: column;
   background-color: #fff;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
+
+  @media (max-width: 600px) {
+        display: none;
+    }
 `;
 
 const AlertText = styled.p`
@@ -121,6 +138,7 @@ const AlertText = styled.p`
   width: auto !important;
 
   span {
+    font-style: normal;
     padding-right: 0.5rem;
     font-size: 1rem;
   }
@@ -130,7 +148,7 @@ const PoliceInfo = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
   color: #000;
-  padding: 1rem;
+  padding: 0.8rem;
 `;
 
 const DivAlertText = styled.div`
@@ -141,7 +159,8 @@ const DivAlertText = styled.div`
 `;
 
 const DivColor = styled.div`
-  background: ${({ theme }) => theme.colors.backgroundGreen};
+  border-top-right-radius: 10px;
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
   margin: 0;
   padding: 0;
@@ -152,7 +171,7 @@ const DivColor = styled.div`
 const DivTexts = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0.5rem;
   width: 100%;
 `;
 
@@ -161,46 +180,44 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <ModalOverlay>
-      <ModalContainer>
-        <ModalHeader>
-          <div>
-            SkillSwap Safety
-          </div>
-          <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
-        </ModalHeader>
-        <DivRoute>C:\ User\ Documents\ SafetyTips</DivRoute>
-        <ModalContent>
-          {/* Left section with the report form */}
-          <LeftSection>
-            {/* Pasar la función onClose como prop */}
-            <ReportForm closeModal={onClose} />
-          </LeftSection>
+        <ModalContainer>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
+          <ModalHeader>
+            <div>
+              SkillSwap Safety
+            </div>
+            <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
+          </ModalHeader>
+          <DivRoute>C:\ User\ Documents\ SafetyTips</DivRoute>
+          <ModalContent>
+            <LeftSection>
+              <ReportForm closeModal={onClose} />
+            </LeftSection>
 
-          {/* Right section with warnings */}
-          <RightSection>
-            <DivAlertText>
-              <DivColor />
-              <DivTexts>
-                <AlertText>
-                  <span>⚠️</span> No dudes en reportar.
-                </AlertText>
-                <AlertText>
-                  <span>🔵</span> La seguridad es lo primero.
-                </AlertText>
-                <AlertText>
-                  <span>⛔</span> Reprobamos cualquier tipo de abuso o ilegalidad.
-                </AlertText>
-              </DivTexts>
-            </DivAlertText>
+            <RightSection>
+              <DivAlertText>
+                <DivColor />
+                <DivTexts>
+                  <AlertText>
+                    <span>⚠️</span> No dudes en reportar.
+                  </AlertText>
+                  <AlertText>
+                    <span>🔵</span> La seguridad es lo primero.
+                  </AlertText>
+                  <AlertText>
+                    <span>⛔</span> Reprobamos cualquier tipo de abuso o ilegalidad.
+                  </AlertText>
+                </DivTexts>
+              </DivAlertText>
 
-            <PoliceInfo>
-              Policía Nacional - CAI Virtual <br />
-              Línea Nacional: 0 8000 91 1190 <br />
-              Página web: cai.virtual.policia.gov.co
-            </PoliceInfo>
-          </RightSection>
-        </ModalContent>
-      </ModalContainer>
+              <PoliceInfo>
+                <strong>Liínea Policía Nacional: </strong><br />0 8000 91 1190<br /><br />
+                <strong>Página CAI Virtual: </strong><br />https://cai.virtual.policia.gov.co
+              </PoliceInfo>
+            </RightSection>
+          </ModalContent>
+          </ScrollContainer>
+        </ModalContainer>
     </ModalOverlay>
   );
 };

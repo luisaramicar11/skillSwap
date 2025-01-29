@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ScrollContainer from "../scroll/Scroll";
 
 interface ModalProps {
   isOpen: boolean;
@@ -20,14 +21,15 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bgPink};
-  width: 50%;
-  height: 50%;
-  padding: 1rem;
+  background-color: ${({ theme }) => theme.colors.bgOrange};
+  width: 60%;
+  border-radius: 10px;
+  height: 55%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   @media (max-width: 768px) {
     width: 90%;
@@ -37,51 +39,97 @@ const ModalContainer = styled.div`
 
 const ModalHeader = styled.div`
   font-size: 1.5rem;
-  background: ${({ theme }) => theme.colors.backgroundPink};
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: ${({ theme }) => theme.colors.gradientPrimary};
   color: #fff;
   padding: 0.5rem;
+  padding-left: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & div{
+    font-weight: bold;
+  }
 `;
 
 const ModalCloseButton = styled.button`
   background: none;
   font-weight: bold;
   color: #000;
+  opacity: 0.6;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
 `;
 
 const ModalContent = styled.div`
+  margin: 1rem;
+  border-radius: 10px;
   display: flex;
+  align-items: start;
   flex: 1;
-  margin-top: 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  height: fit-content;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   overflow: auto;
+  background-color: #fff;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
 const LeftSection = styled.div`
+  border-bottom-left-radius: 10px;
+  height: auto;
+  border-top-left-radius: 10px;
+  border-right: 1px solid ${({ theme }) => theme.colors.textBlack};
   flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   padding: 1rem;
-  background-color: #fff;
   gap: 10px;
+  width: 60%;
+
+  @media (max-width: 768px) {
+    border-bottom-left-radius: 0;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
+    border-right: none;
+    width: 100%;
+  }
 `;
 
 const RightSection = styled.div`
-  flex: 1;
-  padding: 1rem;
-  background-color: #fff;
-  border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+  gap: 20px;
+  height: auto;
+  width: 40%;
+
+  & article {
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+    :last-child{
+      align-self: center;
+    }
+
+    span{
+      font-size: 40px;
+      font-style: normal
+    }
+  }
 
   @media (max-width: 768px) {
-    border-left: none;
-    border-top: 1px solid ${({ theme }) => theme.colors.textTertiary};
+    width: 100%;
   }
 `;
 
@@ -91,9 +139,13 @@ const TipItem = styled.div`
   gap: 10px;
 `;
 
-const Icon = styled.img`
-  width: 40px;
-  height: 40px;
+const Icon = styled.div`
+  filter: grayscale();
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 `;
 
 const TipText = styled.p`
@@ -106,16 +158,8 @@ const AlertText = styled.p`
   font-weight: 300;
   color: #000;
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
   gap: 10px;
-`;
-
-const PoliceInfo = styled.div`
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: #000;
-  padding: 1rem;
+  font-style: normal;
 `;
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
@@ -126,33 +170,40 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       <ModalContainer>
         <ModalHeader>
           <div>SkillSwap Safety</div>
-          <ModalCloseButton onClick={onClose}>X</ModalCloseButton>
+          <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
         </ModalHeader>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
         <ModalContent>
           <LeftSection>
             <TipItem>
-              <Icon src="/folder.svg" alt="Verify profile" />
-              <TipText>Verificar tu perfil aumenta la confianza entre usuarios y garantiza un ambiente seguro.</TipText>
+            <Icon>📂</Icon>
+            <TipText><strong>Completar tu perfil</strong> aumenta la confianza entre usuarios y garantiza un <strong>ambiente seguro.</strong></TipText>
             </TipItem>
             <TipItem>
-              <Icon src="/folder.svg" alt="No sensitive data" />
-              <TipText>No compartas datos sensibles.</TipText>
+              <Icon>📂</Icon>
+              <TipText>No compartas <strong>datos sensibles</strong>. La seguridad mutua es primero.</TipText>
             </TipItem>
             <TipItem>
-              <Icon src="/folder.svg" alt="Report misconduct" />
-              <TipText>Reporta cualquier comportamiento sospechoso o inadecuado.</TipText>
+            <Icon>📂</Icon>
+            <TipText>Reporta cualquier comportamiento <strong>sospechoso o inadecuado</strong>.</TipText>
             </TipItem>
           </LeftSection>
-
           <RightSection>
-            <AlertText>⚠️ No dudes en reportar.</AlertText>
-            <AlertText>🔵 En el panel de Ayuda puedes ver más sobre Reportes.</AlertText>
-            <AlertText>⛔ Cualquier tipo de abuso será sancionado.</AlertText>
+            <article>
+              <span>🔵</span><AlertText>En tu <strong>Social</strong> podrás realizar <strong>Reportes</strong>.</AlertText>
+            </article>
+            <article>
+            <span>⚠️</span><AlertText>Si lo solicitas, acude a las <strong>autoridades policiales</strong>.</AlertText>
+            </article>
+            <article>
+              <span>⛔</span><AlertText>Las sanciones van de <strong>suspensiones a bloqueos</strong>.</AlertText></article>
           </RightSection>
         </ModalContent>
+        </ScrollContainer>
       </ModalContainer>
     </ModalOverlay>
   );
 };
+
 
 export default Modal;

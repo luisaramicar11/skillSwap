@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Th = styled.th`
-  background-color: black;
+  background-color: grey;
   color: white;
   padding: 10px;
   text-align: center;

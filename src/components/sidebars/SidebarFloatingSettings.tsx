@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+'use client';
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import StyledNavLink from "../ui/links/NavLinks";
 
@@ -29,7 +30,7 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
     position: fixed;
     height: 300px;
     width: min-content;
-    top: 74px;
+    top: 70px;
     right: 20px;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.textWhite};

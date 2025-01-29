@@ -27,14 +27,14 @@ export const fetchUsers = createAsyncThunk<IUserUpdateAdmin[], void, { rejectVal
       
       // Extraer y mapear los datos
       const data = await response.json();
-      const users = data.data.response.map((user: any): IUserUpdateAdmin => ({
+      const users = data.data.response.map((user: IUser): IUserUpdateAdmin => ({
         id: user.id,
         name: user.name,
         lastName: user.lastName,
         urlImage: user.urlImage,
         jobTitle: user.jobTitle,
         description: user.description,
-        birthdate: user.string, // Convertir fecha a Date
+        birthdate: user.birthdate, // Convertir fecha a Date
         email: user.email,
         phoneNumber: user.phoneNumber,
         category: user.category,
@@ -49,8 +49,8 @@ export const fetchUsers = createAsyncThunk<IUserUpdateAdmin[], void, { rejectVal
       }));
 
       return users;
-    } catch (error: any) {
-      return rejectWithValue(error.message);
+    } catch (error) {
+      return rejectWithValue(error as string);
     }
   }
 );
@@ -82,9 +82,9 @@ const usersSlice = createSlice({
         state.loading = false;
         state.users = action.payload;
       })
-      .addCase(fetchUsers.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   }
 });

@@ -4,12 +4,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from "../../../../components/modals/ModalSafety"
 
-const MetricsContainer = styled.div`
-  margin: 54px 0;
-`;
-
-
-
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
@@ -125,23 +119,6 @@ const WidgetBody = styled.div`
   flex-direction: column;
 `;
 
-const DivDeactivateAccount = styled.div`
-width: 100%;
-display: flex;
-justify-content: end;
-align-items: end;
-padding: 2rem; 
-gap: 2rem;
-
-& div{
-  max-width: 400px;
-
-  & p {
-    font-size: 15px;
-  }
-}
-`;
-
 const SecurityButton = styled.button`
   width: 100%;
   padding: 15px;
@@ -163,8 +140,26 @@ const Security = styled.div`
   height: 100%;
 `;
 
+interface IUser {
+  idUsuario: number;
+  nombreUsuario: string;
+  solicitudes: Request;
+}
+
+interface Request {
+  ultimaAceptada: string;
+  ultimaPendiente: string;
+  ultimaCancelada: string;
+  ultimoEnviado: string;
+  conteoConexiones: number;
+  conteoAceptadas: number;
+  conteoPendientes: number;
+  conteoCanceladas: number;
+  conteoEnviadas: number;
+}
+
 const Metrics: React.FC = () => {
-  const [requestData, setRequestData] = useState<any>(null);
+  const [requestData, setRequestData] = useState<IUser>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -172,38 +167,40 @@ const Metrics: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    const userIdString = localStorage.getItem('userId');
-    const userId = userIdString ? Number(userIdString) : null; // Convertir a número
+    if (typeof window !== 'undefined') {
+      const userIdString = localStorage.getItem('userId');
+      const userId = userIdString ? Number(userIdString) : null;
 
-    if (userId === null) {
-      setError('ID de usuario no encontrado');
-      setLoading(false);
-      return;
-    }
-
-    const fetchRequestData = async () => {
-      try {
-        const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${userId}`, {
-          method: 'GET',
-          headers: {
-            'accept': '*/*',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos');
-        }
-
-        const data = await response.json();
-        setRequestData(data.data.response);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
+      if (userId === null) {
+        setError('ID de usuario no encontrado');
         setLoading(false);
+        return;
       }
-    };
 
-    fetchRequestData();
+      const fetchRequestData = async () => {
+        try {
+          const response = await fetch(`https://skillswapriwi.azurewebsites.net/api/RequestsGet/GetRequestById/${userId}`, {
+            method: 'GET',
+            headers: {
+              'accept': '*/*',
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos');
+          }
+
+          const data = await response.json();
+          setRequestData(data.data.response);
+        } catch (err) {
+          setError(err as string);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchRequestData();
+    }
   }, []);
 
   if (loading) return <div>Cargando...</div>;
@@ -220,39 +217,34 @@ const Metrics: React.FC = () => {
         <InfoPageContainer>
           <PageContent>
             <PageBody>
-            <h2>{requestData.nombreUsuario}</h2>
-            <WidgetContainer>
-              <WidgetBody>
-          
-                 
-                  <h4>Ultima Aceptada</h4>{requestData.solicitudes.ultimaAceptada} <br />
-                  <br />
-                  <h4>Ultima Pendeinete</h4>{requestData.solicitudes.ultimaPendiente} <br />
-                  <br />
-                  <h4>Última Cancelada: </h4>{requestData.solicitudes.ultimaCancelada || 'N/A'} <br />
-                  <br />
-                  <h4>Último Enviado: </h4>{requestData.solicitudes.ultimoEnviado || 'N/A'} <br />
-                  <br />
-                  <h4>Conteo de Conexiones: </h4> {requestData.solicitudes.conteoConexiones} <br />
-                  <br />
-                  <h4>Conteo Aceptadas:</h4>{requestData.solicitudes.conteoAceptadas} <br />
-                  <br />
-                  <h4>Conteo Pendientes: </h4> {requestData.solicitudes.conteoPendientes} <br />
-                  <br />
-                  <h4>Conteo Canceladas: </h4> {requestData.solicitudes.conteoCanceladas} <br />
-                  <br />
-                  <h4>Conteo Enviadas:</h4> {requestData.solicitudes.conteoEnviadas} <br />
-                  
-      
-              </WidgetBody>
-             
-           </WidgetContainer>
-           <Security>
+              <h2>{requestData?.nombreUsuario}</h2>
               <WidgetContainer>
-                <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
-                <Modal isOpen={isModalOpen} onClose={closeModal} />
+                <WidgetBody>
+                  <h4>Ultima Aceptada</h4>{requestData?.solicitudes.ultimaAceptada} <br />
+                  <br />
+                  <h4>Ultima Pendeinete</h4>{requestData?.solicitudes.ultimaPendiente} <br />
+                  <br />
+                  <h4>Última Cancelada: </h4>{requestData?.solicitudes.ultimaCancelada ?? 'N/A'} <br />
+                  <br />
+                  <h4>Último Enviado: </h4>{requestData?.solicitudes.ultimoEnviado ?? 'N/A'} <br />
+                  <br />
+                  <h4>Conteo de Conexiones: </h4> {requestData?.solicitudes.conteoConexiones} <br />
+                  <br />
+                  <h4>Conteo Aceptadas:</h4>{requestData?.solicitudes.conteoAceptadas} <br />
+                  <br />
+                  <h4>Conteo Pendientes: </h4> {requestData?.solicitudes.conteoPendientes} <br />
+                  <br />
+                  <h4>Conteo Canceladas: </h4> {requestData?.solicitudes.conteoCanceladas} <br />
+                  <br />
+                  <h4>Conteo Enviadas:</h4> {requestData?.solicitudes.conteoEnviadas} <br />
+                </WidgetBody>
               </WidgetContainer>
-            </Security>
+              <Security>
+                <WidgetContainer>
+                  <SecurityButton onClick={openModal}>Seguridad </SecurityButton>
+                  <Modal isOpen={isModalOpen} onClose={closeModal} />
+                </WidgetContainer>
+              </Security>
             </PageBody>
           </PageContent>
         </InfoPageContainer>

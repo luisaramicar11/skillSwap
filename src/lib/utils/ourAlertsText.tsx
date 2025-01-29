@@ -8,7 +8,7 @@ export const OurAlertsText = styled.p`
   font-size: 14px;
   border-radius: 10px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.textDark};
-  background-color: ${({ theme }) => theme.colors.textWhite};
-  border: 1px solid ${({ theme }) => theme.colors.textBlack};
+  color: ${({ theme }) => theme.colors.bgGray};
+  background-color: ${({ theme }) => theme.colors.textPrimary};
+  border: 1px solid ${({ theme }) => theme.colors.bgGray};
 `;

@@ -5,14 +5,15 @@ import styled from "styled-components";
 import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
-import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
-// Texto de cambio
+import ScrollContainer from "@/src/components/scroll/Scroll";
+import { FooterMain } from "@/src/components/footer/FooterMain";
 
+// Texto de cambio
 const TextWrapper = styled.div`
   width: max-content;
   position: absolute;
   right: 15vw;
-  bottom: 55%;
+  top: -75px;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -28,7 +29,7 @@ const TextWrapper = styled.div`
 `;
 
 const SkillSwapText = styled(motion.h1)`
-  font-size: clamp(2.8rem,4.2vw,6rem);
+  font-size: 4rem;
   font-weight: bold;
   background: ${({ theme }) => theme.colors.gradientText};
   -webkit-background-clip: text;
@@ -38,8 +39,8 @@ const SkillSwapText = styled(motion.h1)`
   line-height: 1.2;
   text-transform: uppercase;
 
-  @media (max-width: 1070px) {
-    font-size: 3rem;
+  & span{
+    font-style: normal;
   }
 `;
 
@@ -48,19 +49,18 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  overflow-x: hidden;
   width: 100%;
-  min-height: 450px;
+  height: auto;
+  margin-top: 100px;
+  min-height: 70vh;
 
   @media (max-width: 1070px) {
-    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    margin-top: 0 !important;
+    flex-direction: column; 
     align-items: flex-start;
     border-radius: none;
-    /* Alinea el contenido al inicio */
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 154px !important;
+    height: 700px;
   }
 `;
 
@@ -70,8 +70,7 @@ const MotionDiv = styled(motion.div)`
   justify-content: center;
 
   @media (max-width: 1070px) {
-    display: flex
-    ;
+    display: flex;
     flex-direction: column;
     width: 90%;
     justify-content: center;
@@ -82,6 +81,7 @@ const MotionDiv = styled(motion.div)`
 // Contenedor de la capa superpuesta
 const OverlayContainer = styled.div`
   position: absolute;
+  border: none;
   left: 50%;
   width: 50%;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
@@ -128,9 +128,9 @@ const Div = styled.div`
   margin: 0;
 
   @media (max-width: 1070px) {
-    padding: 2rem;
+    padding: 1.8rem;
     height: auto;
-    border:0;  /* Ajuste automático del alto */
+    border:0; 
   }
 `;
 
@@ -152,6 +152,8 @@ const H1 = styled.h1`
 
   @media (max-width: 1070px) {
     justify-content: center;
+    padding: 0;
+    margin: 0;
   }
 `;
 
@@ -160,7 +162,7 @@ const SwitchButton = styled.button`
   padding: 0 !important;
   border-radius: 20px;
   width: 150px;
-  border: 1px solid ${({ theme }) => theme.colors.textOrange};
+  border: 1px solid ${({ theme }) => theme.colors.textYellow};
   background-color: transparent;
   font-size: 12px;
   font-weight: 500;
@@ -172,10 +174,9 @@ const SwitchButton = styled.button`
   & a {
     width: 100% !important;
     height: 100% !important;
-    color: ${({ theme }) => theme.colors.textOrange};
+    color: ${({ theme }) => theme.colors.textYellow};
     border: 0;
     padding: 10px;
-    
   }
 
   &:hover {
@@ -194,20 +195,12 @@ const SwitchButton = styled.button`
   }
 `;
 
-const P = styled.p`
-  color: ${({ theme }) => theme.colors.textTertiary};
-  font-weight: bold;
-  font-size: 1rem;
-
-  @media (max-width: 1070px) {
-    font-size: 0.9rem; /* Ajuste del tamaño de la fuente en pantallas pequeñas */
-  }
-`;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
+    <ScrollContainer overflowY="auto"  overflowX='hidden' marginY='30px' style={{ height: '100%' }}>
     <Container>
       {/* Framer Motion wrapper for form animations */}
       <motion.div
@@ -255,7 +248,7 @@ export default function AuthPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            ← SWAP
+            <span>➜</span> SWAP
           </SkillSwapText>
           <SkillSwapText
             initial={{ opacity: 0, y: -100 }}
@@ -288,5 +281,7 @@ export default function AuthPage() {
         </OverlayPanel>
       </OverlayContainer>
     </Container>
+    <FooterMain/>
+    </ScrollContainer>
   );
 }

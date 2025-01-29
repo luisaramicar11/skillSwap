@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FormContainer, FormWrapper, Title, Input, SubmitButton } from "./RecoverPasswordStyling";
+import { FooterMain } from '@/src/components/footer/FooterMain';
 
 function RecoverPassword() {
   const [password, setPassword] = useState("");
@@ -52,8 +53,8 @@ function RecoverPassword() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            token: token, // Incluimos el token que recibimos por la URL
-            newPassword: password, // La nueva contraseña
+            token: token, 
+            newPassword: password, 
           }),
         }
       );
@@ -64,9 +65,9 @@ function RecoverPassword() {
       }
 
       alert("Contraseña actualizada con éxito.");
-      router.push("/auth"); // Redirige al login
-    } catch (error: any) {
-      alert(error.message || "Ocurrió un error.");
+      router.push("/auth");
+    } catch (error) {
+      alert(error || "Ocurrió un error.");
     }
   };
 
@@ -94,6 +95,7 @@ function RecoverPassword() {
           <SubmitButton type="submit">ENVIAR</SubmitButton>
         </form>
       </FormWrapper>
+      <FooterMain />
     </FormContainer>
   );
 }

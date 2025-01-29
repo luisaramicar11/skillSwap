@@ -14,94 +14,93 @@ const baskervville = Baskervville({
     style: 'normal'
 });
 
-// Define los labels que deberían establecer el tema en oscuro
-export const darkThemeLabels = ['MATCH', 'DISCOVER', 'SIGN UP', 'ADMIN'];
-
-// Setting our Global Theme
+// Configuramos nuestro Global Theme
 export const GlobalTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
-        bgBanner: 'rgba(0, 0, 0, 0.0)',
-        bgMainOpacity:'#0000007f',
+        bgBanner: 'rgba(0, 0, 0, 0.1)',
+        bgMainOpacity:'#00000050',
         bgSidebar: '#ffffff',
-        bgPink: '#FFF4F4',
+        bgOrange: '#F4F3EE',      
         bgPrimary: '#FFFFFF',               
-        textPrimary: '#ffffff',
+        textPrimary: '#FFFFFF',
         textDark: '#555555',             
         bgSecondary: '#222222', 
+        bgGray: '#777777', 
+        bgGrey: '#222222', 
         bgTertiary: '#F5F5F5',            
         textSecondary: '#222222', 
-        textBlack: '#00000020',  
-        textWhite: '#ffffff',            
+        textBlack: '#00000025',  
+        textWhite: '#FFFFFF',            
         textTertiary: '#00000050',
         textPurple: '#965AC6',
-        textOrange: '#DD5B0A',
-        textOrange2: '#ea2424',
-        textOrangeO: '#ea242450',
+        textOrange: '#DC7D2F',
+        textOrange2: '#D13B00',
+        textOrangeO: '#EA242450',
         textBlueLight: '#2D68FF',
         textBlueDark: '#093A98',
         textYellow: '#F0AC27',
         textGreen: '#34DD0A',
         textRed: '#891E1E',
-        textGreenDark: '#1E892F60',
         textBlue:'#1E6F8960',
         textBrown: '#A3761E60', 
         textPink: '#EFC7C5', 
-        borderAuthLeft: '#2222220', 
-        borderAuthRight: '#F0AC27',  
-        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientSecondary: 'linear-gradient(270deg, #F0AC2799 20%,  #da731e99 80%, #ea242499 100% )', 
+        borderNavs: '#CCCCCC', 
+        borderAuthLeft: '#FFFFFF', 
+        borderAuthRight: '#F0AC27', 
+        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #DC7D2F 60%, #D13B00 100% )', 
+        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #DC7D2F 60%, #D13B00 100% )', 
+        gradientSecondary: 'linear-gradient(270deg, #F0AC2799 20%,  #DC7D2F99 80%, #D13B0099 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
-        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
+        backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE66 100%)',
     }
 };
 
 export const GlobalDarkTheme: IGlobalTheme = {
     colors: {
         bgNavbar:'#222222',
-        bgBanner: 'rgba(0, 0, 0, 0.1)',
-        bgMainOpacity:'#0000007f',
-        bgSidebar: 'rgba(255, 255, 255)',
+        bgBanner: 'rgba(255, 255, 255, 0.1)',
+        bgMainOpacity:'#FFFFFF16',
+        bgSidebar: '#ffffff',
         bgPrimary: '#222222',   
-        bgPink: '#FFF4F4',            
+        bgOrange: '#F4F3EE',      
+        bgGray: '#777777',   
+        bgGrey: '#222222', 
         textPrimary: '#222222',             
         bgSecondary: '#FFFFFF', 
-        bgTertiary: '#F5F5F5',            
-        textSecondary: '#ffffff', 
+        bgTertiary: '#222222',            
+        textSecondary: '#FFFFFF',
+        textDark: '#CCCBCB',              
         textBlack: '#00000020',
         textPink: '#EFC7C5',
-        textWhite: '#ffffff',      
+        textWhite: '#FFFFFF',      
         textTertiary: '#00000050',
         textPurple: '#965AC6',
-        textOrange: '#da731e',
-        textOrange2: '#ea2424',
-        textOrangeO: '#ea242450',
+        textOrange: '#DC7D2F',
+        textOrange2: '#D13B00',
+        textOrangeO: '#EA242450',
         textBlueLight: '#2D68FF',
         textBlueDark: '#093A98',
         textYellow: '#F0AC27',
         textGreen: '#34DD0A',
         textRed: '#891E1E60',
-        textGreenDark: '#1E892F60',
-        textBlue:'1E6F8960',
+        textBlue:'#1E6F8960',
         textBrown: '#A3761E60',  
         borderAuthLeft: '#FFFFFF', 
-        borderAuthRight: '#FFFFFF',     
-        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
-        gradientSecondary: 'linear-gradient(270deg, #F0AC27 0%,  #da731e 60%, #ea2424 100% )', 
+        borderAuthRight: '#FFFFFF',   
+        borderNavs: '#303030',  
+        gradientText: 'linear-gradient(90deg, #F0AC27 0%,  #DC7D2F 60%, #D13B00 100% )', 
+        gradientPrimary: 'linear-gradient(90deg, #F0AC27 0%,  #DC7D2F 60%, #D13B00 100% )', 
+        gradientSecondary: 'linear-gradient(270deg, #F0AC2799 20%,  #DC7D2F99 80%, #D13B0099 100% )', 
         backgroundPink: 'linear-gradient(90deg, #7D93FF 0%, #F093C0 85%, #EFC7C5 100%)',
         backgroundGreen: 'linear-gradient(90deg, #B6CB65 0%, #37A879 52%, #4A54AE 100%)',
     }
 };
 
-
-// Global styling for essential HTML elements
+// Global styling para elementos HTML importantes
 export const GlobalStyle = createGlobalStyle`
 
-/* styles/globals.css */
 html {
-
     background-color: ${({ theme }) => theme.colors.bgPrimary};
     width: 100vw !important;
     overflow-x: hidden;
@@ -119,7 +118,6 @@ html {
 
 body {
     min-height: 100vh;
-    overflow-x: hidden;
     width: 100% !important;
     overflow-x: hidden;
     margin: 0;
@@ -135,9 +133,9 @@ p {
     line-height: 1.5;
     font-weight: 300;
     margin: 0;
-    hyphens: auto; /* Activa la inserción automática de guiones */
-    word-wrap: break-word; /* Asegura que las palabras largas se dividan */
-    overflow-wrap: break-word; /* Para compatibilidad adicional */
+    hyphens: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 } */
 
 .gradient-bg-primary {

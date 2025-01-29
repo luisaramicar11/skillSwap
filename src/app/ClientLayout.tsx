@@ -1,38 +1,78 @@
 'use client';
+
 import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyling";
 import { Navbar } from "../components/navbar/Navbar";
 import { useTheme } from "../hooks/useTheme";
+import { useThemeAuth } from "../hooks/useThemeAuth";
 import { Logobar } from "../components/logobar/Logobar";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { clearStorage } from "../lib/services/storageService";
+import LoadingScreen from "../components/loadingScreen/LoadingScreen";
+import { IGlobalTheme } from "../models/globalTheme.model";
+
+const LayoutContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;         
+    padding: 0;
+    overflow: hidden;
+`;
 
 const ClientLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const pathname = usePathname(); // Obtenemos la ruta actual
-    const [theme] = useTheme();
+    const pathname = usePathname();
+    const router = useRouter();
     const [token, setToken] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [themeAuth] = useThemeAuth();
+    const [theme] = useTheme();
+    const [definedTheme, setDefinedTheme] = useState<IGlobalTheme | null>(null);
 
     useEffect(() => {
-        // Accedemos a localStorage solo en el cliente
-        const storedToken = localStorage.getItem("authToken");
+        const storedToken = typeof window !== 'undefined' ? localStorage.getItem("authToken") : null;
         setToken(storedToken);
-        
-        // Limpia el localStorage solo si no hay token
+        console.log(storedToken);
+
         if (!storedToken) {
             clearStorage();
         }
-    }, []); // Solo se ejecuta una vez al montar el componente
 
-    // Verificamos si estamos en la ruta /auth
+        const handleStart = () => setLoading(true);
+        const handleComplete = () => {
+            setTimeout(() => setLoading(false), 3000);
+        };
+
+        router.prefetch(pathname);
+
+        handleStart();
+        handleComplete();
+    }, [pathname, router]);
+
     const isAuthPage = pathname === '/auth';
 
+    useEffect(() => {
+        const themeToUse = (pathname === '/auth') ? themeAuth : theme;
+        setDefinedTheme(themeToUse);
+    }, [themeAuth, theme, token, pathname]);
+
+    if (loading) {
+        return <LoadingScreen />;
+    }
+
+    if (!definedTheme) {
+        return null;
+    }
+
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={definedTheme}>
             <GlobalStyle />
-            {!isAuthPage && <Navbar />} {/* Renderizamos el Navbar solo si no estamos en /auth */}
-            {children}
-            {!isAuthPage && <Logobar />}
+            <LayoutContainer>
+                {!isAuthPage && <Navbar />}
+                {children}
+                {!isAuthPage && <Logobar />}
+            </LayoutContainer>
         </ThemeProvider>
     );
 };

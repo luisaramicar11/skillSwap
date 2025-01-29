@@ -3,66 +3,146 @@ import React, { FormEvent, MouseEvent, useState, useEffect } from "react";
 import { IReportGet, IReport } from "../../models/admin.reports.model";
 import styled from "styled-components";
 
+//Formulario
 const Form = styled.form`
-  padding: 30px;
-  width: 50%;
+  padding: 50px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+
+  & article{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Input = styled.input`
-  width: 50%;
+  width: 100%; 
   border-radius: 10px;
   border: 1px #ccc solid;
   padding: 7px;
   font-size: small;
   color: black;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem; 
+  }
 `;
-
-const DivInfo = styled.div`
-  font-size: 0.8rem;
-  text-align: center;
-`
-
-const DivButtton = styled.div`
-display: flex;
-justify-content: center;
-`
 
 const Button = styled.button`
   margin-top: 5px;
-  margin-right: 10px;
+  margin-left: 15px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px black solid;
+  border: 1px grey solid;
   color: black;
   cursor: pointer;
   background: none;
   padding: 5px 10px;
 
   &:hover {
-    background-color: green;
+    background-color: grey;
     color: white;
+    border: none
   }
 `;
 
 const Div = styled.div`
-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+
+  & label{
+    align-self: start;
+    display: flex;
+    align-items: center;
+
+    & p{
+      margin-right: 5px;
+      font-style: normal;
+      color: rgb(0, 0, 0, 0.2)
+    }
+  }
 `;
 
 const Title = styled.p`
-  margin-top: 15px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: black;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: orange;
+  font-size: 20px;
   font-weight: 500;
+`;
+
+const DivInfo = styled.div`
+  font-size: 0.8rem;
+`;
+
+const DivButton = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: end;
+`;
+
+//Contenedor global
+const DivContent = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content : center;
+  gap: 50px;
+`;
+
+//Card para el Formulario
+const Card = styled.div`
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  height: 540px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  text-align: center;
+`;
+
+const UserImage = styled.div<{ urlImage: string }>`
+  width: 100%;
+  height: 450px;
+  background-image: url(${(props) => props.urlImage});
+  background-size: cover;
+  background-position: center;
+`;
+
+const UserInfo = styled.div`
+  padding: 20px;
+`;
+
+const ReportTitle = styled.h2`
+  font-size: 1.5em;
+  margin: 0;
+  color: #333;
+`;
+
+const ReportDate = styled.h4`
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #777;
+`;
+
+const Description = styled.p`
+  font-size: 0.9em;
+  color: #555;
+  line-height: 1.4;
 `;
 
 interface CreateReportFormProps {
@@ -109,6 +189,7 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
 
     if (!form.id || form.id === 0) {
       const { id, ...userWithoutId } = form;
+      console.log(id);
       createData(userWithoutId as Omit<IReport, "id">);
     } else {
       updateData(form);
@@ -132,148 +213,161 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
   };
 
   return (
-    <main>
-    <Title>{dataToEdit ? "Editar Reporte" : "Editar Reporte"}</Title>
-    <DivInfo>La acción tomada debe ser cualquiera de las siguientes: suspender, habilitar o deshabilitar </DivInfo>
-    <DivInfo>Los códigos de los estados de los usuarios son: 1. Activo, 2. Inactivo, 3. Suspendido </DivInfo>
-    <Div>
-      <Form onSubmit={handleSubmit}>
-        <Div>
-          <label htmlFor="title">Nombre del reporte</label>
-          <Input
-            type="text"
-            name="title"
-            id="title"  // Añadido para asociar con el label
-            placeholder="Nombre del reporte"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.titleReport}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="description">Descripción del reporte</label>
-          <Input
-            type="text"
-            name="description"
-            id="description"  // Añadido para asociar con el label
-            placeholder="Descripción del reporte"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.description}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="dateReport">Fecha del reporte</label>
-          <Input
-            type="date"
-            name="dateReport"
-            id="dateReport"  // Añadido para asociar con el label
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.dateReport ? formatDate(form.dateReport) : ""}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="actionTaken">Acción tomada</label>
-          <Input
-            type="text"
-            name="actionTaken"
-            id="actionTaken"  // Añadido para asociar con el label
-            placeholder="Acción tomada"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.actionTaken}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="idState">ID del Estado</label>
-          <Input
-            type="number"
-            name="idState"
-            id="idState"  // Añadido para asociar con el label
-            placeholder="Id del Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idState}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="idUser">ID del Usuario</label>
-          <Input
-            type="number"
-            name="idUser"
-            id="idUser"  // Añadido para asociar con el label
-            placeholder="Id del User"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idUser}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="idReportedUser">ID del usuario reportado</label>
-          <Input
-            type="number"
-            name="idReportedUser"
-            id="idReportedUser"  // Añadido para asociar con el label
-            placeholder="Id del usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.idReportedUser}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="state">Estado</label>
-          <Input
-            type="text"
-            name="state"
-            id="state"  // Añadido para asociar con el label
-            placeholder="Estado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.state}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="user">Usuario quien reporta</label>
-          <Input
-            type="text"
-            name="user"
-            id="user"  // Añadido para asociar con el label
-            placeholder="Usuario quien reporta"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.user}
-            required
-          />
-        </Div>
-        <Div>
-          <label htmlFor="reportedUser">Usuario reportado</label>
-          <Input
-            type="text"
-            name="reportedUser"
-            id="reportedUser"  // Añadido para asociar con el label
-            placeholder="Usuario reportado"
-            onBlur={handleChange}
-            onChange={handleChange}
-            value={form.reportedUser}
-            required
-          />
-        </Div>
-        <DivButtton>
-          <Button type="submit">Enviar</Button>
-          <Button type="button" onClick={handleReset}>Limpiar</Button>
-        </DivButtton>
-      </Form>
-    </Div>
-  </main>
+    <>
+      <DivContent>
+        <Form onSubmit={handleSubmit}>
+          <article>
+            <Title>★ EDITAR REPORTE</Title>
+            <DivInfo>Aquí podrás resolver y tomar acción de los reportes realizados por usuarios de la plataforma.</DivInfo>
+            <DivInfo>La acción tomada debe ser cualquiera de las siguientes: <strong>suspender, habilitar</strong> o <strong>deshabilitar</strong>.</DivInfo>
+            <DivInfo>Los códigos de los estados de los usuarios son: <strong> 1. Activo, 2. Inactivo, 3. Suspendido</strong>.</DivInfo>
+          </article>
+          <Div>
+            <label htmlFor="title"><p>★</p>Nombre del reporte</label>
+            <Input
+              type="text"
+              name="title"
+              id="title"  
+              placeholder="Nombre del reporte"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.titleReport}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="description"><p>★</p>Descripción del reporte</label>
+            <Input
+              type="text"
+              name="description"
+              id="description" 
+              placeholder="Descripción del reporte"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.description}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="dateReport"><p>★</p>Fecha del reporte</label>
+            <Input
+              type="date"
+              name="dateReport"
+              id="dateReport"  
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.dateReport ? formatDate(form.dateReport) : ""}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="actionTaken"><p>★</p>Acción tomada</label>
+            <Input
+              type="text"
+              name="actionTaken"
+              id="actionTaken" 
+              placeholder="Acción tomada"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.actionTaken}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="idState"><p>★</p>ID del Estado</label>
+            <Input
+              type="number"
+              name="idState"
+              id="idState"  
+              placeholder="Id del Estado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idState}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="idUser"><p>★</p>ID del Usuario</label>
+            <Input
+              type="number"
+              name="idUser"
+              id="idUser"  
+              placeholder="Id del User"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idUser}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="idReportedUser"><p>★</p>ID del usuario reportado</label>
+            <Input
+              type="number"
+              name="idReportedUser"
+              id="idReportedUser"  
+              placeholder="Id del usuario reportado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.idReportedUser}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="state"><p>★</p>Estado</label>
+            <Input
+              type="text"
+              name="state"
+              id="state" 
+              placeholder="Estado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.state}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="user"><p>★</p>Usuario quien reporta</label>
+            <Input
+              type="text"
+              name="user"
+              id="user"  
+              placeholder="Usuario quien reporta"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.user}
+              required
+            />
+          </Div>
+          <Div>
+            <label htmlFor="reportedUser"><p>★</p>Usuario reportado</label>
+            <Input
+              type="text"
+              name="reportedUser"
+              id="reportedUser" 
+              placeholder="Usuario reportado"
+              onBlur={handleChange}
+              onChange={handleChange}
+              value={form.reportedUser}
+              required
+            />
+          </Div>
+          <DivButton>
+            <Button type="submit">Enviar</Button>
+            <Button type="button" onClick={handleReset}>Limpiar</Button>
+          </DivButton>
+        </Form>
+        <Card>
+      <UserImage urlImage="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg" />
+      <UserInfo>
+        <ReportTitle>{form.titleReport}</ReportTitle>
+        <ReportDate>{form.dateReport ? formatDate(form.dateReport) : ""}</ReportDate>
+        <Description>
+          {form.description}
+        </Description>
+      </UserInfo>
+    </Card>
+      </DivContent>
+    </>
   );
 };
 

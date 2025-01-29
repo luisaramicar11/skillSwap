@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface CardProps {
-  angle: number; // Definimos la prop 'angle' como número
-  imgsrc: string; // URL de la imagen para la tarjeta
+  angle: number;
+  imgsrc: string;
 }
 
 // Contenedor principal
@@ -11,9 +11,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:${({ theme }) => theme.colors.textSecondary};
+  background:${({ theme }) => theme.colors.bgGrey};
   flex-direction: column;
-  padding: 150px 0;
+  padding-top: 100px;
+  padding-bottom: 150px;
   margin: 0; 
   width: 100vw;
   height: auto;
@@ -21,7 +22,7 @@ const Container = styled.div`
 
 // Título principal
 const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.textPrimary};
+  color: ${({ theme }) => theme.colors.textWhite};
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -41,7 +42,7 @@ const Title = styled.h1`
 
 // Subtítulo
 const Subtitle = styled.span`
-  color: ${({ theme }) => theme.colors.textPrimary};
+  color: ${({ theme }) => theme.colors.textWhite};
   font-size: 14px;
   opacity: 0.5;
   font-style: normal;
@@ -79,19 +80,17 @@ const CardsContainer = styled.div`
 
 
 const Card = styled.div<CardProps>`
+  filter: grayscale();
   background-color: #c4c4c4;
   margin: 5px;
   border-radius: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   background-image: url(${props => props.imgsrc});
   background-size: cover;
   background-position: center;
-  width: 150px; // Valor predeterminado
-  height: 200px; // Valor predeterminado
+  width: 150px;
+  height: 200px;
   transform: perspective(500px) rotateY(${props => props.angle}deg);
   overflow: hidden;
-
-  
 
   &:nth-child(1) {
     width: 150px;
@@ -122,37 +121,36 @@ const Card = styled.div<CardProps>`
 
   @media (max-width: 768px) {
     &:nth-child(n+6) {
-      display: none; // Oculta las tarjetas 6 y 7 en pantallas medianas
+      display: none; 
     }
   }
 
   @media (max-width: 480px) {
     &:nth-child(n+4) {
-      display: none; // Oculta las tarjetas 4 y siguientes en móviles
+      display: none;
     }
 
-    width: 80px; // Ajustamos el ancho en móviles
-    height: 120px; // Ajustamos la altura en móviles
+    width: 80px;
+    height: 120px;
     margin: 10px;
   }
 `;
 
-
-
 // Componente principal del carrusel
 const Carousel: React.FC = () => {
+
   return (
     <Container>
       <Title>MATCH<span> con tu skill ideal</span></Title>
       <Subtitle>“A VECES NI SABEMOS QUE LO<br></br>NECESITAMOS, HASTA QUE LO VEMOS.”</Subtitle>
       <CardsContainer>
-        <Card angle={-10}imgsrc="https://img.freepik.com/fotos-premium/concepto-personas-felicidad-adolescente-sonriente-sobre-fondo-blanco_380164-63917.jpg"/>
-        <Card angle={-5}imgsrc="https://st.depositphotos.com/1024381/2148/i/450/depositphotos_21484663-stock-photo-happy-teen-girl-beautiful-young.jpg"/>
-        <Card angle={0} imgsrc="https://img.freepik.com/foto-gratis/hombre-sonriendo-brazos-cruzados_1149-1711.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726531200&semt=ais_hybrid"/>
-        <Card angle={0} imgsrc="https://media.istockphoto.com/id/494711330/es/foto/hombre-joven-latina-en-un-estudio.jpg?s=612x612&w=0&k=20&c=Ye9u097upgUhpcVttIB5i39Dj8XOPheoL4HB6SHC9iA="/>
-        <Card angle={0} imgsrc="https://st.depositphotos.com/1003989/3636/i/450/depositphotos_36365377-stock-photo-woman-with-phone.jpg"/>
-        <Card angle={5} imgsrc="https://st.depositphotos.com/1269204/1219/i/950/depositphotos_12196477-stock-photo-smiling-men-isolated-on-the.jpg"/>
-        <Card angle={10}imgsrc="https://media.istockphoto.com/id/1348560795/es/foto/mujer-de-negocios-segura-de-s%C3%AD-misma-con-anteojos-sonriendo-a-la-c%C3%A1mara.jpg?s=612x612&w=0&k=20&c=yX6ro57Rg3IxvS-GFi0KtuRPm1RW8qndB5dc_tZbUb4="/>
+        <Card angle={-10}imgsrc="https://images.pexels.com/photos/17612180/pexels-photo-17612180/free-photo-of-blanco-y-negro-mujer-cara-enfrentarse.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={-5}imgsrc="https://images.pexels.com/photos/15169306/pexels-photo-15169306/free-photo-of-blanco-y-negro-mujer-joven-retrato.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={0} imgsrc="https://images.pexels.com/photos/13944737/pexels-photo-13944737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={0} imgsrc="https://images.pexels.com/photos/16557436/pexels-photo-16557436/free-photo-of-retrato-para-mi-prima.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={0} imgsrc="https://images.pexels.com/photos/24017554/pexels-photo-24017554/free-photo-of-cara-de-nino-en-blanco-y-negro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={5} imgsrc="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
+        <Card angle={10}imgsrc="https://images.pexels.com/photos/8727669/pexels-photo-8727669.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"/>
       </CardsContainer>
     </Container>
   );

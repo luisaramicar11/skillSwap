@@ -2,31 +2,25 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, registerUser } from "@/src/app/redux/slices/authSlice";
+import { loginUser } from "@/src/app/redux/slices/authSlice";
+import {IUserLoginResponse } from "../../../models/login.model"
 import { toast } from "react-toastify";
 import { AppDispatch } from "@/src/app/redux/store";
-import InputSingUp from "../../../components/ui/inputs/InputAuth";
+import InputSingUp from "../../ui/inputs/InputAuth";
 import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
 import Label from "../../ui/labels/LabelAuth";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
 import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
+import { RootState } from '../../../app/redux/store';
 
 // Styled components
-import {
-  FormWrapper,
-  Container,
-  Title,
-  DivButtonLogin,
-  BackLink,
-  Arrow,
-  ForgotPasswordButton
-} from "./LoginStyling";
+import {FormWrapper,Container,Title,DivButtonLogin,BackLink,Arrow,ForgotPasswordButton} from "./LoginStyling";
 
 export default function LoginPage() {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const { loading } = useSelector((state: any) => state.auth);
+  const { loading } = useSelector((state: RootState) => state.auth);
 
   const [form, setForm] = useState({
     email: "",
@@ -63,17 +57,18 @@ export default function LoginPage() {
     }
   }
 
-  const handleLoginSuccess = (payload: any) => {
+  const handleLoginSuccess = (payload: IUserLoginResponse ) => {
     const token = payload?.data.response.token;
     const role = payload?.data.response.role;
     const idUser = payload?.data.response.id;
 
     if (token) {
-      toast.success("Login exitoso!", {
+      toast.success("¡Login exitoso!", {
         style: {
-          marginTop: '10px', // Cambia el padding
+          marginTop: '10px', 
         },
       });
+      
       localStorage.setItem("authToken", token);
       localStorage.setItem("userId", idUser.toString());
       document.cookie = `authToken=${token}; path=/;`;
@@ -120,7 +115,7 @@ export default function LoginPage() {
             autoComplete="current-password"
           />
           <DivButtonLogin>
-            <ButtonSingUp type="submit" disabled={loading}>
+            <ButtonSingUp type="submit" disabled={loading} onClick={() => handlePageChange('INICIO')}>
               {loading ? "Cargando..." : "ENTRAR"}
             </ButtonSingUp>
           </DivButtonLogin>

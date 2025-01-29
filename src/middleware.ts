@@ -26,4 +26,3 @@ export const config = {
     '/admin/:path*',  // Protege todas las rutas bajo /admin/
   ],
 };
-
