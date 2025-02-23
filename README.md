@@ -100,7 +100,7 @@ These credentials should be used only for administrative purposes.
 - Luisa Fernanda Ramírez Cardona
     - luisaramicar11
 
-- Joan Sebastian Zapata Caro
+- Joan Sebastián Zapata Caro
     - JoanZapata05
 
 ## Equipo Backend

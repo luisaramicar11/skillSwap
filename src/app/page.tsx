@@ -118,7 +118,7 @@ const Text = styled.div`
 ;
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 0 20px;
     width: 100%;
 
     & h2 {
@@ -153,7 +153,9 @@ const Text2 = styled.div`
   }
 ;
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 0;
+    padding-left: 20px;
+    padding-bottom: 25px;
     width: 100%;
     border: none;
 
