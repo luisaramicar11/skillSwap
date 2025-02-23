@@ -30,13 +30,13 @@ const ProfileName = styled.div`
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.8rem;
-  color: ${({ theme }) => theme.colors.textDark};
+  color: ${({ theme }) => theme.colors.textSidebar};
 `;
 
 const Skills = styled.div`
-  opacity: 0.5;
+  opacity: 0.75;
   font-size: 0.6rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
+  color: ${({ theme }) => theme.colors.textSidebar};
   display: flex;
   flex-direction: column;
 `;

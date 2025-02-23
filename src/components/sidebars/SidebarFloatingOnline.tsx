@@ -140,7 +140,7 @@ const StatusSection = styled.div`
 `;
 
 const H2StatusSection = styled.h2`
-  color: ${({ theme }) => theme.colors.textDark};
+  color: ${({ theme }) => theme.colors.textSidebar};
   font-weight: 500;
   margin: 0;
   margin-bottom: 0.1rem;

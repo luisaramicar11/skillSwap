@@ -13,7 +13,7 @@ const LogobarStyled = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${({ theme }) => theme.colors.bgPrimary};
-    border-top: solid 1px ${({ theme }) => theme.colors.borderNavs};
+    border-top: solid 1px ${({ theme }) => theme.colors.borderLogobar};
 
     & h1 {
         background: ${({ theme }) => theme.colors.gradientSecondary};

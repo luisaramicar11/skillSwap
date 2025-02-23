@@ -37,7 +37,7 @@ const PagePosts = styled.section`
 
 const SliderContainer = styled.div`
   width: 100%;
-  margin-top: 5vw;
+  margin-top: 55px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

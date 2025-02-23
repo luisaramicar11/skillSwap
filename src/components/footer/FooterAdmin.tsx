@@ -113,7 +113,7 @@ export const FooterAdmin: React.FC = () => {
         <div className="social-icons">
           <StyledIconNavLink
             target="_blank"
-            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/rutaAvanzada.ts-Mockup?node-id=0-1&node-type=canvas&t=SONsdrpY89xVseme-0"
+            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?t=PeYSqlQXqRBoexmp-1"
             label="Figma"
             icon={<FigmaIcon />}
           />
@@ -125,7 +125,7 @@ export const FooterAdmin: React.FC = () => {
           />
           <StyledIconNavLink
             target="_blank"
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/franccoina"
             label="Instagram"
             icon={<InstagramIcon />}
           />
