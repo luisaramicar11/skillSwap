@@ -4,14 +4,14 @@ import React from "react";
 import StyledNavLink from "../ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
-import InstagramIcon from "@/public/svg/InstagramIcon";
-import FigmaIcon from "@/public/svg/FigmaIcon";
-import GitHubIcon from "@/public/svg/GitHubIcon";
+import { FaCode } from "react-icons/fa6";
+import { FaFigma, FaInstagram } from "react-icons/fa";
+import { VscGithubAlt } from "react-icons/vsc";
 
 // Estilos para el footer
 const FooterStyled = styled.footer`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.bgGrey};
+  background: ${({ theme }) => theme.colors.bgGrey};
   color: ${({ theme }) => theme.colors.textWhite};
   padding: 120px 40px 100px 40px;
   display: flex;
@@ -19,20 +19,35 @@ const FooterStyled = styled.footer`
   align-items: center;
   margin-top: 50px;
 
-  article {
+  ul{
+    margin: 0;
+    padding: 0;
     display: flex;
     gap: 20px;
-    text-align: center;
+    text-align: start;
+    list-style: none;
+  }
+
+  section {
+    display: flex;
+    gap: 20px;
+    text-align: start;
   }
 
   @media (max-width: 679px) {
-    padding: 120px 40px 80px 40px;
-
-    article {
+    padding: 80px 40px 50px 40px;
+    
+    section {
       display: flex;
       flex-direction: column;
       gap: 20px;
       text-align: center;
+    }
+
+    ul {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     div {
@@ -43,7 +58,7 @@ const FooterStyled = styled.footer`
   a {
     color: ${({ theme }) => theme.colors.textWhite};
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
 
     &:hover {
       color: ${({ theme }) => theme.colors.textWhite};
@@ -54,10 +69,14 @@ const FooterStyled = styled.footer`
     height: min-content;
     display: flex;
     gap: 20px;
+
+    @media (max-width: 979px) {
+      gap: 10px;
+    }
   }
 `;
 
-const Box = styled.article`
+const Box = styled.section`
   height: min-content;
   display: flex;
   justify-content: space-between;
@@ -69,6 +88,18 @@ const Box = styled.article`
 
   > * {
     color: ${({ theme }) => theme.colors.textWhite};
+    hyphens: none;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    font-size: 15px;
+  }
+
+  @media (max-width: 679px) {
+    width: 95%;
+
+    > * {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -76,6 +107,7 @@ const FooterNavItem = styled.li`
     display: inline-block;
     font-size: 15px;
     max-height: 54px;
+    margin-top: 10px;
     cursor: pointer;
 
     a{
@@ -91,7 +123,7 @@ const FooterNavItem = styled.li`
 export const FooterAdmin: React.FC = () => {
   return (
     <FooterStyled>
-      <article>
+      <ul>
         <FooterNavItem onClick={() => handlePageChange('INICIO')}>
           <StyledNavLink href="/admin" label="INICIO" />
         </FooterNavItem>
@@ -107,33 +139,40 @@ export const FooterAdmin: React.FC = () => {
         <FooterNavItem onClick={() => handlePageChange('LEGAL')}>
           <StyledNavLink href="/admin/legal" label="LEGAL" />
         </FooterNavItem>
-      </article>
+      </ul>
       <Box>
         <p>
-          © {new Date().getFullYear()} SkillSwap, Inc. Todos los derechos reservados.
+          © {new Date().getFullYear()} SkillSwap. Todos los derechos reservados.
         </p>
         <div className="social-icons">
           <StyledIconNavLink
             target="_blank"
-            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?t=PeYSqlQXqRBoexmp-1"
+            href="https://www.instagram.com/franccoina"
+            label="Instagram"
+            icon={<FaInstagram />}
+          />
+          <StyledIconNavLink
+            target="_blank"
+            href="https://www.figma.com/design/FEDH5WgaGXBLSr2xBBA8OV/SkillSwap.ts-Mockup?t=O8A7L1zQEFkpy70a-1"
             label="Figma"
-            icon={<FigmaIcon />}
+            icon={<FaFigma />}
           />
           <StyledIconNavLink
             target="_blank"
             href="https://github.com/luisaramicar11/skillSwap"
-            label="GitHub"
-            icon={<GitHubIcon />}
+            label="GitHub-Frontend"
+            icon={<VscGithubAlt />}
           />
           <StyledIconNavLink
             target="_blank"
-            href="https://www.instagram.com/franccoina"
-            label="Instagram"
-            icon={<InstagramIcon />}
+            href="https://github.com/medi77na/SkillSwap"
+            label="GitHub-Backend"
+            icon={<FaCode />}
           />
         </div>
       </Box>
     </FooterStyled>
   );
 };
+
 
