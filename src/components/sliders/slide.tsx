@@ -38,13 +38,13 @@ const Image = styled.div<{ urlImage: string, alt: string }>`
 `;
 
 const Title = styled.h3`
-    width: 400px;
+  width: 400px;
   font-size: 2rem;
   text-align: start;
   position: absolute;
   hyphens: auto;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   bottom: 2.5rem;
   left: 1.5rem;
   z-index: 99;
@@ -138,19 +138,19 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
     setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en la estrellita
   };
 
-    return (
-      <>
-        <CardContainer>
-          <PassButton onClick={handlePassClick}><div>&lt;</div> pass</PassButton>
-          <Image urlImage={user.urlImage} alt= {user.fullName}/>
-          <Title>{user.fullName}</Title>
-          <Subtitle>{user.jobTitle}</Subtitle>
-          <StarButton onClick={handleStarClick}><PiHandshake /></StarButton> {/* Aquí va el ícono de apretón de manos */}
-        </CardContainer>
-  
-        {modalOpen && <Modal userToRequest={user}  isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
-      </>
-    );
+  return (
+    <>
+      <CardContainer>
+        <PassButton onClick={handlePassClick}><div>&lt;</div> pass</PassButton>
+        <Image urlImage={user.urlImage} alt={user.fullName} />
+        <Title>{user.fullName}</Title>
+        <Subtitle>{user.jobTitle}</Subtitle>
+        <StarButton onClick={handleStarClick}><PiHandshake /></StarButton> {/* Aquí va el ícono de apretón de manos */}
+      </CardContainer>
+
+      {modalOpen && <Modal userToRequest={user} isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
+    </>
+  );
 };
 
 export default SliderCard;
