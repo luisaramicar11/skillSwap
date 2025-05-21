@@ -2,10 +2,10 @@
 import styled from "styled-components";
 import React from "react";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import InfoIcon from "@/public/svg/InfoIcon";
+import { BsInfoCircle } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../app/redux/slices/authSlice"; 
+import { logoutUser } from "../../app/redux/slices/authSlice";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -86,7 +86,7 @@ const IconsContainer = styled.div`
 `;
 
 // Navbar component
-export const Navbar: React.FC = () => {
+export const NavbarNotFound: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -106,15 +106,25 @@ export const Navbar: React.FC = () => {
                     localStorage.removeItem("authToken");
                     localStorage.removeItem("userId");
                     localStorage.removeItem("clickedUserId");
-                
+
                     localStorage.setItem("currentPage", "AUTH");
                     localStorage.setItem('theme', 'light');
-                
+
                     window.dispatchEvent(new Event('storage'));
                 }} href="/auth" label="AUTH" icon={
-                    <AuthLink><small>Iniciar Sesión</small></AuthLink>
+                    <AuthLink><small>Reiniciar</small></AuthLink>
                 } />
-                <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink onClick={() => {
+                    dispatch(logoutUser());
+                    localStorage.removeItem("authToken");
+                    localStorage.removeItem("userId");
+                    localStorage.removeItem("clickedUserId");
+
+                    localStorage.setItem("currentPage", "LEGAL");
+                    localStorage.setItem('theme', 'light');
+
+                    window.dispatchEvent(new Event('storage'));
+                }} href="/legal" label="LEGAL" icon={<BsInfoCircle />} />
             </IconsContainer>
         </NavbarContainer>
     );
