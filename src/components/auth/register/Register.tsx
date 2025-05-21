@@ -119,7 +119,7 @@ export default function RegisterPage() {
           <DivUserData>
             <ProgressBar currentStep={currentStep} />
             <DivUserTitle>
-              <Title>Tus datos</Title>
+              <Title>Datos</Title>
             </DivUserTitle>
             <DivUserInput>
               <Label htmlFor="name" text="Nombre *" />

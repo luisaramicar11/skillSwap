@@ -11,13 +11,17 @@ import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
 import Label from "../../ui/labels/LabelAuth";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
-import ModalPasswordRecovery from "../../modals/ModalForgotPassword";
 import { RootState } from '../../../app/redux/store';
+import { ReactNode } from "react";
 
 // Styled components
-import {FormWrapper,Container,Title,DivButtonLogin,BackLink,Arrow,ForgotPasswordButton} from "./LoginStyling";
+import {FormWrapper,Container,Title,DivButtonLogin,BackLink,Arrow} from "./LoginStyling";
 
-export default function LoginPage() {
+interface ILoginPageProps {
+  forgotPassword: ReactNode;
+}
+
+export default function LoginPage({forgotPassword}: ILoginPageProps) {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
   const { loading } = useSelector((state: RootState) => state.auth);
@@ -27,17 +31,12 @@ export default function LoginPage() {
     password: "",
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -121,14 +120,11 @@ export default function LoginPage() {
           </DivButtonLogin>
 
           {/* Botón estilizado de "Olvidaste tu contraseña" */}
-          <ForgotPasswordButton type="button" onClick={openModal}>
-            ¿Olvidaste tu contraseña?
-          </ForgotPasswordButton>
+          {forgotPassword}
         </form>
       </FormWrapper>
 
       {/* Renderiza el modal */}
-      <ModalPasswordRecovery isOpen={isModalOpen} onClose={closeModal} />
     </Container>
   );
 }
