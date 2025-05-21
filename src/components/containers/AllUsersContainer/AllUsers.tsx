@@ -12,6 +12,7 @@ const CardListContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
+  padding-top: 0;
 `;
 
 // Estilos para los botones de paginación

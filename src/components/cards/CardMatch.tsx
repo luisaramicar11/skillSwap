@@ -98,7 +98,7 @@ const RatingStars = styled.div`
 `;
 
 const Star = styled.span`
-  color: ${({ theme }) => theme.colors.textYellow};
+  color: ${({ theme }) => theme.colors.textDark};
   font-size: 16px;
   font-style: normal;
 `;
@@ -144,9 +144,9 @@ const MatchCard: React.FC<CardProps> = ({ description, skills, rating, countMatc
   return (
     <CardContainer>
       <ScrollContainer overflowY="auto" overflowX='auto' marginY="5px" style={{ maxHeight: '100%' }}>
-      <ConnectionsSection>
-  Este perfil ha conectado con {isNaN(countMatches) ? 0 : countMatches} {countMatches === 1 ? "persona" : "personas"}.
-</ConnectionsSection>
+        <ConnectionsSection>
+          Este perfil ha conectado con {isNaN(countMatches) ? 0 : countMatches} {countMatches === 1 ? "persona" : "personas"}.
+        </ConnectionsSection>
         <DivCardContent>
           <RatingSection>
             <h1>{(Math.floor(rating * 10)) / 10}</h1>

@@ -36,7 +36,7 @@ const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) =
                 }
             }}
         >
-            {children || label} 
+            {children || label}
         </DivLinkComponent>
     );
 };

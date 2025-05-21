@@ -1,16 +1,20 @@
 "use client"
 import { useState, useEffect } from "react";
 import { IUser } from "@/src/models/user.model";
-import styled from "styled-components";
 import { IRequestOnDetailUserCardProps } from "@/src/models/detailUser.model";
-import SkillTag from "../ui/skillTag/skillTag";
 import { Urbanist } from "next/font/google";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { getUserById } from "@/src/app/api/users";
 import { FaLinkedin, FaGithubSquare, FaBehanceSquare } from "react-icons/fa";
+import { IoFlowerOutline } from "react-icons/io5";
+import styled from "styled-components";
 import StyledNavLink from "../ui/links/NavLinks";
+import SkillTag from "../ui/skillTag/skillTag";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 const ProfileContainer = styled.div`
   width: 70%;
@@ -39,19 +43,19 @@ const ProfileContainer = styled.div`
 const Header = styled.div`
   background-color: ${({ theme }) => theme.colors.bgTertiary};
   display: flex;
-  padding-left: 1rem;
+  padding: 1rem 1rem 0 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   position: relative;
   border-radius: 10px;
   width: 100%;
-  padding-top: 1rem;
 `;
 
 const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const MainInfo = styled.div`
@@ -74,10 +78,9 @@ const UserName = styled.h1`
 const UserTitle = styled.h2`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 10px;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.textDark};
-  font-style: italic;
   font-weight: 400;
   margin-top: 0;
   
@@ -95,6 +98,26 @@ const ProfileImage = styled.div<{ urlImage: string }>`
   height: 4rem;
   border-radius: 100%;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
+
+  @media (max-width: 769px) {
+      display: none;
+    }
+`;
+
+const ProfileImageMobile = styled.div<{ urlImage: string }>`
+  display: none;
+  background-image: url(${(props) => props.urlImage != " " ? props.urlImage : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"}); 
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 14.5rem;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
+  margin-bottom: 1rem;
+
+  @media (max-width: 769px) {
+      display: block;
+    }
 `;
 
 const ConnectionsRating = styled.div`
@@ -133,14 +156,12 @@ const Connections = styled.div`
 
 const Skills = styled.div`
   align-items: start;
-  align-self: start;
+  align-self: end;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
   margin-top: 1rem;
-  padding-left: 1rem;
-  border-left: 1px solid ${({ theme }) => theme.colors.textBlack};
 
   & div{
     padding: 0;
@@ -153,10 +174,10 @@ const Skills = styled.div`
 `;
 
 const UserDescription = styled.div`
-  min-width: 12rem;
-  max-width: 12rem;
+  min-width: 14rem;
+  max-width: 14rem;
   padding-bottom: 0.5rem;
-  min-height: 14.5rem;
+  min-height: 13.5rem;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   gap: 1rem;
@@ -180,7 +201,7 @@ const P = styled.p`
   text-align: start;
   padding: 0.6rem 1rem;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: 400;
 `;
@@ -205,6 +226,10 @@ const DivRating = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+
+  @media (max-width: 900px) {
+      gap: 1.2rem
+    }
 `;
 
 const Star = styled.span`
@@ -224,7 +249,7 @@ const DivContent = styled.div`
     display: flex;
     align-items: start;
     height: 100%;
-    min-height: 14.5rem;
+    min-height: 13.5rem;
     width: 100%;
     gap: 1rem;
     padding-top: 1rem;
@@ -235,6 +260,11 @@ const DivContent = styled.div`
 `;
 
 const Match = styled.span`
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  font-family: ${urbanist.style.fontFamily};
   color: ${({ theme }) => theme.colors.textOrange};
   padding: 2px 10px;
   border-radius: 20px;
@@ -242,6 +272,7 @@ const Match = styled.span`
   border: 1px solid ${({ theme }) => theme.colors.textOrange};
   font-size: 8px;
   font-weight: bold;
+  font-style: normal;
 `;
 
 const ContactInfo = styled.div`
@@ -271,6 +302,10 @@ const MediaContainer = styled.div`
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   gap: 1rem;
+
+  @media (max-width: 600px) {
+    min-height: 10.5rem;
+    }
 `;
 
 const SocialButtons = styled.div`
@@ -296,6 +331,7 @@ const SocialButton = styled.div`
   a {
     padding: 0;
     color: ${({ theme }) => theme.colors.textDark};
+    font-size: 0.9rem
   }
 `;
 
@@ -309,6 +345,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
       try {
         const detailUser = await getUserById(userData.id);
         setUserDetail(detailUser);
+
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -337,6 +374,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
     : [];
   return (
     <ProfileContainer>
+      <ProfileImageMobile urlImage={userDetail.urlImage} />
       <Header>
         <UserInfo>
           <MainInfo>
@@ -345,7 +383,7 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
               <UserName>{userData.fullName}</UserName>
               <UserTitle>
                 {userDetail.jobTitle}
-                <Match>⚜ Match</Match>
+                <Match><IoFlowerOutline />Match</Match>
               </UserTitle>
             </div>
           </MainInfo>
@@ -376,6 +414,23 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
       </Header>
       <DivUserDetails>
         <DivContent>
+        <MediaContainer>
+            <H3>Enlaces Externos</H3>
+            <SocialButtons>
+              <SocialButton>
+                <FaLinkedin />
+                <StyledNavLink target="_blank" href={userDetail.urlLinkedin as string} label="LinkedIn" />
+              </SocialButton>
+              <SocialButton>
+                <FaGithubSquare />
+                <StyledNavLink target="_blank" href={userDetail.urlGithub as string} label="GitHub" />
+              </SocialButton>
+              <SocialButton>
+                <FaBehanceSquare />
+                <StyledNavLink target="_blank" href={userDetail.urlBehance as string} label="Adobe Behance" />
+              </SocialButton>
+            </SocialButtons>
+          </MediaContainer>
           <UserDescription>
             <H3>Descripción</H3>
             <P>{userDetail.description}</P>
@@ -396,23 +451,6 @@ const UserProfileDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }
               <span>{userDetail.birthdate!.slice(0, 4)}</span>
             </ContactInfo>
           </UserDescription>
-          <MediaContainer>
-            <H3>Enlaces Externos</H3>
-            <SocialButtons>
-              <SocialButton>
-                <FaLinkedin />
-                <StyledNavLink target="_blank" href={userDetail.urlLinkedin as string} label="LinkedIn" />
-              </SocialButton>
-              <SocialButton>
-                <FaGithubSquare />
-                <StyledNavLink target="_blank" href={userDetail.urlGithub as string} label="GitHub" />
-              </SocialButton>
-              <SocialButton>
-                <FaBehanceSquare />
-                <StyledNavLink target="_blank" href={userDetail.urlBehance as string} label="Behance" />
-              </SocialButton>
-            </SocialButtons>
-          </MediaContainer>
         </DivContent>
       </DivUserDetails>
       <Skills>
