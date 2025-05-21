@@ -37,7 +37,7 @@ export const Input = styled.input`
 export const SubmitButton = styled.button`
   width: 100%;
   padding: 0.8rem;
-  background-color: #000;
+  background-color: #222;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -45,6 +45,6 @@ export const SubmitButton = styled.button`
   font-size: 1rem;
 
   &:hover {
-    background-color: #333;
+    background-color: #000;
   }
 `;
