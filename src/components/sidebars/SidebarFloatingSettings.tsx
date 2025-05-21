@@ -51,7 +51,7 @@ const SidebarContainer = styled.div<{ isOpen: boolean }>`
 `;
 
 const SidebarContent = styled.div`
-    min-height: 235px !important;
+    min-height: 150px !important;
     width: 100%;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.textWhite};
@@ -99,12 +99,6 @@ const SettingsFloatingSidebar: React.FC<SettingsSidebarProps> = ({ isOpen, onClo
             <NavList>
                 <NavItem onClick={() => changePage('PERFIL')}>
                     <StyledNavLink href="/user/profile" label="PERFIL" />
-                </NavItem>
-                <NavItem onClick={() => changePage('SKILLS')}>
-                    <StyledNavLink href="/user/skills" label="SKILLS" />
-                </NavItem>
-                <NavItem onClick={() => changePage('MÉTRICAS')}>
-                    <StyledNavLink href="/user/metrics" label="MÉTRICAS" />
                 </NavItem>
                 <NavItem onClick={() => changePage('SOCIAL')}>
                     <StyledNavLink href="/user/social" label="SOCIAL" />
