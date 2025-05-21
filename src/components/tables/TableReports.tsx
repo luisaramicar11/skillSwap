@@ -31,6 +31,8 @@ const Td = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  color: #808080;
+  font-weight: bold;
 `;
 
 const Tr = styled.tr`
@@ -59,7 +61,7 @@ const TableReports: React.FC<TableDataReports> = ({ data, setDataToEdit, deleteD
             ))
           ) : (
             <Tr>
-              <Td colSpan={7}>Sin datos</Td>
+              <Td colSpan={11}>◕  No hay datos que mostrar.</Td>
             </Tr>
           )}
         </tbody>

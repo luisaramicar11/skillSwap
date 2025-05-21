@@ -57,6 +57,7 @@ const SubmitButton = styled.button`
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
   width: 40%;
+  min-width: 70px !important;
   cursor: pointer;
 
   &:hover {
