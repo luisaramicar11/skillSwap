@@ -1,7 +1,6 @@
 import apiClient from './apiClient';
-import { IUserCardProps } from '../../models/userCards.model';
+import { IUserCardProps, IUserCarouselProps } from '../../models/userCards.model';
 import { IUser } from '../../models/user.model'; // Importa la interfaz de IUser si aún no está
-import { IUserCarouselProps } from "../../models/userCards.model";
 
 // Función para obtener los usuarios con imágenes
 export const getUsersForImages = async (): Promise<IUserCardProps[]> => {

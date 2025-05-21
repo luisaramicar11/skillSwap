@@ -41,14 +41,13 @@ export const updateRequestById = async (idRequest: number, idStateRequest: numbe
 // src/api/request.ts
 export const getRequestsMessagesById = async (userId: number) => {
   try {
-    const data = await apiClient(`RequestsGet/GetRequestMessagesById/${userId}`
+    const response = await apiClient(`RequestsGet/GetRequestMessagesById/${userId}`
     );
 
-
-    if (data?.message === "Success") {
-      return data; // Retorna las data para entrar a las solicitudes si la respuesta es exitosa
+    if (response?.message === "Success") {
+      return response.data.response; // Retorna las data para entrar a las solicitudes si la respuesta es exitosa
     } else {
-      throw new Error(data?.message || 'Error al obtener solicitudes');
+      throw new Error(response?.message || 'Error al obtener solicitudes');
     }
   } catch (error) {
     console.error("Error obteniendo solicitudes:", error);

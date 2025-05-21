@@ -8,7 +8,7 @@ export interface IReport {
     idState: number;
     idUser: number;
     idReportedUser: number;
-  }
+}
 
 export const createReport = async (reportData: IReport) => {  // Ajusta el tipo según tu interfaz
     try {
