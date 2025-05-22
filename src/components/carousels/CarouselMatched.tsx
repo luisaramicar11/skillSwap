@@ -236,7 +236,7 @@ const CarouselMatched: React.FC<IProfileCardProps> = ({ userId }) => {
       >
         {allUsersData.slice(0, maxUsersToShow).map((user) => (
           <SwiperSlide key={user.id}>
-            <Link href={`/user/detailUser?id=${user.id}`}>
+            <Link href={`/user/detail/u?id=${user.id}`}>
               <UserCard>
                 <AvatarWrapper>
                   <Image

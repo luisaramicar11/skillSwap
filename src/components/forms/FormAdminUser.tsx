@@ -250,24 +250,24 @@ const FormUsers: React.FC<EditUserFormProps> = ({
           <DivInfo>Los códigos de los estados de los usuarios son: <strong>1. Activo, 2. Inactivo, 3. Suspendido</strong></DivInfo>
         </article>
         <Div>
-          <label htmlFor="name"><p>★</p>Nombre del usuario</label>
+          <label htmlFor="name"><p>★</p>Nombre del Usuario</label>
           <Input
             type="text"
             name="name"
             id="name" 
-            placeholder="Nombre del usuario"
+            placeholder="Nombre del Usuario"
             onChange={handleChange}
             value={form.name}
             required
           />
         </Div>
         <Div>
-          <label htmlFor="lastName"><p>★</p>Apellidos del usuario</label>
+          <label htmlFor="lastName"><p>★</p>Apellidos del Usuario</label>
           <Input
             type="text"
             name="lastName"
             id="lastName" 
-            placeholder="Apellidos del usuario"
+            placeholder="Apellidos del Usuario"
             onChange={handleChange}
             value={form.lastName}
             required
@@ -286,12 +286,12 @@ const FormUsers: React.FC<EditUserFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="category"><p>★</p>Categoría</label>
+          <label htmlFor="category"><p>★</p>Comunidad</label>
           <Input
             type="text"
             name="category"
             id="category" 
-            placeholder="Categoría"
+            placeholder="Comunidad"
             onChange={handleChange}
             value={form.category}
             required
