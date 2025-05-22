@@ -14,6 +14,7 @@ export const getUsersForImages = async (): Promise<IUserCardProps[]> => {
 
         return response.data.response;  
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
@@ -30,6 +31,7 @@ export const getAllUsersSorted = async (): Promise<IUserCarouselProps[]> => {
 
         return response;  // Asegúrate de devolver los datos correctos
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
@@ -46,6 +48,7 @@ export const getUserById = async (userId: number): Promise<IUser> => {
 
         return response.data.response;  // Devuelve los datos del usuario
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
@@ -62,6 +65,7 @@ export const toggleUserAccountState = async (id: number, action: string) => {
 
         return response.data.response.estado; // Ajusta según la estructura de respuesta de tu API
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
@@ -77,6 +81,7 @@ export const getRequestById = async (userId: number) => {
 
         return response.data.response; 
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };
@@ -92,6 +97,7 @@ export const getAllUsers = async () => {
 
         return response.data.response;  
     } catch (error) {
+        console.error(error);
         throw error;
     }
 };

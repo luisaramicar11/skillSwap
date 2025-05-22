@@ -8,13 +8,13 @@ import InputAuth from "../../ui/inputs/InputAuth";
 import Label from "../../ui/labels/LabelAuth";
 import Select from "../../ui/selects/SelectRegister";
 import TextArea from "../../ui/textAreas/TextAreaRegister";
-import ButtonSingUp from '../../ui/buttons/ButtonSingUp';
+import ButtonAuth from '../../ui/buttons/ButtonAuth';
 import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
 import StyledNavLink from '../../ui/links/NavLinks';
 import ProgressBar from '../../progressBar/ProgressBar';
 
 // Styled
-import { DivUserData, DivUserInput, DivUserTitle, DivButtonSingUp, Form } from "./RegisterStyling";
+import { DivUserData, DivUserInput, DivUserTitle, DivButtonAuth, Form } from "./RegisterStyling";
 import { Title, BackLink, Arrow, FormWrapper, Container, DivButtonLogin } from '../login/LoginStyling';
 
 export default function RegisterPage() {
@@ -364,32 +364,32 @@ export default function RegisterPage() {
         <Form onSubmit={handleSubmit}>
           {renderStep()}
           <DivButtonLogin />
-          <DivButtonSingUp>
+          <DivButtonAuth>
             {currentStep > 0 && currentStep < 7 && (
-              <ButtonSingUp className="backBtn" type="button" onClick={() => setCurrentStep(currentStep - 1)}>
+              <ButtonAuth className="backBtn" type="button" onClick={() => setCurrentStep(currentStep - 1)}>
                 ATRÁS
-              </ButtonSingUp>
+              </ButtonAuth>
             )}
             {currentStep < 6 ? (
-              <ButtonSingUp type="button" onClick={() => setCurrentStep(currentStep + 1)}>
+              <ButtonAuth type="button" onClick={() => setCurrentStep(currentStep + 1)}>
                 SIGUIENTE
-              </ButtonSingUp>
+              </ButtonAuth>
             ) : (
               loading ? (
-                <ButtonSingUp type="submit" disabled={loading}>
+                <ButtonAuth type="submit" disabled={loading}>
                   Registrando...
-                </ButtonSingUp>
+                </ButtonAuth>
               ) : hasError ? (
-                <ButtonSingUp type="button" onClick={() => setCurrentStep(0)}>
+                <ButtonAuth type="button" onClick={() => setCurrentStep(0)}>
                   REGRESAR
-                </ButtonSingUp>
+                </ButtonAuth>
               ) : (
-                <ButtonSingUp type="submit" onClick={() => setCurrentStep(currentStep + 1)}>
+                <ButtonAuth type="submit" onClick={() => setCurrentStep(currentStep + 1)}>
                   ENVIAR
-                </ButtonSingUp>
+                </ButtonAuth>
               )
             )}
-          </DivButtonSingUp>
+          </DivButtonAuth>
         </Form>
         {hasError && currentStep == 7 && <p style={{ color: '#222222' }}>{error}</p>}
       </FormWrapper>

@@ -75,7 +75,7 @@ const ConnectionRequestForm: React.FC<IConnectionRequestFormProps> = ({ idReceiv
     <FormContainer onSubmit={handleSubmit}>
       {error && <p>{error}</p>}
       <TextArea 
-        placeholder="Type here the content for your connection request..." 
+        placeholder="Escribe aquí el contenido de tu solicitud de conexión..." 
         value={message} 
         onChange={(e) => setMessage(e.target.value)} 
         disabled={loading}

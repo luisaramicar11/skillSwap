@@ -224,12 +224,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           <DivInfo>Los códigos de los estados de los usuarios son: <strong> 1. Activo, 2. Inactivo, 3. Suspendido</strong>.</DivInfo>
         </article>
         <Div>
-          <label htmlFor="title"><p>★</p>Nombre del reporte</label>
+          <label htmlFor="title"><p>★</p>Título del Reporte</label>
           <Input
             type="text"
             name="title"
             id="title"
-            placeholder="Nombre del reporte"
+            placeholder="Título del Reporte"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.titleReport}
@@ -237,12 +237,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="description"><p>★</p>Descripción del reporte</label>
+          <label htmlFor="description"><p>★</p>Descripción del Reporte</label>
           <Input
             type="text"
             name="description"
             id="description"
-            placeholder="Descripción del reporte"
+            placeholder="Descripción del Reporte"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.description}
@@ -250,7 +250,7 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="dateReport"><p>★</p>Fecha del reporte</label>
+          <label htmlFor="dateReport"><p>★</p>Fecha del Reporte</label>
           <Input
             type="date"
             name="dateReport"
@@ -288,12 +288,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="idUser"><p>★</p>ID del Usuario</label>
+          <label htmlFor="idUser"><p>★</p>ID del Informante</label>
           <Input
             type="number"
             name="idUser"
             id="idUser"
-            placeholder="Id del User"
+            placeholder="ID del Informante"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.idUser}
@@ -301,12 +301,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="idReportedUser"><p>★</p>ID del usuario reportado</label>
+          <label htmlFor="idReportedUser"><p>★</p>ID del Reportado</label>
           <Input
             type="number"
             name="idReportedUser"
             id="idReportedUser"
-            placeholder="Id del usuario reportado"
+            placeholder="ID del Reportado"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.idReportedUser}
@@ -327,12 +327,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="user"><p>★</p>Usuario quien reporta</label>
+          <label htmlFor="user"><p>★</p>Usuario Informante</label>
           <Input
             type="text"
             name="user"
             id="user"
-            placeholder="Usuario quien reporta"
+            placeholder="Usuario Informante"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.user}
@@ -340,12 +340,12 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="reportedUser"><p>★</p>Usuario reportado</label>
+          <label htmlFor="reportedUser"><p>★</p>Usuario Reportado</label>
           <Input
             type="text"
             name="reportedUser"
             id="reportedUser"
-            placeholder="Usuario reportado"
+            placeholder="Usuario Reportado"
             onBlur={handleChange}
             onChange={handleChange}
             value={form.reportedUser}
