@@ -11,7 +11,7 @@ export const getRequestById = async (userId: number) => {
 
     return response.data.response; 
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -68,7 +68,7 @@ export const checkUserConnection = async (currentId: number, requestId: number) 
     );
     return response.data.response; // Retorna el estado de la conexión
   } catch (err) {
-    console.error("Error al verificar conexión:");
+    console.error("Error al verificar conexión:", err);
     throw err;
   }
 };

@@ -103,7 +103,7 @@ const PassButton = styled.button`
   }
 `;
 
-const StarButton = styled.button`
+const MatchButton = styled.button`
   position: absolute;
   padding: 0;
   bottom: 4.05rem;
@@ -134,8 +134,8 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
     onPass();
   };
 
-  const handleStarClick = () => {
-    setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en la estrellita
+  const handleMatchClick = () => {
+    setModalOpen(true); // Aquí es donde abrirías el modal al hacer clic en el ícono de apretón de manos
   };
 
   return (
@@ -145,7 +145,7 @@ const SliderCard: React.FC<ISliderCardProps> = ({ user, onPass }) => {
         <Image urlImage={user.urlImage} alt={user.fullName} />
         <Title>{user.fullName}</Title>
         <Subtitle>{user.jobTitle}</Subtitle>
-        <StarButton onClick={handleStarClick}><PiHandshake /></StarButton> {/* Aquí va el ícono de apretón de manos */}
+        <MatchButton onClick={handleMatchClick}><PiHandshake /></MatchButton> {/* Aquí va el ícono de apretón de manos */}
       </CardContainer>
 
       {modalOpen && <Modal userToRequest={user} isOpen={modalOpen} onClose={() => setModalOpen(false)} />}

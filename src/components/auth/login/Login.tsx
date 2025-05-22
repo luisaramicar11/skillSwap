@@ -1,18 +1,17 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/src/app/redux/slices/authSlice";
 import {IUserLoginResponse } from "../../../models/login.model"
 import { toast } from "react-toastify";
 import { AppDispatch } from "@/src/app/redux/store";
-import InputSingUp from "../../ui/inputs/InputAuth";
-import ButtonSingUp from "../../ui/buttons/ButtonSingUp";
+import InputAuth from "../../ui/inputs/InputAuth";
+import ButtonAuth from "../../ui/buttons/ButtonAuth";
 import Label from "../../ui/labels/LabelAuth";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import StyledNavLink from "../../ui/links/NavLinks";
 import { RootState } from '../../../app/redux/store';
-import { ReactNode } from "react";
 
 // Styled components
 import {FormWrapper,Container,Title,DivButtonLogin,BackLink,Arrow} from "./LoginStyling";
@@ -92,7 +91,7 @@ export default function LoginPage({forgotPassword}: ILoginPageProps) {
         <Title>Iniciar Sesión</Title>
         <form onSubmit={handleSubmit}>
           <Label text="Email" htmlFor="email-login" />
-          <InputSingUp
+          <InputAuth
             type="email"
             id="email-login"
             name="email"
@@ -103,7 +102,7 @@ export default function LoginPage({forgotPassword}: ILoginPageProps) {
             autoComplete="email"
           />
           <Label text="Contraseña" htmlFor="password-login" />
-          <InputSingUp
+          <InputAuth
             type="password"
             id="password-login"
             name="password"
@@ -114,9 +113,9 @@ export default function LoginPage({forgotPassword}: ILoginPageProps) {
             autoComplete="current-password"
           />
           <DivButtonLogin>
-            <ButtonSingUp type="submit" disabled={loading} onClick={() => handlePageChange('INICIO')}>
+            <ButtonAuth type="submit" disabled={loading} onClick={() => handlePageChange('INICIO')}>
               {loading ? "Cargando..." : "ENTRAR"}
-            </ButtonSingUp>
+            </ButtonAuth>
           </DivButtonLogin>
 
           {/* Botón estilizado de "Olvidaste tu contraseña" */}
