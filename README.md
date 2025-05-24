@@ -190,7 +190,7 @@ NEXT_PUBLIC_GITHUB_TOKEN=your_generated_token_here
 Make sure to keep your token private. If you believe it has been compromised, revoke it immediately and generate a new one.
 
 
---------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------- 
 
 <br>
 <div align="center">
@@ -199,7 +199,7 @@ Make sure to keep your token private. If you believe it has been compromised, re
 </div>
 <br>
 
---------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------- 
 
 <div align="center">
   <img src="./public/img/skillswap-isotype.webp" alt="Skillswap-Isotype" width="400" />
