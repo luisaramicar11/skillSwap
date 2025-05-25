@@ -130,7 +130,7 @@ const UserInfo = styled.div`
 const UserName = styled.h2`
   font-size: 1.5em;
   margin: 0;
-  color: #333;
+  color: #222;
 `;
 
 const JobTitle = styled.h4`
@@ -189,8 +189,8 @@ const FormUsers: React.FC<EditUserFormProps> = ({
       console.log(id);
       setForm({
         ...userWithoutId,
-        suspensionDate: userWithoutId.suspensionDate || null,
-        reactivationDate: userWithoutId.reactivationDate || null,
+        suspensionDate: userWithoutId.suspensionDate ?? null,
+        reactivationDate: userWithoutId.reactivationDate ?? null,
       });
     } else {
       setForm(initialFormState);
@@ -250,24 +250,24 @@ const FormUsers: React.FC<EditUserFormProps> = ({
           <DivInfo>Los códigos de los estados de los usuarios son: <strong>1. Activo, 2. Inactivo, 3. Suspendido</strong></DivInfo>
         </article>
         <Div>
-          <label htmlFor="name"><p>★</p>Nombre del usuario</label>
+          <label htmlFor="name"><p>★</p>Nombre del Usuario</label>
           <Input
             type="text"
             name="name"
             id="name" 
-            placeholder="Nombre del usuario"
+            placeholder="Nombre del Usuario"
             onChange={handleChange}
             value={form.name}
             required
           />
         </Div>
         <Div>
-          <label htmlFor="lastName"><p>★</p>Apellidos del usuario</label>
+          <label htmlFor="lastName"><p>★</p>Apellidos del Usuario</label>
           <Input
             type="text"
             name="lastName"
             id="lastName" 
-            placeholder="Apellidos del usuario"
+            placeholder="Apellidos del Usuario"
             onChange={handleChange}
             value={form.lastName}
             required
@@ -286,12 +286,12 @@ const FormUsers: React.FC<EditUserFormProps> = ({
           />
         </Div>
         <Div>
-          <label htmlFor="category"><p>★</p>Categoría</label>
+          <label htmlFor="category"><p>★</p>Comunidad</label>
           <Input
             type="text"
             name="category"
             id="category" 
-            placeholder="Categoría"
+            placeholder="Comunidad"
             onChange={handleChange}
             value={form.category}
             required
@@ -328,7 +328,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
             name="suspensionDate"
             id="suspensionDate" 
             onChange={handleChange}
-            value={form.suspensionDate || ""}
+            value={form.suspensionDate ?? ""}
           />
         </Div>
         <Div>
@@ -338,7 +338,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
             name="reactivationDate"
             id="reactivationDate" 
             onChange={handleChange}
-            value={form.reactivationDate || ""}
+            value={form.reactivationDate ?? ""}
           />
         </Div>
         <DivButton>
@@ -349,7 +349,7 @@ const FormUsers: React.FC<EditUserFormProps> = ({
         </DivButton>
       </Form>
       <Card>
-      <UserImage urlImage={form.urlImage} />
+      <UserImage urlImage={form.urlImage ? form.urlImage : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"} />
       <UserInfo>
         <UserName>{form.name}{form.lastName}</UserName>
         <JobTitle>{form.jobTitle}</JobTitle>

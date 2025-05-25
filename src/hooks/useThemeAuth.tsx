@@ -1,10 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { GlobalDarkTheme, GlobalTheme } from '../app/GlobalStyling';
-import { darkThemeLabels } from '../lib/utils/handlePageTheme';
+import { GlobalDarkTheme, GlobalTheme, darkThemeLabels } from '../app/GlobalStyling';
 import { IGlobalTheme } from '../models/globalTheme.model';
 
-// Hook personalizado para manejar el tema
+// Hook personalizado para manejar el tema 
 export function useThemeAuth(): [IGlobalTheme, (theme: 'dark' | 'light') => void] {
     const [theme, setTheme] = useState<IGlobalTheme>(GlobalTheme);
 

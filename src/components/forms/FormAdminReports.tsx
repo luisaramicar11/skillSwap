@@ -115,22 +115,24 @@ const Card = styled.div`
   text-align: center;
 `;
 
-const UserImage = styled.div<{ urlImage: string }>`
+const ReportImage = styled.div<{ urlImage: string }>`
   width: 100%;
   height: 450px;
   background-image: url(${(props) => props.urlImage});
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
+  filter: grayscale() contrast(1.9) opacity(0.6) brightness(1.3);
 `;
 
-const UserInfo = styled.div`
+const ReportInfo = styled.div`
   padding: 20px;
 `;
 
 const ReportTitle = styled.h2`
   font-size: 1.5em;
   margin: 0;
-  color: #333;
+  color: #222;
 `;
 
 const ReportDate = styled.h4`
@@ -213,161 +215,159 @@ const CreateReportForm: React.FC<CreateReportFormProps> = ({
   };
 
   return (
-    <>
-      <DivContent>
-        <Form onSubmit={handleSubmit}>
-          <article>
-            <Title>★ EDITAR REPORTE</Title>
-            <DivInfo>Aquí podrás resolver y tomar acción de los reportes realizados por usuarios de la plataforma.</DivInfo>
-            <DivInfo>La acción tomada debe ser cualquiera de las siguientes: <strong>suspender, habilitar</strong> o <strong>deshabilitar</strong>.</DivInfo>
-            <DivInfo>Los códigos de los estados de los usuarios son: <strong> 1. Activo, 2. Inactivo, 3. Suspendido</strong>.</DivInfo>
-          </article>
-          <Div>
-            <label htmlFor="title"><p>★</p>Nombre del reporte</label>
-            <Input
-              type="text"
-              name="title"
-              id="title"  
-              placeholder="Nombre del reporte"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.titleReport}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="description"><p>★</p>Descripción del reporte</label>
-            <Input
-              type="text"
-              name="description"
-              id="description" 
-              placeholder="Descripción del reporte"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.description}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="dateReport"><p>★</p>Fecha del reporte</label>
-            <Input
-              type="date"
-              name="dateReport"
-              id="dateReport"  
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.dateReport ? formatDate(form.dateReport) : ""}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="actionTaken"><p>★</p>Acción tomada</label>
-            <Input
-              type="text"
-              name="actionTaken"
-              id="actionTaken" 
-              placeholder="Acción tomada"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.actionTaken}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="idState"><p>★</p>ID del Estado</label>
-            <Input
-              type="number"
-              name="idState"
-              id="idState"  
-              placeholder="Id del Estado"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.idState}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="idUser"><p>★</p>ID del Usuario</label>
-            <Input
-              type="number"
-              name="idUser"
-              id="idUser"  
-              placeholder="Id del User"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.idUser}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="idReportedUser"><p>★</p>ID del usuario reportado</label>
-            <Input
-              type="number"
-              name="idReportedUser"
-              id="idReportedUser"  
-              placeholder="Id del usuario reportado"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.idReportedUser}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="state"><p>★</p>Estado</label>
-            <Input
-              type="text"
-              name="state"
-              id="state" 
-              placeholder="Estado"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.state}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="user"><p>★</p>Usuario quien reporta</label>
-            <Input
-              type="text"
-              name="user"
-              id="user"  
-              placeholder="Usuario quien reporta"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.user}
-              required
-            />
-          </Div>
-          <Div>
-            <label htmlFor="reportedUser"><p>★</p>Usuario reportado</label>
-            <Input
-              type="text"
-              name="reportedUser"
-              id="reportedUser" 
-              placeholder="Usuario reportado"
-              onBlur={handleChange}
-              onChange={handleChange}
-              value={form.reportedUser}
-              required
-            />
-          </Div>
-          <DivButton>
-            <Button type="submit">Enviar</Button>
-            <Button type="button" onClick={handleReset}>Limpiar</Button>
-          </DivButton>
-        </Form>
-        <Card>
-      <UserImage urlImage="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg" />
-      <UserInfo>
-        <ReportTitle>{form.titleReport}</ReportTitle>
-        <ReportDate>{form.dateReport ? formatDate(form.dateReport) : ""}</ReportDate>
-        <Description>
-          {form.description}
-        </Description>
-      </UserInfo>
-    </Card>
-      </DivContent>
-    </>
+    <DivContent>
+      <Form onSubmit={handleSubmit}>
+        <article>
+          <Title>★ EDITAR REPORTE</Title>
+          <DivInfo>Aquí podrás resolver y tomar acción de los reportes realizados por usuarios de la plataforma.</DivInfo>
+          <DivInfo>La acción tomada debe ser cualquiera de las siguientes: <strong>suspender, habilitar</strong> o <strong>deshabilitar</strong>.</DivInfo>
+          <DivInfo>Los códigos de los estados de los usuarios son: <strong> 1. Activo, 2. Inactivo, 3. Suspendido</strong>.</DivInfo>
+        </article>
+        <Div>
+          <label htmlFor="title"><p>★</p>Título del Reporte</label>
+          <Input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Título del Reporte"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.titleReport}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="description"><p>★</p>Descripción del Reporte</label>
+          <Input
+            type="text"
+            name="description"
+            id="description"
+            placeholder="Descripción del Reporte"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.description}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="dateReport"><p>★</p>Fecha del Reporte</label>
+          <Input
+            type="date"
+            name="dateReport"
+            id="dateReport"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.dateReport ? formatDate(form.dateReport) : ""}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="actionTaken"><p>★</p>Acción tomada</label>
+          <Input
+            type="text"
+            name="actionTaken"
+            id="actionTaken"
+            placeholder="Acción tomada"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.actionTaken}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="idState"><p>★</p>ID del Estado</label>
+          <Input
+            type="number"
+            name="idState"
+            id="idState"
+            placeholder="Id del Estado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idState}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="idUser"><p>★</p>ID del Informante</label>
+          <Input
+            type="number"
+            name="idUser"
+            id="idUser"
+            placeholder="ID del Informante"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idUser}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="idReportedUser"><p>★</p>ID del Reportado</label>
+          <Input
+            type="number"
+            name="idReportedUser"
+            id="idReportedUser"
+            placeholder="ID del Reportado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.idReportedUser}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="state"><p>★</p>Estado</label>
+          <Input
+            type="text"
+            name="state"
+            id="state"
+            placeholder="Estado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.state}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="user"><p>★</p>Usuario Informante</label>
+          <Input
+            type="text"
+            name="user"
+            id="user"
+            placeholder="Usuario Informante"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.user}
+            required
+          />
+        </Div>
+        <Div>
+          <label htmlFor="reportedUser"><p>★</p>Usuario Reportado</label>
+          <Input
+            type="text"
+            name="reportedUser"
+            id="reportedUser"
+            placeholder="Usuario Reportado"
+            onBlur={handleChange}
+            onChange={handleChange}
+            value={form.reportedUser}
+            required
+          />
+        </Div>
+        <DivButton>
+          <Button type="submit">Enviar</Button>
+          <Button type="button" onClick={handleReset}>Limpiar</Button>
+        </DivButton>
+      </Form>
+      <Card>
+        <ReportImage urlImage="https://cdn-icons-png.flaticon.com/512/567/567903.png" />
+        <ReportInfo>
+          <ReportTitle>{form.titleReport}</ReportTitle>
+          <ReportDate>{form.dateReport ? formatDate(form.dateReport) : ""}</ReportDate>
+          <Description>
+            {form.description}
+          </Description>
+        </ReportInfo>
+      </Card>
+    </DivContent>
   );
 };
 

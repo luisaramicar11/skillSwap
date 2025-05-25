@@ -8,14 +8,23 @@ import SkillTag from "../ui/skillTag/skillTag";
 import { Urbanist } from "next/font/google";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { getUserById } from "@/src/app/api/users";
+import { getCommunityDescription } from "@/src/lib/utils/ourCommunityDescription";
+import { FaArrowRight } from "react-icons/fa";
+import { MdQuestionMark } from "react-icons/md";
 
-const urbanist = Urbanist({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 const ProfileContainer = styled.div`
   width: 70%;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.bgPrimary};
   margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   padding-right: 1rem;
 
   & span{
@@ -35,19 +44,19 @@ const ProfileContainer = styled.div`
 const Header = styled.div`
   background-color: ${({ theme }) => theme.colors.bgTertiary};
   display: flex;
-  padding-left: 1rem;
+  padding: 1rem 1rem 0 1rem;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   position: relative;
   border-radius: 10px;
   width: 100%;
-  padding-top: 1rem;
 `;
 
 const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const MainInfo = styled.div`
@@ -70,27 +79,16 @@ const UserName = styled.h1`
 const UserTitle = styled.h2`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 10px;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.textDark};
-  font-style: italic;
   font-weight: 400;
   margin-top: 0;
-
+  
   @media (max-width: 400px) {
       flex-direction: column;
       align-items: start;
     }
-`;
-
-const Unknown = styled.span`
-  color: ${({ theme }) => theme.colors.textDark};
-  padding: 2px 10px;
-  border-radius: 20px;
-  text-align: center;
-  border: 1px solid ${({ theme }) => theme.colors.textDark};
-  font-size: 8px;
-  font-weight: bold;
 `;
 
 const ProfileImage = styled.div<{ urlImage: string }>`
@@ -101,6 +99,26 @@ const ProfileImage = styled.div<{ urlImage: string }>`
   height: 4rem;
   border-radius: 100%;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
+
+  @media (max-width: 769px) {
+      display: none;
+    }
+`;
+
+const ProfileImageMobile = styled.div<{ urlImage: string }>`
+  display: none;
+  background-image: url(${(props) => props.urlImage != " " ? props.urlImage : "https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"}); 
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 14.5rem;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
+  margin-bottom: 1rem;
+
+  @media (max-width: 769px) {
+      display: block;
+    }
 `;
 
 const ConnectionsRating = styled.div`
@@ -139,14 +157,12 @@ const Connections = styled.div`
 
 const Skills = styled.div`
   align-items: start;
-  align-self: start;
+  align-self: end;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
   margin-top: 1rem;
-  padding-left: 1rem;
-  border-left: 1px solid ${({ theme }) => theme.colors.textBlack};
 
   & div{
     padding: 0;
@@ -159,12 +175,17 @@ const Skills = styled.div`
 `;
 
 const UserDescription = styled.div`
-  min-width: 12rem !important;
-  max-width: 12rem !important;
-  min-height: 14.5rem;
+  min-width: 14rem;
+  max-width: 14rem;
+  padding-bottom: 0.5rem;
+  min-height: 13.5rem;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.textBlack};
   gap: 1rem;
+
+  @media (max-width: 600px) {
+      max-width: 100%;
+    }
 `;
 
 const H3 = styled.h3`
@@ -181,7 +202,7 @@ const P = styled.p`
   text-align: start;
   padding: 0.6rem 1rem;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.colors.textSecondary};
   font-weight: 400;
 `;
@@ -206,6 +227,10 @@ const DivRating = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+
+  @media (max-width: 900px) {
+      gap: 1.2rem
+    }
 `;
 
 const Star = styled.span`
@@ -217,22 +242,63 @@ const DivUserDetails = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
 `;
 
 const DivContent = styled.div`
     display: flex;
-    align-items: end;
+    align-items: start;
     height: 100%;
-    min-height: 14.5rem;
+    min-height: 13.5rem;
     width: 100%;
     gap: 1rem;
     padding-top: 1rem;
 
-    @media (max-width: 900px) {
-      flex-wrap: wrap;
+    & section{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  & span{
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+
+    & section{
+      align-items: center;
     }
+
+    & span {
+      display: block;
+      width: 50%;
+      height: 1px;
+      border-top: 1px solid ${({ theme }) => theme.colors.textDark};
+      margin: 1rem 5px;
+      opacity: 0.5;
+    }
+  }
+`;
+
+const Unknown = styled.span`
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  font-family: ${urbanist.style.fontFamily};
+  color: ${({ theme }) => theme.colors.textDark};
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  font-size: 8px;
+  font-weight: bold;
+  font-style: normal;
 `;
 
 const SendButton = styled.button`
@@ -241,23 +307,39 @@ const SendButton = styled.button`
   align-items: center;
   background-color: transparent;
   color: ${({ theme }) => theme.colors.textDark};
-  padding: 15px 25px;
-  margin-top: 1rem;
+  padding: 14px 24px;
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.textDark};
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
+  gap: 10px;
+
+  &:hover{
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
+    }
 `;
 
-const ButtonText = styled.span`
+const ButtonText = styled.p`
   font-size: 18px;
   font-weight: bold;
+  color: ${({ theme }) => theme.colors.textDark};
 `;
 
-const Arrow = styled.span`
-  font-size: 20px;
-  margin-left: 10px;
+const MediaContent = styled.div`
+  width: 100%;
+  height: 9rem !important;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
+  gap: 1rem;
+
+  @media (max-width: 600px) {
+    height: 12rem !important;
+    }
 `;
 
 const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData }) => {
@@ -302,6 +384,7 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData
     : [];
   return (
     <ProfileContainer>
+      <ProfileImageMobile urlImage={userDetail.urlImage} />
       <Header>
         <UserInfo>
           <MainInfo>
@@ -310,7 +393,7 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData
               <UserName>{userData.fullName}</UserName>
               <UserTitle>
                 {userDetail.jobTitle}
-                <Unknown>？Unknown</Unknown>
+                <Unknown><MdQuestionMark />Unknown</Unknown>
               </UserTitle>
             </div>
           </MainInfo>
@@ -341,20 +424,27 @@ const UserProfileNoDetail: React.FC<IRequestOnDetailUserCardProps> = ({ userData
       </Header>
       <DivUserDetails>
         <DivContent>
+          <section>
+            <MediaContent>
+              <H3>Cultura</H3>
+              <P>{getCommunityDescription(userDetail.category)}</P>
+            </MediaContent>
+            <span></span>
+            <SendButton onClick={openModal}>
+              <ButtonText>ENVIAR SOLICITUD</ButtonText><FaArrowRight />
+            </SendButton>
+            <span></span>
+          </section>
           <UserDescription>
             <H3>Descripción</H3>
             <P>{userDetail.description}</P>
           </UserDescription>
-          <Skills>
-            <SkillTag skillsArray={abilitiesArray} />
-          </Skills>
-          <SendButton onClick={openModal}>
-            <ButtonText>ENVIAR SOLICITUD</ButtonText>
-            <Arrow>→</Arrow>
-          </SendButton>
-          <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal} />
         </DivContent>
+        <Skills>
+          <SkillTag skillsArray={abilitiesArray} />
+        </Skills>
       </DivUserDetails>
+      <ModalRequest userToRequest={userData} isOpen={isModalOpen} onClose={closeModal} />
     </ProfileContainer>
   );
 };

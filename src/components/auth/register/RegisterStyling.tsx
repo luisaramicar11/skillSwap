@@ -60,7 +60,7 @@ export const Form = styled.form`
   }
 `;
 
-export const DivButtonSingUp = styled.div`
+export const DivButtonAuth = styled.div`
   position: absolute;
   bottom: 50px;
   display: flex;

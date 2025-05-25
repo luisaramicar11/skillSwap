@@ -27,6 +27,8 @@ const Td = styled.td`
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  color: #808080;
+  font-weight: bold;
 `;
 
 const Tr = styled.tr`
@@ -65,7 +67,7 @@ const TableUser: React.FC<TableUserProps> = ({
             ))
           ) : (
             <Tr>
-              <Td colSpan={8}>Sin datos</Td>
+              <Td colSpan={9}>◕  No hay datos que mostrar.</Td>
             </Tr>
           )}
         </tbody>

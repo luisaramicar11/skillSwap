@@ -22,6 +22,10 @@ const ModalOverlay = styled.div`
   margin: 0;
   padding: 0;
 
+  & strong {
+    font-weight: bold;
+  }
+
   > * {
     font-size: 14px !important ;
   }
@@ -38,6 +42,7 @@ const ModalContainer = styled.div`
   margin: 0;
   border-radius: 10px;
   padding: 0;
+  border: none;
 
   & h2{
     margin: 0;
@@ -45,7 +50,7 @@ const ModalContainer = styled.div`
 `;
 
 const ModalHeader = styled.div`
-  font-size: 1.5rem;
+  font-size: 20px !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background: ${({ theme }) => theme.colors.gradientPrimary};
@@ -64,7 +69,9 @@ const ModalHeader = styled.div`
   & article{
     font-weight: bold;
     font-style: normal;
-    color: #000000
+    font-size: 20px !important;
+    opacity: 0.6;
+    padding-left: 6px;
   }
 `;
 
@@ -74,7 +81,7 @@ const ModalCloseButton = styled.button`
   color: #000;
   opacity: 0.6;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.5rem  !important;
   cursor: pointer;
 `;
 
@@ -86,7 +93,6 @@ const DivRoute = styled.div`
   padding: 0.5rem;
   padding-left: 1rem;
   margin: 1rem;
-  margin-bottom: 0 ;
   font-weight: bold;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -94,6 +100,7 @@ const DivRoute = styled.div`
 const ModalContent = styled.div`
   display: flex;
   margin: 1rem;
+  margin-top: 0;
   border-radius: 10px;
   max-height: 400px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
@@ -136,7 +143,7 @@ const RightSection = styled.div`
 `;
 
 const AlertText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.8rem  !important;
   font-weight: 300;
   color: #000;
   margin-bottom: 10px;
@@ -148,12 +155,11 @@ const AlertText = styled.p`
   span {
     font-style: normal;
     padding-right: 0.5rem;
-    font-size: 1rem;
+    font-size: 1rem  !important;
   }
 `;
 
 const PoliceInfo = styled.div`
-  font-size: 0.8rem;
   font-weight: 300;
   color: #000;
   padding: 0.8rem;
@@ -189,9 +195,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <ModalOverlay>
         <ModalContainer>
-        <ScrollContainer overflowY="auto" overflowX='auto' marginY="60px 0 16px" style={{ maxHeight: '100%' }}>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px 0 16px" style={{ maxHeight: '100%' }}>
           <ModalHeader>
-            <div>SkillSwap<article>.org</article></div>
+            <div>Cultura<article>SkillSwap</article></div>
             <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
           </ModalHeader>
           <DivRoute>C:\ User\ Documents\ SkillSwap</DivRoute>
@@ -217,7 +223,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               </DivAlertText>
 
               <PoliceInfo>
-                <strong>Liínea Policía Nacional: </strong><br />0 8000 91 1190<br /><br />
+                <strong>Línea Policía Nacional: </strong><br />0 8000 91 1190<br /><br />
                 <strong>Página CAI Virtual: </strong><br />https://cai.virtual.policia.gov.co
               </PoliceInfo>
             </RightSection>
