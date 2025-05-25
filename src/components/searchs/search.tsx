@@ -39,6 +39,10 @@ const Input = styled.input`
     border-color: ${({ theme }) => theme.colors.textSecondary};
     outline: none;
   }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 
 const Search: React.FC<SearchProps> = ({ label, onSearch }) => {

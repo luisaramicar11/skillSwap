@@ -9,7 +9,6 @@ const ProfileHeader = styled.div`
   gap: 1rem;
   justify-content: start;
   align-items: center;
-  margin-bottom: 1rem;
   padding-bottom: 20px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
@@ -41,7 +40,7 @@ const JobTitle = styled.div`
 `;
 
 // Componente principal
-const CardUserSmall: React.FC<IShortProfileCardProps> = ({
+const CardProfileLinkSmall: React.FC<IShortProfileCardProps> = ({
     userData
 }) => {
     return (
@@ -57,4 +56,4 @@ const CardUserSmall: React.FC<IShortProfileCardProps> = ({
     );
 };
 
-export default CardUserSmall;
+export default CardProfileLinkSmall;

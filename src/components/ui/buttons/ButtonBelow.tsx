@@ -4,16 +4,10 @@ import { ButtonProps } from '@/src/models/button.model';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 8px 12px;
   background-color: transparent;
   color: ${({ theme }) => theme.colors.textSecondary};
-  border: none;
-  gap: 5px;
-  width: 100%;
-  height: 58px;
+  border: 1px solid ${({ theme }) => theme.colors.textBlack};
   cursor: pointer;
   transition: 0.4s;
   border-radius: 5px;
@@ -35,7 +29,7 @@ const StyledButton = styled.button`
 `;
 
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, className, type, label, disabled }) => {
+const ButtonBelow: React.FC<ButtonProps> = ({ children, onClick, className, type, label, disabled }) => {
   return (
     <StyledButton type={type} onClick={onClick} className={className} disabled={disabled}>
       {children}
@@ -44,4 +38,4 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, className, type, lab
   );
 };
 
-export default Button;
+export default ButtonBelow;

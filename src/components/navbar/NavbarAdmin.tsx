@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
-import InfoIcon from "@/public/svg/InfoIcon";
-import ListIcon from "@/public/svg/ListIcon";
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 import ProfileSidebar from "../sidebars/SidebarFloatingOnline";
 import LogoutButton from "../ui/buttons/ButtonLogout";
 import { FiLogOut } from "react-icons/fi";
+import { BsInfoCircle } from "react-icons/bs";
+import { PiList } from "react-icons/pi";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -55,13 +55,9 @@ const SidebarLink = styled.p`
         transform: scale(0.95);
         transition: 0.4s;
     }
-
-    @media (max-width: 790px) {
-        display: none;
-    }
 `;
 
-const SidebarLinkContainer = styled.li`
+const SidebarLinkContainer = styled.span`
     width: 100px;
     cursor: pointer;
     list-style: none;
@@ -208,7 +204,7 @@ export const NavbarAdmin: React.FC = () => {
                 <SidebarLink onClick={openModal}>+ <small>Notificaciones</small></SidebarLink>
             </SidebarLinkContainer>
             <HamburgerMenu onClick={toggleMenu}>
-                <StyledIconNavLink href="#" icon={<ListIcon />} />
+                <StyledIconNavLink href="#" icon={<PiList />} />
             </HamburgerMenu>
             <NavList isOpen={isOpen}>
                 <NavItem onClick={() => handlePageChange('ADMIN/INICIO')}>
@@ -228,7 +224,7 @@ export const NavbarAdmin: React.FC = () => {
                 </BoxLogout>
             </NavList>
             <IconsContainer>
-                <StyledIconNavLink href="/admin/legal" label="ADMIN/LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/admin/legal" label="ADMIN/LEGAL" icon={<BsInfoCircle />} />
             </IconsContainer>
         </NavbarContainer>
     );

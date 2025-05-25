@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import ProfileCard from "@/src/components/cards/CardMatchProfile";
+import ProfileCard from "@/src/components/cards/CardProfile";
 import UserProfileNoDetail from "@/src/components/cards/CardDetailUserNoMatch";
 import UserProfileDetail from "@/src/components/cards/CardDetailUserMatch";
 import { Div, DivProfile, Container } from "./DetailStyling";
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
-import { getUsersForImages } from "../../api/users";
-import { checkUserConnection } from "../../api/requests";
+import { getUsersForImages } from "../../../api/users";
+import { checkUserConnection } from "../../../api/requests";
 import { FooterMain } from '@/src/components/footer/FooterMain';
 
 const DetailAboutUser = () => {
@@ -48,6 +48,7 @@ const DetailAboutUser = () => {
 
           if (userDataResponse) {
             setConnectionInfo(isConnected);
+            
             const matchedUser = userDataResponse.find((user) => user.id === idNumberClickedUser);
             setUserData(matchedUser!);
           } else {
@@ -90,6 +91,7 @@ const DetailAboutUser = () => {
         ) : (
           <UserProfileNoDetail userData={userData} />
         )}
+        <UserProfileDetail userData={userData} />
       </Div>
       <FooterMain />
     </Container>

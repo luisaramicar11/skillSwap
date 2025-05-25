@@ -19,19 +19,17 @@ const waveAnimation = keyframes`
 // Estilos para la pantalla de carga completa
 const FullScreenLoader = styled.div`
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: end;
-    height: 100vh;
-    width: 100vw;
+    width: 100dvw;
+    height: 100dvh !important;
     filter: invert(1) contrast(200%);
     background-image: url("https://i.pinimg.com/originals/2a/23/d6/2a23d6dbca72cfad0bc1028fbfefc962.gif");
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
     opacity: 0.85;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     z-index: 9999;
     transition: 1s ease-in-out;
