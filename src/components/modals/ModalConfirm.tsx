@@ -26,25 +26,23 @@ const ModalContent = styled.div`
   transform: translate(-50%, -50%);
   background: white;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 90%;
   max-width: 500px;
   z-index: 1001;
 
-  & p, h2{
-    color: black !important;
+    & p{
+    color: #222 !important;
+    font-size: 0.9rem !important;
   }
 
   @media (max-width: 600px) {
-    padding: 1rem;
+    padding: 1.5rem;
     width: 95%;
   }
 `;
 
 const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -56,18 +54,33 @@ const ConfirmButton = styled.button`
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
-  background-color: #000;
+  background-color: #222;
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 1rem;
+`;
+
+const ModalHeader = styled.div`
+  font-size: 20px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & h2{
+    margin: 0 !important;
+    font-size: 20px !important;
+  }
 `;
 
 const ModalConfirm: React.FC<ModalConfirmProps> = ({ isOpen, onClose, onConfirm }) => {
   return (
     <ModalOverlay isOpen={isOpen}>
       <ModalContent>
-        <CloseButton onClick={onClose}>×</CloseButton>
+        <ModalHeader>
         <h2>Confirmación</h2>
+        <CloseButton onClick={onClose}>×</CloseButton>
+        </ModalHeader>
         <p>¿Estas completamente seguro de que quieres ejecutar esta acción? En caso de que te arrepientas podrás deshacerlo, pero solo después de un día.</p>
         <div>
           <ConfirmButton type="button" onClick={onConfirm}>CONFIRMAR</ConfirmButton>

@@ -26,21 +26,30 @@ const ModalContent = styled.div`
   transform: translate(-50%, -50%);
   background: white;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 90%;
   max-width: 500px;
   z-index: 1001;
 
   @media (max-width: 600px) {
-    padding: 1rem;
+    padding: 1.5rem;
     width: 95%;
   }
 `;
 
+const ModalHeader = styled.div`
+  font-size: 20px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & h2{
+    margin: 0 !important;
+    font-size: 20px !important;
+  }
+`;
+
 const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -51,6 +60,7 @@ const CloseButton = styled.button`
 const FormLabel = styled.label`
   display: block;
   margin-top: 1rem;
+  font-size: 0.9rem;
 `;
 
 const Input = styled.input`
@@ -59,16 +69,18 @@ const Input = styled.input`
   margin-top: 0.6rem;
   border-radius: 4px;
   border: 1px solid #ccc;
+  font-size: 0.9rem;
 `;
 
 const SubmitButton = styled.button`
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
-  background-color: #000;
+  background-color: #222;
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 0.9rem;
 `;
 
 const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, onClose }) => {
@@ -109,8 +121,10 @@ const ModalPasswordRecovery: React.FC<ModalPasswordRecoveryProps> = ({ isOpen, o
   return (
     <ModalOverlay isOpen={isOpen}>
       <ModalContent>
-        <CloseButton onClick={onClose}>×</CloseButton>
+        <ModalHeader>
         <h2>Recuperar contraseña</h2>
+        <CloseButton onClick={onClose}>×</CloseButton>
+        </ModalHeader>
         <form onSubmit={handleSubmit}>
           <FormLabel htmlFor="email-recovery">Ingresa tu correo electrónico:</FormLabel>
           <Input

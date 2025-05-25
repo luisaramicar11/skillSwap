@@ -20,16 +20,20 @@ const FooterContainer = styled.div`
 `;
 
 const FooterText = styled.p`
-    font-size: 0.875rem;
+    font-size: 15px;
     margin: 0;
     padding: 20px 0;
     width: 50%;
     min-width: 180px;
     border-top: 1px solid ${({ theme }) => theme.colors.bgGray};
     color: ${({ theme }) => theme.colors.bgGray};
+    hyphens: none;
+    word-wrap: normal;
+    overflow-wrap: normal;
 
     @media (max-width: 768px) {
-        font-size: 0.75rem;
+        font-size: 12px;
+        width: 60%;
     }
 `;
 
@@ -37,7 +41,7 @@ export const FooterMain: React.FC = () => {
     return (
         <PageWrapper>
             <FooterContainer>
-                <FooterText>© {new Date().getFullYear()} SkillSwap, Inc. Todos los derechos reservados.</FooterText>
+                <FooterText>© {new Date().getFullYear()} SkillSwap. Todos los derechos reservados.</FooterText>
             </FooterContainer>
         </PageWrapper>
     );

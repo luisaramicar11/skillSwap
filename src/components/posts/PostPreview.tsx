@@ -27,7 +27,7 @@ small {
 
 const PreviewContainer = styled.div`
   background-color: #2C2C2C;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 16px;
   padding: 16px;
 `;

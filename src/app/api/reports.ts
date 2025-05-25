@@ -8,7 +8,7 @@ export interface IReport {
     idState: number;
     idUser: number;
     idReportedUser: number;
-  }
+}
 
 export const createReport = async (reportData: IReport) => {  // Ajusta el tipo según tu interfaz
     try {
@@ -23,7 +23,7 @@ export const createReport = async (reportData: IReport) => {  // Ajusta el tipo 
 
         return response; // Ajusta según la estructura de respuesta de tu API
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 };
 

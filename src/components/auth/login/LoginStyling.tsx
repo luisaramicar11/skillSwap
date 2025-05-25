@@ -111,18 +111,3 @@ export const DivButtonLogin = styled.div`
     justify-content: center;
   }
 `;
-
-export const ForgotPasswordButton = styled.button`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  opacity: 0.7;
-  text-decoration: underline;
-  cursor: pointer;
-  text-align: left;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  padding-left: 0;
-  display: block;
-  width: 100%;
-`;

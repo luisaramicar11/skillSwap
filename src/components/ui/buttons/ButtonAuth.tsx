@@ -1,21 +1,36 @@
-'use client';
 import React from 'react';
-import { MouseEventHandler } from "react";
+import styled from 'styled-components';
 
-interface AuthButtonProps {
-  type: "submit" | "button" | "reset";
-  label: string;      
-  onClick: MouseEventHandler<HTMLButtonElement>; 
-  className?: string; 
-  disabled?: boolean; 
-}
+type AuthButtonProps = {
+  className?: string;
+  type?: 'button' | 'submit' | 'reset'; 
+  disabled?: boolean;
+  onClick?: () => void; 
+  children: React.ReactNode; 
+};
 
-const Button: React.FC<AuthButtonProps> = ({ label, onClick, className, type, disabled }) => {
+const StyledButtonAuth = styled.button`
+  padding: 10px;
+  color: ${({ theme }) => theme.colors.textOrange};
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 120px;
+  background-color: ${({ theme }) => theme.colors.textWhite};
+  border: none;
+
+  > * {
+    color: ${({ theme }) => theme.colors.textOrange};
+  }
+`;
+
+const ButtonAuth: React.FC<AuthButtonProps> = ({ type = 'button', className, disabled = false, onClick, children }) => {
   return (
-    <button type={type} onClick={onClick} className={className} disabled={disabled}>
-      {label}
-    </button>
+    <StyledButtonAuth className={className} type={type} disabled={disabled} onClick={onClick}>
+      {children}
+    </StyledButtonAuth>
   );
 };
 
-export default Button;
+export default ButtonAuth;

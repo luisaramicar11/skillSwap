@@ -19,7 +19,7 @@ export function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-// Definimos en qué rutas se aplicará el middleware
+// Definimos en qué rutas se aplicará el middleware 
 export const config = {
   matcher: [
     '/user/:path*',   // Protege todas las rutas bajo /user/

@@ -6,6 +6,7 @@ import LoginPage from "../../../components/auth/login/Login";
 import RegisterPage from "../../../components/auth/register/Register";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import { FooterMain } from "@/src/components/footer/FooterMain";
+import ModalPasswordRecovery from "@/src/components/modals/ModalForgotPassword";
 
 // Texto de cambio
 const TextWrapper = styled.div`
@@ -167,7 +168,7 @@ const SwitchButton = styled.button`
   background-color: transparent;
   font-size: 12px;
   font-weight: 500;
-  transition: background-color 0.6s ease;
+  transition: 0.5s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,12 +182,12 @@ const SwitchButton = styled.button`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.colors.gradientPrimary};
-    border: none;
+    transform: scale(0.95);
+    transition: 0.5s ease-in-out;
 
-    & a:hover {
-      color: ${({ theme }) => theme.colors.textWhite};
-    }
+    & a{
+    font-weight: normal;
+  }
   }
 
   @media (max-width: 1070px) {
@@ -196,93 +197,113 @@ const SwitchButton = styled.button`
   }
 `;
 
+const ForgotPasswordButton = styled.button`
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  opacity: 0.7;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding-left: 0;
+  display: block;
+  width: 100%;
+`;
 
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <>
-    <Container>
-      {/* Framer Motion wrapper for form animations */}
-      <motion.div
-        initial={false}
-        animate={isSignUp ? { x: "-50%" } : { x: "0%" }}
-        transition={{ duration: 1 }}
-        style={{
-          width: "200%",
-          display: "flex",
-        }}
-      >
-        {/* Formulario de Iniciar Sesión */}
-        <MotionDiv
+      <Container>
+        {/* Framer Motion wrapper for form animations */}
+        <motion.div
           initial={false}
-          animate={isSignUp ? { x: "200%" } : { x: "0%" }}
+          animate={isSignUp ? { x: "-50%" } : { x: "0%" }}
           transition={{ duration: 1 }}
-          style={{ width: "50%" }}
+          style={{
+            width: "200%",
+            display: "flex",
+          }}
         >
-          <LoginPage />
-        </MotionDiv>
+          {/* Formulario de Iniciar Sesión */}
+          <MotionDiv
+            initial={false}
+            animate={isSignUp ? { x: "200%" } : { x: "0%" }}
+            transition={{ duration: 1 }}
+            style={{ width: "50%" }}
+          >
+            <LoginPage forgotPassword={
+              <ForgotPasswordButton type="button" onClick={openModal}>
+                ¿Olvidaste tu contraseña?
+              </ForgotPasswordButton>
+            } />
+          </MotionDiv>
 
-        {/* Formulario de Registrarse */}
-        <MotionDiv
-          initial={false}
-          animate={isSignUp ? { x: "0%" } : { x: "200%" }}
-          transition={{ duration: 1 }}
-          style={{ width: "50%" }}
-        >
-          <RegisterPage />
-        </MotionDiv>
-      </motion.div>
+          {/* Formulario de Registrarse */}
+          <MotionDiv
+            initial={false}
+            animate={isSignUp ? { x: "0%" } : { x: "200%" }}
+            transition={{ duration: 1 }}
+            style={{ width: "50%" }}
+          >
+            <RegisterPage />
+          </MotionDiv>
+        </motion.div>
 
-      {/* Overlay Panel */}
-      <OverlayContainer>
-        <TextWrapper>
-          <SkillSwapText
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
-            SWAP
-          </SkillSwapText>
-          <SkillSwapText
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <span>➜</span> SWAP
-          </SkillSwapText>
-          <SkillSwapText
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            SKILL SWAP
-          </SkillSwapText>
-        </TextWrapper>
-        <OverlayPanel>
-          <Div>
-            {isSignUp ? (
-              <>
+        {/* Overlay Panel */}
+        <OverlayContainer>
+          <TextWrapper>
+            <SkillSwapText
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              SWAP
+            </SkillSwapText>
+            <SkillSwapText
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <span>➜</span> SWAP
+            </SkillSwapText>
+            <SkillSwapText
+              initial={{ opacity: 0, y: -100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              SKILL SWAP
+            </SkillSwapText>
+          </TextWrapper>
+          <OverlayPanel>
+            <Div>
+              {isSignUp ? (
                 <H1>
                   <SwitchButton onClick={() => setIsSignUp(false)}>
                     <StyledNavLink href="/auth" label="INICIAR SESIÓN" />
                   </SwitchButton>
                 </H1>
-              </>
-            ) : (
-              <>
+              ) : (
                 <H1>
                   <SwitchButton onClick={() => setIsSignUp(true)}>
                     <StyledNavLink href="/auth" label="REGISTRO" />
                   </SwitchButton>
                 </H1>
-              </>
-            )}
-          </Div>
-        </OverlayPanel>
-      </OverlayContainer>
-    </Container>
-    <FooterMain/>
+              )}
+            </Div>
+          </OverlayPanel>
+        </OverlayContainer>
+      </Container>
+      <ModalPasswordRecovery isOpen={isModalOpen} onClose={closeModal} />
+      <FooterMain />
     </>
   );
 }
