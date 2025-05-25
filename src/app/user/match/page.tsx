@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import SliderCard from "../../../components/sliders/slide";
 import MatchCard from "../../../components/cards/CardMatch";
 import { DivMatch, Container } from "./MatchStyling";
-import ProfileCard from "@/src/components/cards/CardMatchProfile";
+import ProfileCard from "@/src/components/cards/CardProfile";
 import { IUserCardProps } from "@/src/models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { getUsersForImages } from "../../api/users"

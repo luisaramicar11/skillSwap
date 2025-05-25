@@ -1,20 +1,26 @@
 "use client";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import ModalConfirm from "@/src/components/modals/ModalConfirm";
 import WidgetContainer from "../../../../components/containers/WidgetContainer/WidgetContainer";
+import { useEffect, useState } from "react";
 import { getUserById, toggleUserAccountState } from "../../../api/users";
 import { FooterMain } from '@/src/components/footer/FooterMain';
-import ModalConfirm from "@/src/components/modals/ModalConfirm";
 import { toast } from "react-toastify";
+import { GrStatusGoodSmall } from "react-icons/gr";
+import { Urbanist } from "next/font/google";
+
+const urbanist = Urbanist({ 
+    subsets: ["latin"], 
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+});
 
 //Container for the whole page.tsx
 const PageContainer = styled.section`
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  align-items: center;
   display: flex;
-  position: relative;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
 
   & h1 {
     margin: 0;
@@ -25,61 +31,45 @@ const PageContainer = styled.section`
     padding-left: 1rem;
   }
 
-  & h2 {
-    margin: 0;
-    padding-bottom: 10px;
-    width: 100%;
-    font-size: 30px;
-    background: ${({ theme }) => theme.colors.gradientSecondary};
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
   & h3 {
-    margin: 0;
-    padding: 10px 30px;
-    width: 100% !important;
-    font-size: 20px;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
-  }
-
-  & h4 {
     margin: 0;
     margin-bottom: 10px;
     width: 100%;
-    opacity: 0.3;
-    font-weight: 400;
-    font-size: 20px;
-    color: ${({ theme }) => theme.colors.textSecondary};
+    font-weight: 500;
+    font-size: 18px;
+    color: ${({ theme }) => theme.colors.textDark};
   }
 
   & p {
     margin: 0;
     width: 100%;
-    font-size: 16px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: justify;
     color: ${({ theme }) => theme.colors.textSecondary};
+  }
+
+  & strong{
+    font-weight: bold;
   }
 `;
 
 //Container for page.tsx content
-const PageContentContainer = styled.article`
+const Container = styled.div`
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  margin: 54px 0;
 `;
 
 //Containers for banner
 const Banner = styled.article`
-  top: 0;
-  padding: 20px;
-  position: absolute;
-  width: 100%;
-  height: 150px;
+  background-color: ${({ theme }) => theme.colors.bgTertiary};
   display: flex;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.bgBanner};
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
 `;
 
 const BannerBody = styled.div`
@@ -89,20 +79,18 @@ const BannerBody = styled.div`
 `;
 
 //Container for INFO content
-const InfoPageContainer = styled.div`
-  padding-top: 150px;
+const PageContent = styled.div`
+  padding: 1rem;
   width: 100%;
   max-width: 1000px;
   display: flex;
   align-items: start;
   flex-direction: column;
-`;
+  gap: 1rem;
 
-const PageContent = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  @media (max-width: 769px) {
+    padding-bottom: 0;
+  }
 `;
 
 const PageBody = styled.div`
@@ -110,20 +98,19 @@ const PageBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 2rem;
 `;
 
 //Containers for Widgets and Aside
 const WidgetBody = styled.div`
-  padding: 20px 30px;
+  padding: 1.5rem 2rem;
   width: 100%;
   min-width: 220px;
   display: flex;
   flex-direction: column;
 `;
 
-const PDesc = styled.p`
-    font-size: 15px !important;
+const P = styled.p`
+    font-size: 0.9rem !important;
     max-width: 300px !important;
     hyphens: unset;
 `;
@@ -153,7 +140,6 @@ const ButtonDeactivate = styled.button<({ color: string }) >`
   max-width: 250px;
   text-align: center;
   border-radius: 10px;
-  margin: 10px 0;
   background-color: transparent;
   padding: 10px;
   font-weight: 500;
@@ -175,22 +161,22 @@ const ButtonDeactivate = styled.button<({ color: string }) >`
   }
 `;
 
-const AccountStateButton = styled.div<({ color: string }) >`
+const AccountStateTag = styled.div<({ color: string }) >`
   width: 100px;
   text-align: center;
   border-radius: 50px;
   margin: 10px 0;
   padding: 2px;
   font-size: 12px;
-  font-weight: 400;
+  font-weight: bold;
   color: ${(props) => props.color};
   border: ${(props) => props.color} 1px solid;
-`;
-
-const Container = styled.div`
-  margin: 54px 0;
-  flex-direction: column;
   display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-family: ${urbanist.style.fontFamily};
 `;
 
 const UserInfo = () => {
@@ -206,7 +192,7 @@ const UserInfo = () => {
         const idNumber = idString ? parseInt(idString, 10) : null;
 
         if (!idNumber) {
-          setError("ID de usuario no encontrado");
+          setError("Error: ID de usuario no encontrado");
           setLoading(false);
           return;
         }
@@ -245,15 +231,15 @@ const UserInfo = () => {
   };
 
   const stateBtnColor = () => {
-    if (accountState === "Activo") return "#F0AC27";
-    else if (accountState === "Inactivo") return "#828282";
-    else return "#666666";
+    if (accountState === "Activo") return "#2C8560";
+    else if (accountState === "Inactivo") return "#D13B00";
+    else return "#707070";
   }
 
   const changeStateBtnColor = () => {
     if (accountState === "Activo") return "#D13B00";
-    else if (accountState === "Inactivo") return "#4072C3";
-    else return "#666666";
+    else if (accountState === "Inactivo") return "#2C8560";
+    else return "#707070";
   }
 
   // Render del componente
@@ -268,66 +254,60 @@ const UserInfo = () => {
         }}
       />
       <PageContainer>
-        <Banner>
-          <BannerBody>
-            <h1>Info</h1>
-          </BannerBody>
-        </Banner>
-        <PageContentContainer>
-          <InfoPageContainer>
-            <PageContent>
-              <PageBody>
-                <h2>Configuración y datos</h2>
+        <PageContent>
+          <Banner>
+            <BannerBody>
+              <h1>Info</h1>
+            </BannerBody>
+          </Banner>
+          <PageBody>
+            <WidgetContainer>
+              <WidgetBody>
+                <h3>Estado de cuenta</h3>
+                <P>
+                  Aquí podrás ver en que condición se encuentra tu cuenta actualmente.
+                </P>
+                <br />
 
-                <WidgetContainer>
-                  <WidgetBody>
-                    <h4>| Estado de cuenta</h4>
+                {loading ? (
+                  <p>Cargando...</p>
+                ) : error ? (
+                  <p>{error}</p>
+                ) : (
+                  <AccountStateTag color={stateBtnColor()}><GrStatusGoodSmall />{accountState}</AccountStateTag>
+                )}
+              </WidgetBody>
 
-                    <PDesc>
-                      Aquí podrás ver en que condición se encuentra tu cuenta actualmente.
-                    </PDesc>
+              <DivDeactivateAccount>
+                <ButtonDeactivate
+                  color={changeStateBtnColor()}
+                  onClick={() => setIsModalOpen(true)}
+                  disabled={accountState === "Suspendido"} // Deshabilita el botón si está suspendido
+                >
+                  {accountState === "Activo"
+                    ? "Deshabilitar cuenta"
+                    : "Habilitar cuenta"}
+                </ButtonDeactivate>
 
-                    {loading ? (
-                      <p>Cargando...</p>
-                    ) : error ? (
-                      <p>{error}</p>
-                    ) : (
-                      <AccountStateButton color={stateBtnColor()}>✦ {accountState}</AccountStateButton>
-                    )}
-                  </WidgetBody>
+                {accountState === "Suspendido" && (
+                  <p>
+                    Tu cuenta ha sido suspendida por un administrador. No
+                    puedes cambiar el estado hasta que el administrador lo
+                    restaure.
+                  </p>
+                )}
 
-                  <DivDeactivateAccount>
-                    <ButtonDeactivate
-                      color={changeStateBtnColor()}
-                      onClick={() => setIsModalOpen(true)}
-                      disabled={accountState === "Suspendido"} // Deshabilita el botón si está suspendido
-                    >
-                      {accountState === "Activo"
-                        ? "Deshabilitar cuenta"
-                        : "Habilitar cuenta"}
-                    </ButtonDeactivate>
-
-                    {accountState === "Suspendido" && (
-                      <p>
-                        Tu cuenta ha sido suspendida por un administrador. No
-                        puedes cambiar el estado hasta que el administrador lo
-                        restaure.
-                      </p>
-                    )}
-
-                    <div>
-                      <h4>| Deshabilitación de cuenta</h4>
-                      <p>
-                        <strong> Atención: </strong>Al desactivar tu cuenta de SkillSwap, toda tu
-                        información permanecerá segura y no será eliminada.
-                      </p>
-                    </div>
-                  </DivDeactivateAccount>
-                </WidgetContainer>
-              </PageBody>
-            </PageContent>
-          </InfoPageContainer>
-        </PageContentContainer>
+                <div>
+                  <h3>Deshabilitación de cuenta</h3>
+                  <p>
+                    <strong> Atención: </strong>Al desactivar tu cuenta de SkillSwap, toda tu
+                    información permanecerá segura y no será eliminada.
+                  </p>
+                </div>
+              </DivDeactivateAccount>
+            </WidgetContainer>
+          </PageBody>
+        </PageContent>
       </PageContainer>
       <FooterMain />
     </Container>

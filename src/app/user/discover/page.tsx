@@ -1,19 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import CardAdsDiscover from "@/src/components/cards/CardAdsDiscover";
+import ButtonAside from "@/src/components/ui/buttons/ButtonAside";
+import ButtonBelow from "@/src/components/ui/buttons/ButtonBelow";
 import Search from "@/src/components/searchs/search";
 import AllUsers from "../../../components/containers/AllUsersContainer/AllUsers";
-import TopUsers from "../../../components/containers/AllUsersContainer/TopUsers";
-import { IUserCardProps, IUserCarouselProps } from "../../../models/userCards.model";
+import CarouselNewUsers from "../../../components/carousels/CarouselNewUsers";
+import { IUserCardProps } from "../../../models/userCards.model";
 import { OurAlertsText } from "@/src/lib/utils/ourAlertsText";
 import { FooterMain } from "@/src/components/footer/FooterMain";
-import { getAllUsersSorted, getUsersForImages } from '../../api/users';
-import styled from "styled-components";
-import CardUserDiscover from "@/src/components/cards/CardUserDiscover";
-import Button from "@/src/components/ui/buttons/Button";
+import { getUsersForImages } from '../../api/users';
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { FaArrowDownAZ } from "react-icons/fa6";
 import { MdOutlineAlignHorizontalLeft } from "react-icons/md";
-import { GiNewShoot } from "react-icons/gi";
 
 const DiscoverPage = styled.div`
   width: 100% !important;
@@ -27,7 +27,6 @@ const Container = styled.div`
   width: 100% !important;
   height: 100%;
   display: flex;
-  align-items: space-between;
 `;
 
 const LateralContainer = styled.div`
@@ -65,6 +64,32 @@ const DivContainer = styled.div`
     }
   }
 
+  @media (max-width: 1200px) {
+    width: 80%;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+`;
+
+const DivCarousel = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  height: 100%;
+
+    & hr {
+      padding: 0;
+      margin: 0 400px !important;
+      translate: 0 15px;
+      border: none;
+      height: 4px;
+      opacity: 0.1;
+      border-radius: 500px;
+      background-color: ${({ theme }) => theme.colors.textOrange};
+    }
+
   @media (max-width: 1000px) {
     width: 100%;
   }
@@ -79,27 +104,59 @@ const SearchContainer = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
   padding: 0 !important;
+
+  & span {
+    display: none;
+  }
+
+  @media (max-width: 1000px) {
+    align-self: center;
+    width: 95%;
+    padding-top: 0.5rem !important;
+
+    & span {
+      align-self: center;
+      display: block;
+      height: 1px;
+      border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
+      width: 98%;
+      padding-top: 0.5rem;
+    }
+  }
+`;
+
+const Bottombar = styled.div`
+  display: none;
+
+  @media (max-width: 1000px) {
+    display: flex;
+    height: auto;
+    gap: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1rem 0 !important;
+    width: 100%;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   align-items: start;
   justify-content: center;
-  width: 85%;
+  width: 100%;
   height: 80%;
   padding: 1rem;
-
-  @media (max-width: 460px) {
-    width: 100%;
-  }
+  overflow-x: hidden;
 `;
 
 const Sidebar = styled.div`
   padding: 1rem;
-  width: 150px;
+  width: inherit;
   height: 100%;
   gap: 2rem;
   position: fixed;
@@ -110,6 +167,7 @@ const Sidebar = styled.div`
 `;
 
 const SidebarContainer = styled.div`
+  min-width: 100px !important;
   width: 150px;
   height: 100%;
   display: flex;
@@ -117,7 +175,7 @@ const SidebarContainer = styled.div`
   justify-content: start;
   align-items: center;
 
-  @media (max-width: 460px) {
+  @media (max-width: 1000px) {
     display: none;
   }
 `;
@@ -125,13 +183,11 @@ const SidebarContainer = styled.div`
 const Discover = () => {
   // Estados para manejar a todos los usuarios, loading y errores
   const [allUsersData, setAllUsersData] = useState<IUserCardProps[]>([]);
-  const [newUsersData, setNewUsersData] = useState<IUserCarouselProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   // Estado para manejar los usuarios filtrados
   const [filteredUsers, setFilteredUsers] = useState<IUserCardProps[]>([]);
-  const [showTopUsers, setShowTopUsers] = useState<boolean>(false); // Nuevo estado para manejar el botón "Top"
 
   // Función de búsqueda
   const handleSearch = (query: string | null): boolean => {
@@ -153,18 +209,10 @@ const Discover = () => {
   // Reseteamos el filtrado por categorias
   const handleFilterReset = () => {
     setFilteredUsers(allUsersData);
-    setShowTopUsers(true); // Reseteamos el estado del botón "Top"
-  };
-
-  // Filtrar por nuevos usuarios
-  const handleShowNewUsers = () => {
-    setNewUsersData(newUsersData);
-    setShowTopUsers(false); // Reseteamos el estado del botón "Top"
   };
 
   // Filtrar por top usuarios
   const handleShowTopUsers = () => {
-    setShowTopUsers(true); // Marcamos que estamos mostrando los top
     const sortedUsers = [...allUsersData].sort((a, b) => b.qualification - a.qualification);
     setFilteredUsers(sortedUsers);
   };
@@ -173,7 +221,6 @@ const Discover = () => {
   const handleShowAlphabeticalOrder = () => {
     const sortedUsers = [...allUsersData].sort((a, b) => a.jobTitle.localeCompare(b.jobTitle));
     setFilteredUsers(sortedUsers);
-    setShowTopUsers(true); // Reseteamos el estado del botón "Top"
   };
 
   // Fetch de los usuarios
@@ -183,9 +230,6 @@ const Discover = () => {
         const responseData = await getUsersForImages();
         setAllUsersData(responseData);
         setFilteredUsers(responseData);
-
-        const responseDataNew = await getAllUsersSorted();
-        setNewUsersData(responseDataNew);
 
         setLoading(false);
       } catch (error) {
@@ -210,34 +254,40 @@ const Discover = () => {
       <Container>
         <SidebarContainer>
           <Sidebar>
-            <Button type={"button"} label={"Restaurar"} onClick={handleFilterReset}>
+            <ButtonAside type={"button"} label={"Default"} onClick={handleFilterReset}>
               <RiArrowGoBackFill />
-            </Button>
-            <Button type={"button"} label={"Trabajos"} onClick={handleShowAlphabeticalOrder}>
+            </ButtonAside>
+            <ButtonAside type={"button"} label={"Trabajos"} onClick={handleShowAlphabeticalOrder}>
               <FaArrowDownAZ />
-            </Button>
-            <Button type={"button"} label={"Top"} onClick={handleShowTopUsers}>
+            </ButtonAside>
+            <ButtonAside type={"button"} label={"Top"} onClick={handleShowTopUsers}>
               <MdOutlineAlignHorizontalLeft />
-            </Button>
-            <Button type={"button"} label={"Nuevos"} onClick={handleShowNewUsers}>
-              <GiNewShoot />
-            </Button>
-
+            </ButtonAside>
           </Sidebar>
         </SidebarContainer>
         <Content>
           <DivContainer>
             <SearchContainer>
               <Search label="⌕" onSearch={handleSearch} />
+              <Bottombar>
+                <ButtonBelow type={"button"} label={"Default"} onClick={handleFilterReset}>
+                </ButtonBelow>
+                <ButtonBelow type={"button"} label={"Trabajos"} onClick={handleShowAlphabeticalOrder}>
+                </ButtonBelow>
+                <ButtonBelow type={"button"} label={"Top"} onClick={handleShowTopUsers}>
+                </ButtonBelow>
+              </Bottombar>
+              <span></span>
             </SearchContainer>
             <UsersContainer>
-              {showTopUsers ?               
-              <AllUsers users={filteredUsers} /> :
-              <TopUsers users={newUsersData} /> }
+              <DivCarousel>
+                <CarouselNewUsers />
+              </DivCarousel>
+              <AllUsers users={filteredUsers} />
             </UsersContainer>
           </DivContainer>
           <LateralContainer>
-            <CardUserDiscover />
+            <CardAdsDiscover />
           </LateralContainer>
         </Content>
       </Container>
