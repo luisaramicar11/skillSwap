@@ -31,7 +31,8 @@ These credentials should be used only for administrative purposes.
 ```bash
 ├── public
 │   ├── img
-│   └── svg
+│   ├── svg
+│   └── vid
 ├── src
 │   ├── app
 │   │   ├── (account)
@@ -51,7 +52,7 @@ These credentials should be used only for administrative purposes.
 │   │   │   ├── slices
 │   │   │   └── store.ts
 │   │   ├── user
-│   │   │   ├── detailUser
+│   │   │   ├── detail/u
 │   │   │   ├── discover
 │   │   │   ├── legal
 │   │   │   ├── match
@@ -60,13 +61,11 @@ These credentials should be used only for administrative purposes.
 │   │   │   └── (settings)
 │   │   │       ├── info
 │   │   │       ├── profile
-│   │   │       ├── metrics
-│   │   │       ├── skills
 │   │   │       └── social
 │   │   ├── layout.tsx
-│   │   ├── providers.tsx
-│   │   ├── rootHandler.tsx
-│   │   └── globalStyling.tsx
+│   │   ├── Providers.tsx
+│   │   ├── RootHandler.tsx
+│   │   └── GlobalStyling.tsx
 │   ├── components
 │   │   └── ui
 │   ├── hooks
@@ -74,7 +73,7 @@ These credentials should be used only for administrative purposes.
 │   │   ├── services
 │   │   └── utils
 │   ├── models
-│   └─── middleware.ts
+│   └── middleware.ts
 └─── .env.local (OPTIONAL)
 ```
 
@@ -91,6 +90,12 @@ These credentials should be used only for administrative purposes.
 
 4. In this link, you can view our project deployed on Vercel:
     - [https://skill-swap-ten.vercel.app/](https://skill-swap-ten.vercel.app/)
+
+5. In this link, you can explore the team's repository for backend develop and deploy:
+    - [https://github.com/medi77na/SkillSwap/](https://github.com/medi77na/SkillSwap/)
+
+6. You are here right now! Be sure to explore our team's repository for frontend develop and deploy:
+    - [https://github.com/luisaramicar11/skillSwap](https://github.com/luisaramicar11/skillSwap)
 
 ## Equipo Frontend
 
@@ -207,7 +212,8 @@ Make sure to keep your token private. If you believe it has been compromised, re
 
 <div align="center">
     <em>
-      <strong>2024 SkillSwap, Inc. Looking for Skill.</strong><br>
+      <strong>2024 SkillSwap. Looking for Skill.</strong><br>
       © All rights reserved.
        </em>
 </div>
+

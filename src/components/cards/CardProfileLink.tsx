@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LinkProfile from "../ui/links/NavLinks";
-import {
-  IProfileCardProps,
-} from "@/src/models/userCards.model";
+import { IProfileCardProps } from "@/src/models/userCards.model";
 
 const ProfileHeader = styled.div`
   display: flex;
@@ -33,12 +31,15 @@ const ProfileName = styled.div`
   color: ${({ theme }) => theme.colors.textSidebar};
 `;
 
-const Skills = styled.div`
+const Skills = styled.ul`
   opacity: 0.75;
   font-size: 0.6rem;
   color: ${({ theme }) => theme.colors.textSidebar};
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
 `;
 
 const RatingSection = styled.div`
@@ -85,7 +86,7 @@ const RatingStars = styled.div`
 `;
 
 const Star = styled.span`
-  color: ${({ theme }) => theme.colors.textYellow};
+  color:  ${({ theme }) => theme.colors.textDark};
   font-size: 16px;
   font-style: normal;
 `;
@@ -118,7 +119,7 @@ const CardProfileLink: React.FC<IProfileCardProps> = ({
       <RatingSection>
         <h1>{(Math.floor(userData?.qualification * 10)) / 10}</h1>
         <DivRate>
-          <p>Calificación</p>
+          <p>Tu Calificación</p>
           <RatingStars>
             {[...Array(5)].map((_, index) => {
               const rating = Math.floor(userData?.qualification);

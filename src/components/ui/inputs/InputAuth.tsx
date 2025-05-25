@@ -15,7 +15,7 @@ interface InputProps {
   autoComplete?: string;
 }
 
-const StyledInputSignUp = styled.input`
+const StyledInputAuth = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.textWhite};
   color: ${({ theme }) => theme.colors.textWhite};
   border-radius: 10px;
@@ -33,7 +33,7 @@ const StyledInputSignUp = styled.input`
   }
 `;
 
-const InputSingUp: React.FC<InputProps> = ({
+const InputAuth: React.FC<InputProps> = ({
   type,
   id,
   placeholder,
@@ -45,7 +45,7 @@ const InputSingUp: React.FC<InputProps> = ({
   autoComplete
 }) => {
   return (
-    <StyledInputSignUp type={type}
+    <StyledInputAuth type={type}
     id={id}
     placeholder={placeholder}
     value={value}
@@ -54,12 +54,12 @@ const InputSingUp: React.FC<InputProps> = ({
     name={name}
     required={required} 
     autoComplete= {autoComplete}>
-    </StyledInputSignUp>
+    </StyledInputAuth>
     
   );
 };
 
-export default InputSingUp;
+export default InputAuth;
 
 
 

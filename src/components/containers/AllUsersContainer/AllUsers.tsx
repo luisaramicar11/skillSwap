@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Card from "../../cards/CardDiscover";
 import { IAllUsersCardsProps } from "../../../models/userCards.model";
-import DivLink from "../../ui/links/CardUserLink";
+import CardUserLink from "../../ui/links/CardUserLink";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 
 const CardListContainer = styled.div`
@@ -12,6 +12,7 @@ const CardListContainer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
+  padding-top: 0;
 `;
 
 // Estilos para los botones de paginación
@@ -75,7 +76,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
             : [];
 
           return (
-            <DivLink key={index} href="/user/detailUser" label="DETALLE" id={user.id.toString()} >
+            <CardUserLink key={index} href="/user/detail/u" label="DETALLE" id={user.id.toString()} >
               <Card
                 id={user.id}
                 fullName={user.fullName}
@@ -84,7 +85,7 @@ const AllUsers: React.FC<IAllUsersCardsProps> = ({ users }) => {
                 abilities={abilitiesArray}
                 urlImage={user.urlImage}
               />
-            </DivLink>
+            </CardUserLink>
           );
         })}
       </CardListContainer>
