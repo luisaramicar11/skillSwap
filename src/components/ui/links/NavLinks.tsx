@@ -2,7 +2,7 @@ import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { handlePageChange } from '../../../lib/utils/handlePageTheme';
+import { handlePageTheme } from '../../../lib/utils/ourPageThemeHandler';
 
 const NavLinkComponent = styled(Link)`
   text-decoration: none;
@@ -24,7 +24,7 @@ const StyledNavLink: React.FC<ILinkProps> = ({ href, label, onClick, children })
       href={href}
       onClick={() => {
         if (label) {
-          handlePageChange(label);
+          handlePageTheme(label);
           if (onClick) onClick(label);
         }
       }}

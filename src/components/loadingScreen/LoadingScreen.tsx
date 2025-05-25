@@ -1,9 +1,9 @@
 import styled, { keyframes } from 'styled-components';
-import { Urbanist } from "next/font/google";    
+import { Urbanist } from "next/font/google";
 
-const urbanist = Urbanist({ 
-    subsets: ["latin"], 
-    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] 
+const urbanist = Urbanist({
+    subsets: ["latin"],
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
 });
 
 // Animación de las letras que hacen una ola
@@ -19,19 +19,17 @@ const waveAnimation = keyframes`
 // Estilos para la pantalla de carga completa
 const FullScreenLoader = styled.div`
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: end;
-    height: 100vh;
-    width: 100vw;
+    width: 100dvw;
+    height: 100dvh !important;
     filter: invert(1) contrast(200%);
     background-image: url("https://i.pinimg.com/originals/2a/23/d6/2a23d6dbca72cfad0bc1028fbfefc962.gif");
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
     opacity: 0.85;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     z-index: 9999;
     transition: 1s ease-in-out;
@@ -50,14 +48,14 @@ const Letter = styled.span<{ delay: number }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: clamp(2.1rem, 2.8vw, 5.2rem);
+    height: clamp(2.1rem, 2.8vw, 5.2rem);
     background-color: #ffffff;
     color: #000000;
     font-weight: 600;
     animation: ${waveAnimation} 1.2s ease-in-out infinite;
     animation-delay: ${({ delay }) => delay}s;
-    border-radius: 0.4rem;
+    border-radius: 0.42rem;
 `;
 
 const LoadingScreen = () => {

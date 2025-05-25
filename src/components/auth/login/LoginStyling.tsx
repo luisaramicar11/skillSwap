@@ -25,13 +25,14 @@ export const BackLink = styled.div`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.textWhite};
   text-decoration: none;
-  gap:5px;
+  gap:4px;
   margin: 0;
   padding-bottom: 5px;
 
   a {
     padding: 0 !important;
     margin: 0 !important;
+    font-weight: 500;
   }
 `;
 
@@ -65,6 +66,10 @@ export const FormWrapper = styled.div`
   position: relative;
 
   @media (max-width: 1070px) {
+    border-radius: none;
+    border-radius: 15px; 
+    border: 0;
+    width: 300px;
     height: 460px !important;
 
     & form{
@@ -76,15 +81,6 @@ export const FormWrapper = styled.div`
         align-self: center !important;
       }
     }
-    
-  }
-  
-  @media (max-width: 1070px) { 
-    border-radius: none;
-    border-radius: 15px; 
-    border: 0;
-    width: 300px;
-    height: 500px;
   }
 `;
 
@@ -110,19 +106,4 @@ export const DivButtonLogin = styled.div`
     display: flex;
     justify-content: center;
   }
-`;
-
-export const ForgotPasswordButton = styled.button`
-  background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  opacity: 0.7;
-  text-decoration: underline;
-  cursor: pointer;
-  text-align: left;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-  padding-left: 0;
-  display: block;
-  width: 100%;
 `;

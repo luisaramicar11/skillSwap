@@ -3,9 +3,9 @@ import React from 'react';
 import { ILinkProps } from '@/src/models/link.model';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { handlePageChange } from '@/src/lib/utils/handlePageTheme';
+import { handlePageTheme } from '@/src/lib/utils/ourPageThemeHandler';
 
-const DivLinkComponent = styled(Link)`
+const CardUserLinkComponent = styled(Link)`
     width: 100%;
     height: 100%;
     text-decoration: none;
@@ -19,9 +19,9 @@ const DivLinkComponent = styled(Link)`
     }
 `;
 
-const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) => {
+const CardUserLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) => {
     return (
-        <DivLinkComponent
+        <CardUserLinkComponent
             href={href}
             onClick={() => {
                 // Almacenar el clickedUserId en localStorage si existe
@@ -31,14 +31,14 @@ const DivLink: React.FC<ILinkProps> = ({ href, label, onClick, id, children }) =
 
                 // Ejecutar la lógica de cambio de página
                 if (label) {
-                    handlePageChange(label);
+                    handlePageTheme(label);
                     if (onClick) onClick(label);
                 }
             }}
         >
-            {children || label} 
-        </DivLinkComponent>
+            {children || label}
+        </CardUserLinkComponent>
     );
 };
 
-export default DivLink;
+export default CardUserLink;

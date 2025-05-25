@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { handlePageChange } from "../../lib/utils/handlePageTheme";
+import { handlePageTheme } from "../../lib/utils/ourPageThemeHandler";
 import StyledNavLink from "../ui/links/NavLinks";
 
 const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
@@ -11,8 +11,8 @@ const OfflineSidebarContainer = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")}; 
   align-items: center;
   background: ${({ theme }) => theme.colors.bgMainOpacity};
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   animation: ${({ isOpen }) => (isOpen ? "appear 1s ease-in-out" : "none")};
 
   @keyframes appear {
@@ -114,13 +114,16 @@ const ProfileName = styled.div`
   -webkit-text-fill-color: transparent; 
 `;
 
-const Skills = styled.div`
+const Skills = styled.ul`
+  list-style: none;
   opacity: 0.5;
   font-size: 0.6rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.textSecondary};
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 `;
 
 const Button = styled.button`
@@ -144,13 +147,12 @@ display: flex;
   }
 
   &:hover {
-    opacity: 0.7;
-    background: ${({ theme }) => theme.colors.gradientPrimary};
+    transform: scale(0.9);
     transition: 0.5s ease-in-out;
 
     & a{
-      color: ${({ theme }) => theme.colors.textWhite};
-  }
+      font-weight: normal;
+    }
   }
 `;
 
@@ -170,7 +172,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ isOpen, onClose }) => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -186,13 +188,13 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ isOpen, onClose }) => {
               <div>
                 <ProfileName>Offline</ProfileName>
                 <Skills>
-                  <li>Oops!</li>
+                  <li>¡Ups!</li>
                 </Skills>
               </div>
             </ProfileHeader>
           </OfflineProfile>
           <H2>Atrévete a hacer parte de nuestras <strong>Comunidades</strong>.</H2>
-          <Button onClick={() => handlePageChange('INICIAR SESIÓN')}>
+          <Button onClick={() => handlePageTheme('INICIAR SESIÓN')}>
             <StyledNavLink href="/auth" label="COMENZAR" />
           </Button>
         </Disclaimer>
