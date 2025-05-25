@@ -18,6 +18,10 @@ const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  & strong {
+    font-weight: bold;
+  }
 `;
 
 const ModalContainer = styled.div`
@@ -31,15 +35,16 @@ const ModalContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   max-height: 416px;
+  border: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     width: 90%;
     height: 70%;
   }
 `;
 
 const ModalHeader = styled.div`
-  font-size: 1.5rem;
+  font-size: 20px !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background: ${({ theme }) => theme.colors.gradientPrimary};
@@ -58,7 +63,9 @@ const ModalHeader = styled.div`
   & article{
     font-weight: bold;
     font-style: normal;
-    color: #000000
+    font-size: 20px !important;
+    opacity: 0.6;
+    padding-left: 6px;
   }
 `;
 
@@ -68,12 +75,13 @@ const ModalCloseButton = styled.button`
   color: #000;
   opacity: 0.6;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
   cursor: pointer;
 `;
 
 const ModalContent = styled.div`
   margin: 1rem;
+  margin-top: 0;
   border-radius: 10px;
   display: flex;
   align-items: start;
@@ -83,7 +91,7 @@ const ModalContent = styled.div`
   overflow: auto;
   background-color: #fff;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     flex-direction: column;
     align-items: center;
   }
@@ -93,7 +101,6 @@ const LeftSection = styled.div`
   border-bottom-left-radius: 10px;
   height: auto;
   border-top-left-radius: 10px;
-  border-right: 1px solid ${({ theme }) => theme.colors.textBlack};
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -101,10 +108,9 @@ const LeftSection = styled.div`
   padding: 1rem;
   width: 60%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     border-bottom-left-radius: 0;
     border-bottom: 1px solid ${({ theme }) => theme.colors.textBlack};
-    border-right: none;
     width: 100%;
   }
 `;
@@ -114,13 +120,13 @@ const RightSection = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 1rem 0;
-  gap: 10px;
   height: auto;
   width: 40%;
+  border-left: 1px solid ${({ theme }) => theme.colors.textBlack};
 
   & article {
     height: 100%;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -135,8 +141,13 @@ const RightSection = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     width: 100%;
+    border-left: none;
+
+    & article {
+      justify-content: start;
+    }
   }
 `;
 
@@ -148,7 +159,7 @@ const TipItem = styled.div`
 
 const Icon = styled.div`
   filter: grayscale();
-  height: 95px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,12 +167,12 @@ const Icon = styled.div`
 `;
 
 const TipText = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.9rem !important;
   color: #000;
 `;
 
 const AlertText = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.9rem !important;
   font-weight: 300;
   color: #000;
   margin-bottom: 10px;
@@ -169,43 +180,56 @@ const AlertText = styled.p`
   font-style: normal;
 `;
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+const DivRoute = styled.div`
+  display: flex;
+  border-radius: 10px;
+  justify-content: flex-start;
+  background-color: #fff;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  margin: 1rem;
+  font-weight: bold;
+  border: 1px solid ${({ theme }) => theme.colors.textTertiary};
+`;
+
+const ModalTips: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
     <ModalOverlay>
       <ModalContainer>
         <ModalHeader>
-          <div>SkillSwap<article>.org</article></div>
+          <div>Cultura<article>SkillSwap</article></div>
           <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
         </ModalHeader>
-        <ScrollContainer overflowY="auto" overflowX='auto' marginY="60px 0 16px" style={{ maxHeight: '100%' }}>
-        <ModalContent>
-          <LeftSection>
-            <TipItem>
-            <Icon>📂</Icon>
-            <TipText><strong>Completar tu perfil</strong> mantiene la confianza entre usuarios y un <strong>ambiente seguro.</strong></TipText>
-            </TipItem>
-            <TipItem>
-              <Icon>📂</Icon>
-              <TipText>No compartas <strong>datos sensibles</strong>. La seguridad mutua primero.</TipText>
-            </TipItem>
-            <TipItem>
-            <Icon>📂</Icon>
-            <TipText>Reporta cualquier conducta <strong>sospechosa o inadecuada</strong>.</TipText>
-            </TipItem>
-          </LeftSection>
-          <RightSection>
-            <article>
-              <span>🔵</span><AlertText>En tu sección <strong>Social</strong> podrás realizar <strong>Reportes</strong>.</AlertText>
-            </article>
-            <article>
-            <span>⚠️</span><AlertText>Si lo solicitas, acude a las <strong>autoridades policiales</strong>.</AlertText>
-            </article>
-            <article>
-              <span>⛔</span><AlertText>Las sanciones van de <strong>suspensiones a bloqueos</strong>.</AlertText></article>
-          </RightSection>
-        </ModalContent>
+        <DivRoute>C:\ User\ Documents\ SkillSwap</DivRoute>
+        <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px 0 16px" style={{ maxHeight: '100%' }}>
+          <ModalContent>
+            <LeftSection>
+              <TipItem>
+                <Icon>📂</Icon>
+                <TipText><strong>Completar tu perfil</strong> mantiene la confianza entre usuarios y un <strong>ambiente seguro.</strong></TipText>
+              </TipItem>
+              <TipItem>
+                <Icon>📂</Icon>
+                <TipText>No compartas <strong>datos sensibles</strong>. La seguridad mutua primero.</TipText>
+              </TipItem>
+              <TipItem>
+                <Icon>📂</Icon>
+                <TipText>Reporta cualquier conducta <strong>sospechosa o inadecuada</strong>.</TipText>
+              </TipItem>
+            </LeftSection>
+            <RightSection>
+              <article>
+                <span>🔵</span><AlertText>En tu sección <strong>Social</strong> podrás realizar <strong>Reportes</strong>.</AlertText>
+              </article>
+              <article>
+                <span>⚠️</span><AlertText>Si lo solicitas, acude a las <strong>autoridades policiales</strong>.</AlertText>
+              </article>
+              <article>
+                <span>⛔</span><AlertText>Las sanciones van de <strong>suspensiones a bloqueos</strong>.</AlertText></article>
+            </RightSection>
+          </ModalContent>
         </ScrollContainer>
       </ModalContainer>
     </ModalOverlay>
@@ -213,4 +237,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 };
 
 
-export default Modal;
+export default ModalTips;

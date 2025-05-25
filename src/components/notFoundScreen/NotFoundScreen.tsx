@@ -55,7 +55,7 @@ const NotFoundScreen = () => {
         </NotFoundText>
       </div>
       <section>
-        <P>¡Oops! Parece que no se pudo encontrar el recurso solicitado.</P>
+        <P>¡Ups! Parece que no se pudo encontrar el recurso solicitado.</P>
       </section>
     </FullScreenLoader>
   );

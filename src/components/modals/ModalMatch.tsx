@@ -35,6 +35,7 @@ const ModalContainer = styled.div`
   margin: 0;
   border-radius: 10px;
   padding: 0;
+  border: none;
 
   @media (max-width: 600px) {
     height: 65%;
@@ -43,16 +44,16 @@ const ModalContainer = styled.div`
 `;
 
 const ModalHeader = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   background-color: ${({ theme }) => theme.colors.textSecondary};
   color: #fff;
   padding: 0.5rem;
   padding-left: 1rem;
   font-weight: bold;
-  margin-bottom: 10px;
   display: flex;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  align-items: center;
   justify-content: space-between;
 `;
 
@@ -65,9 +66,10 @@ const ModalCloseButton = styled.button`
 `;
 
 const UserInfo = styled.div`
+  min-width: 45%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border-left: 1px solid ${({ theme }) => theme.colors.textTertiary};
@@ -82,21 +84,23 @@ const UserDetail = styled.div`
   flex-direction: column;
   align-items: flex-start;
   border-top: 1px solid ${({ theme }) => theme.colors.textTertiary};
-  margin-bottom: 10px;
   text-align: end;
-  padding-top: 2rem;
   border-bottom-right-radius: 10px;
+  width: 100%;
+  padding: 1rem;
 `;
 
 const UserName = styled.h3`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  margin-right: 0.5rem;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  gap: 5px;
 
   div {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
     font-weight: bold;
   }
 
@@ -112,6 +116,7 @@ const DivRoute = styled.div`
   justify-content: flex-start;
   padding: 0.5rem;
   padding-left: 1rem;
+  font-size: 14px;
   margin: 0.8rem;
   border-radius: 10px;
   font-weight: bold;
@@ -153,16 +158,20 @@ const Div = styled.div`
   max-height: 300px;
   border: 1px solid ${({ theme }) => theme.colors.textTertiary};
 `;
+
 const DivConnections = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
   margin: 0;
+  padding: 1rem;
 `;
 
 const Connections = styled.div`
   padding: 1rem;
+  padding-bottom: 0;
   margin-bottom: 0.5rem;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.textSecondary};
@@ -175,7 +184,7 @@ const Connections = styled.div`
 // Sección de rating
 const RatingSection = styled.div`
   padding: 1rem;
-  margin-bottom: 0.5rem;
+  padding-bottom: 0;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.textSecondary};
 
@@ -191,15 +200,25 @@ const DivRating = styled.div`
 `;
 
 const RatingStars = styled.div`
-  color: #f5c518;
+  color: ${({ theme }) => theme.colors.textDark};
   font-size: 1.2rem;
 `;
 
 const Star = styled.span`
-  color: gold;
+  color: ${({ theme }) => theme.colors.textDark};
   font-size: 16px;
   margin: 0 2px;
   font-style: normal;
+`;
+
+const Unknown = styled.span`
+  color: ${({ theme }) => theme.colors.textDark};
+  padding: 2px 10px;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid ${({ theme }) => theme.colors.textDark};
+  font-size: 8px;
+  font-weight: bold;
 `;
 
 interface IModalProps {
@@ -216,7 +235,7 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
       <ModalContainer>
         <ScrollContainer overflowY="auto" overflowX='auto' marginY="16px" style={{ maxHeight: '100%' }}>
           <ModalHeader>
-            Solicita Conexiones
+            Conectar
             <ModalCloseButton onClick={onClose}>×</ModalCloseButton>
           </ModalHeader>
           <DivRoute>C:\ User\ Documents\ SkillSwap</DivRoute>
@@ -230,7 +249,7 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
                 {/* Información del usuario */}
                 <Connections>
                   <div>Conexiones</div>
-                  <div>🔗 {userToRequest.countMatches}</div>
+                  <div># {userToRequest.countMatches}</div>
                 </Connections>
                 <RatingSection>
                   <div>Calificación</div>
@@ -253,6 +272,7 @@ const Modal: React.FC<IModalProps> = ({ userToRequest, isOpen, onClose }) => {
                 <UserName>
                   <div>{userToRequest.fullName}</div>
                   <p>{userToRequest.jobTitle}</p>
+                  <Unknown>？Unknown</Unknown>
                 </UserName>
               </UserDetail>
             </UserInfo>

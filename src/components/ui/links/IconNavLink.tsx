@@ -31,17 +31,17 @@ const IconNavLinkComponent = styled(Link)`
 `;
 
 const StyledIconNavLink: React.FC<ILinkProps & { icon: React.ReactNode }> = ({ href, label, onClick, icon }) => {
-    return (
-        <IconNavLinkComponent
-            href={href}
-            onClick={() => {
-                handlePageChange(label ?? 'DEFAULT_LABEL');
-                if (onClick) onClick(label ?? 'DEFAULT_LABEL');
-            }}
-        >
-            {icon}
-        </IconNavLinkComponent>
-    );
+  return (
+    <IconNavLinkComponent
+      href={href}
+      onClick={() => {
+        handlePageChange(label ?? 'DEFAULT_LABEL');
+        if (onClick) onClick(label ?? 'DEFAULT_LABEL');
+      }}
+    >
+      {icon}
+    </IconNavLinkComponent>
+  );
 };
 
 export default StyledIconNavLink;

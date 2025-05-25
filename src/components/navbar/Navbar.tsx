@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import InfoIcon from "@/public/svg/InfoIcon";
+import { BsInfoCircle } from "react-icons/bs";
 import OfflineProfileSidebar from "../sidebars/SidebarFloatingOffline";
 
 // Styled components
@@ -73,7 +73,7 @@ const SidebarLink = styled.p`
     }
 `;
 
-const SidebarLinkContainer = styled.li`
+const SidebarLinkContainer = styled.span`
     width: 100px;
     cursor: pointer;
     list-style: none;
@@ -116,7 +116,7 @@ export const Navbar: React.FC = () => {
                 <StyledIconNavLink href="/auth" label="AUTH" icon={
                     <AuthLink><small>Iniciar sesión</small></AuthLink>
                     } />
-                <StyledIconNavLink href="/legal" label="LEGAL" icon={<InfoIcon />} />
+                <StyledIconNavLink href="/legal" label="LEGAL" icon={<BsInfoCircle />} />
             </IconsContainer>
         </NavbarContainer>
     );

@@ -25,11 +25,11 @@ const TableHeaderUser: React.FC = () => {
         <Th>Nombre</Th>
         <Th>Apellido</Th>
         <Th>Habilidades</Th>
-        <Th>Categoría</Th>
+        <Th>Comunidad</Th>
         <Th>ID Estado</Th>
         <Th>ID Rol</Th>
-        <Th>Fecha de suspensión</Th>
-        <Th>Fecha de reactivación</Th>
+        <Th>Fecha de Suspensión</Th>
+        <Th>Fecha de Reactivación</Th>
         <Th>Acciones</Th>
       </Tr>
     </thead>
