@@ -55,7 +55,6 @@ export const fetchUsers = createAsyncThunk<IUserUpdateAdmin[], void, { rejectVal
   }
 );
 
-
 // Slice de Redux
 const usersSlice = createSlice({
   name: 'users',

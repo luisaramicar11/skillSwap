@@ -3,14 +3,14 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import StyledNavLink from "@/src/components/ui/links/NavLinks";
 import StyledIconNavLink from "../ui/links/IconNavLink";
-import InfoIcon from "@/public/svg/InfoIcon";
-import ListIcon from "@/public/svg/ListIcon";
-import SettingsIcon from "@/public/svg/SettingsIcon";
 import OnlineProfileSidebar from "../sidebars/SidebarFloatingOnline";
 import SettingsFloatingSidebar from "../sidebars/SidebarFloatingSettings";
 import { handlePageChange } from "@/src/lib/utils/handlePageTheme";
 import LogoutButton from "../ui/buttons/ButtonLogout";
 import { FiLogOut } from "react-icons/fi";
+import { BsInfoCircle } from "react-icons/bs";
+import { PiList } from "react-icons/pi";
+import { IoSettingsOutline } from "react-icons/io5";
 
 // Styled components
 const NavbarContainer = styled.div`
@@ -30,6 +30,16 @@ const NavbarContainer = styled.div`
 
     @media (max-width: 790px) {
         padding: 0 5px;
+    }
+`;
+
+const SidebarLinkContainer = styled.span`
+    width: 100px;
+    cursor: pointer;
+    list-style: none;
+
+    @media (max-width: 790px) {
+        display: none;
     }
 `;
 
@@ -54,11 +64,6 @@ const SidebarLink = styled.p`
     &:hover {
         transform: scale(0.95);
         transition: 0.4s;
-
-    }
-
-    @media (max-width: 790px) {
-        display: none;
     }
 `;
 
@@ -189,9 +194,11 @@ export const NavbarUser: React.FC = () => {
         <NavbarContainer>
             <OnlineProfileSidebar isOpen={isSidebarProfileOpen} onClose={closeSidebarProfile} />
             <SettingsFloatingSidebar isOpen={isSidebarSettingsOpen} onClose={closeSidebarSettings} />
-            <SidebarLink onClick={openSidebarProfile}>+ <small>Notificaciones</small></SidebarLink>
+            <SidebarLinkContainer>
+                <SidebarLink onClick={openSidebarProfile}>+ <small>Notificaciones</small></SidebarLink>
+            </SidebarLinkContainer>
             <HamburgerMenu onClick={toggleMenu}>
-                <StyledIconNavLink href="#" icon={<ListIcon />} />
+                <StyledIconNavLink href="#" icon={<PiList />} />
             </HamburgerMenu>
             <NavList isOpen={isOpenToggle}>
                 <NavItem onClick={() => handlePageChange('INICIO')}>
@@ -209,8 +216,8 @@ export const NavbarUser: React.FC = () => {
             </NavList>
 
             <IconsContainer>
-                <StyledIconNavLink href="/user/legal" label="USER/LEGAL" icon={<InfoIcon />} />
-                <StyledIconNavLink onClick={openSidebarSettings} href="#" icon={<SettingsIcon />} />
+                <StyledIconNavLink onClick={openSidebarSettings} href="#" icon={<IoSettingsOutline />} />
+                <StyledIconNavLink href="/user/legal" label="USER/LEGAL" icon={<BsInfoCircle />} />
             </IconsContainer>
         </NavbarContainer>
     );

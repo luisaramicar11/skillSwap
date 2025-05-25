@@ -22,17 +22,17 @@ const TableHeaderReport: React.FC = () => {
     return (
       <thead>
         <Tr>
-          <Th>Título del reporte</Th>
+          <Th>Título</Th>
           <Th>Descripción</Th>
-          <Th>Fecha de creación</Th> 
+          <Th>Fecha de Creación</Th> 
           <Th>Acción tomada</Th>
-          <Th>Id del Estado</Th> 
-          <Th>Id del Usuario</Th> 
-          <Th>Id del Reportado</Th> 
+          <Th>ID Estado</Th> 
+          <Th>ID Informante</Th> 
+          <Th>ID Reportado</Th> 
           <Th>Estado</Th> 
-          <Th>Nombre del usuario</Th> 
-          <Th>Nombre del reportado</Th> 
-          <Th>Actions</Th>
+          <Th>Nombre del Informante</Th> 
+          <Th>Nombre del Reportado</Th> 
+          <Th>Acciones</Th>
         </Tr>
       </thead>
     );

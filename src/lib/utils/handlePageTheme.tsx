@@ -1,5 +1,5 @@
 'use client';
-export const darkThemeLabels = ['REGISTRO', 'ADMIN/POSTS'];
+export const darkThemeLabels = ['REGISTRO'];
 
 export function handlePageChange(label: string) {
     if (typeof window !== 'undefined') {
